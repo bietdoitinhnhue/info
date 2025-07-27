@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate 2FA Code (TOTP) from Secret</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Segoe UI, Arial, sans-serif; background: #f4f8fb; }
+    .box {
+      max-width: 400px; margin: 40px auto; background: #fff;
+      border-radius: 12px; box-shadow: 0 4px 28px #3056d325;
+      padding: 30px 24px 20px 24px;
+    }
+    h2 { color: #3056d3; text-align: center; }
+    textarea, input {
+      width: 100%; font-size: 1rem; margin: 12px 0;
+      padding: 13px; border-radius: 6px; border: 1px solid #3056d3;
+      background: #fafdff;
+    }
+    button {
+      padding: 10px 26px; border: none; border-radius: 6px;
+      background: #3056d3; color: #fff; font-size: 1rem; cursor: pointer;
+      margin-bottom: 10px; transition: background 0.2s;
+    }
+    button:hover { background: #183580; }
+    .result-box { background: #ecfdf5; padding: 15px 8px; font-size: 1.3em; border-radius: 6px; color: #059669; text-align: center; margin-top: 12px; letter-spacing: 2px; }
+    label { font-weight: 600; color: #1a2450; }
+  </style>
+  <!-- Dùng otplib (CDN) để generate OTP -->
+  <script src="https://cdn.jsdelivr.net/npm/otplib@12.0.1/otplib-browser.min.js"></script>
+</head>
+<body>
+  <div class="box">
+    <h2>2FA Code Generator</h2>
+    <form id="otpForm" autocomplete="off">
+      <label for="secret">* 2FA Secret</label>
+      <textarea id="secret" rows="2" placeholder="Nhập 2FA Secret (Base32)..."></textarea>
+      <button type="submit">Get 2FA Code</button>
+    </form>
+    <div class="result-box" id="result"></div>
+    <button onclick="copyCode()" id="copyBtn" style="width:100%;display:none;">Copy</button>
+    <div style="font-size:0.93em;color:#aaa;text-align:center;margin-top:20px;">
+      Code by Drake Nguyễn – An toàn tuyệt đối, chạy offline!
+    </div>
+  </div>
+  <script>
+    let currentCode = "";
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let secret = document.getElementById('secret').value.replace(/\s+/g,'').trim();
+      if (!secret) {
+        document.getElementById('result').textContent = "Vui lòng nhập 2FA Secret!";
+        document.getElementById('copyBtn').style.display = "none";
+        return;
+      }
+      try {
+        const otp = window.otplib.authenticator.generate(secret);
+        document.getElementById('result').textContent = otp;
+        currentCode = otp;
+        document.getElementById('copyBtn').style.display = "block";
+      } catch {
+        document.getElementById('result').textContent = "Secret không hợp lệ!";
+        document.getElementById('copyBtn').style.display = "none";
+      }
+    });
+    function copyCode() {
+      if (!currentCode) return;
+      navigator.clipboard.writeText(currentCode);
+      document.getElementById('copyBtn').textContent = "Đã copy!";
+      setTimeout(() => document.getElementById('copyBtn').textContent = "Copy", 1500);
+    }
+  </script>
+</body>
+</html>
