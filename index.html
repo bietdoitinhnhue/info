@@ -239,7 +239,7 @@
                 <div class="input-container">
                     <textarea 
                         id="secret" 
-                        placeholder="Enter your 2FA secret key (Base32 format)..."
+                        placeholder="Paste your Facebook 2FA secret key here (with or without spaces)..."
                         autocomplete="off"
                         spellcheck="false"
                     ></textarea>
@@ -272,6 +272,80 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/otplib/12.0.1/otplib-browser.min.js"></script>
     <script>
+        // Custom TOTP implementation as fallback
+        class CustomTOTP {
+            static base32ToBytes(base32) {
+                const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+                let bits = '';
+                let value = 0;
+                let index = 0;
+                const output = [];
+
+                for (let i = 0; i < base32.length; i++) {
+                    const char = base32[i].toUpperCase();
+                    if (char === '=') break;
+                    
+                    value = (value << 5) | alphabet.indexOf(char);
+                    bits += 5;
+
+                    if (bits >= 8) {
+                        output.push((value >>> (bits - 8)) & 255);
+                        bits -= 8;
+                    }
+                }
+
+                return new Uint8Array(output);
+            }
+
+            static async hmacSha1(key, data) {
+                const cryptoKey = await crypto.subtle.importKey(
+                    'raw',
+                    key,
+                    { name: 'HMAC', hash: 'SHA-1' },
+                    false,
+                    ['sign']
+                );
+
+                const signature = await crypto.subtle.sign('HMAC', cryptoKey, data);
+                return new Uint8Array(signature);
+            }
+
+            static async generate(secret, timeStep = 30, digits = 6) {
+                try {
+                    // Clean secret
+                    const cleanSecret = secret.replace(/\s+/g, '').toUpperCase();
+                    
+                    // Convert secret to bytes
+                    const secretBytes = CustomTOTP.base32ToBytes(cleanSecret);
+                    
+                    // Calculate time counter
+                    const timeCounter = Math.floor(Date.now() / 1000 / timeStep);
+                    
+                    // Convert counter to 8-byte array
+                    const counterBytes = new ArrayBuffer(8);
+                    const counterView = new DataView(counterBytes);
+                    counterView.setUint32(4, timeCounter, false); // Big-endian
+                    
+                    // Calculate HMAC
+                    const hmac = await CustomTOTP.hmacSha1(secretBytes, counterBytes);
+                    
+                    // Dynamic truncation
+                    const offset = hmac[hmac.length - 1] & 0x0f;
+                    const code = (
+                        ((hmac[offset] & 0x7f) << 24) |
+                        ((hmac[offset + 1] & 0xff) << 16) |
+                        ((hmac[offset + 2] & 0xff) << 8) |
+                        (hmac[offset + 3] & 0xff)
+                    ) % Math.pow(10, digits);
+                    
+                    return code.toString().padStart(digits, '0');
+                } catch (error) {
+                    throw new Error(`TOTP generation failed: ${error.message}`);
+                }
+            }
+        }
+    </script>
+    <script>
         class TwoFactorGenerator {
             constructor() {
                 this.currentCode = '';
@@ -300,23 +374,30 @@
                 this.secretInput.addEventListener('input', () => this.clearError());
             }
 
-            handleSubmit(e) {
+            async handleSubmit(e) {
                 e.preventDefault();
                 
-                const secret = this.secretInput.value.replace(/\s+/g, '').trim().toUpperCase();
+                let secret = this.secretInput.value.trim();
                 
                 if (!secret) {
                     this.showError('Please enter your 2FA secret key');
                     return;
                 }
 
+                // Clean the secret: remove spaces, convert to uppercase
+                secret = secret.replace(/\s+/g, '').toUpperCase();
+                
+                // Handle Facebook format: sometimes they provide keys with spaces or lowercase
+                // Also handle keys that might have dashes or other separators
+                secret = secret.replace(/[-\s]/g, '');
+
                 if (!this.isValidBase32(secret)) {
-                    this.showError('Invalid Base32 format. Please check your secret key.');
+                    this.showError('Invalid Base32 format. Make sure to copy the complete secret key from your app.');
                     return;
                 }
 
                 try {
-                    this.generateCode(secret);
+                    await this.generateCode(secret);
                     this.startAutoRefresh(secret);
                 } catch (error) {
                     this.showError(`Failed to generate code: ${error.message}`);
@@ -324,19 +405,47 @@
             }
 
             isValidBase32(str) {
+                // Remove spaces and convert to uppercase
+                const cleanStr = str.replace(/\s+/g, '').toUpperCase();
+                
                 // Base32 should only contain A-Z and 2-7, with optional padding (=)
                 const base32Pattern = /^[A-Z2-7]+=*$/;
-                return base32Pattern.test(str) && str.length >= 16;
+                
+                // Length should be at least 16 characters and divisible by 8 (with padding)
+                const isValidLength = cleanStr.length >= 16;
+                const isValidPattern = base32Pattern.test(cleanStr);
+                
+                console.log('Validating Base32:', cleanStr, 'Length:', cleanStr.length, 'Pattern:', isValidPattern);
+                
+                return isValidPattern && isValidLength;
             }
 
-            generateCode(secret) {
+            async generateCode(secret) {
                 try {
-                    const code = window.otplib.authenticator.generate(secret);
+                    // Clean and normalize the secret
+                    const cleanSecret = secret.replace(/\s+/g, '').toUpperCase();
+                    
+                    console.log('Clean secret:', cleanSecret);
+                    
+                    let code;
+                    
+                    // Try with otplib first
+                    try {
+                        code = window.otplib.authenticator.generate(cleanSecret);
+                        console.log('OTPLib generated code:', code);
+                    } catch (otplibError) {
+                        console.log('OTPLib failed, trying custom implementation:', otplibError);
+                        // Fallback to custom implementation
+                        code = await CustomTOTP.generate(cleanSecret);
+                        console.log('Custom TOTP generated code:', code);
+                    }
+                    
                     this.currentCode = code;
                     this.displayCode(code);
                     this.clearError();
                 } catch (error) {
-                    throw new Error('Invalid secret key format');
+                    console.error('Generation error:', error);
+                    throw new Error(`Failed to generate code: ${error.message}`);
                 }
             }
 
@@ -377,9 +486,9 @@
                 }
 
                 // Auto-refresh every 30 seconds
-                this.intervalId = setInterval(() => {
+                this.intervalId = setInterval(async () => {
                     try {
-                        this.generateCode(secret);
+                        await this.generateCode(secret);
                     } catch (error) {
                         this.showError(`Auto-refresh failed: ${error.message}`);
                         clearInterval(this.intervalId);
