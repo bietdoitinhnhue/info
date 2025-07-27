@@ -595,6 +595,33 @@
                 }
             }, 30000); // Clear after 30 seconds of inactivity
         });
+        
     </script>
+    <script>
+// Chặn chuột phải
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Chặn phím F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S
+document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === "F12" || e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+    }
+    // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+        e.preventDefault();
+        return false;
+    }
+    // Ctrl+U, Ctrl+S
+    if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'U' || e.key === 'S')) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+
 </body>
 </html>
