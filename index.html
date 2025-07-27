@@ -1,74 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Generate 2FA Code (TOTP) from Secret</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: Segoe UI, Arial, sans-serif; background: #f4f8fb; }
-    .box {
-      max-width: 400px; margin: 40px auto; background: #fff;
-      border-radius: 12px; box-shadow: 0 4px 28px #3056d325;
-      padding: 30px 24px 20px 24px;
-    }
-    h2 { color: #3056d3; text-align: center; }
-    textarea, input {
-      width: 100%; font-size: 1rem; margin: 12px 0;
-      padding: 13px; border-radius: 6px; border: 1px solid #3056d3;
-      background: #fafdff;
-    }
-    button {
-      padding: 10px 26px; border: none; border-radius: 6px;
-      background: #3056d3; color: #fff; font-size: 1rem; cursor: pointer;
-      margin-bottom: 10px; transition: background 0.2s;
-    }
-    button:hover { background: #183580; }
-    .result-box { background: #ecfdf5; padding: 15px 8px; font-size: 1.3em; border-radius: 6px; color: #059669; text-align: center; margin-top: 12px; letter-spacing: 2px; }
-    label { font-weight: 600; color: #1a2450; }
-  </style>
-  <!-- Dùng otplib (CDN) để generate OTP -->
-  <script src="https://cdn.jsdelivr.net/npm/otplib@12.0.1/otplib-browser.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2FA Code Generator - Offline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result-container {
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            border-radius: 15px;
+            color: white;
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .code-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .countdown {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .copy-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .error {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.85rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            transition: width 1s linear;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .code-display {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="box">
-    <h2>2FA Code Generator</h2>
-    <form id="otpForm" autocomplete="off">
-      <label for="secret">* 2FA Secret</label>
-      <textarea id="secret" rows="2" placeholder="Nhập 2FA Secret (Base32)..."></textarea>
-      <button type="submit">Get 2FA Code</button>
-    </form>
-    <div class="result-box" id="result"></div>
-    <button onclick="copyCode()" id="copyBtn" style="width:100%;display:none;">Copy</button>
-    <div style="font-size:0.93em;color:#aaa;text-align:center;margin-top:20px;">
-      Code by Drake Nguyễn – An toàn tuyệt đối, chạy offline!
+    <div class="container">
+        <div class="header">
+            <h1>🔐 2FA Generator</h1>
+            <p>Secure offline 2FA code generation</p>
+        </div>
+
+        <form id="otpForm">
+            <div class="form-group">
+                <label for="secret">2FA Secret Key *</label>
+                <div class="input-container">
+                    <textarea 
+                        id="secret" 
+                        placeholder="Enter your 2FA secret key (Base32 format)..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" id="generateBtn">
+                Generate 2FA Code
+            </button>
+        </form>
+
+        <div class="result-container" id="resultContainer">
+            <div class="code-display" id="codeDisplay"></div>
+            <div class="countdown" id="countdown"></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <button class="copy-btn" id="copyBtn">📋 Copy Code</button>
+        </div>
+
+        <div class="error" id="errorContainer">
+            <strong>Error:</strong> <span id="errorMessage"></span>
+        </div>
+
+        <div class="footer">
+            <p>🔒 Runs completely offline - your secrets never leave your device</p>
+            <p>Built with security and privacy in mind</p>
+        </div>
     </div>
-  </div>
-  <script>
-    let currentCode = "";
-    document.getElementById('otpForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      let secret = document.getElementById('secret').value.replace(/\s+/g,'').trim();
-      if (!secret) {
-        document.getElementById('result').textContent = "Vui lòng nhập 2FA Secret!";
-        document.getElementById('copyBtn').style.display = "none";
-        return;
-      }
-      try {
-        const otp = window.otplib.authenticator.generate(secret);
-        document.getElementById('result').textContent = otp;
-        currentCode = otp;
-        document.getElementById('copyBtn').style.display = "block";
-      } catch {
-        document.getElementById('result').textContent = "Secret không hợp lệ!";
-        document.getElementById('copyBtn').style.display = "none";
-      }
-    });
-    function copyCode() {
-      if (!currentCode) return;
-      navigator.clipboard.writeText(currentCode);
-      document.getElementById('copyBtn').textContent = "Đã copy!";
-      setTimeout(() => document.getElementById('copyBtn').textContent = "Copy", 1500);
-    }
-  </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/otplib/12.0.1/otplib-browser.min.js"></script>
+    <script>
+        class TwoFactorGenerator {
+            constructor() {
+                this.currentCode = '';
+                this.intervalId = null;
+                this.countdownId = null;
+                this.initializeElements();
+                this.bindEvents();
+            }
+
+            initializeElements() {
+                this.form = document.getElementById('otpForm');
+                this.secretInput = document.getElementById('secret');
+                this.generateBtn = document.getElementById('generateBtn');
+                this.resultContainer = document.getElementById('resultContainer');
+                this.codeDisplay = document.getElementById('codeDisplay');
+                this.copyBtn = document.getElementById('copyBtn');
+                this.errorContainer = document.getElementById('errorContainer');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.countdown = document.getElementById('countdown');
+                this.progressFill = document.getElementById('progressFill');
+            }
+
+            bindEvents() {
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                this.copyBtn.addEventListener('click', () => this.copyCode());
+                this.secretInput.addEventListener('input', () => this.clearError());
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                
+                const secret = this.secretInput.value.replace(/\s+/g, '').trim().toUpperCase();
+                
+                if (!secret) {
+                    this.showError('Please enter your 2FA secret key');
+                    return;
+                }
+
+                if (!this.isValidBase32(secret)) {
+                    this.showError('Invalid Base32 format. Please check your secret key.');
+                    return;
+                }
+
+                try {
+                    this.generateCode(secret);
+                    this.startAutoRefresh(secret);
+                } catch (error) {
+                    this.showError(`Failed to generate code: ${error.message}`);
+                }
+            }
+
+            isValidBase32(str) {
+                // Base32 should only contain A-Z and 2-7, with optional padding (=)
+                const base32Pattern = /^[A-Z2-7]+=*$/;
+                return base32Pattern.test(str) && str.length >= 16;
+            }
+
+            generateCode(secret) {
+                try {
+                    const code = window.otplib.authenticator.generate(secret);
+                    this.currentCode = code;
+                    this.displayCode(code);
+                    this.clearError();
+                } catch (error) {
+                    throw new Error('Invalid secret key format');
+                }
+            }
+
+            displayCode(code) {
+                this.codeDisplay.textContent = code;
+                this.resultContainer.classList.add('show');
+                this.startCountdown();
+            }
+
+            startCountdown() {
+                const updateCountdown = () => {
+                    const now = Math.floor(Date.now() / 1000);
+                    const timeLeft = 30 - (now % 30);
+                    const progress = ((30 - timeLeft) / 30) * 100;
+                    
+                    this.countdown.textContent = `Expires in ${timeLeft} seconds`;
+                    this.progressFill.style.width = `${progress}%`;
+                    
+                    if (timeLeft === 30) {
+                        // Code just refreshed
+                        this.progressFill.style.width = '0%';
+                    }
+                };
+
+                // Clear existing countdown
+                if (this.countdownId) {
+                    clearInterval(this.countdownId);
+                }
+
+                updateCountdown();
+                this.countdownId = setInterval(updateCountdown, 1000);
+            }
+
+            startAutoRefresh(secret) {
+                // Clear existing interval
+                if (this.intervalId) {
+                    clearInterval(this.intervalId);
+                }
+
+                // Auto-refresh every 30 seconds
+                this.intervalId = setInterval(() => {
+                    try {
+                        this.generateCode(secret);
+                    } catch (error) {
+                        this.showError(`Auto-refresh failed: ${error.message}`);
+                        clearInterval(this.intervalId);
+                    }
+                }, 30000);
+            }
+
+            async copyCode() {
+                if (!this.currentCode) return;
+
+                try {
+                    await navigator.clipboard.writeText(this.currentCode);
+                    
+                    const originalText = this.copyBtn.textContent;
+                    this.copyBtn.textContent = '✅ Copied!';
+                    this.copyBtn.style.background = 'rgba(72, 187, 120, 0.3)';
+                    
+                    setTimeout(() => {
+                        this.copyBtn.textContent = originalText;
+                        this.copyBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+                    }, 2000);
+                } catch (error) {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = this.currentCode;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    this.copyBtn.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        this.copyBtn.textContent = '📋 Copy Code';
+                    }, 2000);
+                }
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorContainer.classList.add('show');
+                this.resultContainer.classList.remove('show');
+                
+                // Clear intervals on error
+                if (this.intervalId) {
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                }
+                if (this.countdownId) {
+                    clearInterval(this.countdownId);
+                    this.countdownId = null;
+                }
+            }
+
+            clearError() {
+                this.errorContainer.classList.remove('show');
+            }
+
+            destroy() {
+                if (this.intervalId) clearInterval(this.intervalId);
+                if (this.countdownId) clearInterval(this.countdownId);
+            }
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const app = new TwoFactorGenerator();
+            
+            // Clean up intervals when page is closed
+            window.addEventListener('beforeunload', () => {
+                app.destroy();
+            });
+        });
+
+        // Security: Clear clipboard and inputs when page loses focus
+        window.addEventListener('blur', () => {
+            setTimeout(() => {
+                const secretInput = document.getElementById('secret');
+                if (secretInput) {
+                    secretInput.value = '';
+                }
+            }, 30000); // Clear after 30 seconds of inactivity
+        });
+    </script>
 </body>
 </html>
