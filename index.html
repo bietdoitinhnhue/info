@@ -3,629 +3,1048 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2FA OTP Code Generator – An toàn & Riêng tư | Drake Nguyễn</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Tạo mã 2FA (OTP) ngay trên trình duyệt, không gửi dữ liệu ra ngoài. Dùng cho Facebook, Google, các dịch vụ bảo mật. Hoàn toàn an toàn & riêng tư.">
-<meta name="keywords" content="2FA, OTP, TOTP, code generator, tạo mã 2FA, hai lớp bảo mật, Facebook 2FA, Google 2FA, bảo mật, security, Drake Nguyễn">
+    <title>Drake Nguyen | Head of Growth & Automation - System & AI Scaling</title>
 
-<!-- Open Graph for Facebook -->
-<meta property="og:title" content="2FA OTP Code Generator – An toàn & Riêng tư | Drake Nguyễn" />
-<meta property="og:description" content="Tạo mã 2FA (OTP) trực tiếp trên trình duyệt – không gửi secret ra ngoài. An toàn tuyệt đối, riêng tư tuyệt đối." />
-<meta property="og:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/bietdoitinhnhue/main/Thunail.png" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://2fa.drakenguyen.me/" />
-<meta property="og:site_name" content="2FA OTP Code Generator" />
+    <!-- 
+    ====================================================================
+    SEO & METADATA TAGS 
+    ====================================================================
+    -->
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="2FA OTP Code Generator – An toàn & Riêng tư | Drake Nguyễn">
-<meta name="twitter:description" content="Tạo mã 2FA OTP trực tiếp, dùng cho Facebook, Google, mọi dịch vụ bảo mật. Không gửi dữ liệu ra ngoài – bảo mật tuyệt đối.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/bietdoitinhnhue/main/Thunail.png">
+    <!-- Standard SEO Meta Tags -->
+    <meta name="description" content="Portfolio of Drake Nguyen, specializing in building high-efficiency, data-driven systems and leveraging AI for massive business growth and automation.">
+    <meta name="keywords" content="Growth Hacking, Automation, AI, System Thinking, Performance Marketing, Conversion Rate Optimization, Drake Nguyen, Head of Growth">
+    <meta name="author" content="Drake Nguyen">
+    <link rel="canonical" href="[Your Canonical URL Here, e.g., https://drakenguyen.me]">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/png" href="https://placehold.co/32x32/1E40AF/FFFFFF?text=DN" sizes="32x32">
+    <link rel="apple-touch-icon" href="https://placehold.co/180x180/1E40AF/FFFFFF?text=DN">
+    
+    <!-- Open Graph Tags (for Facebook, LinkedIn, general social sharing/thumbnail) -->
+    <meta property="og:title" content="Drake Nguyen | Head of Growth & Automation - System & AI Scaling">
+    <meta property="og:description" content="Portfolio of Drake Nguyen, specializing in building high-efficiency, data-driven systems and leveraging AI for massive business growth and automation.">
+    <meta property="og:image" content="https://placehold.co/1200x630/4B77BE/FFFFFF?text=Drake+Nguyen+Portfolio">
+    <meta property="og:url" content="[Your Canonical URL Here]">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/bietdoitinhnhue/bietdoitinhnhue/main/ba-dev-con-nghe.png">
+    <!-- Twitter Card Tags (for Twitter/X thumbnail) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@drakenguyen"> <!-- Replace with Twitter handle if available -->
+    <meta name="twitter:title" content="Drake Nguyen | System & AI Scaling Expert">
+    <meta name="twitter:description" content="I build high-efficiency, data-driven systems and leverage AI for massive business growth and automation. View my projects.">
+    <meta name="twitter:image" content="https://placehold.co/1200x675/4B77BE/FFFFFF?text=Drake+Nguyen+Portfolio">
 
-<!-- Roboto font -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    ====================================================================
+    END SEO & METADATA TAGS 
+    ====================================================================
+    -->
+
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5n/BpQ2GfT2A5/iA7m2QJb1oV4y8E0v08p5n8JmGg7XJ4sW3N3w7n0z5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Tailwind Configuration and Custom Styles -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+	        /* ============================================================
+        Airplane Takeoff Effect
+        ============================================================ */
+        .plane-wrapper {
+            position: absolute;
+            bottom: 1.5rem;   /* cách đáy section một chút */
+            left: -4rem;      /* xuất phát hơi ngoài màn hình bên trái */
+            pointer-events: none;
         }
 
+        .plane-icon {
+            font-size: 2.75rem;
+            color: #2563eb; /* xanh đồng bộ brand */
+            filter: drop-shadow(0 8px 10px rgba(37, 99, 235, 0.45));
+            animation: planeTakeoff 2.5s ease-in-out 0.5s infinite;
+        }
+
+        @keyframes planeTakeoff {
+            0% {
+                transform: translate(0, 0) rotate(-15deg) scale(0.9);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            40% {
+                transform: translate(40vw, -10vh) rotate(-5deg) scale(1);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(80vw, -30vh) rotate(0deg) scale(1.05);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translate(110vw, -40vh) rotate(5deg) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        /* Ẩn hiệu ứng trên màn hình rất nhỏ nếu muốn bớt rối */
+        @media (max-width: 640px) {
+            .plane-wrapper {
+                display: none;
+            }
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f7f9fb; 
+        }
+        .section-padding {
+            padding: 4rem 1rem;
+        }
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 6rem 4rem;
+            }
+        }
+        .content-box {
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .project-block-title {
+            border: 2px solid #3b82f6; 
+            border-radius: 0.75rem;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            background-color: #eff6ff;
+        }
+
+        /* Logic for 3-page display */
+        .page-section {
+            display: none; 
+        }
+        .page-section.active {
+            display: block; 
+        }
+
+        /* 16:9 Aspect Ratio Container */
+        .aspect-16-9 {
+            position: relative;
+            padding-bottom: 56.25%; /* 9 / 16 * 100% */
+            height: 0;
+            overflow: hidden; 
+        }
+        
+        /* Project Image Styling and Hover Effect */
+        .aspect-16-9 img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out; 
+        }
+        .aspect-16-9:hover img {
+            transform: scale(1.08); 
+        }
+
+        /* Custom styling for the new Growth Stack logos */
+        .logo-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 450px;
+            height: 100%; 
+            padding: 0.5rem;
+            border-radius: 0.5rem;
             text-align: center;
         }
 
-        .header {
-            margin-bottom: 30px;
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem; 
+            line-height: 1;
+            margin-bottom: 0.25rem;
+            border-radius: 0.5rem;
+            background-color: #e5e7eb; 
         }
 
-        .header h1 {
-            color: #2d3748;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .logo-label {
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            color: #4b5563; 
+            margin-top: 0.5rem;
+            line-height: 1.2;
         }
-
-        .header p {
-            color: #718096;
-            font-size: 0.95rem;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            color: #2d3748;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .input-container {
-            position: relative;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            resize: vertical;
-            min-height: 80px;
-            background: #f8fafc;
-            transition: all 0.3s ease;
-            font-family: 'Courier New', monospace;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn:disabled {
-            background: #cbd5e0;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .result-container {
-            margin: 25px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            border-radius: 15px;
-            color: white;
-            display: none;
-        }
-
-        .result-container.show {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
+        
+        /* Animation Styles for Introduction Text */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
                 opacity: 0;
-                transform: translateY(-10px);
             }
-            to {
+            100% {
+                transform: translateX(0);
                 opacity: 1;
-                transform: translateY(0);
             }
         }
 
-        .code-display {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            font-family: 'Courier New', monospace;
+        .animate-intro {
+            animation: slideInFromLeft 0.8s ease-out forwards;
+            opacity: 0; /* Start invisible */
         }
+        /* Delay the lines */
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
 
-        .countdown {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
+        /* ============================================================
+        NEW: Styles for Growth Mindset and Contact Sections
+        ============================================================ */
 
-        .copy-btn {
-            width: 100%;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 500;
+        /* Enhanced Growth Mindset Flow Card */
+        .mindset-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0.5rem;
+            border-radius: 0.75rem;
+            transition: transform 0.2s, background-color 0.2s;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+        }
+        .mindset-item:hover {
+            background-color: #e0f2fe; /* Light blue on hover */
+            transform: translateY(-3px);
+        }
+        .mindset-item .text-xs {
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        /* Style for the central Growth Mindset box */
+        .mindset-text-box {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
+        /* Style for the QR Code boxes */
+        .qr-box {
+            position: relative;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
         }
-
-        .error {
-            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            display: none;
+        .qr-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
-        .error.show {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #718096;
-            font-size: 0.85rem;
-        }
-
-        .progress-bar {
+        .qr-image-placeholder {
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
+            height: auto;
+            border-radius: 0.5rem;
+            border: 2px solid; /* Border will be set by JS/placeholder */
+            padding: 0.5rem;
+        }
+        /* ============================================================
+        Growth Mindset – Marvel Universe Style
+        ============================================================ */
+
+        .marvel-panel {
+            position: relative;
             overflow: hidden;
-            margin-top: 10px;
+            background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.25), transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.25), transparent 55%),
+                        linear-gradient(135deg, #020617, #020617, #0f172a);
+            border: 1px solid rgba(129, 140, 248, 0.6);
         }
 
-        .progress-fill {
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            transition: width 1s linear;
+        .marvel-panel::before,
+        .marvel-panel::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(40px);
+            opacity: 0.5;
+            pointer-events: none;
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-                margin: 10px;
-            }
-            
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .code-display {
-                font-size: 2rem;
-                letter-spacing: 2px;
+        .marvel-panel::before {
+            width: 260px;
+            height: 260px;
+            background: rgba(56, 189, 248, 0.45);
+            top: -80px;
+            left: -60px;
+        }
+
+        .marvel-panel::after {
+            width: 320px;
+            height: 320px;
+            background: rgba(129, 140, 248, 0.45);
+            bottom: -120px;
+            right: -80px;
+        }
+
+        .mindset-heading {
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.08em;
+        }
+
+        .mindset-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            padding: 0.25rem 0.9rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #22d3ee, #818cf8);
+            color: #0b1120;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .mindset-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background-color: #0f172a;
+        }
+
+        .mindset-text-box {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8));
+            border-radius: 1rem;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            box-shadow:
+                0 18px 45px rgba(15, 23, 42, 0.9),
+                0 0 18px rgba(56, 189, 248, 0.35);
+        }
+
+        .mindset-text-box p {
+            color: #e5e7eb;
+        }
+
+        .mindset-text-box span.highlight {
+            color: #22d3ee;
+            font-weight: 600;
+        }
+
+        /* Marvel-style node cards */
+
+        .mindset-flow-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .mindset-flow-line {
+            position: absolute;
+            inset: 50% 4%;
+            transform: translateY(-50%);
+            border-radius: 999px;
+            background: radial-gradient(circle at 0%, rgba(56, 189, 248, 0.8), transparent 55%),
+                        radial-gradient(circle at 100%, rgba(129, 140, 248, 0.8), transparent 55%),
+                        linear-gradient(90deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2));
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .mindset-flow-line {
+                display: none;
             }
         }
+
+        .mindset-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0.5rem 1.1rem;
+            border-radius: 0.9rem;
+            background: radial-gradient(circle at 50% 0%, rgba(248, 250, 252, 0.09), transparent 65%),
+                        linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.8));
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            box-shadow:
+                0 12px 30px rgba(15, 23, 42, 0.75),
+                0 0 20px rgba(59, 130, 246, 0.3);
+            cursor: default;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .mindset-item::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .mindset-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow:
+                0 18px 45px rgba(15, 23, 42, 0.95),
+                0 0 30px rgba(56, 189, 248, 0.7);
+            border-color: rgba(56, 189, 248, 0.8);
+        }
+
+        .mindset-item:hover::before {
+            opacity: 1;
+        }
+
+        .mindset-step {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 0.4rem;
+        }
+
+        .mindset-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 30% 0%, #38bdf8, #4f46e5);
+            color: #f9fafb;
+            font-size: 1.55rem;
+            margin-bottom: 0.5rem;
+            box-shadow:
+                0 0 22px rgba(56, 189, 248, 0.9),
+                0 10px 18px rgba(15, 23, 42, 0.8);
+        }
+
+        .mindset-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #e5e7eb;
+        }
+
+        .mindset-tagline {
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+            color: #9ca3af;
+        }
+
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🔐 2FA Generator</h1>
-            <p>Secure 2FA code generation</p>
+<body class="text-gray-800">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-md">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-end items-center h-16">
+            <div class="space-x-8 text-sm font-semibold" id="nav-menu">
+                <a href="#about" data-page="about" class="nav-link text-indigo-600 hover:text-indigo-800 transition duration-300">About Me</a>
+                <a href="#projects" data-page="projects" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Project Highlights</a>
+                <a href="#contact" data-page="contact" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Section 1: About Me - Page 1 -->
+    <section id="about" class="page-section active section-padding bg-white relative overflow-hidden">
+    <!-- Background patterns -->
+    <div class="absolute top-0 right-0 ..."></div>
+    <div class="absolute bottom-0 left-0 ..."></div>
+
+    <div class="container mx-auto max-w-4xl relative z-10">
+        <!-- Airplane Takeoff Effect -->
+        <div class="plane-wrapper">
+            <i class="fas fa-plane-departure plane-icon"></i>
         </div>
 
-        <form id="otpForm">
-            <div class="form-group">
-                <label for="secret">2FA Secret Key *</label>
-                <div class="input-container">
-                    <textarea 
-                        id="secret" 
-                        placeholder="Paste your Facebook 2FA secret key here (with or without spaces)..."
-                        autocomplete="off"
-                        spellcheck="false"
-                    ></textarea>
+
+        <!-- Background patterns -->
+        <div class="absolute top-0 right-0 w-48 h-48 bg-blue-100 transform skew-y-12 translate-x-1/2 -translate-y-1/2 opacity-50 hidden sm:block"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-blue-100 transform -skew-y-12 -translate-x-1/2 translate-y-1/2 opacity-50 hidden sm:block"></div>
+
+        <div class="container mx-auto max-w-4xl relative z-10 px-4">
+
+            <!-- Slogan & Intro -->
+            <p class="text-center text-blue-700 text-lg sm:text-xl font-bold mb-10">
+                Stop Working Harder. Start Scaling Smarter.
+            </p>
+
+            <div class="flex flex-col items-center text-center mb-12">
+                <!-- Avatar & Name -->
+                <img src="https://placehold.co/120x120/4B77BE/FFFFFF?text=D.N" 
+                     alt="Avatar Drake Nguyen"
+                     class="rounded-full w-32 h-32 object-cover shadow-xl ring-4 ring-blue-500 mb-6">
+                
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-2">I'M DRAKE NGUYEN</h1>
+                <p class="text-xl text-blue-600 font-semibold mb-6">Head of Growth & Automation</p>
+                
+                <!-- Updated and Animated Introduction Lines -->
+                <div class="text-left max-w-md space-y-2">
+                    
+                    <!-- Line 1: Expertise -->
+                    <div class="flex items-start text-gray-600 animate-intro delay-1">
+                        <span class="text-blue-500 mr-2 flex-shrink-0 mt-1"><i class="fas fa-dot-circle"></i></span>
+                        <p class="text-base">10+ years in Digital Marketing, AI & System Architecture.</p>
+                    </div>
+
+                    <!-- Line 2: Systems -->
+                    <div class="flex items-start text-gray-600 animate-intro delay-2">
+                        <span class="text-blue-500 mr-2 flex-shrink-0 mt-1"><i class="fas fa-dot-circle"></i></span>
+                        <p class="text-base">Build lean, automated systems that scale efficiently.</p>
+                    </div>
+
+                    <!-- Line 3: Clarity -->
+                    <div class="flex items-start text-gray-600 animate-intro delay-3">
+                        <span class="text-blue-500 mr-2 flex-shrink-0 mt-1"><i class="fas fa-dot-circle"></i></span>
+                        <p class="text-base">Turn complexity into clarity with data, systems & growth thinking.</p>
+                    </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn" id="generateBtn">
-                Generate 2FA Code
-            </button>
-        </form>
+             <!-- Growth Mindset Section – Marvel Universe Style -->
+            <div class="content-box marvel-panel p-6 sm:p-10 mb-12 text-slate-100">
+                <h3 class="mindset-heading text-2xl font-bold text-slate-50 mb-6 pb-3 border-b border-slate-700/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <span class="flex items-center gap-2">
+                        <span class="mindset-badge">
+                            <span class="mindset-badge-dot"></span>
+                            GROWTH MINDSET PROTOCOL
+                        </span>
+                    </span>
+                    <span class="text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-400">
+                        AI · SYSTEMS · DATA · SCALE
+                    </span>
+                </h3>
 
-        <div class="result-container" id="resultContainer">
-            <div class="code-display" id="codeDisplay"></div>
-            <div class="countdown" id="countdown"></div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+                <div class="flex flex-col lg:flex-row lg:space-x-10 items-start">
+                    
+                    <!-- Text Box (Left Side) -->
+                    <div class="mindset-text-box lg:w-1/3 mb-6 lg:mb-0 border-l-4 border-cyan-400/80 px-5 py-4">
+                        <p class="text-sm sm:text-base">
+                            I treat every business like a <span class="highlight">Marvel universe</span>: 
+                            a complex world of characters, power levels, and story arcs.
+                            My job is to connect them into one cohesive system — 
+                            where <span class="highlight">AI, data and automation</span> assemble like a team of heroes:
+                            each doing what they do best, at scale, on autopilot.
+                        </p>
+                    </div>
+                    
+                    <!-- Flowchart/Diagram Simulation (Right Side - 4 Steps) -->
+                    <div class="lg:w-2/3 mindset-flow-wrapper">
+                        <!-- Glowing connection line behind nodes -->
+                        <div class="mindset-flow-line"></div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 text-center">
+                            <!-- Step 1: AI (Brain) -->
+                            <div class="mindset-item">
+                                <span class="mindset-step">01 · CORE</span>
+                                <span class="mindset-icon">
+                                    <i class="fas fa-brain"></i>
+                                </span>
+                                <p class="mindset-label">Lead by AI</p>
+                                <p class="mindset-tagline">Strategy Engine</p>
+                            </div>
+                            <!-- Step 2: Scale (Sliders) -->
+                            <div class="mindset-item">
+                                <span class="mindset-step">02 · POWER</span>
+                                <span class="mindset-icon">
+                                    <i class="fas fa-sliders-h"></i>
+                                </span>
+                                <p class="mindset-label">Scale</p>
+                                <p class="mindset-tagline">Leveraged Systems</p>
+                            </div>
+                            <!-- Step 3: Optimize (Sync) -->
+                            <div class="mindset-item">
+                                <span class="mindset-step">03 · CONTROL</span>
+                                <span class="mindset-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </span>
+                                <p class="mindset-label">Optimize</p>
+                                <p class="mindset-tagline">Continuous Tuning</p>
+                            </div>
+                            <!-- Step 4: Data (Chart) -->
+                            <div class="mindset-item">
+                                <span class="mindset-step">04 · VISION</span>
+                                <span class="mindset-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </span>
+                                <p class="mindset-label">Data</p>
+                                <p class="mindset-tagline">Clarity & Direction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="copy-btn" id="copyBtn">📋 Copy Code</button>
+            <!-- END Growth Mindset Section – Marvel Universe Style -->
+
+
+            <!-- Core Strengths Section -->
+            <div class="content-box bg-white p-6 sm:p-10 border-4 border-dashed border-gray-200 mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-300 pb-2">Core Strengths</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-3 rounded-lg bg-yellow-100">
+                        <span class="text-3xl text-yellow-600 mb-2"><i class="fas fa-sitemap"></i></span>
+                        <p class="text-sm font-semibold mt-2">SYSTEM THINKING</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-orange-100">
+                        <span class="text-3xl text-orange-600 mb-2"><i class="fas fa-users"></i></span>
+                        <p class="text-sm font-semibold mt-2">TEAM LEADERSHIP</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-green-100">
+                        <span class="text-3xl text-green-600 mb-2"><i class="fas fa-cogs"></i></span>
+                        <p class="text-sm font-semibold mt-2">DATA-DRIVEN OPS</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-purple-100">
+                        <span class="text-3xl text-purple-600 mb-2"><i class="fas fa-robot"></i></span>
+                        <p class="text-sm font-semibold mt-2">AI AUTOMATION</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Snapshot -->
+            <div class="content-box bg-white p-6 sm:p-10 border-t-8 border-indigo-500">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-300 pb-2">Skills Snapshot</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-4xl text-red-500 flex-shrink-0"><i class="fas fa-rocket"></i></span>
+                        <div>
+                            <p class="font-bold">GROWTH HACKING</p>
+                            <p class="text-sm text-gray-600">CONVERSION OPTIMIZATION</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-4xl text-blue-500 flex-shrink-0"><i class="fas fa-project-diagram"></i></span>
+                        <div>
+                            <p class="font-bold">SYSTEM THINKING</p>
+                            <p class="text-sm text-gray-600">WORKFLOW DESIGN</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-4xl text-pink-500 flex-shrink-0"><i class="fas fa-bullhorn"></i></span>
+                        <div>
+                            <p class="font-bold">PERFORMANCE MARKETING</p>
+                            <p class="text-sm text-gray-600">ADS & MEDIA BUYING</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-4xl text-green-500 flex-shrink-0"><i class="fas fa-envelope-open-text"></i></span>
+                        <div>
+                            <p class="font-bold">MARKETING AUTOMATION</p>
+                            <p class="text-sm text-gray-600">CRM INTEGRATION</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Growth Stack (Icons Simulation) - Updated as requested -->
+                <h4 class="text-xl font-bold text-gray-800 mt-10 mb-4 border-b border-gray-300 pb-2">Growth Stack</h4>
+                
+                <!-- Group: AUTOMATION -->
+                <div class="mb-8">
+                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-cogs mr-2"></i> AUTOMATION</h5>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-blue-100 text-blue-600"><p class="text-sm font-bold">N8N</p></div>
+                            <p class="logo-label">n8n / Make</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-green-100 text-green-600"><i class="fas fa-robot"></i></div>
+                            <p class="logo-label">Zapier</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-red-100 text-red-600"><i class="fas fa-envelope"></i></div>
+                            <p class="logo-label">ActiveCampaign</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-yellow-100 text-yellow-600"><i class="fas fa-handshake"></i></div>
+                            <p class="logo-label">HubSpot</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-purple-100 text-purple-600"><p class="text-sm font-bold">SQL</p></div>
+                            <p class="logo-label">Custom Scripts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group: ANALYTICS -->
+                <div class="mb-8">
+                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-chart-line mr-2"></i> ANALYTICS</h5>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-orange-100 text-orange-600"><p class="text-sm font-bold">GA4</p></div>
+                            <p class="logo-label">Google Analytics 4</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-pink-100 text-pink-600"><i class="fas fa-mouse-pointer"></i></div>
+                            <p class="logo-label">Hotjar / Crazy Egg</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-indigo-100 text-indigo-600"><i class="fas fa-database"></i></div>
+                            <p class="logo-label">BigQuery / Metabase</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-teal-100 text-teal-600"><i class="fas fa-layer-group"></i></div>
+                            <p class="logo-label">GTM / Segment</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-lime-100 text-lime-600"><p class="text-sm font-bold">BI</p></div>
+                            <p class="logo-label">Power BI / Looker</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group: AI TOOLS -->
+                <div class="mb-8">
+                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-brain mr-2"></i> AI TOOLS</h5>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-gray-200 text-gray-800"><i class="fas fa-comments"></i></div>
+                            <p class="logo-label">GPT-4o / Claude</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-blue-300 text-blue-800"><p class="text-sm font-bold">GEM</p></div>
+                            <p class="logo-label">Gemini API</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-green-300 text-green-800"><i class="fas fa-code"></i></div>
+                            <p class="logo-label">Code Assistants</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-pink-300 text-pink-800"><i class="fas fa-image"></i></div>
+                            <p class="logo-label">Midjourney / DALL-E</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-yellow-300 text-yellow-800"><p class="text-sm font-bold">BERT</p></div>
+                            <p class="logo-label">Fine-tuned LLMs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group: INFRA / DEVOPS -->
+                <div class="mb-8">
+                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-server mr-2"></i> INFRA/DEVOPS</h5>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-red-400 text-white"><p class="text-sm font-bold">AWS</p></div>
+                            <p class="logo-label">AWS / GCP</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-sky-400 text-white"><i class="fas fa-cloud"></i></div>
+                            <p class="logo-label">Cloudflare</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-gray-400 text-white"><i class="fas fa-microchip"></i></div>
+                            <p class="logo-label">Vultr / Linode</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-indigo-400 text-white"><i class="fas fa-code-branch"></i></div>
+                            <p class="logo-label">Git / CI/CD</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-green-400 text-white"><p class="text-sm font-bold">DB</p></div>
+                            <p class="logo-label">Supabase / Firebase</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group: WORKFLOW / PROJECT MANAGEMENT -->
+                <div>
+                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-tasks mr-2"></i> WORKFLOW / PROJECT MANAGEMENT</h5>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-blue-500 text-white"><i class="fas fa-check-circle"></i></div>
+                            <p class="logo-label">ClickUp / Jira</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-yellow-500 text-white"><i class="fas fa-calendar-alt"></i></div>
+                            <p class="logo-label">Google Workspace</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-red-500 text-white"><i class="fas fa-users-cog"></i></div>
+                            <p class="logo-label">Team Collaboration</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-purple-500 text-white"><i class="fas fa-pen-nib"></i></div>
+                            <p class="logo-label">Figma / Sketch</p>
+                        </div>
+                        <div class="logo-item bg-gray-50">
+                            <div class="logo-icon bg-teal-500 text-white"><i class="fas fa-file-alt"></i></div>
+                            <p class="logo-label">Notion / Confluence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Project Highlights - Page 2 -->
+    <section id="projects" class="page-section section-padding bg-gray-100">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl font-extrabold text-center mb-16 text-gray-900 border-b-4 border-indigo-500 pb-2 inline-block mx-auto">PROJECT HIGHLIGHTS</h2>
+
+            <!-- 10 Project Blocks with 16:9 Images and Hover Effect -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Block 1 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">1. POD Sellers Automation</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/93C5FD/000000?text=Analytics+Dashboard+(16:9)" alt="Project Image 1: Automated dashboard for Print-on-Demand sellers" onerror="this.src='https://placehold.co/600x338/93C5FD/000000?text=Analytics+Dashboard+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Built an automated campaign system for Print-on-Demand (POD) sales.</p>
+                </div>
+
+                <!-- Block 2 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">2. Social Content System</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/FDBA74/000000?text=Content+Planning+(16:9)" alt="Project Image 2: Content calendar and planning flow" onerror="this.src='https://placehold.co/600x338/FDBA74/000000?text=Content+Planning+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Efficient multi-channel content creation and distribution system.</p>
+                </div>
+                
+                <!-- Block 3 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">3. Gicos Optimization</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/336699/FFFFFF?text=Optimization+Report+(16:9)" alt="Project Image 3: Gicos platform optimization report" onerror="this.src='https://placehold.co/600x338/336699/FFFFFF?text=Optimization+Report+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Analysis and optimization of the Gicos platform performance.</p>
+                </div>
+                
+                <!-- Block 4 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">4. Lady's House E-Commerce CRO</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/FFC0CB/000000?text=E-commerce+Funnel+(16:9)" alt="Project Image 4: E-commerce conversion funnel analysis" onerror="this.src='https://placehold.co/600x338/FFC0CB/000000?text=E-commerce+Funnel+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Conversion Rate Optimization (CRO) for a fashion e-commerce store.</p>
+                </div>
+
+                <!-- Block 5 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">5. Runbylinh Campaign Testing</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/8D6E63/FFFFFF?text=Ad+Creative+Testing+(16:9)" alt="Project Image 5: Ad creative testing results" onerror="this.src='https://placehold.co/600x338/8D6E63/FFFFFF?text=Ad+Creative+Testing+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Executed A/B testing and multi-platform ad optimization.</p>
+                </div>
+
+                <!-- Block 6 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">6. Sbooks.vn Data Integration</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/4CAF50/FFFFFF?text=Database+Schema+(16:9)" alt="Project Image 6: Database schema and integration map" onerror="this.src='https://placehold.co/600x338/4CAF50/FFFFFF?text=Database+Schema+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Integrated customer data from various sources into the CRM system.</p>
+                </div>
+
+                <!-- Block 7 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">7. AI Chatbot Development</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/7B1FA2/FFFFFF?text=Chatbot+Flowchart+(16:9)" alt="Project Image 7: AI Chatbot decision tree" onerror="this.src='https://placehold.co/600x338/7B1FA2/FFFFFF?text=Chatbot+Flowchart+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Designed and deployed an AI-powered customer support chatbot.</p>
+                </div>
+
+                <!-- Block 8 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">8. Customer Journey Mapping</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/00796B/FFFFFF?text=User+Journey+Map+(16:9)" alt="Project Image 8: Visual representation of user journey" onerror="this.src='https://placehold.co/600x338/00796B/FFFFFF?text=User+Journey+Map+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Analyzed customer journey and identified critical touchpoints for improvement.</p>
+                </div>
+
+                <!-- Block 9 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">9. Conversion Funnel Optimization</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/D84315/FFFFFF?text=Conversion+Funnel+(16:9)" alt="Project Image 9: Marketing funnel stages" onerror="this.src='https://placehold.co/600x338/D84315/FFFFFF?text=Conversion+Funnel+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Optimized conversion steps within the marketing and sales funnels.</p>
+                </div>
+
+                <!-- Block 10 -->
+                <div class="bg-white content-box p-4 hover:shadow-xl">
+                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">10. Data Visualization Dashboard</h3></div>
+                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
+                        <img src="https://placehold.co/600x338/1565C0/FFFFFF?text=Power+BI+Dashboard+(16:9)" alt="Project Image 10: Performance data visualization dashboard" onerror="this.src='https://placehold.co/600x338/1565C0/FFFFFF?text=Power+BI+Dashboard+(16:9)'" />
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Built comprehensive dashboards for performance data visualization.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Contact Me - Page 3 (FIXED FOR BETTER VISUALS) -->
+    <section id="contact" class="page-section section-padding bg-white relative overflow-hidden">
+        <!-- Background patterns -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <!-- Pattern Top Left -->
+            <svg class="absolute top-0 left-0 w-96 h-96 transform -translate-x-1/2 -translate-y-1/2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H100L0 100V0Z" fill="#3B82F6"/>
+                <path d="M10 0H100L0 90V0L10 0Z" fill="#60A5FA"/>
+            </svg>
+             <!-- Pattern Bottom Right -->
+            <svg class="absolute bottom-0 right-0 w-96 h-96 transform translate-x-1/2 translate-y-1/2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 100H0L100 0V100Z" fill="#3B82F6"/>
+                <path d="M90 100H0L100 10V100H90Z" fill="#60A5FA"/>
+            </svg>
         </div>
 
-        <div class="error" id="errorContainer">
-            <strong>Error:</strong> <span id="errorMessage"></span>
-        </div>
-
-        <div class="footer">
-    <p style="color:#420b40;">🔒 Runs completely - your secrets never leave your device</p>
-<p style="color:#240b42;">Built with security and privacy in mind</p>
-<p style="color:#f28a02; font-weight:bold;">
-  Built & Managed by
-  <a href="https://facebook.com/drakenguyen.me" target="_blank" style="color:#081763; text-decoration:none; font-weight:bold;">Drake Nguyễn</a>
-</p>
-
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/otplib/12.0.1/otplib-browser.min.js"></script>
-    <script>
-        // Custom TOTP implementation as fallback
-        class CustomTOTP {
-            static base32ToBytes(base32) {
-                const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-                let bits = '';
-                let value = 0;
-                let index = 0;
-                const output = [];
-
-                for (let i = 0; i < base32.length; i++) {
-                    const char = base32[i].toUpperCase();
-                    if (char === '=') break;
-                    
-                    value = (value << 5) | alphabet.indexOf(char);
-                    bits += 5;
-
-                    if (bits >= 8) {
-                        output.push((value >>> (bits - 8)) & 255);
-                        bits -= 8;
-                    }
-                }
-
-                return new Uint8Array(output);
-            }
-
-            static async hmacSha1(key, data) {
-                const cryptoKey = await crypto.subtle.importKey(
-                    'raw',
-                    key,
-                    { name: 'HMAC', hash: 'SHA-1' },
-                    false,
-                    ['sign']
-                );
-
-                const signature = await crypto.subtle.sign('HMAC', cryptoKey, data);
-                return new Uint8Array(signature);
-            }
-
-            static async generate(secret, timeStep = 30, digits = 6) {
-                try {
-                    // Clean secret
-                    const cleanSecret = secret.replace(/\s+/g, '').toUpperCase();
-                    
-                    // Convert secret to bytes
-                    const secretBytes = CustomTOTP.base32ToBytes(cleanSecret);
-                    
-                    // Calculate time counter
-                    const timeCounter = Math.floor(Date.now() / 1000 / timeStep);
-                    
-                    // Convert counter to 8-byte array
-                    const counterBytes = new ArrayBuffer(8);
-                    const counterView = new DataView(counterBytes);
-                    counterView.setUint32(4, timeCounter, false); // Big-endian
-                    
-                    // Calculate HMAC
-                    const hmac = await CustomTOTP.hmacSha1(secretBytes, counterBytes);
-                    
-                    // Dynamic truncation
-                    const offset = hmac[hmac.length - 1] & 0x0f;
-                    const code = (
-                        ((hmac[offset] & 0x7f) << 24) |
-                        ((hmac[offset + 1] & 0xff) << 16) |
-                        ((hmac[offset + 2] & 0xff) << 8) |
-                        (hmac[offset + 3] & 0xff)
-                    ) % Math.pow(10, digits);
-                    
-                    return code.toString().padStart(digits, '0');
-                } catch (error) {
-                    throw new Error(`TOTP generation failed: ${error.message}`);
-                }
-            }
-        }
-    </script>
-    <script>
-        class TwoFactorGenerator {
-            constructor() {
-                this.currentCode = '';
-                this.intervalId = null;
-                this.countdownId = null;
-                this.initializeElements();
-                this.bindEvents();
-            }
-
-            initializeElements() {
-                this.form = document.getElementById('otpForm');
-                this.secretInput = document.getElementById('secret');
-                this.generateBtn = document.getElementById('generateBtn');
-                this.resultContainer = document.getElementById('resultContainer');
-                this.codeDisplay = document.getElementById('codeDisplay');
-                this.copyBtn = document.getElementById('copyBtn');
-                this.errorContainer = document.getElementById('errorContainer');
-                this.errorMessage = document.getElementById('errorMessage');
-                this.countdown = document.getElementById('countdown');
-                this.progressFill = document.getElementById('progressFill');
-            }
-
-            bindEvents() {
-                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-                this.copyBtn.addEventListener('click', () => this.copyCode());
-                this.secretInput.addEventListener('input', () => this.clearError());
-            }
-
-            async handleSubmit(e) {
-                e.preventDefault();
-                
-                let secret = this.secretInput.value.trim();
-                
-                if (!secret) {
-                    this.showError('Please enter your 2FA secret key');
-                    return;
-                }
-
-                // Clean the secret: remove spaces, convert to uppercase
-                secret = secret.replace(/\s+/g, '').toUpperCase();
-                
-                // Handle Facebook format: sometimes they provide keys with spaces or lowercase
-                // Also handle keys that might have dashes or other separators
-                secret = secret.replace(/[-\s]/g, '');
-
-                if (!this.isValidBase32(secret)) {
-                    this.showError('Invalid Base32 format. Make sure to copy the complete secret key from your app.');
-                    return;
-                }
-
-                try {
-                    await this.generateCode(secret);
-                    this.startAutoRefresh(secret);
-                } catch (error) {
-                    this.showError(`Failed to generate code: ${error.message}`);
-                }
-            }
-
-            isValidBase32(str) {
-                // Remove spaces and convert to uppercase
-                const cleanStr = str.replace(/\s+/g, '').toUpperCase();
-                
-                // Base32 should only contain A-Z and 2-7, with optional padding (=)
-                const base32Pattern = /^[A-Z2-7]+=*$/;
-                
-                // Length should be at least 16 characters and divisible by 8 (with padding)
-                const isValidLength = cleanStr.length >= 16;
-                const isValidPattern = base32Pattern.test(cleanStr);
-                
-                console.log('Validating Base32:', cleanStr, 'Length:', cleanStr.length, 'Pattern:', isValidPattern);
-                
-                return isValidPattern && isValidLength;
-            }
-
-            async generateCode(secret) {
-                try {
-                    // Clean and normalize the secret
-                    const cleanSecret = secret.replace(/\s+/g, '').toUpperCase();
-                    
-                    console.log('Clean secret:', cleanSecret);
-                    
-                    let code;
-                    
-                    // Try with otplib first
-                    try {
-                        code = window.otplib.authenticator.generate(cleanSecret);
-                        console.log('OTPLib generated code:', code);
-                    } catch (otplibError) {
-                        console.log('OTPLib failed, trying custom implementation:', otplibError);
-                        // Fallback to custom implementation
-                        code = await CustomTOTP.generate(cleanSecret);
-                        console.log('Custom TOTP generated code:', code);
-                    }
-                    
-                    this.currentCode = code;
-                    this.displayCode(code);
-                    this.clearError();
-                } catch (error) {
-                    console.error('Generation error:', error);
-                    throw new Error(`Failed to generate code: ${error.message}`);
-                }
-            }
-
-            displayCode(code) {
-                this.codeDisplay.textContent = code;
-                this.resultContainer.classList.add('show');
-                this.startCountdown();
-            }
-
-            startCountdown() {
-                const updateCountdown = () => {
-                    const now = Math.floor(Date.now() / 1000);
-                    const timeLeft = 30 - (now % 30);
-                    const progress = ((30 - timeLeft) / 30) * 100;
-                    
-                    this.countdown.textContent = `Expires in ${timeLeft} seconds`;
-                    this.progressFill.style.width = `${progress}%`;
-                    
-                    if (timeLeft === 30) {
-                        // Code just refreshed
-                        this.progressFill.style.width = '0%';
-                    }
-                };
-
-                // Clear existing countdown
-                if (this.countdownId) {
-                    clearInterval(this.countdownId);
-                }
-
-                updateCountdown();
-                this.countdownId = setInterval(updateCountdown, 1000);
-            }
-
-            startAutoRefresh(secret) {
-                // Clear existing interval
-                if (this.intervalId) {
-                    clearInterval(this.intervalId);
-                }
-
-                // Auto-refresh every 30 seconds
-                this.intervalId = setInterval(async () => {
-                    try {
-                        await this.generateCode(secret);
-                    } catch (error) {
-                        this.showError(`Auto-refresh failed: ${error.message}`);
-                        clearInterval(this.intervalId);
-                    }
-                }, 30000);
-            }
-
-            async copyCode() {
-                if (!this.currentCode) return;
-
-                try {
-                    await navigator.clipboard.writeText(this.currentCode);
-                    
-                    const originalText = this.copyBtn.textContent;
-                    this.copyBtn.textContent = '✅ Copied!';
-                    this.copyBtn.style.background = 'rgba(72, 187, 120, 0.3)';
-                    
-                    setTimeout(() => {
-                        this.copyBtn.textContent = originalText;
-                        this.copyBtn.style.background = 'rgba(255, 255, 255, 0.2)';
-                    }, 2000);
-                } catch (error) {
-                    // Fallback for older browsers
-                    const textArea = document.createElement('textarea');
-                    textArea.value = this.currentCode;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    
-                    this.copyBtn.textContent = '✅ Copied!';
-                    setTimeout(() => {
-                        this.copyBtn.textContent = '📋 Copy Code';
-                    }, 2000);
-                }
-            }
-
-            showError(message) {
-                this.errorMessage.textContent = message;
-                this.errorContainer.classList.add('show');
-                this.resultContainer.classList.remove('show');
-                
-                // Clear intervals on error
-                if (this.intervalId) {
-                    clearInterval(this.intervalId);
-                    this.intervalId = null;
-                }
-                if (this.countdownId) {
-                    clearInterval(this.countdownId);
-                    this.countdownId = null;
-                }
-            }
-
-            clearError() {
-                this.errorContainer.classList.remove('show');
-            }
-
-            destroy() {
-                if (this.intervalId) clearInterval(this.intervalId);
-                if (this.countdownId) clearInterval(this.countdownId);
-            }
-        }
-
-        // Initialize the app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            const app = new TwoFactorGenerator();
+        <div class="container mx-auto max-w-4xl text-center relative z-10">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-blue-800 mb-12 uppercase border-b-4 border-indigo-500 pb-2 inline-block mx-auto">CONTACT ME</h2>
             
-            // Clean up intervals when page is closed
-            window.addEventListener('beforeunload', () => {
-                app.destroy();
-            });
-        });
+            <!-- Contact Card -->
+            <div class="bg-white border-4 border-blue-500 rounded-3xl p-6 sm:p-10 shadow-2xl">
 
-        // Security: Clear clipboard and inputs when page loses focus
-        window.addEventListener('blur', () => {
-            setTimeout(() => {
-                const secretInput = document.getElementById('secret');
-                if (secretInput) {
-                    secretInput.value = '';
-                }
-            }, 30000); // Clear after 30 seconds of inactivity
-        });
-        
-    </script>
+                <p class="text-xl text-gray-700 mb-8 font-medium">Let's connect and discuss how to scale your system.</p>
+
+                <!-- Email (Top priority call to action) -->
+                <div class="mb-10">
+                    <a href="mailto:Drakenguyen.me@gmail.com" class="text-2xl sm:text-3xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition duration-300 flex items-center justify-center p-4 rounded-xl shadow-lg ring-4 ring-blue-300 max-w-lg mx-auto">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white mr-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                        <!-- ADDED truncate and max-w-full for responsive text handling -->
+                        <span class="truncate max-w-full block text-lg sm:text-3xl">Drakenguyen.me@gmail.com</span>
+                    </a>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-300 pb-2">Connect via QR</h3>
+                
+                <!-- QR Code Block (Cleaned up layout) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    
+                    <!-- QR 1: Telegram -->
+    <a href="https://t.me/drakenguyen" target="_blank" class="qr-box block">
+        <p class="text-lg font-bold text-gray-700 mb-3 flex items-center justify-center text-blue-500">
+            <i class="fab fa-telegram-plane mr-2"></i> Telegram
+        </p>
+        <img src="https://placehold.co/150x150/0088CC/FFFFFF?text=QR+Code" 
+             alt="Telegram QR" 
+             class="qr-image-placeholder border-blue-500">
+    </a>
+
+                    <!-- QR 2: Messenger -->
+    <a href="https://m.me/drakenguyen.me" target="_blank" class="qr-box block">
+        <p class="text-lg font-bold text-gray-700 mb-3 flex items-center justify-center text-purple-600">
+            <i class="fab fa-facebook-messenger mr-2"></i> Messenger
+        </p>
+        <img src="https://placehold.co/150x150/0078FF/FFFFFF?text=QR+Code" 
+             alt="Messenger QR" 
+             class="qr-image-placeholder border-purple-600">
+    </a>
+
+                    
+                     <!-- QR 3: LinkedIn -->
+    <a href="https://www.linkedin.com/in/huylanmartech" target="_blank" class="qr-box block">
+        <p class="text-lg font-bold text-gray-700 mb-3 flex items-center justify-center text-blue-700">
+            <i class="fab fa-linkedin mr-2"></i> LinkedIn
+        </p>
+        <img src="https://placehold.co/150x150/0A66C2/FFFFFF?text=QR+Code" 
+             alt="LinkedIn QR" 
+             class="qr-image-placeholder border-blue-700">
+    </a>
+                    
+                    <!-- QR 4: WhatsApp -->
+                      <!-- QR 4: WhatsApp -->
+    <a href="https://wa.me/84968333342" target="_blank" class="qr-box block">
+        <p class="text-lg font-bold text-gray-700 mb-3 flex items-center justify-center text-green-600">
+            <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+        </p>
+        <img src="https://placehold.co/150x150/25D366/FFFFFF?text=QR+Code" 
+             alt="WhatsApp QR" 
+             class="qr-image-placeholder border-green-600">
+    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END Contact Section FIX -->
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 text-gray-600 p-4 text-center text-xs border-t border-gray-200">
+        <p class="space-x-4">
+            <a href="#" class="hover:underline">Terms & Support</a>
+            <span>|</span>
+            <a href="#" class="hover:underline">Privacy Policy</a>
+            <span>|</span>
+            <span>Designed with Drakenguyen.me</span>
+        </p>
+    </footer>
+
+    <!-- JavaScript for Single Page Application (SPA) Logic -->
     <script>
-// Chặn chuột phải
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-});
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.page-section');
+            const navLinks = document.querySelectorAll('.nav-link');
 
-// Chặn phím F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S
-document.addEventListener('keydown', function(e) {
-    // F12
-    if (e.key === "F12" || e.keyCode === 123) {
-        e.preventDefault();
-        return false;
-    }
-    // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
-    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
-        e.preventDefault();
-        return false;
-    }
-    // Ctrl+U, Ctrl+S
-    if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'U' || e.key === 'S')) {
-        e.preventDefault();
-        return false;
-    }
-});
-</script>
+            /**
+             * Displays the requested page and updates the menu state.
+             * @param {string} pageId - ID of the section (e.g., 'about', 'projects', 'contact').
+             */
+            function showPage(pageId) {
+                // 1. Hide all sections
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    section.style.display = 'none';
+                });
 
+                // 2. Display the desired section
+                const targetSection = document.getElementById(pageId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    targetSection.style.display = 'block'; 
+                    // Scroll to the top of the page when switching views
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+
+                    // 3. Update the active state of the menu links
+                    navLinks.forEach(link => {
+                        // Reset all links to gray color
+                        link.classList.remove('text-indigo-600', 'hover:text-indigo-800');
+                        link.classList.add('text-gray-600', 'hover:text-indigo-600');
+                        
+                        // Set the active link to indigo color
+                        if (link.getAttribute('data-page') === pageId) {
+                            link.classList.remove('text-gray-600', 'hover:text-indigo-600');
+                            link.classList.add('text-indigo-600', 'hover:text-indigo-800');
+                        }
+                    });
+                }
+            }
+
+            // Attach click event listeners to menu links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default anchor jump
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+
+            // Initial setup: Determine the page to show based on the hash in the URL or default to 'about'
+            const initialPage = window.location.hash ? window.location.hash.substring(1) : 'about';
+            showPage(initialPage);
+        });
+    </script>
 </body>
 </html>
