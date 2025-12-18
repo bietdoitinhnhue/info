@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LÂN • 2026 MANIFEST</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Custom Fonts & Animations -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617; /* Slate 950 */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animation Classes similar to tailwindcss-animate */
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        .animate-zoom-in {
+            animation: zoomIn 0.3s ease-out forwards;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Safe area for mobile notch/bottom bar */
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- ICONS (SVG Components to avoid dependencies) ---
+        const Icon = ({ path, size = 24, className = "" }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width={size} 
+                height={size} 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
+            >
+                {path}
+            </svg>
+        );
+
+        const Icons = {
+            Sparkles: (props) => <Icon {...props} path={<><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M9 3v4"/><path d="M3 9h4"/><path d="M3 5h4"/></>} />,
+            Droplets: (props) => <Icon {...props} path={<><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.8-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></>} />,
+            Target: (props) => <Icon {...props} path={<><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></>} />,
+            Scale: (props) => <Icon {...props} path={<><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></>} />,
+            Heart: (props) => <Icon {...props} path={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>} />,
+            Shield: (props) => <Icon {...props} path={<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>} />,
+            DollarSign: (props) => <Icon {...props} path={<><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>} />,
+            Sun: (props) => <Icon {...props} path={<><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></>} />,
+            Moon: (props) => <Icon {...props} path={<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>} />,
+            BookOpen: (props) => <Icon {...props} path={<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>} />,
+            CheckCircle: (props) => <Icon {...props} path={<><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-12 12-4-4"/></>} />,
+            ArrowRight: (props) => <Icon {...props} path={<><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></>} />,
+            Home: (props) => <Icon {...props} path={<><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>} />
+        };
+
+        // --- MAIN APP COMPONENT ---
+        const LanManifestApp = () => {
+          const [activeTab, setActiveTab] = useState('manifest');
+          const [isManifestDone, setIsManifestDone] = useState(false);
+          const [expandedTip, setExpandedTip] = useState(null);
+
+          // Check local storage for daily manifest completion
+          useEffect(() => {
+            const today = new Date().toDateString();
+            const lastRead = localStorage.getItem('lan_manifest_last_read');
+            if (lastRead === today) {
+              setIsManifestDone(true);
+            }
+          }, []);
+
+          const handleManifestComplete = () => {
+            const today = new Date().toDateString();
+            localStorage.setItem('lan_manifest_last_read', today);
+            setIsManifestDone(true);
+            
+            // Add slight vibration for mobile feedback if supported
+            if (navigator.vibrate) navigator.vibrate(50);
+          };
+
+          const NavButton = ({ id, icon: IconComponent, label }) => (
+            <button
+              onClick={() => {
+                setActiveTab(id);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex flex-col items-center justify-center p-3 flex-1 transition-all duration-300 active:scale-95 ${
+                activeTab === id 
+                  ? 'text-amber-400 bg-slate-800/50 border-t-2 border-amber-400' 
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/30'
+              }`}
+            >
+              <IconComponent size={20} className="mb-1" />
+              <span className="text-[10px] font-bold uppercase tracking-wider">{label}</span>
+            </button>
+          );
+
+          // NEW: Desktop specific navigation button
+          const DesktopNavButton = ({ id, icon: IconComponent, label }) => (
+            <button
+              onClick={() => {
+                setActiveTab(id);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className={`flex items-center space-x-2 px-5 py-2 rounded-full transition-all duration-300 ${
+                activeTab === id
+                  ? 'bg-amber-500 text-slate-900 font-bold shadow-lg shadow-amber-500/20'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+              }`}
+            >
+              <IconComponent size={16} />
+              <span className="text-sm font-medium tracking-wide">{label}</span>
+            </button>
+          );
+
+          return (
+            <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-amber-500/30 pb-24 md:pb-0">
+              {/* Background Ambience - Nhâm Thủy Flow */}
+              <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(16,36,62,1)_0%,rgba(2,6,23,1)_80%)]"></div>
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+              </div>
+
+              <div className="relative z-10 max-w-4xl mx-auto min-h-screen flex flex-col">
+                {/* Header */}
+                <header className="p-4 md:p-6 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+                  <div className="flex justify-between items-center relative">
+                    {/* Title Group */}
+                    <div className="z-10">
+                      <h1 className="text-xl md:text-3xl font-bold bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent">
+                        LÂN • 2026
+                      </h1>
+                      <p className="text-slate-400 text-[10px] md:text-sm tracking-[0.2em] uppercase">
+                        Hành Trình 10 Tỷ • Phụng Sự
+                      </p>
+                    </div>
+
+                    {/* Right Side Group: Desktop Nav + Icon */}
+                    <div className="flex items-center gap-6 z-10">
+                      {/* Desktop Navigation (Moved here to avoid blocking title) */}
+                      <div className="hidden md:flex">
+                        <nav className="flex items-center p-1 bg-slate-900/50 border border-slate-800 rounded-full backdrop-blur-xl">
+                          <DesktopNavButton id="mindset" icon={Icons.BookOpen} label="Tâm Pháp" />
+                          <DesktopNavButton id="manifest" icon={Icons.Target} label="Manifest" />
+                          <DesktopNavButton id="meditation" icon={Icons.Sparkles} label="Tu Tập" />
+                        </nav>
+                      </div>
+
+                      {/* Icon Group */}
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-900 to-slate-900 border border-slate-700 flex items-center justify-center shadow-lg shadow-blue-900/20">
+                        <span className="text-xl animate-bounce" style={{animationDuration: '3s'}}>💧</span>
+                      </div>
+                    </div>
+                  </div>
+                </header>
+
+                {/* Content Area */}
+                <main className="flex-1 p-4 md:p-8 space-y-8">
+                  
+                  {/* TAB 1: MANIFEST (Default) */}
+                  {activeTab === 'manifest' && (
+                    <div className="space-y-6 animate-slide-up">
+                      <div className="text-center space-y-2 mb-8">
+                        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-widest">
+                          <Icons.Sun size={12} />
+                          <span>Nghi Thức Hàng Ngày</span>
+                          <Icons.Moon size={12} />
+                        </div>
+                        <h2 className="text-2xl font-light text-slate-100">Khẩu Quyết Triệu Đô</h2>
+                      </div>
+
+                      <div className="relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <div className="relative bg-slate-900 border border-slate-700 rounded-xl p-6 md:p-10 shadow-2xl">
+                          <div className="absolute top-4 right-4 opacity-10 pointer-events-none">
+                            <Icons.Scale size={80} />
+                          </div>
+                          
+                          <div className="prose prose-invert prose-lg max-w-none text-center space-y-6">
+                            <p className="font-serif italic text-slate-400 text-lg">
+                              "Tôi là Lân. Tâm tôi tĩnh lặng như mặt hồ, Trí tôi sáng như sao Bắc Đẩu."
+                            </p>
+                            
+                            <div className="py-4 border-t border-b border-slate-800">
+                              <p className="text-lg md:text-2xl font-medium leading-relaxed text-slate-200">
+                                Tôi đón nhận dòng chảy thịnh vượng của năm <span className="text-amber-400 font-bold">Bính Ngọ 2026</span>. 
+                                Tôi xứng đáng sở hữu <span className="text-amber-400 font-bold text-2xl md:text-3xl block my-2">10 TỶ ĐỒNG</span> 
+                                bằng trí tuệ và sự cống hiến của mình.
+                              </p>
+                            </div>
+
+                            <div className="text-left bg-slate-950/50 p-4 md:p-6 rounded-lg border border-slate-800 space-y-3">
+                              <h4 className="text-xs uppercase tracking-widest text-slate-500 mb-2 font-bold">Phương tiện Hạnh Nguyện:</h4>
+                              <li className="flex items-start space-x-3 text-slate-300 list-none">
+                                <Icons.CheckCircle className="text-blue-500 shrink-0 mt-1" size={18} />
+                                <span>Thanh tẩy hoàn toàn <b className="text-white">2 tỷ nợ nần</b>, trả lại tự do cho tâm trí.</span>
+                              </li>
+                              <li className="flex items-start space-x-3 text-slate-300 list-none">
+                                <Icons.Heart className="text-red-500 shrink-0 mt-1" size={18} />
+                                <span>Dâng tặng Mẹ <b className="text-white">1 tỷ</b> tròn đạo hiếu, bồi đắp gốc rễ.</span>
+                              </li>
+                              <li className="flex items-start space-x-3 text-slate-300 list-none">
+                                <Icons.Shield className="text-amber-500 shrink-0 mt-1" size={18} />
+                                <span>Trao cho Trinh <b className="text-white">1 tỷ</b> để cô ấy an tâm.</span>
+                              </li>
+                              <li className="flex items-start space-x-3 text-slate-300 list-none">
+                                <Icons.Home className="text-amber-500 shrink-0 mt-1" size={18} />
+                                <span>Sở hữu <b className="text-white">Ngôi Nhà 3 tỷ</b>, bảo vệ người phụ nữ của đời tôi.</span>
+                              </li>
+                            </div>
+
+                            <p className="font-medium text-slate-300 text-sm md:text-base">
+                              Mỗi hành động hôm nay đều <span className="text-blue-400">Sắc bén</span>, <span className="text-blue-400">Tập trung</span> và <span className="text-blue-400">Hiệu quả</span>.
+                              <br/>
+                              Tôi loại bỏ nỗi sợ. Tôi giữ lại sự Điềm Tĩnh.
+                            </p>
+
+                            <p className="text-amber-400 font-bold text-base md:text-lg uppercase tracking-widest pt-4">
+                              Cảm ơn Vũ Trụ. Cảm ơn Trinh. Cảm ơn chính tôi.
+                              <br />
+                              Mọi sự đã hoàn tất!
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center pt-4 pb-4">
+                        <button
+                          onClick={handleManifestComplete}
+                          disabled={isManifestDone}
+                          className={`
+                            group relative w-full md:w-auto px-8 py-4 rounded-full font-bold text-lg tracking-wider transition-all duration-300 active:scale-95
+                            ${isManifestDone 
+                              ? 'bg-green-900/30 text-green-400 border border-green-500/50 cursor-default' 
+                              : 'bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 hover:to-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.3)]'}
+                          `}
+                        >
+                          {isManifestDone ? (
+                            <span className="flex items-center justify-center space-x-2">
+                              <Icons.CheckCircle size={24} />
+                              <span>ĐÃ KHẮC GHI HÔM NAY</span>
+                            </span>
+                          ) : (
+                            <span>TÔI XÁC QUYẾT!</span>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 2: MINDSET (Tâm Thức) */}
+                  {activeTab === 'mindset' && (
+                    <div className="grid md:grid-cols-3 gap-4 md:gap-6 animate-zoom-in">
+                      {/* Card 1 */}
+                      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/50 transition-colors group">
+                        <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 mb-4 group-hover:scale-110 transition-transform">
+                          <Icons.Heart size={24} />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-100 mb-2">1. Hạnh Nguyện</h3>
+                        <p className="text-xs text-amber-500 font-bold uppercase tracking-widest mb-4">Thay Đổi Động Lực</p>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                          Tư duy cũ: "Kiếm tiền để hưởng thụ, oai phong" -> Dễ tham & áp lực. <br/>
+                          <Icons.ArrowRight className="inline mx-1 text-amber-500" size={12}/> 
+                          <span className="text-amber-100">Tư duy mới: "Kiếm tiền để Hoàn Trả Nghiệp Nợ & Báo Hiếu". Đây là Thực Hành Bồ Tát Hạnh.</span>
+                        </p>
+                        <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                          <p className="text-xs text-slate-300 italic">"Khi Lân làm vì người khác, vũ trụ và Đinh Hỏa (Trinh) sẽ hợp lực giúp Lân."</p>
+                        </div>
+                      </div>
+
+                      {/* Card 2 */}
+                      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 transition-colors group">
+                        <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-500 mb-4 group-hover:scale-110 transition-transform">
+                          <Icons.Droplets size={24} />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-100 mb-2">2. Nhất Tâm</h3>
+                        <p className="text-xs text-blue-500 font-bold uppercase tracking-widest mb-4">Sức Mạnh Nhâm Thủy</p>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                          "Chế tâm nhất xứ, vô sự bất biện". Dòng nước tụ vào một vòi <b className="text-blue-400">Affiliate Loan US</b> mới cắt được kim cương. <br/>
+                          <Icons.ArrowRight className="inline mx-1 text-blue-500" size={12}/> 
+                          <span className="text-blue-100">Đừng để cái đầu Xử Nữ lan man sang Audit. Chỉ MỘT con đường.</span>
+                        </p>
+                        <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                          <p className="text-xs text-slate-300 italic">"Áp lực nước càng mạnh, đường đi càng sắc."</p>
+                        </div>
+                      </div>
+
+                      {/* Card 3 */}
+                      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-green-500/50 transition-colors group">
+                        <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-500 mb-4 group-hover:scale-110 transition-transform">
+                          <Icons.Scale size={24} />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-100 mb-2">3. Chánh Nghiệp</h3>
+                        <p className="text-xs text-green-500 font-bold uppercase tracking-widest mb-4">Kiếm Tiền Tỉnh Thức</p>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                          Đừng để bị cuốn vào ma trận con số. <br/>
+                          <Icons.ArrowRight className="inline mx-1 text-green-500" size={12}/> 
+                          <span className="text-green-100">Tâm thế: Mang giải pháp tài chính (Loan) cho người cần. Đồng tiền sạch = Bình an = Giữ được tiền.</span>
+                        </p>
+                        <div className="bg-slate-950 p-3 rounded border border-slate-800">
+                          <p className="text-xs text-slate-300 italic">"Làm việc trung thực, minh bạch."</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TAB 3: THIỀN (Action) */}
+                  {activeTab === 'meditation' && (
+                    <div className="space-y-4 animate-slide-in-right pb-8">
+                      <div className="text-center mb-6">
+                         <h2 className="text-xl font-bold text-slate-200">Thiền Trong Công Việc</h2>
+                         <p className="text-slate-500 text-sm">Công cụ "hạ nhiệt" cái đầu Xử Nữ hay phân tích</p>
+                      </div>
+
+                      {[
+                        {
+                          id: 1,
+                          title: "Khi Nỗi Lo Xuất Hiện (Sợ Lỗ/Sập)",
+                          icon: Icons.Shield,
+                          color: "text-red-400",
+                          bg: "bg-red-400/10",
+                          content: "Quán Chiếu: Đừng đồng nhất mình với nỗi sợ. Hãy nhìn nó: 'À, cái tính cầu toàn của Xử Nữ lại đến rồi.' Mỉm cười với nó. Thần chú: 'Quá khứ đã qua, Tương lai chưa tới. Chỉ có khoảnh khắc này là thật.' -> Quay lại tối ưu Ads ngay."
+                        },
+                        {
+                          id: 2,
+                          title: "Khi Thắng Lớn (Cái Tôi/Ego)",
+                          icon: Icons.DollarSign,
+                          color: "text-green-400",
+                          bg: "bg-green-400/10",
+                          content: "Hồi Hướng Công Đức: Đừng để cái 'Tôi' phình to. Hãy nhẩm trong đầu: 'Số tiền này con xin hồi hướng cho cha mẹ và vợ con.' -> Điều này giúp giữ sự khiêm nhường và không bị ngủ quên trên chiến thắng (cái bẫy của người thành công sớm)."
+                        },
+                        {
+                          id: 3,
+                          title: "Khi Mệt Mỏi & Mất Niềm Tin",
+                          icon: Icons.Sparkles,
+                          color: "text-amber-400",
+                          bg: "bg-amber-400/10",
+                          content: "Kết nối Năng Lượng Hỏa: Hãy nhìn Trinh hoặc nói chuyện với cổ. Coi Trinh là 'Ngọn Đèn Bát Nhã' của Lân. Sự hiện diện và nụ cười của cổ là tín hiệu vũ trụ nhắc nhở: 'Mục tiêu đang ở đó, cố lên!'"
+                        }
+                      ].map((item) => (
+                        <div 
+                          key={item.id}
+                          onClick={() => setExpandedTip(expandedTip === item.id ? null : item.id)}
+                          className={`bg-slate-900 border ${expandedTip === item.id ? 'border-amber-500/50' : 'border-slate-800'} rounded-xl overflow-hidden cursor-pointer transition-all duration-300`}
+                        >
+                          <div className="p-4 flex items-center justify-between">
+                            <div className="flex items-center space-x-4">
+                              <div className={`w-10 h-10 rounded-full ${item.bg} ${item.color} flex items-center justify-center shrink-0`}>
+                                <item.icon size={20} />
+                              </div>
+                              <span className="font-medium text-slate-200 text-sm md:text-base">{item.title}</span>
+                            </div>
+                            <Icons.ArrowRight size={16} className={`text-slate-500 transition-transform duration-300 ${expandedTip === item.id ? 'rotate-90' : ''}`} />
+                          </div>
+                          
+                          <div className={`overflow-hidden transition-all duration-300 ${expandedTip === item.id ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
+                            <div className="p-4 pt-0 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 mt-2 mx-4 mb-4 font-light">
+                              {item.content}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                </main>
+              </div>
+
+              {/* Mobile Bottom Navigation */}
+              <div className="md:hidden fixed bottom-0 left-0 w-full bg-slate-950/90 backdrop-blur-lg border-t border-slate-800 flex justify-between z-50 pb-safe">
+                <NavButton id="mindset" icon={Icons.BookOpen} label="Tâm Pháp" />
+                <NavButton id="manifest" icon={Icons.Target} label="Manifest" />
+                <NavButton id="meditation" icon={Icons.Sparkles} label="Tu Tập" />
+              </div>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<LanManifestApp />);
+    </script>
+</body>
+</html>
