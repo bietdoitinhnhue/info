@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Meta Tags -->
+    <title>Lân gửi Trinh ❤️</title>
+    <meta name="description" content="Một món quà nhỏ Lân gửi tặng Diễm Trinh. Nhấn vào để xem điều bất ngờ nhé!">
+    <meta name="author" content="Lân">
+
+    <!-- Favicon (Icon trên tab trình duyệt) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+
+    <!-- Open Graph / Facebook Thumbnail -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lân gửi Diễm Trinh ❤️">
+    <meta property="og:description" content="Nhấn vào để xem điều bất ngờ Lân dành cho Trinh nhé!">
+    <!-- Dùng ảnh của Diễm Trinh làm ảnh đại diện khi chia sẻ link -->
+    <meta property="og:image" content="https://prnt.sc/f5i-WvhBZ3p-">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Icon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- Confetti Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .font-handwriting {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Heart Animation Background */
+        .heart-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart-fall {
+            position: absolute;
+            top: -10%;
+            color: #ff9a9e;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Pulse Animation for Button */
+        .animate-pulse-fast {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .9; transform: scale(1.05); }
+        }
+
+        /* Hidden Utility */
+        .hidden-opacity {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+        
+        .visible-opacity {
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 1s ease;
+        }
+
+        #noBtn {
+            transition: all 0.3s ease;
+        }
+        
+        /* Custom scrollbar for long text if needed on small screens */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #fbcfe8;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #f472b6;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex items-center justify-center bg-pink-50 relative">
+
+    <!-- Background Music -->
+    <!-- Đã cập nhật link nhạc I Do - 911 -->
+    <audio id="bgMusic" loop>
+        <source src="https://raw.githubusercontent.com/bietdoitinhnhue/tools/main/I%20Do%20-%20911.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ phát nhạc.
+    </audio>
+
+    <!-- Falling Hearts Container -->
+    <div class="heart-bg" id="heartContainer"></div>
+
+    <!-- SCREEN 1: INTRO (Password Protection) -->
+    <div id="introScreen" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-pink-100 transition-all duration-1000">
+        <div class="text-center p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl max-w-md mx-4 border-4 border-pink-200 w-full">
+            <div class="text-6xl text-red-500 mb-4 animate-bounce">💌</div>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Có thư gửi Diễm Trinh nè!</h1>
+            <p class="text-gray-600 mb-6">Nhập mật khẩu để mở thư nhé (Gợi ý: Ngày sinh nhật của em ddMMyyyy)</p>
+            
+            <div class="mb-6 relative">
+                <input type="password" id="passwordInput" placeholder="Nhập mật khẩu..." 
+                    class="w-full px-5 py-3 border-2 border-pink-300 rounded-full text-center focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all text-gray-700 font-bold tracking-widest text-lg"
+                    onkeypress="handleKeyPress(event)">
+                <p id="errorMsg" class="text-red-500 text-sm mt-2 hidden font-bold animate-pulse">Sai mật khẩu rồi! Thử lại đi nè 🥺</p>
+            </div>
+
+            <button onclick="checkPassword()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 animate-pulse-fast text-xl w-full">
+                Mở thư ngay <i class="fas fa-heart ml-2"></i>
+            </button>
+            <p class="text-gray-400 text-xs mt-4">Hãy đeo tai nghe để có trải nghiệm tốt nhất</p>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: MAIN CONTENT -->
+    <div id="mainContent" class="hidden-opacity absolute inset-0 z-40 flex items-center justify-center">
+        <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-2xl max-w-2xl w-full mx-4 text-center border-2 border-pink-100 relative max-h-[90vh] flex flex-col">
+            
+            <!-- Avatar/Image Area (Couple Style) -->
+            <!-- Bạn hãy thay link ảnh của bạn và Trinh vào 2 thẻ img bên dưới nhé -->
+            <div class="mb-6 flex justify-center items-center gap-4 shrink-0">
+                <!-- Khung ảnh Bạn Nam -->
+                <div class="relative group">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-blue-200 overflow-hidden bg-white shadow-md transform transition duration-300 group-hover:scale-110 group-hover:rotate-[-10deg]">
+                        <img src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/482005929_1130234928881770_528207169751640260_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=a1mZI8rmFRsQ7kNvwGcsrg7&_nc_oc=Adk8dGgG8qdN__MFG0KCSfKvDVm5GmZk94BH7aJ-tOxAIo0tE3nc7m1ByZVg0POCPCrTtQt1j9B3ztKewky3hcY9&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=SI0WAPC76nELwwoDHZqqrQ&oh=00_AflKC_FaM4VTMN1Yoo8DMZdjoNTyeAm7fUAolyqy6Z3wqw&oe=694FD07F" alt="Anh" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-[10px] md:text-xs px-2 py-0.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity">Anh</div>
+                </div>
+
+                <!-- Icon Trái tim ở giữa -->
+                <div class="text-2xl md:text-3xl text-red-500 animate-pulse pt-2">
+                    <i class="fas fa-heart"></i>
+                </div>
+
+                <!-- Khung ảnh Bạn Nữ -->
+                <div class="relative group">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-pink-200 overflow-hidden bg-white shadow-md transform transition duration-300 group-hover:scale-110 group-hover:rotate-[10deg]">
+                        <img src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/590354445_4144248052556549_5354193044921273782_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=4cU-iES_FcIQ7kNvwGCJyC3&_nc_oc=AdnG4zljk4HsC4zbMqbQcyaODqaUcT1HBrpz0RRxCUhwLgC3r8SneHSULOoZMGHDafXmPBk1qAaEp0Nt8LeX-4Zv&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=OWuSmsb2XFqGtenQCjJovQ&oh=00_AfnQz5dkw2rJtmqimVLszRmqsgibqgW1P3jv2sNoesmUIg&oe=694FD583" alt="Diễm Trinh" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-pink-500 text-white text-[10px] md:text-xs px-2 py-0.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity">Em</div>
+                </div>
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-handwriting text-pink-600 mb-4 font-bold shrink-0">Gửi Diễm Trinh</h1>
+            
+            <!-- Typing Text Area - Added scroll for long text -->
+            <div class="flex-grow overflow-y-auto custom-scrollbar px-2 mb-6">
+                <p id="typingText" class="text-gray-700 text-base md:text-lg leading-relaxed whitespace-pre-line text-left"></p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center mt-auto shrink-0 relative h-14">
+                <!-- Đã cập nhật onclick -->
+                <button onclick="handleAgree()" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-110 z-10 text-lg w-full md:w-auto">
+                    Đồng ý làm người anh thương <i class="fas fa-kiss-wink-heart ml-2"></i>
+                </button>
+                
+                <!-- Đã cập nhật onclick -->
+                <button id="foreverBtn" onclick="handleForever()" class="bg-gradient-to-r from-blue-400 to-indigo-500 hover:from-blue-500 hover:to-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-110 z-10 text-lg w-full md:w-auto">
+                    Bên anh trọn đời <i class="fas fa-ring ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: SUCCESS -->
+    <div id="successScreen" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm transition-all duration-500 opacity-0">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-md mx-4 animate-bounce-in">
+            <div class="text-6xl mb-4">🥰</div>
+            <h2 class="text-3xl font-handwriting font-bold text-pink-600 mb-2">Yeahhhh!</h2>
+            <p class="text-gray-700 text-xl">Cảm ơn Diễm Trinh đã đồng ý làm người thương anh!</p>
+            <p class="text-gray-500 mt-2 text-sm">(Anh đã chụp màn hình lại làm bằng chứng rồi nhé hihi)</p>
+            <div class="mt-6">
+                <button onclick="closeSuccess()" class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600">Thương em ❤️</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const message = `Trinh thương,
+Nghe anh nói nè, từ rày về sau, cưng đừng có gồng mình lên làm người lớn nữa nghen.
+
+Anh biết, hồi đó giờ đời bắt cưng phải mạnh mẽ, phải gai góc để tự bảo vệ mình. Nhưng mà đó là chuyện lúc chưa có anh. Giờ anh tới rồi, anh ở đây rồi, cưng cứ việc trút bỏ hết mấy cái "áo giáp" nặng trịch đó xuống đi.
+
+Ở bên cạnh anh, cưng cứ làm một cô bé nhỏ xíu xiu thôi cũng được. Cứ nhõng nhẽo, cứ yếu mềm, thậm chí cứ khóc nhè nếu cưng muốn. Anh không cần một người đàn bà "thép", anh thương là thương cô gái nhỏ bé cần người che chở này nè.
+
+Thế giới ngoài kia mưa nắng sao mặc kệ, về tới vòng tay anh là trời yên biển lặng. Anh hứa sẽ là cái lá chắn vững chãi nhất, che hết giông bão cho cưng. Cưng chỉ việc núp sau lưng anh mà bình an, mà cười thôi, chịu hông?
+
+Thương cưng đứt ruột.`;
+
+        const speed = 50; // Typing speed in ms (faster for long text)
+        const password = "19042000"; // Mật khẩu để mở thư
+        
+        // --- ELEMENTS ---
+        const introScreen = document.getElementById('introScreen');
+        const mainContent = document.getElementById('mainContent');
+        const bgMusic = document.getElementById('bgMusic');
+        const typingTextElement = document.getElementById('typingText');
+        const foreverBtn = document.getElementById('foreverBtn');
+        const successScreen = document.getElementById('successScreen');
+        const heartContainer = document.getElementById('heartContainer');
+
+        // --- FUNCTIONS ---
+
+        // Handle Enter key for password
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
+
+        // Check password function
+        function checkPassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if (passwordInput.value === password) {
+                // Correct Password
+                startExperience();
+            } else {
+                // Wrong Password
+                errorMsg.classList.remove('hidden');
+                passwordInput.classList.add('border-red-500', 'bg-red-50');
+                passwordInput.value = ''; // Clear input
+                passwordInput.focus();
+                
+                // Shake effect manually or just reset style after delay
+                setTimeout(() => {
+                    passwordInput.classList.remove('border-red-500', 'bg-red-50');
+                }, 1000);
+            }
+        }
+
+        // 1. Start the experience
+        function startExperience() {
+            // Play music (requires user interaction first)
+            bgMusic.volume = 0.5;
+            bgMusic.play().catch(e => console.log("Audio play failed:", e));
+
+            // Hide intro, show main
+            introScreen.style.opacity = '0';
+            setTimeout(() => {
+                introScreen.style.display = 'none';
+                mainContent.classList.remove('hidden-opacity');
+                mainContent.classList.add('visible-opacity');
+                
+                // Start typing effect
+                typeWriter();
+                // Create falling hearts
+                createHearts();
+            }, 1000);
+        }
+
+        // 2. Typing Effect
+        let i = 0;
+        function typeWriter() {
+            if (i < message.length) {
+                // Handle special characters if needed, but innerHTML handles text well
+                // Check if the current character is a newline to ensure smooth typing
+                const char = message.charAt(i);
+                typingTextElement.innerHTML += char;
+                i++;
+                
+                // Auto scroll to bottom while typing
+                const typingContainer = typingTextElement.parentElement;
+                typingContainer.scrollTop = typingContainer.scrollHeight;
+
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // 3. Falling Hearts Logic
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-fall');
+                heart.innerHTML = ['❤️', '💖', '💝', '💕', '🌸'][Math.floor(Math.random() * 5)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2-5s
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                
+                heartContainer.appendChild(heart);
+
+                // Remove after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+
+        // 4. Accept Love Logic (No more runaway button)
+        // Hàm chung để xử lý hiệu ứng
+        function triggerEffects() {
+            // Show confetti
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 70 };
+
+            function randomInOut(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                // fire works
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+
+            // Show success modal
+            successScreen.classList.remove('hidden');
+            setTimeout(() => {
+                successScreen.style.opacity = '1';
+            }, 10);
+        }
+
+        // Xử lý nút Đồng ý -> Messenger
+        function handleAgree() {
+            triggerEffects();
+            
+            // Đợi 1.5s để ngắm pháo hoa rồi mới chuyển tab
+            setTimeout(() => {
+                // --- QUAN TRỌNG: BẠN HÃY THAY LINK DƯỚI ĐÂY BẰNG LINK MESSENGER CỦA BẠN ---
+                // Ví dụ: https://m.me/nguyen.van.lan
+                window.open('https://m.me/your.username.here', '_blank'); 
+            }, 1500);
+        }
+
+        // Xử lý nút Trọn đời -> WhatsApp
+        function handleForever() {
+            triggerEffects();
+            
+            // Đợi 1.5s rồi chuyển qua WhatsApp
+            setTimeout(() => {
+                // Link WhatsApp đến số 0968333342 (Mã vùng VN là 84)
+                window.open('https://wa.me/84968333342', '_blank');
+            }, 1500);
+        }
+
+        function closeSuccess() {
+            // Just keep them on the page with the music and animation
+             successScreen.style.opacity = '0';
+            setTimeout(() => {
+                successScreen.classList.add('hidden');
+            }, 500);
+            
+            // Change message
+            typingTextElement.innerHTML = "Anh biết mà! Thương Diễm Trinh nhiều lắm ❤️";
+            foreverBtn.style.display = 'none'; // Hide the Forever button
+        }
+
+        // Start creating some background hearts immediately for intro
+        createHearts();
+
+    </script>
+</body>
+</html>
