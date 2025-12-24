@@ -76,7 +76,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         // --- ICONS (SVG Components to avoid dependencies) ---
         const Icon = ({ path, size = 24, className = "" }) => (
@@ -109,7 +109,9 @@
             BookOpen: (props) => <Icon {...props} path={<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>} />,
             CheckCircle: (props) => <Icon {...props} path={<><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-12 12-4-4"/></>} />,
             ArrowRight: (props) => <Icon {...props} path={<><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></>} />,
-            Home: (props) => <Icon {...props} path={<><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>} />
+            Home: (props) => <Icon {...props} path={<><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>} />,
+            Volume2: (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M15.54 8.46a5 5 0 0 1 0 7.07" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /></>} />,
+            VolumeX: (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" /></>} />
         };
 
         // --- MAIN APP COMPONENT ---
@@ -117,6 +119,7 @@
           const [activeTab, setActiveTab] = useState('manifest');
           const [isManifestDone, setIsManifestDone] = useState(false);
           const [expandedTip, setExpandedTip] = useState(null);
+          const [isMusicPlaying, setIsMusicPlaying] = useState(true); // Default to true to attempt autoplay
 
           // Check local storage for daily manifest completion
           useEffect(() => {
@@ -126,6 +129,10 @@
               setIsManifestDone(true);
             }
           }, []);
+
+          const toggleMusic = () => {
+            setIsMusicPlaying(!isMusicPlaying);
+          };
 
           const handleManifestComplete = () => {
             const today = new Date().toDateString();
@@ -173,6 +180,21 @@
 
           return (
             <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-amber-500/30 pb-24 md:pb-0">
+              {/* YouTube Background Music Embed (Hidden) */}
+              {isMusicPlaying && (
+                 <div style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', opacity: 0.01, pointerEvents: 'none' }}>
+                    <iframe 
+                        width="100" 
+                        height="100" 
+                        src="https://looptube.io/?videoId=ZuJyn7lwkZQ&start=0&end=186&rate=1" 
+                        title="Background Music" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen
+                    ></iframe>
+                 </div>
+              )}
+
               {/* Background Ambience - Nhâm Thủy Flow */}
               <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(16,36,62,1)_0%,rgba(2,6,23,1)_80%)]"></div>
@@ -190,13 +212,13 @@
                         LÂN • 2026
                       </h1>
                       <p className="text-slate-400 text-[10px] md:text-sm tracking-[0.2em] uppercase">
-                        Hành Trình 10 Tỷ • Phụng Sự
+                        Hành Trình 20 Tỷ • Phụng Sự
                       </p>
                     </div>
 
-                    {/* Right Side Group: Desktop Nav + Icon */}
-                    <div className="flex items-center gap-6 z-10">
-                      {/* Desktop Navigation (Moved here to avoid blocking title) */}
+                    {/* Right Side Group: Desktop Nav + Icons */}
+                    <div className="flex items-center gap-4 md:gap-6 z-10">
+                      {/* Desktop Navigation */}
                       <div className="hidden md:flex">
                         <nav className="flex items-center p-1 bg-slate-900/50 border border-slate-800 rounded-full backdrop-blur-xl">
                           <DesktopNavButton id="mindset" icon={Icons.BookOpen} label="Tâm Pháp" />
@@ -205,7 +227,20 @@
                         </nav>
                       </div>
 
-                      {/* Icon Group */}
+                      {/* Music Toggle Button */}
+                      <button 
+                        onClick={toggleMusic}
+                        className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                            isMusicPlaying 
+                            ? 'bg-amber-500/10 border-amber-500/50 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.2)]' 
+                            : 'bg-slate-900 border-slate-700 text-slate-500 hover:text-slate-300'
+                        }`}
+                        title={isMusicPlaying ? "Tắt nhạc" : "Bật nhạc thiền"}
+                      >
+                         {isMusicPlaying ? <Icons.Volume2 size={20} className="animate-pulse" /> : <Icons.VolumeX size={20} />}
+                      </button>
+
+                      {/* Water Icon Group */}
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-900 to-slate-900 border border-slate-700 flex items-center justify-center shadow-lg shadow-blue-900/20">
                         <span className="text-xl animate-bounce" style={{animationDuration: '3s'}}>💧</span>
                       </div>
@@ -243,7 +278,7 @@
                             <div className="py-4 border-t border-b border-slate-800">
                               <p className="text-lg md:text-2xl font-medium leading-relaxed text-slate-200">
                                 Tôi đón nhận dòng chảy thịnh vượng của năm <span className="text-amber-400 font-bold">Bính Ngọ 2026</span>. 
-                                Tôi xứng đáng sở hữu <span className="text-amber-400 font-bold text-2xl md:text-3xl block my-2">10 TỶ ĐỒNG</span> 
+                                Tôi xứng đáng sở hữu <span className="text-amber-400 font-bold text-2xl md:text-3xl block my-2">20 TỶ ĐỒNG</span> 
                                 bằng trí tuệ và sự cống hiến của mình.
                               </p>
                             </div>
@@ -260,7 +295,7 @@
                               </li>
                               <li className="flex items-start space-x-3 text-slate-300 list-none">
                                 <Icons.Shield className="text-amber-500 shrink-0 mt-1" size={18} />
-                                <span>Trao cho Trinh <b className="text-white">1 tỷ</b> & tất cả những gì mình có để cô ấy an tâm.</span>
+                                <span>Trao cho Trinh <b className="text-white">1 tỷ</b> để cô ấy an tâm.</span>
                               </li>
                               <li className="flex items-start space-x-3 text-slate-300 list-none">
                                 <Icons.Home className="text-amber-500 shrink-0 mt-1" size={18} />
@@ -337,7 +372,7 @@
                         <p className="text-slate-400 text-sm leading-relaxed mb-4">
                           "Chế tâm nhất xứ, vô sự bất biện". Dòng nước tụ vào một vòi <b className="text-blue-400">Affiliate Loan US</b> mới cắt được kim cương. <br/>
                           <Icons.ArrowRight className="inline mx-1 text-blue-500" size={12}/> 
-                          <span className="text-blue-100">Đừng để cái đầu lan man sang Audit. Chỉ MỘT con đường.</span>
+                          <span className="text-blue-100">Đừng để tâm trí lan man sang Audit. Chỉ MỘT con đường.</span>
                         </p>
                         <div className="bg-slate-950 p-3 rounded border border-slate-800">
                           <p className="text-xs text-slate-300 italic">"Áp lực nước càng mạnh, đường đi càng sắc."</p>
@@ -368,7 +403,7 @@
                     <div className="space-y-4 animate-slide-in-right pb-8">
                       <div className="text-center mb-6">
                          <h2 className="text-xl font-bold text-slate-200">Thiền Trong Công Việc</h2>
-                         <p className="text-slate-500 text-sm">Công cụ "hạ nhiệt" cái đầu hay phân tích</p>
+                         <p className="text-slate-500 text-sm">Công cụ "hạ nhiệt" khi cái đầu phân tích quá mức</p>
                       </div>
 
                       {[
@@ -378,7 +413,7 @@
                           icon: Icons.Shield,
                           color: "text-red-400",
                           bg: "bg-red-400/10",
-                          content: "Quán Chiếu: Đừng đồng nhất mình với nỗi sợ. Hãy nhìn nó: 'À, cái tính cầu toàn của mình lại đến rồi.' Mỉm cười với nó. Thần chú: 'Quá khứ đã qua, Tương lai chưa tới. Chỉ có khoảnh khắc này là thật.' -> Quay lại tối ưu Ads ngay."
+                          content: "Quán Chiếu: Đừng đồng nhất mình với nỗi sợ. Hãy nhìn nó: 'À, cái tính cầu toàn lại đến rồi.' Mỉm cười với nó. Thần chú: 'Quá khứ đã qua, Tương lai chưa tới. Chỉ có khoảnh khắc này là thật.' -> Quay lại tối ưu Ads ngay."
                         },
                         {
                           id: 2,
@@ -386,7 +421,7 @@
                           icon: Icons.DollarSign,
                           color: "text-green-400",
                           bg: "bg-green-400/10",
-                          content: "Hồi Hướng Công Đức: Đừng để cái 'Tôi' phình to. Hãy nhẩm trong đầu: 'Số tiền này con xin hồi hướng cho cha mẹ, vợ con & một phần lại cho chúng sanh muôn loài.' -> Điều này giúp giữ sự khiêm nhường và không bị ngủ quên trên chiến thắng (cái bẫy của người thành công sớm)."
+                          content: "Hồi Hướng Công Đức: Đừng để cái 'Tôi' phình to. Hãy nhẩm trong đầu: 'Số tiền này con xin hồi hướng cho cha mẹ và vợ con.' -> Điều này giúp giữ sự khiêm nhường và không bị ngủ quên trên chiến thắng (cái bẫy của người thành công sớm)."
                         },
                         {
                           id: 3,
