@@ -1,1050 +1,551 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drake Nguyen | Head of Growth & Automation - System & AI Scaling</title>
-
-    <!-- 
-    ====================================================================
-    SEO & METADATA TAGS 
-    ====================================================================
-    -->
-
-    <!-- Standard SEO Meta Tags -->
-    <meta name="description" content="Portfolio of Drake Nguyen, specializing in building high-efficiency, data-driven systems and leveraging AI for massive business growth and automation.">
-    <meta name="keywords" content="Growth Hacking, Automation, AI, System Thinking, Performance Marketing, Conversion Rate Optimization, Drake Nguyen, Head of Growth">
-    <meta name="author" content="Drake Nguyen">
-    <link rel="canonical" href="[Your Canonical URL Here, e.g., https://drakenguyen.me]">
-    
-    <!-- Favicon and App Icons -->
-    <link rel="icon" type="image/png" href="https://placehold.co/32x32/1E40AF/FFFFFF?text=DN" sizes="32x32">
-    <link rel="apple-touch-icon" href="https://placehold.co/180x180/1E40AF/FFFFFF?text=DN">
-    
-    <!-- Open Graph Tags (for Facebook, LinkedIn, general social sharing/thumbnail) -->
-    <meta property="og:title" content="Drake Nguyen | Head of Growth & Automation - System & AI Scaling">
-    <meta property="og:description" content="Portfolio of Drake Nguyen, specializing in building high-efficiency, data-driven systems and leveraging AI for massive business growth and automation.">
-    <meta property="og:image" content="https://placehold.co/1200x630/4B77BE/FFFFFF?text=Drake+Nguyen+Portfolio">
-    <meta property="og:url" content="[Your Canonical URL Here]">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_US">
-
-    <!-- Twitter Card Tags (for Twitter/X thumbnail) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@drakenguyen"> <!-- Replace with Twitter handle if available -->
-    <meta name="twitter:title" content="Drake Nguyen | System & AI Scaling Expert">
-    <meta name="twitter:description" content="I build high-efficiency, data-driven systems and leverage AI for massive business growth and automation. View my projects.">
-    <meta name="twitter:image" content="https://placehold.co/1200x675/4B77BE/FFFFFF?text=Drake+Nguyen+Portfolio">
-
-    <!-- 
-    ====================================================================
-    END SEO & METADATA TAGS 
-    ====================================================================
-    -->
-
-    <!-- Load Tailwind CSS -->
+    <title>CV - Drake Nguyễn (Nguyễn Huy Lân)</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5n/BpQ2GfT2A5/iA7m2QJb1oV4y8E0v08p5n8JmGg7XJ4sW3N3w7n0z5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Tailwind Configuration and Custom Styles -->
     <style>
-	        /* ============================================================
-        Airplane Takeoff Effect
-        ============================================================ */
-        .plane-wrapper {
-            position: absolute;
-            bottom: 1.5rem;   /* cách đáy section một chút */
-            left: -4rem;      /* xuất phát hơi ngoài màn hình bên trái */
-            pointer-events: none;
-        }
-
-        .plane-icon {
-            font-size: 2.75rem;
-            color: #2563eb; /* xanh đồng bộ brand */
-            filter: drop-shadow(0 8px 10px rgba(37, 99, 235, 0.45));
-            animation: planeTakeoff 2.5s ease-in-out 0.5s infinite;
-        }
-
-        @keyframes planeTakeoff {
-            0% {
-                transform: translate(0, 0) rotate(-15deg) scale(0.9);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            40% {
-                transform: translate(40vw, -10vh) rotate(-5deg) scale(1);
-                opacity: 1;
-            }
-            80% {
-                transform: translate(80vw, -30vh) rotate(0deg) scale(1.05);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translate(110vw, -40vh) rotate(5deg) scale(1.1);
-                opacity: 0;
-            }
-        }
-
-        /* Ẩn hiệu ứng trên màn hình rất nhỏ nếu muốn bớt rối */
-        @media (max-width: 640px) {
-            .plane-wrapper {
-                display: none;
-            }
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #f7f9fb; 
-        }
-        .section-padding {
-            padding: 4rem 1rem;
-        }
-        @media (min-width: 640px) {
-            .section-padding {
-                padding: 6rem 4rem;
-            }
-        }
-        .content-box {
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-        .project-block-title {
-            border: 2px solid #3b82f6; 
-            border-radius: 0.75rem;
-            padding: 0.5rem 1rem;
-            margin-bottom: 1rem;
-            background-color: #eff6ff;
-        }
-
-        /* Logic for 3-page display */
-        .page-section {
-            display: none; 
-        }
-        .page-section.active {
-            display: block; 
-        }
-
-        /* 16:9 Aspect Ratio Container */
-        .aspect-16-9 {
-            position: relative;
-            padding-bottom: 56.25%; /* 9 / 16 * 100% */
-            height: 0;
-            overflow: hidden; 
-        }
+        /* Language Toggle Logic */
+        body.lang-en .vn { display: none !important; }
+        body.lang-vn .en { display: none !important; }
         
-        /* Project Image Styling and Hover Effect */
-        .aspect-16-9 img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease-in-out; 
-        }
-        .aspect-16-9:hover img {
-            transform: scale(1.08); 
-        }
-
-        /* Custom styling for the new Growth Stack logos */
-        .logo-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%; 
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            text-align: center;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem; 
-            line-height: 1;
-            margin-bottom: 0.25rem;
-            border-radius: 0.5rem;
-            background-color: #e5e7eb; 
-        }
-
-        .logo-label {
-            font-size: 0.75rem; 
-            font-weight: 600; 
-            color: #4b5563; 
-            margin-top: 0.5rem;
-            line-height: 1.2;
-        }
-        
-        /* Animation Styles for Introduction Text */
-        @keyframes slideInFromLeft {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .animate-intro {
-            animation: slideInFromLeft 0.8s ease-out forwards;
-            opacity: 0; /* Start invisible */
-        }
-        /* Delay the lines */
-        .delay-1 { animation-delay: 0.3s; }
-        .delay-2 { animation-delay: 0.6s; }
-        .delay-3 { animation-delay: 0.9s; }
-
-        /* ============================================================
-        NEW: Styles for Growth Mindset and Contact Sections
-        ============================================================ */
-
-        /* Enhanced Growth Mindset Flow Card */
-        .mindset-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem 0.5rem;
-            border-radius: 0.75rem;
-            transition: transform 0.2s, background-color 0.2s;
-            cursor: pointer;
-        }
-        .mindset-item:hover {
-            background-color: #e0f2fe; /* Light blue on hover */
-            transform: translateY(-3px);
-        }
-        .mindset-item .text-xs {
-            margin-top: 0.5rem;
-            font-weight: 600;
-        }
-        
-        /* Style for the central Growth Mindset box */
-        .mindset-text-box {
-            background-color: #fff;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Style for the QR Code boxes */
-        .qr-box {
-            position: relative;
-            background-color: #ffffff;
-            border-radius: 1rem;
-            padding: 1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e5e7eb;
-        }
-        .qr-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .qr-image-placeholder {
-            width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            border: 2px solid; /* Border will be set by JS/placeholder */
-            padding: 0.5rem;
-        }
-        /* ============================================================
-        Growth Mindset – Marvel Universe Style
-        ============================================================ */
-
-        .marvel-panel {
-            position: relative;
-            overflow: hidden;
-            background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.25), transparent 50%),
-                        radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.25), transparent 55%),
-                        linear-gradient(135deg, #020617, #020617, #0f172a);
-            border: 1px solid rgba(129, 140, 248, 0.6);
-        }
-
-        .marvel-panel::before,
-        .marvel-panel::after {
-            content: "";
-            position: absolute;
-            border-radius: 999px;
-            filter: blur(40px);
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .marvel-panel::before {
-            width: 260px;
-            height: 260px;
-            background: rgba(56, 189, 248, 0.45);
-            top: -80px;
-            left: -60px;
-        }
-
-        .marvel-panel::after {
-            width: 320px;
-            height: 320px;
-            background: rgba(129, 140, 248, 0.45);
-            bottom: -120px;
-            right: -80px;
-        }
-
-        .mindset-heading {
-            position: relative;
-            z-index: 1;
-            letter-spacing: 0.08em;
-        }
-
-        .mindset-badge {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.22em;
-            padding: 0.25rem 0.9rem;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #22d3ee, #818cf8);
-            color: #0b1120;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-
-        .mindset-badge-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 999px;
-            background-color: #0f172a;
-        }
-
-        .mindset-text-box {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8));
-            border-radius: 1rem;
-            border: 1px solid rgba(56, 189, 248, 0.45);
-            box-shadow:
-                0 18px 45px rgba(15, 23, 42, 0.9),
-                0 0 18px rgba(56, 189, 248, 0.35);
-        }
-
-        .mindset-text-box p {
-            color: #e5e7eb;
-        }
-
-        .mindset-text-box span.highlight {
-            color: #22d3ee;
-            font-weight: 600;
-        }
-
-        /* Marvel-style node cards */
-
-        .mindset-flow-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-
-        .mindset-flow-line {
-            position: absolute;
-            inset: 50% 4%;
-            transform: translateY(-50%);
-            border-radius: 999px;
-            background: radial-gradient(circle at 0%, rgba(56, 189, 248, 0.8), transparent 55%),
-                        radial-gradient(circle at 100%, rgba(129, 140, 248, 0.8), transparent 55%),
-                        linear-gradient(90deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2));
-            opacity: 0.6;
-        }
-
-        @media (max-width: 768px) {
-            .mindset-flow-line {
-                display: none;
-            }
-        }
-
-        .mindset-item {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem 0.5rem 1.1rem;
-            border-radius: 0.9rem;
-            background: radial-gradient(circle at 50% 0%, rgba(248, 250, 252, 0.09), transparent 65%),
-                        linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.8));
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            box-shadow:
-                0 12px 30px rgba(15, 23, 42, 0.75),
-                0 0 20px rgba(59, 130, 246, 0.3);
-            cursor: default;
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-color 0.3s ease,
-                background 0.3s ease;
-        }
-
-        .mindset-item::before {
-            content: "";
-            position: absolute;
-            inset: -1px;
-            border-radius: inherit;
-            border: 1px solid rgba(56, 189, 248, 0.45);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .mindset-item:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow:
-                0 18px 45px rgba(15, 23, 42, 0.95),
-                0 0 30px rgba(56, 189, 248, 0.7);
-            border-color: rgba(56, 189, 248, 0.8);
-        }
-
-        .mindset-item:hover::before {
-            opacity: 1;
-        }
-
-        .mindset-step {
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: #9ca3af;
-            margin-bottom: 0.4rem;
-        }
-
-        .mindset-icon {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at 30% 0%, #38bdf8, #4f46e5);
-            color: #f9fafb;
-            font-size: 1.55rem;
-            margin-bottom: 0.5rem;
-            box-shadow:
-                0 0 22px rgba(56, 189, 248, 0.9),
-                0 10px 18px rgba(15, 23, 42, 0.8);
-        }
-
-        .mindset-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #e5e7eb;
-        }
-
-        .mindset-tagline {
-            font-size: 0.7rem;
-            margin-top: 0.25rem;
-            color: #9ca3af;
-        }
-
+        /* Smooth transitions */
+        .lang-transition { transition: all 0.3s ease; }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="lang-vn min-h-screen bg-slate-100 font-sans text-slate-800 selection:bg-teal-200 selection:text-teal-900">
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-md">
-        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-end items-center h-16">
-            <div class="space-x-8 text-sm font-semibold" id="nav-menu">
-                <a href="#about" data-page="about" class="nav-link text-indigo-600 hover:text-indigo-800 transition duration-300">About Me</a>
-                <a href="#projects" data-page="projects" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Project Highlights</a>
-                <a href="#contact" data-page="contact" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Contact</a>
-            </div>
-        </nav>
-    </header>
+    <!-- Language Toggle Floating Button -->
+    <div class="fixed top-4 right-4 md:top-8 md:right-8 z-50 bg-white rounded-full shadow-xl border border-slate-200 p-1.5 flex items-center gap-1">
+        <button id="btn-vn" onclick="setLanguage('vn')" class="lang-transition px-3 py-1.5 rounded-full bg-slate-800 text-white text-sm font-bold flex items-center gap-2 hover:bg-slate-700">
+            🇻🇳 <span class="hidden sm:inline">Tiếng Việt</span>
+        </button>
+        <button id="btn-en" onclick="setLanguage('en')" class="lang-transition px-3 py-1.5 rounded-full text-slate-500 hover:bg-slate-100 text-sm font-bold flex items-center gap-2">
+            🇬🇧 <span class="hidden sm:inline">English</span>
+        </button>
+    </div>
 
-    <!-- Section 1: About Me - Page 1 -->
-    <section id="about" class="page-section active section-padding bg-white relative overflow-hidden">
-    <!-- Background patterns -->
-    <div class="absolute top-0 right-0 ..."></div>
-    <div class="absolute bottom-0 left-0 ..."></div>
-
-    <div class="container mx-auto max-w-4xl relative z-10">
-        <!-- Airplane Takeoff Effect -->
-        <div class="plane-wrapper">
-            <i class="fas fa-plane-departure plane-icon"></i>
-        </div>
-
-
-        <!-- Background patterns -->
-        <div class="absolute top-0 right-0 w-48 h-48 bg-blue-100 transform skew-y-12 translate-x-1/2 -translate-y-1/2 opacity-50 hidden sm:block"></div>
-        <div class="absolute bottom-0 left-0 w-48 h-48 bg-blue-100 transform -skew-y-12 -translate-x-1/2 translate-y-1/2 opacity-50 hidden sm:block"></div>
-
-        <div class="container mx-auto max-w-4xl relative z-10 px-4">
-
-            <!-- Slogan & Intro -->
-            <p class="text-center text-blue-700 text-lg sm:text-xl font-bold mb-10">
-                Stop Working Harder. Start Scaling Smarter.
-            </p>
-
-            <div class="flex flex-col items-center text-center mb-12">
-                <!-- Avatar & Name -->
-                <img src="https://placehold.co/120x120/4B77BE/FFFFFF?text=D.N" 
-                     alt="Avatar Drake Nguyen"
-                     class="rounded-full w-32 h-32 object-cover shadow-xl ring-4 ring-blue-500 mb-6">
-                
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-2">I'M DRAKE NGUYEN</h1>
-                <p class="text-xl text-blue-600 font-semibold mb-6">Head of Growth & Automation</p>
-                
-                <!-- Updated and Animated Introduction Lines -->
-                <div class="text-left max-w-md space-y-2">
-                    
-                    <!-- Line 1: Expertise -->
-                    <div class="flex items-start text-gray-600 animate-intro delay-1">
-                        <span class="text-blue-500 mr-2 flex-shrink-0 mt-1"><i class="fas fa-dot-circle"></i></span>
-                        <p class="text-base">10+ years in Digital Marketing, AI & System Architecture.</p>
-                    </div>
-
-                    <!-- Line 2: Systems -->
-                    <div class="flex items-start text-gray-600 animate-intro delay-2">
-                        <span class="text-blue-500 mr-2 flex-shrink-0 mt-1"><i class="fas fa-dot-circle"></i></span>
-                        <p class="text-base">Build lean, automated systems that scale efficiently.</p>
-                    </div>
-
-                    <!-- Line 3: Clarity -->
-                    <div class="flex items-start text-gray-600 animate-intro delay-3">
-                        <span class="text-blue-500 mr-2 flex-shrink-0 mt-1"><i class="fas fa-dot-circle"></i></span>
-                        <p class="text-base">Turn complexity into clarity with data, systems & growth thinking.</p>
-                    </div>
-                </div>
-            </div>
-
-             <!-- Growth Mindset Section – Marvel Universe Style -->
-            <div class="content-box marvel-panel p-6 sm:p-10 mb-12 text-slate-100">
-                <h3 class="mindset-heading text-2xl font-bold text-slate-50 mb-6 pb-3 border-b border-slate-700/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                    <span class="flex items-center gap-2">
-                        <span class="mindset-badge">
-                            <span class="mindset-badge-dot"></span>
-                            GROWTH MINDSET PROTOCOL
-                        </span>
-                    </span>
-                    <span class="text-xs sm:text-sm uppercase tracking-[0.25em] text-slate-400">
-                        AI · SYSTEMS · DATA · SCALE
-                    </span>
-                </h3>
-
-                <div class="flex flex-col lg:flex-row lg:space-x-10 items-start">
-                    
-                    <!-- Text Box (Left Side) -->
-                    <div class="mindset-text-box lg:w-1/3 mb-6 lg:mb-0 border-l-4 border-cyan-400/80 px-5 py-4">
-                        <p class="text-sm sm:text-base">
-                            I treat every business like a <span class="highlight">Marvel universe</span>: 
-                            a complex world of characters, power levels, and story arcs.
-                            My job is to connect them into one cohesive system — 
-                            where <span class="highlight">AI, data and automation</span> assemble like a team of heroes:
-                            each doing what they do best, at scale, on autopilot.
-                        </p>
-                    </div>
-                    
-                    <!-- Flowchart/Diagram Simulation (Right Side - 4 Steps) -->
-                    <div class="lg:w-2/3 mindset-flow-wrapper">
-                        <!-- Glowing connection line behind nodes -->
-                        <div class="mindset-flow-line"></div>
-
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 text-center">
-                            <!-- Step 1: AI (Brain) -->
-                            <div class="mindset-item">
-                                <span class="mindset-step">01 · CORE</span>
-                                <span class="mindset-icon">
-                                    <i class="fas fa-brain"></i>
-                                </span>
-                                <p class="mindset-label">Lead by AI</p>
-                                <p class="mindset-tagline">Strategy Engine</p>
-                            </div>
-                            <!-- Step 2: Scale (Sliders) -->
-                            <div class="mindset-item">
-                                <span class="mindset-step">02 · POWER</span>
-                                <span class="mindset-icon">
-                                    <i class="fas fa-sliders-h"></i>
-                                </span>
-                                <p class="mindset-label">Scale</p>
-                                <p class="mindset-tagline">Leveraged Systems</p>
-                            </div>
-                            <!-- Step 3: Optimize (Sync) -->
-                            <div class="mindset-item">
-                                <span class="mindset-step">03 · CONTROL</span>
-                                <span class="mindset-icon">
-                                    <i class="fas fa-sync-alt"></i>
-                                </span>
-                                <p class="mindset-label">Optimize</p>
-                                <p class="mindset-tagline">Continuous Tuning</p>
-                            </div>
-                            <!-- Step 4: Data (Chart) -->
-                            <div class="mindset-item">
-                                <span class="mindset-step">04 · VISION</span>
-                                <span class="mindset-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </span>
-                                <p class="mindset-label">Data</p>
-                                <p class="mindset-tagline">Clarity & Direction</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END Growth Mindset Section – Marvel Universe Style -->
-
-
-            <!-- Core Strengths Section -->
-            <div class="content-box bg-white p-6 sm:p-10 border-4 border-dashed border-gray-200 mb-12">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-300 pb-2">Core Strengths</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div class="p-3 rounded-lg bg-yellow-100">
-                        <span class="text-3xl text-yellow-600 mb-2"><i class="fas fa-sitemap"></i></span>
-                        <p class="text-sm font-semibold mt-2">SYSTEM THINKING</p>
-                    </div>
-                    <div class="p-3 rounded-lg bg-orange-100">
-                        <span class="text-3xl text-orange-600 mb-2"><i class="fas fa-users"></i></span>
-                        <p class="text-sm font-semibold mt-2">TEAM LEADERSHIP</p>
-                    </div>
-                    <div class="p-3 rounded-lg bg-green-100">
-                        <span class="text-3xl text-green-600 mb-2"><i class="fas fa-cogs"></i></span>
-                        <p class="text-sm font-semibold mt-2">DATA-DRIVEN OPS</p>
-                    </div>
-                    <div class="p-3 rounded-lg bg-purple-100">
-                        <span class="text-3xl text-purple-600 mb-2"><i class="fas fa-robot"></i></span>
-                        <p class="text-sm font-semibold mt-2">AI AUTOMATION</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Skills Snapshot -->
-            <div class="content-box bg-white p-6 sm:p-10 border-t-8 border-indigo-500">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-300 pb-2">Skills Snapshot</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-4xl text-red-500 flex-shrink-0"><i class="fas fa-rocket"></i></span>
-                        <div>
-                            <p class="font-bold">GROWTH HACKING</p>
-                            <p class="text-sm text-gray-600">CONVERSION OPTIMIZATION</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-4xl text-blue-500 flex-shrink-0"><i class="fas fa-project-diagram"></i></span>
-                        <div>
-                            <p class="font-bold">SYSTEM THINKING</p>
-                            <p class="text-sm text-gray-600">WORKFLOW DESIGN</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-4xl text-pink-500 flex-shrink-0"><i class="fas fa-bullhorn"></i></span>
-                        <div>
-                            <p class="font-bold">PERFORMANCE MARKETING</p>
-                            <p class="text-sm text-gray-600">ADS & MEDIA BUYING</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-4xl text-green-500 flex-shrink-0"><i class="fas fa-envelope-open-text"></i></span>
-                        <div>
-                            <p class="font-bold">MARKETING AUTOMATION</p>
-                            <p class="text-sm text-gray-600">CRM INTEGRATION</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Growth Stack (Icons Simulation) - Updated as requested -->
-                <h4 class="text-xl font-bold text-gray-800 mt-10 mb-4 border-b border-gray-300 pb-2">Growth Stack</h4>
-                
-                <!-- Group: AUTOMATION -->
-                <div class="mb-8">
-                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-cogs mr-2"></i> AUTOMATION</h5>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-blue-100 text-blue-600"><p class="text-sm font-bold">N8N</p></div>
-                            <p class="logo-label">n8n / Make</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-green-100 text-green-600"><i class="fas fa-robot"></i></div>
-                            <p class="logo-label">Zapier</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-red-100 text-red-600"><i class="fas fa-envelope"></i></div>
-                            <p class="logo-label">ActiveCampaign</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-yellow-100 text-yellow-600"><i class="fas fa-handshake"></i></div>
-                            <p class="logo-label">HubSpot</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-purple-100 text-purple-600"><p class="text-sm font-bold">SQL</p></div>
-                            <p class="logo-label">Custom Scripts</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Group: ANALYTICS -->
-                <div class="mb-8">
-                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-chart-line mr-2"></i> ANALYTICS</h5>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-orange-100 text-orange-600"><p class="text-sm font-bold">GA4</p></div>
-                            <p class="logo-label">Google Analytics 4</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-pink-100 text-pink-600"><i class="fas fa-mouse-pointer"></i></div>
-                            <p class="logo-label">Hotjar / Crazy Egg</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-indigo-100 text-indigo-600"><i class="fas fa-database"></i></div>
-                            <p class="logo-label">BigQuery / Metabase</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-teal-100 text-teal-600"><i class="fas fa-layer-group"></i></div>
-                            <p class="logo-label">GTM / Segment</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-lime-100 text-lime-600"><p class="text-sm font-bold">BI</p></div>
-                            <p class="logo-label">Power BI / Looker</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Group: AI TOOLS -->
-                <div class="mb-8">
-                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-brain mr-2"></i> AI TOOLS</h5>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-gray-200 text-gray-800"><i class="fas fa-comments"></i></div>
-                            <p class="logo-label">GPT-4o / Claude</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-blue-300 text-blue-800"><p class="text-sm font-bold">GEM</p></div>
-                            <p class="logo-label">Gemini API</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-green-300 text-green-800"><i class="fas fa-code"></i></div>
-                            <p class="logo-label">Code Assistants</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-pink-300 text-pink-800"><i class="fas fa-image"></i></div>
-                            <p class="logo-label">Midjourney / DALL-E</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-yellow-300 text-yellow-800"><p class="text-sm font-bold">BERT</p></div>
-                            <p class="logo-label">Fine-tuned LLMs</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Group: INFRA / DEVOPS -->
-                <div class="mb-8">
-                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-server mr-2"></i> INFRA/DEVOPS</h5>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-red-400 text-white"><p class="text-sm font-bold">AWS</p></div>
-                            <p class="logo-label">AWS / GCP</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-sky-400 text-white"><i class="fas fa-cloud"></i></div>
-                            <p class="logo-label">Cloudflare</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-gray-400 text-white"><i class="fas fa-microchip"></i></div>
-                            <p class="logo-label">Vultr / Linode</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-indigo-400 text-white"><i class="fas fa-code-branch"></i></div>
-                            <p class="logo-label">Git / CI/CD</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-green-400 text-white"><p class="text-sm font-bold">DB</p></div>
-                            <p class="logo-label">Supabase / Firebase</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Group: WORKFLOW / PROJECT MANAGEMENT -->
-                <div>
-                    <h5 class="font-bold text-lg text-indigo-700 mb-4 flex items-center"><i class="fas fa-tasks mr-2"></i> WORKFLOW / PROJECT MANAGEMENT</h5>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-blue-500 text-white"><i class="fas fa-check-circle"></i></div>
-                            <p class="logo-label">ClickUp / Jira</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-yellow-500 text-white"><i class="fas fa-calendar-alt"></i></div>
-                            <p class="logo-label">Google Workspace</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-red-500 text-white"><i class="fas fa-users-cog"></i></div>
-                            <p class="logo-label">Team Collaboration</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-purple-500 text-white"><i class="fas fa-pen-nib"></i></div>
-                            <p class="logo-label">Figma / Sketch</p>
-                        </div>
-                        <div class="logo-item bg-gray-50">
-                            <div class="logo-icon bg-teal-500 text-white"><i class="fas fa-file-alt"></i></div>
-                            <p class="logo-label">Notion / Confluence</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 2: Project Highlights - Page 2 -->
-    <section id="projects" class="page-section section-padding bg-gray-100">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-4xl font-extrabold text-center mb-16 text-gray-900 border-b-4 border-indigo-500 pb-2 inline-block mx-auto">PROJECT HIGHLIGHTS</h2>
-
-            <!-- 10 Project Blocks with 16:9 Images and Hover Effect -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                <!-- Block 1 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">1. POD Sellers Automation</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/93C5FD/000000?text=Analytics+Dashboard+(16:9)" alt="Project Image 1: Automated dashboard for Print-on-Demand sellers" onerror="this.src='https://placehold.co/600x338/93C5FD/000000?text=Analytics+Dashboard+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Built an automated campaign system for Print-on-Demand (POD) sales.</p>
-                </div>
-
-                <!-- Block 2 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">2. Social Content System</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/FDBA74/000000?text=Content+Planning+(16:9)" alt="Project Image 2: Content calendar and planning flow" onerror="this.src='https://placehold.co/600x338/FDBA74/000000?text=Content+Planning+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Efficient multi-channel content creation and distribution system.</p>
-                </div>
-                
-                <!-- Block 3 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">3. Gicos Optimization</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/336699/FFFFFF?text=Optimization+Report+(16:9)" alt="Project Image 3: Gicos platform optimization report" onerror="this.src='https://placehold.co/600x338/336699/FFFFFF?text=Optimization+Report+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Analysis and optimization of the Gicos platform performance.</p>
-                </div>
-                
-                <!-- Block 4 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">4. Lady's House E-Commerce CRO</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/FFC0CB/000000?text=E-commerce+Funnel+(16:9)" alt="Project Image 4: E-commerce conversion funnel analysis" onerror="this.src='https://placehold.co/600x338/FFC0CB/000000?text=E-commerce+Funnel+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Conversion Rate Optimization (CRO) for a fashion e-commerce store.</p>
-                </div>
-
-                <!-- Block 5 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">5. Runbylinh Campaign Testing</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/8D6E63/FFFFFF?text=Ad+Creative+Testing+(16:9)" alt="Project Image 5: Ad creative testing results" onerror="this.src='https://placehold.co/600x338/8D6E63/FFFFFF?text=Ad+Creative+Testing+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Executed A/B testing and multi-platform ad optimization.</p>
-                </div>
-
-                <!-- Block 6 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">6. Sbooks.vn Data Integration</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/4CAF50/FFFFFF?text=Database+Schema+(16:9)" alt="Project Image 6: Database schema and integration map" onerror="this.src='https://placehold.co/600x338/4CAF50/FFFFFF?text=Database+Schema+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Integrated customer data from various sources into the CRM system.</p>
-                </div>
-
-                <!-- Block 7 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">7. AI Chatbot Development</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/7B1FA2/FFFFFF?text=Chatbot+Flowchart+(16:9)" alt="Project Image 7: AI Chatbot decision tree" onerror="this.src='https://placehold.co/600x338/7B1FA2/FFFFFF?text=Chatbot+Flowchart+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Designed and deployed an AI-powered customer support chatbot.</p>
-                </div>
-
-                <!-- Block 8 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">8. Customer Journey Mapping</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/00796B/FFFFFF?text=User+Journey+Map+(16:9)" alt="Project Image 8: Visual representation of user journey" onerror="this.src='https://placehold.co/600x338/00796B/FFFFFF?text=User+Journey+Map+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Analyzed customer journey and identified critical touchpoints for improvement.</p>
-                </div>
-
-                <!-- Block 9 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">9. Conversion Funnel Optimization</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/D84315/FFFFFF?text=Conversion+Funnel+(16:9)" alt="Project Image 9: Marketing funnel stages" onerror="this.src='https://placehold.co/600x338/D84315/FFFFFF?text=Conversion+Funnel+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Optimized conversion steps within the marketing and sales funnels.</p>
-                </div>
-
-                <!-- Block 10 -->
-                <div class="bg-white content-box p-4 hover:shadow-xl">
-                    <div class="project-block-title"><h3 class="text-xl font-bold text-blue-700">10. Data Visualization Dashboard</h3></div>
-                    <div class="aspect-16-9 mt-4 rounded-lg shadow-md overflow-hidden cursor-pointer">
-                        <img src="https://placehold.co/600x338/1565C0/FFFFFF?text=Power+BI+Dashboard+(16:9)" alt="Project Image 10: Performance data visualization dashboard" onerror="this.src='https://placehold.co/600x338/1565C0/FFFFFF?text=Power+BI+Dashboard+(16:9)'" />
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Built comprehensive dashboards for performance data visualization.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3: Contact Me - Page 3 (FIXED FOR BETTER VISUALS) -->
-    <section id="contact" class="page-section section-padding bg-white relative overflow-hidden">
-        <!-- Background patterns -->
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <!-- Pattern Top Left -->
-            <svg class="absolute top-0 left-0 w-96 h-96 transform -translate-x-1/2 -translate-y-1/2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H100L0 100V0Z" fill="#3B82F6"/>
-                <path d="M10 0H100L0 90V0L10 0Z" fill="#60A5FA"/>
-            </svg>
-             <!-- Pattern Bottom Right -->
-            <svg class="absolute bottom-0 right-0 w-96 h-96 transform translate-x-1/2 translate-y-1/2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 100H0L100 0V100Z" fill="#3B82F6"/>
-                <path d="M90 100H0L100 10V100H90Z" fill="#60A5FA"/>
-            </svg>
-        </div>
-
-        <div class="container mx-auto max-w-4xl text-center relative z-10">
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-blue-800 mb-12 uppercase border-b-4 border-indigo-500 pb-2 inline-block mx-auto">CONTACT ME</h2>
+    <div class="max-w-6xl mx-auto bg-white shadow-2xl overflow-hidden md:flex my-0 md:my-8 rounded-none md:rounded-xl relative">
+        
+        <!-- LEFT COLUMN - SIDEBAR -->
+        <aside class="w-full md:w-[35%] lg:w-[30%] bg-slate-900 text-slate-300 p-8 md:p-10 flex flex-col gap-8">
             
-            <!-- Contact Card -->
-            <div class="bg-white border-4 border-blue-500 rounded-3xl p-6 sm:p-10 shadow-2xl">
-
-                <p class="text-xl text-gray-700 mb-8 font-medium">Let's connect and discuss how to scale your system.</p>
-
-                <!-- Email (Top priority call to action) -->
-                <div class="mb-10">
-                    <a href="mailto:Drakenguyen.me@gmail.com" class="text-2xl sm:text-3xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition duration-300 flex items-center justify-center p-4 rounded-xl shadow-lg ring-4 ring-blue-300 max-w-lg mx-auto">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white mr-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
-                        <!-- ADDED truncate and max-w-full for responsive text handling -->
-                        <span class="truncate max-w-full block text-lg sm:text-3xl">Drakenguyen.me@gmail.com</span>
-                    </a>
+            <!-- Profile Picture & Name -->
+            <div class="flex flex-col items-center text-center mt-8 md:mt-0">
+                <div class="w-40 h-40 bg-slate-800 rounded-full border-4 border-teal-500/30 overflow-hidden mb-5 flex items-center justify-center">
+                    <img 
+                        src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop" 
+                        alt="Drake Nguyen Portrait" 
+                        class="w-full h-full object-cover"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%25\' height=\'100%25\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23475569\' stroke-width=\'1\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\'/%3E%3Ccircle cx=\'12\' cy=\'7\' r=\'4\'/%3E%3C/svg%3E';"
+                    />
                 </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wide">NGUYỄN HUY LÂN</h1>
+                <h2 class="text-teal-400 font-medium mt-2 tracking-widest text-sm uppercase">Drake Nguyễn</h2>
+                <p class="text-slate-400 mt-3 text-sm font-semibold border-t border-slate-700 pt-3 w-full uppercase">
+                    HEAD OF GROWTH & AUTOMATION
+                </p>
+            </div>
 
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b border-gray-300 pb-2">Connect via QR</h3>
-                
-                <!-- QR Code Block (Cleaned up layout) -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    
-                    <!-- QR 1: Telegram -->
-    <a href="https://t.me/drakenguyen" target="_blank" class="qr-box block">
-        <p class="text-lg font-bold text-blue-800 mb-3 flex items-center justify-center text-blue-500">
-            <i class="fab fa-telegram-plane mr-2"></i> Telegram
-        </p>
-        <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Drakenguyen%20-%20Telegram.png" 
-             alt="Telegram QR" 
-             class="qr-image-placeholder border-blue-500">
-    </a>
-
-                    <!-- QR 2: Messenger -->
-    <a href="https://m.me/drakenguyen.me" target="_blank" class="qr-box block">
-        <p class="text-lg font-bold text-gray-700 mb-3 flex items-center justify-center text-purple-600">
-            <i class="fab fa-facebook-messenger mr-2"></i> Messenger
-        </p>
-        <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Mess_drakenguyen.png" 
-             alt="Messenger QR" 
-             class="qr-image-placeholder border-purple-600">
-    </a>
-
-                    
-                     <!-- QR 3: LinkedIn -->
-    <a href="https://www.linkedin.com/in/huylanmartech" target="_blank" class="qr-box block">
-        <p class="text-lg font-bold text-blue-600 mb-3 flex items-center justify-center text-blue-700">
-            <i class="fab fa-linkedin mr-2"></i> LinkedIn
-        </p>
-        <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Linkedin_drake.png" 
-             alt="LinkedIn QR" 
-             class="qr-image-placeholder border-blue-700">
-    </a>
-                    
-                    <!-- QR 4: WhatsApp -->
-                      <!-- QR 4: WhatsApp -->
-    <a href="https://wa.me/84968333342" target="_blank" class="qr-box block">
-        <p class="text-lg font-bold text-gray-700 mb-3 flex items-center justify-center text-green-600">
-            <i class="fab fa-whatsapp mr-2"></i> WhatsApp
-        </p>
-        <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Whatsapp_drake.png" 
-             alt="WhatsApp QR" 
-             class="qr-image-placeholder border-green-600">
-    </a>
+            <!-- Contact Info -->
+            <div class="space-y-4 text-sm">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="mail" class="w-5 h-5 text-teal-500 shrink-0"></i>
+                    <a href="mailto:Drakenguyen.me@gmail.com" class="hover:text-white transition-colors break-all">Drakenguyen.me@gmail.com</a>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-lucide="phone" class="w-5 h-5 text-teal-500 shrink-0 mt-0.5"></i>
+                    <div>
+                        <a href="tel:0968333342" class="hover:text-white transition-colors block">0968.3333.42</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="globe" class="w-5 h-5 text-teal-500 shrink-0"></i>
+                    <a href="https://drakenguyen.me" target="_blank" rel="noreferrer" class="hover:text-white transition-colors">drakenguyen.me</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-teal-500 shrink-0"></i>
+                    <span class="vn">Cần Thơ, Việt Nam</span>
+                    <span class="en">Can Tho City, Viet Nam</span>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- END Contact Section FIX -->
 
-    <!-- Footer -->
-    <footer class="bg-gray-100 text-gray-600 p-4 text-center text-xs border-t border-gray-200">
-        <p class="space-x-4">
-            <a href="#" class="hover:underline">Terms & Support</a>
-            <span>|</span>
-            <a href="#" class="hover:underline">Privacy Policy</a>
-            <span>|</span>
-            <span>Designed with Drakenguyen.me</span>
-        </p>
-    </footer>
+            <!-- Portfolio Link -->
+            <div class="bg-slate-800 p-4 rounded-lg text-center border border-slate-700">
+                <p class="text-xs text-slate-400 mb-2 uppercase tracking-wider font-semibold">
+                    <span class="vn">Xem Portfolio chi tiết</span>
+                    <span class="en">View Detailed Portfolio</span>
+                </p>
+                <a 
+                    href="https://drakenguyen.my.canva.site/drakenguyen" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    class="flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-500 text-white py-2 px-4 rounded text-sm transition-colors w-full break-all"
+                >
+                    <i data-lucide="link" class="w-4 h-4 shrink-0"></i>
+                    <span class="vn">Tại Canva Site</span>
+                    <span class="en">On Canva Site</span>
+                </a>
+            </div>
 
-    <!-- JavaScript for Single Page Application (SPA) Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.page-section');
-            const navLinks = document.querySelectorAll('.nav-link');
+            <!-- Core Skills -->
+            <div>
+                <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2 border-b border-slate-700 pb-2">
+                    <i data-lucide="terminal" class="w-5 h-5 text-teal-500 shrink-0"></i>
+                    <span class="vn">Kỹ Năng Cốt Lõi</span>
+                    <span class="en">Core Skills</span>
+                </h3>
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700"><span class="vn">Quản lý dự án</span><span class="en">Project Management</span></span>
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700"><span class="vn">Đào tạo đội ngũ</span><span class="en">Team Training</span></span>
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700">Digital Marketing</span>
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700">Ads</span>
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700">Automation & AI</span>
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700"><span class="vn">Phân tích dữ liệu</span><span class="en">Data Analysis</span></span>
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700">SEO</span>
+                    <span class="bg-slate-800 text-teal-100 px-3 py-1.5 rounded-full border border-slate-700"><span class="vn">Quản trị hệ thống</span><span class="en">System Administration</span></span>
+                </div>
+            </div>
 
-            /**
-             * Displays the requested page and updates the menu state.
-             * @param {string} pageId - ID of the section (e.g., 'about', 'projects', 'contact').
-             */
-            function showPage(pageId) {
-                // 1. Hide all sections
-                sections.forEach(section => {
-                    section.classList.remove('active');
-                    section.style.display = 'none';
-                });
+            <!-- Certifications -->
+            <div>
+                <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2 border-b border-slate-700 pb-2">
+                    <i data-lucide="award" class="w-5 h-5 text-teal-500 shrink-0"></i>
+                    <span class="vn">Chứng Chỉ</span>
+                    <span class="en">Certifications</span>
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-500 shrink-0"></i> MCSA</li>
+                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal-500 shrink-0"></i> SEO</li>
+                </ul>
+            </div>
 
-                // 2. Display the desired section
-                const targetSection = document.getElementById(pageId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                    targetSection.style.display = 'block'; 
-                    // Scroll to the top of the page when switching views
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            <!-- Hobbies -->
+            <div>
+                <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2 border-b border-slate-700 pb-2">
+                    <i data-lucide="heart" class="w-5 h-5 text-teal-500 shrink-0"></i>
+                    <span class="vn">Sở Thích</span>
+                    <span class="en">Interests</span>
+                </h3>
+                <p class="text-sm leading-relaxed">
+                    <span class="vn">Chạy bộ, Đọc sách, Nghiên cứu AI, Bảo mật, Marketing.</span>
+                    <span class="en">Running, Reading, AI Research, Cybersecurity, Marketing.</span>
+                </p>
+            </div>
 
-                    // 3. Update the active state of the menu links
-                    navLinks.forEach(link => {
-                        // Reset all links to gray color
-                        link.classList.remove('text-indigo-600', 'hover:text-indigo-800');
-                        link.classList.add('text-gray-600', 'hover:text-indigo-600');
+        </aside>
+
+        <!-- RIGHT COLUMN - MAIN CONTENT -->
+        <main class="w-full md:w-[65%] lg:w-[70%] p-8 md:p-12">
+            
+            <!-- About Me -->
+            <section class="mb-10">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <i data-lucide="user" class="w-6 h-6 text-teal-600 shrink-0"></i>
+                    <span class="vn">Giới Thiệu Bản Thân</span>
+                    <span class="en">Professional Summary</span>
+                </h3>
+                <div class="text-slate-600 leading-relaxed space-y-4 text-justify vn">
+                    <p>Tôi là Nguyễn Huy Lân (Drake Nguyễn), với <strong class="text-teal-600">> 10 năm kinh nghiệm</strong> trong lĩnh vực Digital Marketing & Ecommerce, cùng định hướng phát triển chuyên sâu về ứng dụng AI và tự động hóa để tối ưu hiệu suất công việc.</p>
+                    <p>Tôi từng dẫn dắt và triển khai thành công hàng loạt chiến dịch trong các lĩnh vực: <em>Mỹ phẩm, Thực phẩm chức năng, Thương mại điện tử xuyên biên giới...</em> Trong <strong class="text-teal-600">> 6 năm</strong> quản lý đội nhóm Digital & Ecommerce, tôi không chỉ đảm nhận vai trò leadership mà còn trực tiếp nghiên cứu - xây dựng hệ thống - thiết lập quy trình tinh gọn, giúp doanh nghiệp vận hành linh hoạt, tối ưu chi phí và nâng cao hiệu quả thực thi.</p>
+                    <p>Tôi có nền tảng vững chắc về Công nghệ thông tin - Bảo mật mạng, đồng thời thành thạo sử dụng các công cụ AI, Digital Tools (Google Workplace, n8n, LarkSuite...), hệ thống Cloud/Server/Network để phục vụ việc <strong>tự động hóa – số hóa vận hành – chuẩn hóa dữ liệu & tăng tốc đổi mới</strong>.</p>
+                    <div class="bg-teal-50 p-4 border-l-4 border-teal-500 rounded-r-lg mt-4 italic text-slate-700">
+                        <strong>Triết lý làm việc:</strong> Tôi không chỉ làm việc chăm chỉ, mà luôn làm việc thông minh và cải tiến liên tục. Với tư duy "Lean by AI", tôi theo đuổi việc ứng dụng công nghệ để tạo ra quy trình tinh gọn – hiệu suất cao – dễ nhân rộng, giúp cả tổ chức phát triển bền vững.
+                    </div>
+                </div>
+                <div class="text-slate-600 leading-relaxed space-y-4 text-justify en">
+                    <p>I am Nguyen Huy Lan (Drake Nguyen), bringing <strong class="text-teal-600">> 10 years of experience</strong> in Digital Marketing & E-commerce, with a specialized focus on applying AI and automation to maximize operational efficiency.</p>
+                    <p>I have successfully led and executed numerous campaigns across various industries including <em>Cosmetics, Functional Foods, and Cross-border E-commerce.</em> During my <strong class="text-teal-600">> 6 years</strong> managing Digital & E-commerce teams, I have gone beyond traditional leadership to actively research, build systems, and establish lean processes. This empowers businesses to operate agilely, optimize costs, and enhance execution effectiveness.</p>
+                    <p>Backed by a solid foundation in Information Technology and Network Security, I am highly proficient in utilizing AI tools, Digital Workspaces (Google Workspace, n8n, LarkSuite...), and Cloud/Server/Network systems to drive <strong>automation, digital transformation, data standardization, and accelerated innovation.</strong></p>
+                    <div class="bg-teal-50 p-4 border-l-4 border-teal-500 rounded-r-lg mt-4 italic text-slate-700">
+                        <strong>Working Philosophy:</strong> Work smart, not just hard, and embrace continuous improvement. Driven by the "Lean by AI" mindset, I pursue the application of technology to create lean, high-performance, and scalable workflows, fostering sustainable organizational growth.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Work Experience -->
+            <section class="mb-10">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <i data-lucide="briefcase" class="w-6 h-6 text-teal-600 shrink-0"></i>
+                    <span class="vn">Kinh Nghiệm Làm Việc</span>
+                    <span class="en">Work Experience</span>
+                </h3>
+                
+                <div class="space-y-0">
+                    <!-- Exp 1 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0 last:border-l-0">
+                        <div class="absolute w-4 h-4 bg-teal-500 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800">OPS & DIGITAL TRANSFORMATION ADVISOR</h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">
+                            ONE COMMUNICATION MEDIA & DATA CO., LTD | 11/2023 - <span class="vn">Hiện tại</span><span class="en">Present</span>
+                        </div>
                         
-                        // Set the active link to indigo color
-                        if (link.getAttribute('data-page') === pageId) {
-                            link.classList.remove('text-gray-600', 'hover:text-indigo-600');
-                            link.classList.add('text-indigo-600', 'hover:text-indigo-800');
-                        }
-                    });
-                }
+                        <!-- VN Content -->
+                        <div class="vn">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Quản trị nhân sự & xây dựng hệ thống vận hành linh hoạt.</li>
+                                <li>Triển khai chuyển đổi số & tự động hóa quy trình truyền thông - marketing.</li>
+                                <li>Tối ưu hoá quy trình sản xuất & phân phối nội dung đa kênh. Đảm bảo chất lượng & quản lý rủi ro.</li>
+                                <li>Xây dựng báo cáo trực quan bằng Looker Studio giúp phân tích dữ liệu & đưa ra quyết định nhanh chóng.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Impacts & Khởi Xướng:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Tư vấn & ứng dụng chuyển đổi số bằng AI tại Sbooks.vn, <strong class="text-teal-600">tinh gọn toàn bộ hệ thống</strong> Ecommerce.</li>
+                                    <li>Đóng vai trò Cố vấn & CMO tạm thời: Xây dựng team Marketing in-house cho startup y tế theo chuẩn mô hình <strong class="text-teal-600">hiệu suất cao (high-performance)</strong>.</li>
+                                    <li>Thiết lập thành công hệ thống <strong class="text-teal-600">kiểm duyệt nội dung quảng cáo tự động hóa</strong> chuyên biệt cho doanh nghiệp ngành y tế.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- EN Content -->
+                        <div class="en">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Human resources management & building an agile operational system.</li>
+                                <li>Implementing digital transformation & automating media - marketing workflows.</li>
+                                <li>Optimizing multi-channel content production & distribution processes. Ensuring quality & managing operational risks.</li>
+                                <li>Building interactive dashboards using Looker Studio to facilitate data analysis and rapid decision-making.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Impacts & Initiatives:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Consulted and applied AI-driven digital transformation at Sbooks.vn, <strong class="text-teal-600">streamlining the entire</strong> E-commerce operation.</li>
+                                    <li>Acted as Interim CMO & Advisor: Built a <strong class="text-teal-600">high-performance</strong> in-house Marketing team for a healthcare startup.</li>
+                                    <li>Successfully deployed a <strong class="text-teal-600">specialized automated ad content moderation system</strong> for healthcare businesses.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exp 2 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0 last:border-l-0">
+                        <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800">MARKETING MANAGER & BUSINESS ADVISOR</h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">CUBE HNB & VINTZ Global Vietnam | 3/2023 - 10/2023</div>
+                        <div class="vn">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Cố vấn CEO về mô hình kinh doanh B2B2C & D2C.</li>
+                                <li>Xây dựng chính sách affiliate commission cho KOC, Creator triển khai chương trình tiếp thị liên kết.</li>
+                                <li>Quản lý hiệu quả các chiến dịch marketing, đánh giá hiệu suất nhân sự theo data-driven KPIs.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Tuyển dụng, đào tạo & tối ưu hóa quy trình cho đội ngũ Marketing tinh gọn gồm <strong class="text-teal-600">8 nhân sự</strong> thông qua việc tích hợp AI.</li>
+                                    <li>Đồng bộ hóa giao tiếp, kế hoạch và báo cáo bằng LarkSuite, giúp <strong class="text-teal-600">x2 hiệu suất phối hợp</strong> toàn team.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="en">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Advised the CEO on B2B2C & D2C business models.</li>
+                                <li>Developed affiliate commission structures for KOCs and Creators to launch affiliate marketing programs.</li>
+                                <li>Effectively managed marketing campaigns and evaluated personnel performance based on data-driven KPIs.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Recruited, trained, and optimized workflows for a lean Marketing team of <strong class="text-teal-600">8 members</strong> through AI integration.</li>
+                                    <li>Synchronized communication, planning, and reporting via LarkSuite, <strong class="text-teal-600">doubling team collaboration efficiency</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exp 3 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0 last:border-l-0">
+                        <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800">MARKETING MANAGER</h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">LADY'S HOUSE (Binh Duong) | 6/2022 - 1/2023</div>
+                        <div class="vn">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Trực tiếp xây dựng phòng Marketing từ đầu: tuyển dụng, đào tạo, thiết lập quy trình và KPI cho từng vị trí (SEO, Ads, Content, Design, CSKH).</li>
+                                <li>Quản trị hiệu quả các Agency & Freelancer theo từng chiến dịch.</li>
+                                <li>Định hướng triển khai hệ thống Digital: Website, Social, Automation. Phối hợp CSKH chăm sóc lại khách hàng cũ.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results & Impacts:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Đạt <strong class="text-teal-600">40%</strong> tỷ lệ chuyển đổi trực tiếp từ kênh SEO.</li>
+                                    <li>Mang về <strong class="text-teal-600">400 triệu VNĐ</strong> doanh thu từ tệp khách hàng cũ với mức chi phí marketing bằng <strong class="text-teal-600">0đ</strong>.</li>
+                                    <li>Tối ưu tỷ lệ chuyển đổi Sale online đạt <strong class="text-teal-600">10%</strong>.</li>
+                                    <li>Kiểm soát và duy trì chi phí marketing hiệu quả ở mức <strong class="text-teal-600">10-20%</strong> trên tổng doanh thu/tháng.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="en">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Built the Marketing department from scratch: recruitment, training, setting up workflows and KPIs for each role (SEO, Ads, Content, Design, CS).</li>
+                                <li>Effectively managed Agencies & Freelancers per campaign.</li>
+                                <li>Directed the implementation of Digital systems: Website, Social, Automation. Coordinated with CS for retention strategies.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results & Impacts:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Achieved a <strong class="text-teal-600">40%</strong> direct conversion rate from the SEO channel.</li>
+                                    <li>Generated <strong class="text-teal-600">400 Million VND</strong> in revenue from the existing customer base at <strong class="text-teal-600">0 VND</strong> marketing cost.</li>
+                                    <li>Optimized online sales conversion rate to <strong class="text-teal-600">10%</strong>.</li>
+                                    <li>Maintained and controlled marketing costs efficiently at <strong class="text-teal-600">10-20%</strong> of total monthly revenue.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exp 4 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0 last:border-l-0">
+                        <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800">LEAD DIGITAL MARKETING & GROWTH SYSTEM</h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">Gicos Americare Clinic | 2/2021 - 6/2022</div>
+                        <div class="vn">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Đào tạo đội ngũ SEO & Paid Ads (Brand: Gicos, Americare Clinic). Quản trị hiệu quả hoạt động Agency.</li>
+                                <li>Xây dựng hệ thống Digital: Website, Social, Automation, CRM.</li>
+                                <li>Triển khai chiến dịch chăm sóc lại tệp khách hàng cũ & tiềm năng không tương tác.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Impacts:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Tái cấu trúc thành công luồng trải nghiệm khách hàng: <strong class="text-teal-600">User Flow - Data Flow - CRM Flow</strong>, giúp tối ưu hóa điểm chạm và tăng mạnh tỷ lệ chuyển đổi cuối.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="en">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Trained internal SEO & Paid Ads teams (Brands: Gicos, Americare Clinic). Managed Agency performance.</li>
+                                <li>Built the core Digital ecosystem: Website, Social Media, Automation, CRM.</li>
+                                <li>Launched remarketing campaigns targeting dormant and existing customer bases.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Impacts:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Successfully completely redesigned the customer journey: <strong class="text-teal-600">User Flow - Data Flow - CRM Flow</strong>, optimizing touchpoints and significantly boosting final conversion rates.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exp 5 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0 last:border-l-0">
+                        <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800">PROJECT LEADER</h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">HAMO HOLDINGS JSC | 11/2020 - 1/2021</div>
+                        <div class="vn">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Tái cấu trúc & phát triển hệ thống Digital Marketing. Nghiên cứu và triển khai giải pháp phát triển kênh Facebook.</li>
+                                <li>Tuyển dụng & đào tạo đội ngũ chạy Ads Facebook. Tư vấn đưa Data Analyst vào hệ thống.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li><strong class="text-teal-600">Chuyển đổi 100%</strong> từ việc sử dụng các công cụ rời rạc sang hệ thống quản trị đồng nhất (Facebook Workplace).</li>
+                                    <li>Tinh gọn thành công bộ máy nhân sự, duy trì sự ổn định và <strong class="text-teal-600">tăng hiệu suất vận hành</strong> của phòng Digital Marketing.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="en">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Restructured & developed the Digital Marketing system. Researched and executed growth solutions for Facebook channels.</li>
+                                <li>Recruited & trained the Facebook Ads team. Advised on integrating Data Analysts into the system.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li><strong class="text-teal-600">100% transition</strong> from fragmented tools to a unified management system (Facebook Workplace).</li>
+                                    <li>Successfully streamlined the personnel structure, stabilizing and <strong class="text-teal-600">increasing operational efficiency</strong> of the Digital Marketing department.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exp 6 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0 last:border-l-0">
+                        <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800">FULLSTACK DIGITAL MARKETING & PROJECT LEADER</h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">Seller Crossborder Ecommerce | 2017 - 11/2020</div>
+                        <div class="vn">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Tư vấn & Triển khai chiến lược Marketing tổng thể cho đối tác ngành Mỹ phẩm & Thời trang.</li>
+                                <li>Tư vấn chiến lược phát triển kinh doanh & định vị thương hiệu đa kênh.</li>
+                                <li>Thực hiện setup - tối ưu - scale - đo lường - báo cáo quảng cáo Facebook & Google.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results & Scale:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Quản lý ngân sách Digital Marketing lớn từ <strong class="text-teal-600">500 triệu - 2 tỷ VNĐ/tháng</strong> (Tổng chi tiêu tích lũy <strong class="text-teal-600">> 50 tỷ VNĐ</strong>).</li>
+                                    <li>Xây dựng và duy trì hệ thống vận hành trơn tru cho <strong class="text-teal-600">> 10,000 đơn hàng/tháng</strong>.</li>
+                                    <li>Tối ưu hóa phễu và thu hút thành công <strong class="text-teal-600">> 30,000 lượt truy cập/tháng</strong> với chi phí thấp.</li>
+                                    <li>Đào tạo, quản lý và dẫn dắt đội ngũ vận hành đa chuyên môn quy mô <strong class="text-teal-600">> 10 nhân sự</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="en">
+                            <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm">
+                                <li>Consulted & implemented holistic Marketing strategies for partners in the Cosmetics & Fashion industries.</li>
+                                <li>Advised on business growth strategies and multi-channel brand positioning.</li>
+                                <li>Executed setup, optimization, scaling, measurement, and reporting for Facebook & Google Ads.</li>
+                            </ul>
+                            <div class="mt-3 bg-teal-50/50 p-4 rounded border border-teal-100">
+                                <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Results & Scale:</span>
+                                <ul class="list-disc list-inside text-slate-700 space-y-1 text-sm">
+                                    <li>Managed large-scale Digital Marketing budgets of <strong class="text-teal-600">500M - 2B VND/month</strong> (Cumulative ad spend <strong class="text-teal-600">> 50 Billion VND</strong>).</li>
+                                    <li>Built and sustained a seamless operational system fulfilling <strong class="text-teal-600">> 10,000 orders/month</strong>.</li>
+                                    <li>Optimized marketing funnels, successfully driving <strong class="text-teal-600">> 30,000 visits/month</strong> at lower acquisition costs.</li>
+                                    <li>Trained, managed, and led a multi-disciplinary operational team of <strong class="text-teal-600">> 10 members</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exp 7 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0 last:border-l-0">
+                        <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800">FACEBOOK MARKETING SPECIALIST</h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">DREAM VIET EDUCATION JSC (KYNA EDUACTION) | 2016 - 2017</div>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm vn">
+                            <li>Triển khai các chiến dịch quảng cáo, phối hợp team Design & Content xây dựng ý tưởng.</li>
+                            <li>Sáng tạo nội dung quảng cáo, viết insight và lựa chọn key visual.</li>
+                            <li>Đo lường, báo cáo đánh giá hiệu suất. Trực quan hóa dữ liệu hiệu suất chiến dịch qua <strong class="text-teal-600">Looker Studio</strong>.</li>
+                        </ul>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm en">
+                            <li>Executed ad campaigns, collaborated with Design & Content teams to develop creative concepts.</li>
+                            <li>Created ad copy, drafted consumer insights, and selected appropriate key visuals.</li>
+                            <li>Measured and reported campaign performance. Visualized campaign data efficiently via <strong class="text-teal-600">Looker Studio</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Exp 8 -->
+                    <div class="relative pl-6 pb-8 border-l-2 border-slate-200 last:pb-0">
+                        <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+                        <h4 class="font-bold text-lg text-slate-800"><span class="vn">CHUYÊN VIÊN KINH DOANH</span><span class="en">SALES EXECUTIVE</span></h4>
+                        <div class="text-teal-600 font-medium text-sm mb-2">CENGROUP Real Estate Corporation | 2014 - 2015</div>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm vn">
+                            <li>Tìm kiếm & Tư vấn khách hàng bất động sản (Vinhomes Central Park, The Park Residence...).</li>
+                            <li>Tự triển khai đa kênh <strong class="text-teal-600">SEO, Email Marketing, SMS, Facebook Ads</strong> để chủ động phễu khách hàng thay vì phụ thuộc công ty.</li>
+                            <li>Theo dõi hành trình khách hàng và xây dựng kịch bản chăm sóc tự động, giảm mạnh chi phí tìm kiếm lead.</li>
+                        </ul>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-2 text-sm en">
+                            <li>Prospected & consulted real estate clients for projects like Vinhomes Central Park, The Park Residence, etc.</li>
+                            <li>Independently launched multi-channel funnels via <strong class="text-teal-600">SEO, Email Marketing, SMS, and Facebook Ads</strong> to proactively generate leads.</li>
+                            <li>Mapped customer journeys and built automated nurturing sequences, drastically reducing lead acquisition costs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activities -->
+            <section class="mb-10">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <i data-lucide="activity" class="w-6 h-6 text-teal-600 shrink-0"></i>
+                    <span class="vn">Hoạt Động Cộng Đồng</span>
+                    <span class="en">Community Activities</span>
+                </h3>
+                <div class="bg-white border border-slate-200 rounded-lg p-5 shadow-sm">
+                    <h4 class="font-bold text-lg text-slate-800">
+                        <span class="vn">TỔ CHỨC SỰ KIỆN KỸ NĂNG & HOẠT ĐỘNG CỘNG ĐỒNG SINH VIÊN</span>
+                        <span class="en">SKILLS EVENTS & STUDENT COMMUNITY ORGANIZATION</span>
+                    </h4>
+                    <div class="text-teal-600 font-medium text-sm mb-2">2011 - 2015</div>
+                    <div class="vn">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm mt-3">
+                            <li>Trực tiếp liên hệ & phối hợp tổ chức các hội thảo kỹ năng mềm tại nhiều trường đại học trên địa bàn TPHCM.</li>
+                            <li>Tổ chức các buổi offline kỹ năng thực chiến dành cho sinh viên.</li>
+                            <li>Chủ nhiệm CLB Guitar Tân Phú: Tổ chức các sự kiện âm nhạc offline với <strong class="text-teal-600">> 200 thành viên</strong>.</li>
+                        </ul>
+                        <div class="mt-3 text-sm text-slate-700 bg-teal-50/50 p-4 rounded border border-teal-100">
+                            <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Impacts:</span>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Phát triển cộng đồng online bùng nổ với mức tăng trưởng <strong class="text-teal-600">1,000%</strong>.</li>
+                                <li>Trong 4 năm, tổ chức thành công <strong class="text-teal-600">> 200</strong> buổi hội thảo kỹ năng, tiếp cận trên <strong class="text-teal-600">200,000 sinh viên</strong> toàn quốc.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="en">
+                        <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm mt-3">
+                            <li>Directly contacted & coordinated soft skills seminars at multiple universities across Ho Chi Minh City.</li>
+                            <li>Organized practical offline skill-building sessions for students.</li>
+                            <li>President of Tan Phu Guitar Club: Organized offline music events with <strong class="text-teal-600">> 200 members</strong>.</li>
+                        </ul>
+                        <div class="mt-3 text-sm text-slate-700 bg-teal-50/50 p-4 rounded border border-teal-100">
+                            <span class="font-bold text-teal-700 uppercase text-xs tracking-wider mb-2 block">Key Impacts:</span>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Drove exponential online community growth by <strong class="text-teal-600">1,000%</strong>.</li>
+                                <li>Over 4 years, successfully organized <strong class="text-teal-600">> 200</strong> skill seminars, reaching over <strong class="text-teal-600">200,000 students</strong> nationwide.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section>
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                    <i data-lucide="graduation-cap" class="w-6 h-6 text-teal-600 shrink-0"></i>
+                    <span class="vn">Học Vấn</span>
+                    <span class="en">Education</span>
+                </h3>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-5 border-l-4 border-l-teal-500">
+                    <h4 class="font-bold text-lg text-slate-800 uppercase">
+                        <span class="vn">CÔNG NGHỆ THÔNG TIN – ĐỊNH HƯỚNG AN NINH MẠNG</span>
+                        <span class="en">INFORMATION TECHNOLOGY – MAJOR IN NETWORK SECURITY</span>
+                    </h4>
+                    <div class="text-teal-600 font-medium text-md mb-2">Ho Chi Minh City University of Food Industry (HUIT) | 10/2011 - 6/2015</div>
+                    <div class="vn">
+                        <ul class="list-disc list-inside text-slate-600 space-y-2 mt-3 text-sm">
+                            <li>Thành lập CLB Bảo mật - Khoa CNTT: Tổ chức các buổi chia sẻ chuyên đề, thực hành CTF, nâng cao kiến thức bảo mật cho sinh viên.</li>
+                            <li><strong class="text-teal-600">Impact:</strong> Xây dựng & vận hành kênh YouTube chuyên đề Mạng máy tính, đạt <strong class="text-teal-600">> 33,000 người đăng ký (Subscribers)</strong>, chia sẻ kiến thức kỹ thuật bằng ngôn ngữ dễ hiểu, ứng dụng thực tế cao.</li>
+                        </ul>
+                    </div>
+                    <div class="en">
+                        <ul class="list-disc list-inside text-slate-600 space-y-2 mt-3 text-sm">
+                            <li>Founded the IT Faculty Security Club: Hosted thematic sharing sessions, CTF practices, and enhanced cybersecurity knowledge for students.</li>
+                            <li><strong class="text-teal-600">Impact:</strong> Built & operated a YouTube channel focusing on Computer Networks, reaching <strong class="text-teal-600">> 33,000 Subscribers</strong>, sharing technical knowledge in easy-to-understand language with high practical application.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Language Toggle Logic
+        function setLanguage(lang) {
+            const body = document.body;
+            const btnVn = document.getElementById('btn-vn');
+            const btnEn = document.getElementById('btn-en');
+            
+            if (lang === 'en') {
+                body.classList.remove('lang-vn');
+                body.classList.add('lang-en');
+                
+                // Active EN button
+                btnEn.classList.add('bg-slate-800', 'text-white', 'shadow-md');
+                btnEn.classList.remove('text-slate-500', 'hover:bg-slate-100');
+                
+                // Inactive VN button
+                btnVn.classList.remove('bg-slate-800', 'text-white', 'shadow-md');
+                btnVn.classList.add('text-slate-500', 'hover:bg-slate-100');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-vn');
+                
+                // Active VN button
+                btnVn.classList.add('bg-slate-800', 'text-white', 'shadow-md');
+                btnVn.classList.remove('text-slate-500', 'hover:bg-slate-100');
+                
+                // Inactive EN button
+                btnEn.classList.remove('bg-slate-800', 'text-white', 'shadow-md');
+                btnEn.classList.add('text-slate-500', 'hover:bg-slate-100');
             }
-
-            // Attach click event listeners to menu links
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default anchor jump
-                    const pageId = this.getAttribute('data-page');
-                    showPage(pageId);
-                });
-            });
-
-            // Initial setup: Determine the page to show based on the hash in the URL or default to 'about'
-            const initialPage = window.location.hash ? window.location.hash.substring(1) : 'about';
-            showPage(initialPage);
-        });
+        }
     </script>
 </body>
 </html>
