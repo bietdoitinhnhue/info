@@ -501,27 +501,48 @@
                 <p class="text-slate-500 font-medium mb-2">Chỉ nhận Coaching 1:1 số lượng giới hạn để đảm bảo chất lượng đầu ra.</p>
                 
                 <!-- Pricing Box Redesigned -->
-                <div class="mt-8 mb-10 relative bg-brand-50/50 py-8 px-4 rounded-2xl border border-brand-100">
+                <div class="mt-8 mb-6 relative bg-brand-50/50 py-8 px-4 rounded-2xl border border-brand-100">
                     <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-5 py-1 rounded-full text-sm font-bold uppercase tracking-wider shadow-md animate-pulse whitespace-nowrap">
                         Ưu đãi giới hạn
                     </div>
                     
                     <span class="block text-slate-500 font-medium mb-5">Học phí trọn gói (Không phát sinh)</span>
                     
-                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10">
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
                         <div class="text-center">
                             <span class="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-1">Giá gốc</span>
-                            <span class="text-red-500 line-through text-2xl md:text-3xl font-extrabold decoration-red-600 decoration-4 opacity-80">15.000.000₫</span>
+                            <span class="text-red-500 line-through text-2xl md:text-2xl font-bold decoration-red-600 decoration-2 opacity-80">15.000.000đ</span>
                         </div>
                         
                         <!-- Divider PC -->
-                        <div class="hidden md:block w-px h-12 bg-brand-200"></div>
+                        <div class="hidden md:block w-px h-14 bg-brand-200"></div>
                         <!-- Divider Mobile -->
                         <div class="md:hidden w-16 h-px bg-brand-200 my-1"></div>
                         
                         <div class="text-center">
                             <span class="block text-xs font-semibold text-brand-600 uppercase tracking-widest mb-1">Chỉ còn</span>
-                            <span class="text-4xl md:text-5xl lg:text-6xl font-black text-brand-600 tracking-tight">6.990.000₫</span>
+                            <span class="text-4xl md:text-4xl lg:text-4xl font-black text-brand-600 tracking-tight leading-none">6.990.000đ</span>
+                        </div>
+                    </div>
+
+                    <!-- FOMO Elements (Timer & Scarcity) -->
+                    <div class="mt-8 border-t border-brand-200/60 pt-6">
+                        <div class="flex flex-col items-center justify-center gap-4">
+                            <!-- Slots left -->
+                            <div class="inline-flex items-center gap-2 text-red-600 font-bold bg-red-50 px-5 py-2.5 rounded-full border border-red-200 shadow-sm">
+                                <i class="ph-fill ph-fire text-2xl animate-pulse"></i>
+                                <span>Chỉ còn đúng <span class="text-xl">5</span> slot cuối cùng!</span>
+                            </div>
+                            
+                            <!-- Countdown Timer -->
+                            <div class="flex flex-col sm:flex-row items-center gap-3 mt-1">
+                                <span class="text-slate-600 font-medium">Ưu đãi sẽ tự động đóng sau:</span>
+                                <div class="flex items-center gap-1.5 text-white font-mono text-xl font-bold">
+                                    <div class="bg-slate-800 rounded-md px-3 py-1 shadow-inner" id="timer-minutes">15</div>
+                                    <span class="text-slate-800 font-black animate-pulse">:</span>
+                                    <div class="bg-slate-800 rounded-md px-3 py-1 shadow-inner" id="timer-seconds">00</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -592,8 +613,9 @@
         </div>
     </footer>
 
-    <!-- Mobile Menu Script -->
+    <!-- Scripts -->
     <script>
+        // --- SCRIPT CHO MENU MOBILE ---
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
 
@@ -639,6 +661,39 @@
             currentIndex = (currentIndex + 1) % totalSlides;
             updateSlider();
         }, 5000);
+
+        // --- SCRIPT CHO COUNTDOWN TIMER (FOMO) ---
+        const displayMinutes = document.getElementById('timer-minutes');
+        const displaySeconds = document.getElementById('timer-seconds');
+        
+        // Mặc định 15 phút (15 * 60 giây)
+        let fomoTimer = 15 * 60; 
+        
+        // Kiểm tra xem khách đã vào trang trước đó chưa (Lưu ở sessionStorage)
+        if(sessionStorage.getItem('fomoTimerValue')) {
+            fomoTimer = parseInt(sessionStorage.getItem('fomoTimerValue'));
+        }
+        
+        const countdown = setInterval(() => {
+            let minutes = parseInt(fomoTimer / 60, 10);
+            let seconds = parseInt(fomoTimer % 60, 10);
+
+            // Thêm số 0 đằng trước nếu dưới 10
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            displayMinutes.textContent = minutes;
+            displaySeconds.textContent = seconds;
+
+            if (--fomoTimer < 0) {
+                // Khi hết giờ, giữ nguyên số 00:00 và dừng bộ đếm
+                fomoTimer = 0;
+                clearInterval(countdown);
+            } else {
+                // Lưu thời gian hiện tại vào bộ nhớ trình duyệt
+                sessionStorage.setItem('fomoTimerValue', fomoTimer);
+            }
+        }, 1000);
     </script>
 </body>
 </html>
