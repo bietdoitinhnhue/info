@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching 1:1 Fast-Track: Xây Kênh & Chạy Ads | AdsMastery</title>
+    
+    <!-- SEO Tối ưu -->
+    <meta name="description" content="Khóa học Coaching 1:1 Fast-Track: Xây dựng Fanpage và chạy Facebook Ads thực chiến. Học 20% tư duy, 80% thực hành. Cam kết tự tay lên camp ra đơn, hỗ trợ 30 ngày.">
+    <meta name="keywords" content="coaching 1:1 facebook ads, khóa học chạy ads, dạy chạy quảng cáo thực chiến, facebook ads ai, drake nguyen, xây dựng fanpage, quảng cáo chuyển đổi, học ads 1 kèm 1">
+    <meta name="author" content="Drake Nguyen">
+
+    <!-- Open Graph / Facebook (Thumbnail khi share link) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://drakenguyen.me/">
+    <meta property="og:title" content="Lộ Trình Coaching 1:1 Fast-Track: Xây Kênh & Chạy Ads">
+    <meta property="og:description" content="Học kèm 1:1 trực tiếp qua Google Meet. Đi thẳng từ Fanpage trắng đến tự tay thiết lập chiến dịch Facebook Ads sinh lời. Đăng ký ngay!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Lead%20fb%20ads.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://drakenguyen.me/">
+    <meta property="twitter:title" content="Lộ Trình Coaching 1:1 Fast-Track: Xây Kênh & Chạy Ads">
+    <meta property="twitter:description" content="Học kèm 1:1 trực tiếp qua Google Meet. Đi thẳng từ Fanpage trắng đến tự tay thiết lập chiến dịch Facebook Ads sinh lời. Đăng ký ngay!">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Lead%20fb%20ads.png">
+
+    <!-- Schema Markup (Khai báo khóa học cho Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Coaching 1:1 Fast-Track: Xây Kênh & Chạy Ads Thực Chiến",
+      "description": "Lộ trình coaching 4 buổi (1 kèm 1). Dùng AI giải mã khách hàng, xây dựng Fanpage chuẩn đến việc tự tay lên chiến dịch quảng cáo đa mục tiêu.",
+      "provider": {
+        "@type": "Person",
+        "name": "Drake Nguyen",
+        "sameAs": [
+          "https://zalo.me/0968333342",
+          "https://m.me/drakenguyen.me",
+          "https://t.me/Drakenguyen"
+        ]
+      },
+      "offers": {
+        "@type": "Offer",
+        "category": "Paid",
+        "priceCurrency": "VND",
+        "price": "6990000",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased overflow-x-hidden">
+
+    <!-- Header / Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30">
+                        <i class="ph-bold ph-rocket-launch"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">Ads<span class="text-brand-600">Mastery</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#muc-tieu" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Mục tiêu</a>
+                    <a href="#lo-trinh" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Lộ trình 1:1</a>
+                    <a href="#quyen-loi" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Quyền lợi</a>
+                    <a href="#dang-ky" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        Tư vấn ngay
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-600 focus:outline-none p-2">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#muc-tieu" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50">Mục tiêu</a>
+                <a href="#lo-trinh" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50">Lộ trình 1:1</a>
+                <a href="#quyen-loi" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50">Quyền lợi</a>
+                <a href="#dang-ky" class="block px-3 py-3 mt-4 text-center rounded-lg text-base font-bold text-white bg-brand-600 hover:bg-brand-700">Đăng ký ngay</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-pattern relative">
+        <!-- Decorative blob -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-200/50 blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-accent-200/50 blur-3xl opacity-50 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col items-center gap-10 lg:gap-14">
+                
+                <!-- Hero Content -->
+                <div class="w-full max-w-4xl text-center">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100 text-brand-700 font-semibold text-sm mb-6 shadow-sm border border-brand-200">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-600"></span>
+                        </span>
+                        Khai giảng linh hoạt theo lịch học viên
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                        Lộ Trình Coaching 1:1 <br>
+                        <span class="gradient-text">Fast-Track</span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                        Xây kênh bán hàng & Chạy Ads thực chiến. Đi thẳng từ việc dùng AI giải mã khách hàng đến tự tay lên chiến dịch đa mục tiêu.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#dang-ky" class="w-full sm:w-auto whitespace-nowrap px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-bold text-lg transition-all shadow-lg shadow-brand-500/40 hover:shadow-brand-500/60 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <span>Đăng ký học ngay</span>
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                        <a href="#lo-trinh" class="w-full sm:w-auto whitespace-nowrap px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-full font-bold text-lg transition-all shadow-sm flex items-center justify-center gap-2">
+                            <span>Xem chi tiết lộ trình</span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-slate-500 font-medium">
+                        <div class="flex items-center gap-1"><i class="ph-fill ph-check-circle text-green-500 text-lg"></i> Thực hành 80%</div>
+                        <div class="flex items-center gap-1"><i class="ph-fill ph-check-circle text-green-500 text-lg"></i> 2 buổi/tuần (2 tuần)</div>
+                        <div class="hidden sm:flex items-center gap-1"><i class="ph-fill ph-check-circle text-green-500 text-lg"></i> Hỗ trợ 30 ngày</div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="w-full max-w-5xl relative flex justify-center mt-2 lg:mt-4">
+                    <div class="w-full drop-shadow-2xl transform hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 rounded-2xl relative z-20 overflow-hidden aspect-video bg-slate-200 border border-slate-200 shadow-brand-500/10">
+                        <!-- Slider Track -->
+                        <div id="hero-slider" class="flex h-full w-full transition-transform duration-300 ease-in-out">
+                            <!-- Ảnh 1 (Ảnh gốc của bạn) -->
+                            <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Lead%20fb%20ads.png" alt="Banner Thực Chiến" class="w-full h-full object-cover flex-shrink-0">
+                            <!-- Ảnh 2 -->
+                            <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Fanpage01.png" alt="Xây dựng Fanpage chuẩn" class="w-full h-full object-cover flex-shrink-0 object-top">
+                            <!-- Ảnh 3 -->
+                            <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/TrinhNYoga_Ads.png" alt="Thực hành chiến dịch Ads" class="w-full h-full object-cover flex-shrink-0">
+                            <!-- Ảnh 4 -->
+                            <img src="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Fanpage_TrinhNYoga.png" alt="Kênh Fanpage thực tế" class="w-full h-full object-cover flex-shrink-0 object-top">
+                        </div>
+                        
+                        <!-- Slider Indicators (Dots) -->
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-30">
+                            <button class="slider-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+                            <button class="slider-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+                            <button class="slider-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+                            <button class="slider-dot w-2 h-2 rounded-full bg-white/40 transition-all"></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Objectives / Features -->
+    <section id="muc-tieu" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Mục Tiêu & Hình Thức Cốt Lõi</h2>
+                <div class="w-24 h-1.5 bg-brand-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:border-brand-300 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-target text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Mục tiêu trực diện</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Đi thẳng từ việc dùng AI xây kênh đến tự tay lên chiến dịch. Học để làm được ngay, không lý thuyết suông.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:border-brand-300 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-clock text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Thời lượng & Lịch học</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Chỉ 4 Buổi (2 giờ/buổi), với mật độ <strong class="text-brand-600">2 buổi/tuần</strong>. Tăng tốc làm chủ công cụ Ads chỉ trong 2 tuần.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:border-brand-300 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-users-three text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Hình thức 1 kèm 1</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Học qua Google Meet. Trực tiếp Share màn hình và thao tác thẳng trên tài khoản/dự án của chính bạn.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:border-brand-300 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-chart-pie-slice text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Cam kết tỷ lệ</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        <strong class="text-brand-600">20%</strong> Tư duy chiến lược nền tảng - <strong class="text-brand-600">80%</strong> Thực hành thao tác thực tế. Học là làm được.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Syllabus -->
+    <section id="lo-trinh" class="py-20 bg-slate-900 text-white relative">
+        <!-- Background accents -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-0 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-brand-400 font-bold tracking-wider uppercase text-sm mb-2 block">Chi tiết chương trình</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Lộ Trình 4 Buổi Lột Xác</h2>
+                <p class="text-slate-400 text-lg">Từ con số 0 đến làm chủ công cụ quảng cáo</p>
+            </div>
+
+            <div class="space-y-8">
+                
+                <!-- Buổi 1 -->
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 sm:p-10 hover:border-brand-500 transition-colors duration-300">
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-brand-500/30">
+                                01
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">AI Giải Mã Khách Hàng & Xây Dựng "Mặt Tiền"</h3>
+                            <p class="text-brand-300 font-medium mb-4 pb-4 border-b border-slate-700">Mục tiêu: Dùng AI thấu hiểu khách hàng sâu sắc và sở hữu Fanpage chuyên nghiệp ngay lập tức.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">AI Persona & Insight:</strong> Dùng Claude/Gemini phân tích sản phẩm, "vẽ" chân dung, tìm 5 nỗi đau & 5 khao khát thầm kín.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Chuẩn hóa Fanpage:</strong> Khởi tạo Page từ số 0, thiết lập tên, URL và thông tin liên hệ chuẩn SEO.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">AI Content Mồi:</strong> Dùng ChatGPT sản xuất cấp tốc 10 bài viết nền tảng tạo "Trust" (giáo dục KH, feedback, câu chuyện) trước khi Ads.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Thiết kế nhanh (Canva + AI):</strong> Hướng dẫn thiết kế Avatar và Cover chuyên nghiệp, thu hút mắt nhìn chỉ trong 10 phút.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 2 -->
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 sm:p-10 hover:border-brand-500 transition-colors duration-300">
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-brand-500/30">
+                                02
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">Viết Ad Copy Bằng AI & Thiết Lập Hệ Thống</h3>
+                            <p class="text-brand-300 font-medium mb-4 pb-4 border-b border-slate-700">Mục tiêu: Làm chủ nghệ thuật viết lời chào hàng bằng AI và chuẩn bị dàn tài khoản an toàn.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Prompt Engineering cho Ads:</strong> Sử dụng bộ Prompt chuyên dụng để AI viết bài theo các công thức kinh điển (AIDA, PAS, FAB).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Viết Ad Copy đa dạng:</strong> Dùng AI tạo nhiều phương án Tiêu đề (Hook) khác nhau để làm tư liệu chạy thử nghiệm (Test Ads).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Setup & An toàn thanh toán:</strong> Tạo BM, TKQC cá nhân. Cách add thẻ đúng cách hạn chế rủi ro bị khóa hay lỗi thanh toán.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Hứng Traffic:</strong> Thiết lập kịch bản tin nhắn tự động (Welcome Message) tương tác tức thì khi khách từ Ads nhắn tới.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 3 -->
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 sm:p-10 hover:border-brand-500 transition-colors duration-300">
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-brand-500/30">
+                                03
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">Toàn Cảnh Objective & Thực Chiến Lên Camp</h3>
+                            <p class="text-brand-300 font-medium mb-4 pb-4 border-b border-slate-700">Mục tiêu: Hiểu rõ các mục tiêu quảng cáo và tự tay bấm "Publish" chiến dịch đầu tiên.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Giải phẫu 6 Campaign Objectives:</strong> Phân tích khi nào dùng Tin nhắn, Truy cập, Khách hàng tiềm năng hay Doanh số.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">AI Targeting:</strong> Sử dụng AI gợi ý các bộ từ khóa nhắm mục tiêu (Sở thích, Hành vi) khớp nhất với khách hàng đã vẽ ở Buổi 1.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Thực hành lên Camp & A/B Testing:</strong> Setup chiến dịch trực tiếp trên máy. Chia nhóm quảng cáo để test nội dung/hình ảnh nào rẻ hơn.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Rà soát & Xuất bản:</strong> Loại bỏ các vị trí hiển thị rác để tiết kiệm tiền và chính thức khởi chạy chiến dịch.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 4 -->
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 sm:p-10 hover:border-brand-500 transition-colors duration-300 relative overflow-hidden">
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-brand-500/30">
+                                04
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">Đọc Số Liệu, Tối Ưu & Xử Lý Sự Cố Bằng AI</h3>
+                            <p class="text-brand-300 font-medium mb-4 pb-4 border-b border-slate-700">Mục tiêu: Làm chủ số liệu, biết dùng AI phân tích và cách "cứu" tài khoản khi gặp vấn đề.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Giải phẫu chỉ số lõi:</strong> Hướng dẫn đọc và hiểu các chỉ số CPM, CPC, CTR và CPA (Chi phí trên mỗi khách hàng).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">AI Data Analyst:</strong> Đưa dữ liệu vào AI để phân tích "Ads đang lỗi ở đâu" và đề xuất hướng sửa đổi (thay ảnh hay sửa content).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Kỹ thuật Tối ưu:</strong> Quy tắc "Vít" ngân sách cho camp rẻ và "Cắt lỗ" những camp đắt.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-fill ph-check-circle text-green-400 mt-1 flex-shrink-0 text-xl"></i>
+                                    <span class="text-slate-300"><strong class="text-white">Quy trình xử lý sự cố:</strong> Hướng dẫn các bước kháng nghị khi tài khoản bị khóa hoặc quảng cáo bị từ chối.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus Section -->
+    <section id="quyen-loi" class="py-16 bg-gradient-to-r from-brand-600 to-indigo-700 relative">
+        <!-- SVG Pattern -->
+        <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,100 C20,0 50,100 100,0 L100,100 Z" fill="white"></path>
+        </svg>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 transform md:-translate-y-24 mt-24 md:mt-0">
+                <div class="text-center mb-10">
+                    <h2 class="text-xs font-black tracking-widest text-brand-600 uppercase mb-2">🎁 Quà tặng & Đặc quyền</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Combo Trợ Lực Chuyên Sâu</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Bonus 1 -->
+                    <div class="flex items-start gap-4 p-5 rounded-2xl bg-brand-50 border border-brand-100 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-600 shadow-sm flex-shrink-0">
+                            <i class="ph-fill ph-headset text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Support 1:1 Trực Tiếp</h4>
+                            <p class="text-sm text-slate-600">Đồng hành, giải đáp thắc mắc qua Zalo/Messenger trong 30 ngày sau khi khóa học kết thúc.</p>
+                        </div>
+                    </div>
+                    <!-- Bonus 2 -->
+                    <div class="flex items-start gap-4 p-5 rounded-2xl bg-purple-50 border border-purple-100 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-purple-600 shadow-sm flex-shrink-0">
+                            <i class="ph-fill ph-magic-wand text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">50+ Prompts AI Chuyên Sâu</h4>
+                            <p class="text-sm text-slate-600">Chuyên dùng viết bài quảng cáo bán hàng và kịch bản video ngắn (Reels/TikTok) triệu view.</p>
+                        </div>
+                    </div>
+                    <!-- Bonus 3 -->
+                    <div class="flex items-start gap-4 p-5 rounded-2xl bg-green-50 border border-green-100 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-green-600 shadow-sm flex-shrink-0">
+                            <i class="ph-fill ph-list-checks text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Bộ Check-list Lên Camp Chuẩn</h4>
+                            <p class="text-sm text-slate-600">Giúp bạn tự lên chiến dịch chính xác từng bước, không lo sai sót về mặt kỹ thuật.</p>
+                        </div>
+                    </div>
+                    <!-- Bonus 4 -->
+                    <div class="flex items-start gap-4 p-5 rounded-2xl bg-orange-50 border border-orange-100 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-orange-600 shadow-sm flex-shrink-0">
+                            <i class="ph-fill ph-shield-warning text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Cẩm Nang Xử Lý Tài Khoản</h4>
+                            <p class="text-sm text-slate-600">Các bước chuẩn để làm việc với Support Facebook khi tài khoản gặp sự cố bị khóa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="dang-ky" class="py-20 bg-slate-50 md:-mt-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Bạn đã sẵn sàng để tự tay vít Ads?</h2>
+            <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+                Lịch học linh hoạt 1 kèm 1 theo thời gian rảnh của bạn. Đừng chần chừ đốt thêm tiền cho những sai lầm cơ bản.
+            </p>
+
+            <!-- Action Card -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 md:p-12 max-w-2xl mx-auto relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-500 to-purple-500"></div>
+                
+                <p class="text-slate-500 font-medium mb-2">Chỉ nhận Coaching 1:1 số lượng giới hạn để đảm bảo chất lượng đầu ra.</p>
+                
+                <!-- Pricing Box Redesigned -->
+                <div class="mt-8 mb-10 relative bg-brand-50/50 py-8 px-4 rounded-2xl border border-brand-100">
+                    <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-5 py-1 rounded-full text-sm font-bold uppercase tracking-wider shadow-md animate-pulse whitespace-nowrap">
+                        Ưu đãi giới hạn
+                    </div>
+                    
+                    <span class="block text-slate-500 font-medium mb-5">Học phí trọn gói (Không phát sinh)</span>
+                    
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10">
+                        <div class="text-center">
+                            <span class="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-1">Giá gốc</span>
+                            <span class="text-red-500 line-through text-2xl md:text-3xl font-extrabold decoration-red-600 decoration-4 opacity-80">15.000.000₫</span>
+                        </div>
+                        
+                        <!-- Divider PC -->
+                        <div class="hidden md:block w-px h-12 bg-brand-200"></div>
+                        <!-- Divider Mobile -->
+                        <div class="md:hidden w-16 h-px bg-brand-200 my-1"></div>
+                        
+                        <div class="text-center">
+                            <span class="block text-xs font-semibold text-brand-600 uppercase tracking-widest mb-1">Chỉ còn</span>
+                            <span class="text-4xl md:text-5xl lg:text-6xl font-black text-brand-600 tracking-tight">6.990.000₫</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="https://zalo.me/0968333342" target="_blank" rel="noopener noreferrer" class="block w-full py-5 px-8 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-bold text-xl md:text-2xl shadow-lg shadow-brand-500/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        Đăng Ký Tư Vấn Ngay
+                    </a>
+                    <p class="text-sm text-slate-400 mt-4"><i class="ph ph-lock-key text-slate-500"></i> Thông tin của bạn được bảo mật tuyệt đối.</p>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-slate-100 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-8">
+                    <a href="https://m.me/drakenguyen.me" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="ph-fill ph-messenger-logo text-xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs text-slate-500 group-hover:text-brand-600 transition-colors">Chat qua</p>
+                            <p class="font-bold text-slate-800 group-hover:text-brand-600 transition-colors">Messenger</p>
+                        </div>
+                    </a>
+                    <a href="https://zalo.me/0968333342" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="ph-fill ph-chat-circle-text text-xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs text-slate-500 group-hover:text-brand-600 transition-colors">Hoặc nhắn</p>
+                            <p class="font-bold text-slate-800 group-hover:text-brand-600 transition-colors">Zalo Coaching</p>
+                        </div>
+                    </a>
+                    <a href="https://t.me/Drakenguyen" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="ph-fill ph-telegram-logo text-xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs text-slate-500 group-hover:text-brand-600 transition-colors">Nhắn tin</p>
+                            <p class="font-bold text-slate-800 group-hover:text-brand-600 transition-colors">Telegram</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold">
+                    <i class="ph-bold ph-rocket-launch"></i>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-white">AdsMastery</span>
+            </div>
+            
+            <p class="text-sm text-center md:text-left">
+                &copy; 2024 AdsMastery Coaching. All rights reserved.<br>
+                <span class="text-xs mt-1 block">Khóa học nền tảng thực chiến cho người mới.</span>
+            </p>
+            
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-colors">
+                    <i class="ph-fill ph-facebook-logo text-xl"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-colors">
+                    <i class="ph-fill ph-tiktok-logo text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking a link
+        const menuLinks = menu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // --- SCRIPT CHO HERO SLIDER ---
+        const slider = document.getElementById('hero-slider');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentIndex = 0;
+        const totalSlides = 4; // Tổng số ảnh trong slider
+
+        function updateSlider() {
+            // Trượt ảnh ngang
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Cập nhật hiển thị dấu chấm tròn (dots)
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.remove('bg-white/40');
+                    dot.classList.add('bg-white', 'w-6'); // Kéo dài chấm tròn đang hiện diện
+                } else {
+                    dot.classList.add('bg-white/40');
+                    dot.classList.remove('bg-white', 'w-6');
+                }
+            });
+        }
+
+        // Khởi tạo trạng thái ban đầu
+        updateSlider();
+
+        // Tự động chuyển slide sau mỗi 5000ms (5 giây)
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+    </script>
+</body>
+</html>
