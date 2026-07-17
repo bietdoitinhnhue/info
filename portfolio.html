@@ -114,46 +114,36 @@
     .work-index a:hover{border-color:var(--blue);background:var(--blue);color:#fff}
 
     .projects{padding-bottom:130px}
-    .project{margin-bottom:24px;display:grid;grid-template-columns:.88fr 1.12fr;min-height:650px;overflow:hidden;border:1px solid var(--line);background:var(--card);box-shadow:0 8px 30px rgba(16,38,59,.04)}
-    .project-visual{position:relative;padding:34px;display:flex;flex-direction:column;overflow:hidden;background:var(--blue);color:#fff}
-    .project.orange .project-visual{background:var(--orange)}
-    .project.navy .project-visual{background:var(--navy)}
-    .project.lime .project-visual{background:var(--lime);color:var(--ink)}
-    .project-top{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;font-family:ui-monospace,monospace;font-size:.63rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-    .project-number{width:48px;height:48px;display:grid;place-items:center;border:1px solid currentColor;border-radius:50%}
-    .system-ui{position:relative;z-index:2;margin:auto 0;width:100%;padding:22px;border:1px solid rgba(255,255,255,.26);border-radius:18px;background:rgba(255,255,255,.1);backdrop-filter:blur(4px)}
-    .lime .system-ui{border-color:rgba(16,38,59,.2);background:rgba(255,255,255,.38)}
-    .ui-bar{margin-bottom:20px;display:flex;gap:7px}
-    .ui-bar i{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.45}
-    .flow{display:grid;grid-template-columns:1fr 26px 1fr 26px 1fr;align-items:center;gap:7px}
-    .flow-node{min-height:92px;padding:14px 10px;display:flex;flex-direction:column;justify-content:space-between;border-radius:12px;background:#fff;color:var(--ink)}
-    .flow-node small{font-family:ui-monospace,monospace;font-size:.52rem;opacity:.55}
-    .flow-node strong{font-size:.78rem;line-height:1.2}
-    .arrow{text-align:center;font-weight:900}
-    .mini-bars{margin-top:14px;display:grid;gap:7px}
-    .mini-bars span{height:7px;border-radius:99px;background:rgba(255,255,255,.28)}
-    .mini-bars span:nth-child(1){width:100%}.mini-bars span:nth-child(2){width:72%}.mini-bars span:nth-child(3){width:88%}
-    .lime .mini-bars span{background:rgba(16,38,59,.18)}
-    .visual-result{position:relative;z-index:2;display:flex;align-items:end;justify-content:space-between;gap:20px}
-    .visual-result strong{font-size:clamp(2.3rem,4vw,4.7rem);letter-spacing:-.08em;line-height:.8}
-    .visual-result span{max-width:130px;font-size:.68rem;line-height:1.4;text-align:right;opacity:.72}
-    .orb{position:absolute;width:320px;height:320px;right:-150px;top:90px;border:1px solid rgba(255,255,255,.2);border-radius:50%}
-    .orb::before,.orb::after{content:"";position:absolute;border:1px solid inherit;border-radius:50%}
-    .orb::before{inset:45px}.orb::after{inset:95px}
-
-    .project-body{padding:clamp(38px,5vw,68px);display:flex;flex-direction:column}
-    .project-meta{display:flex;justify-content:space-between;gap:24px;color:var(--muted);font-family:ui-monospace,monospace;font-size:.64rem;font-weight:750;letter-spacing:.07em;text-transform:uppercase}
-    .project-body h3{margin:70px 0 18px;font-size:clamp(2.9rem,5vw,5.5rem);font-weight:880;letter-spacing:-.08em;line-height:.92}
-    .project-summary{max-width:580px;margin-bottom:28px;color:var(--muted);font-size:.98rem;line-height:1.7}
-    .system-list{margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;list-style:none}
-    .system-list li{position:relative;padding:10px 0 10px 18px;border-bottom:1px solid var(--line);font-size:.78rem;font-weight:690;line-height:1.4}
-    .system-list li::before{content:"";position:absolute;left:0;top:16px;width:7px;height:7px;border-radius:50%;background:var(--orange)}
-    .metric-row{margin-top:auto;padding-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .metric{padding-top:16px;border-top:2px solid var(--ink)}
-    .metric strong{display:block;font-size:clamp(1.35rem,2.3vw,2.2rem);letter-spacing:-.06em}
-    .metric span{display:block;margin-top:6px;color:var(--muted);font-size:.64rem;line-height:1.35}
-    .tools{margin-top:25px;display:flex;flex-wrap:wrap;gap:7px}
-    .tools span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-family:ui-monospace,monospace;font-size:.56rem;font-weight:750}
+    .project-slide{position:relative;margin-bottom:34px;padding:36px 40px 40px;overflow:hidden;scroll-margin-top:92px;border:1px solid var(--line);background:#f4f4f2;box-shadow:0 18px 50px rgba(16,38,59,.07)}
+    .project-slide::before{content:"";position:absolute;left:-90px;bottom:-145px;width:330px;height:330px;border-radius:48% 52% 68% 32% / 42% 34% 66% 58%;background:var(--project-color,var(--blue));opacity:.13;transform:rotate(24deg)}
+    .project-slide::after{content:"";position:absolute;right:-70px;top:-80px;width:220px;height:220px;border:1px solid rgba(16,38,59,.11);border-radius:50%}
+    .project-slide.orange{--project-color:var(--orange)}
+    .project-slide.navy{--project-color:var(--navy)}
+    .project-slide.lime{--project-color:#93b718}
+    .slide-head{position:relative;z-index:2;display:grid;grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr);gap:56px;padding-bottom:28px;border-bottom:1px solid rgba(16,38,59,.18)}
+    .slide-kicker{margin-bottom:11px;color:var(--project-color,var(--blue));font-family:ui-monospace,monospace;font-size:.62rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+    .slide-title h3{margin:0;font-size:clamp(2.6rem,4.6vw,5.1rem);font-weight:880;letter-spacing:-.075em;line-height:.9}
+    .slide-title p{max-width:420px;margin:17px 0 0;color:var(--muted);font-size:.82rem;line-height:1.56}
+    .slide-results-label{margin-bottom:15px;font-family:ui-monospace,monospace;font-size:.62rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+    .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .result-item{padding-top:11px;border-top:3px solid var(--project-color,var(--blue))}
+    .result-item strong{display:block;font-size:clamp(1.35rem,2.2vw,2.25rem);letter-spacing:-.055em;line-height:1}
+    .result-item span{display:block;margin-top:7px;color:var(--muted);font-size:.66rem;line-height:1.4}
+    .slide-tools{margin-top:19px;color:var(--muted);font-family:ui-monospace,monospace;font-size:.57rem;font-weight:730;letter-spacing:.035em;line-height:1.65;text-transform:uppercase}
+    .slide-tools b{margin-right:8px;color:var(--ink)}
+    .collage{position:relative;z-index:2;margin-top:28px;height:410px;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(4,1fr);gap:14px}
+    .shot{position:relative;margin:0;overflow:hidden;padding:7px;border:1px solid rgba(16,38,59,.17);background:#fff;box-shadow:0 13px 28px rgba(16,38,59,.1)}
+    .shot img{width:100%;height:100%;display:block;object-fit:contain;background:#fff}
+    .shot::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.7);pointer-events:none}
+    .shot-a{grid-column:1/8;grid-row:1/5;transform:rotate(-.35deg)}
+    .shot-b{grid-column:8/13;grid-row:1/3;transform:rotate(.45deg)}
+    .shot-c{grid-column:8/13;grid-row:3/5;transform:rotate(-.25deg)}
+    .collage.reverse .shot-a{grid-column:6/13;transform:rotate(.3deg)}
+    .collage.reverse .shot-b,.collage.reverse .shot-c{grid-column:1/6}
+    .collage.phone .shot-a{grid-column:1/8;grid-row:1/3}
+    .collage.phone .shot-b{grid-column:8/13;grid-row:1/5;padding:10px}
+    .collage.phone .shot-c{grid-column:1/8;grid-row:3/5}
+    .proof-note{position:absolute;z-index:3;right:20px;bottom:17px;padding:7px 10px;background:var(--project-color,var(--blue));color:#fff;font-family:ui-monospace,monospace;font-size:.52rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 
     .contact{background:var(--navy);color:#fff}
     .contact-title{max-width:1050px;margin-bottom:0;font-size:clamp(4.2rem,8.5vw,9.2rem);font-weight:880;letter-spacing:-.085em;line-height:.9}
@@ -192,9 +182,8 @@
       .work-index{justify-content:flex-start}
       .capability-grid{grid-template-columns:1fr}
       .capability{min-height:230px}
-      .project{grid-template-columns:1fr}
-      .project-visual{min-height:560px}
-      .project-body{min-height:610px}
+      .slide-head{grid-template-columns:1fr;gap:28px}
+      .collage{height:520px}
       .footer-grid{grid-template-columns:1fr 1fr}
     }
     @media(max-width:620px){
@@ -204,13 +193,15 @@
       h1{font-size:clamp(3.1rem,15vw,4.8rem)}
       .stats{gap:8px}.stats span{font-size:.63rem}
       .tag-a{left:-20px}.tag-b{right:-8px}
-      .project-visual{min-height:470px;padding:24px}
-      .project-body{min-height:590px;padding:34px 24px}
-      .project-body h3{margin-top:54px}
-      .system-list{grid-template-columns:1fr}
-      .flow{grid-template-columns:1fr 18px 1fr 18px 1fr;gap:4px}
-      .flow-node{min-height:82px;padding:10px 7px}.flow-node strong{font-size:.66rem}
-      .metric-row{gap:7px}.metric strong{font-size:1.12rem}
+      .project-slide{margin-bottom:22px;padding:27px 20px 24px}
+      .slide-title h3{font-size:clamp(2.5rem,12vw,4.2rem)}
+      .result-grid{gap:9px}
+      .result-item strong{font-size:1.16rem}
+      .result-item span{font-size:.57rem}
+      .collage,.collage.reverse,.collage.phone{height:auto;display:grid;grid-template-columns:1fr;grid-template-rows:none;gap:11px}
+      .collage .shot,.collage.reverse .shot,.collage.phone .shot{grid-column:auto;grid-row:auto;aspect-ratio:16/9;transform:none}
+      .collage.phone .shot-b{aspect-ratio:4/5}
+      .proof-note{right:10px;bottom:10px}
       .channels{grid-template-columns:1fr}
       .email-card{padding:50px 24px}
       .footer-grid{grid-template-columns:1fr}
@@ -286,10 +277,10 @@
     </section>
 
     <section class="work-hero shell" id="projects">
-      <div class="section-label">03 / SELECTED PROJECT SYSTEMS</div>
-      <h2>Six projects.<br><em>Six measurable shifts.</em></h2>
+      <div class="section-label">03 / PROJECT HIGHLIGHTS</div>
+      <h2>Selected work.<br><em>Real results.</em></h2>
       <div class="work-intro">
-        <p>Each case study follows the same logic: identify the bottleneck, redesign the flow and measure the business outcome. No unstable screenshots — every project is organized as a clear system.</p>
+        <p>Six growth systems across ecommerce, content, CRM and automation — organized like the original Canva portfolio, with the result first and the proof directly below.</p>
         <nav class="work-index" aria-label="Project index">
           <a href="#pod">01 POD</a><a href="#content-system">02 CONTENT</a><a href="#ladys-house">03 LADY'S HOUSE</a><a href="#runbylinh">04 RUNBYLINH</a><a href="#sbooks">05 SBOOKS</a><a href="#gicos">06 GICOS</a>
         </nav>
@@ -297,129 +288,81 @@
     </section>
 
     <section class="projects shell" aria-label="Project case studies">
-      <article class="project" id="pod">
-        <div class="project-visual">
-          <div class="orb"></div>
-          <div class="project-top"><div class="project-number">01</div><span>PERFORMANCE ENGINE</span></div>
-          <div class="system-ui">
-            <div class="ui-bar"><i></i><i></i><i></i></div>
-            <div class="flow"><div class="flow-node"><small>INPUT</small><strong>Paid traffic</strong></div><div class="arrow">→</div><div class="flow-node"><small>CONTROL</small><strong>Pixel + GTM</strong></div><div class="arrow">→</div><div class="flow-node"><small>OUTPUT</small><strong>Orders + CRM</strong></div></div>
-            <div class="mini-bars"><span></span><span></span><span></span></div>
-          </div>
-          <div class="visual-result"><strong>10K+</strong><span>orders managed every month</span></div>
+      <article class="project-slide" id="pod">
+        <div class="slide-head">
+          <div class="slide-title"><div class="slide-kicker">01 / Cross-border ecommerce</div><h3>POD Sellers</h3><p>Scaled a measurable performance engine across paid acquisition, tracking, store conversion and customer lifecycle.</p></div>
+          <div class="slide-results"><div class="slide-results-label">Results</div><div class="result-grid"><div class="result-item"><strong>10,000+</strong><span>orders per month</span></div><div class="result-item"><strong>US$2M+</strong><span>total ad spend</span></div><div class="result-item"><strong>30,000+</strong><span>monthly site visits</span></div></div><div class="slide-tools"><b>Tools</b> Facebook Ads · Google Ads · GTM · CRM · Custom Pixel · Mailchimp</div></div>
         </div>
-        <div class="project-body">
-          <div class="project-meta"><span>PROJECT 01</span><span>CROSS-BORDER ECOMMERCE</span></div>
-          <h3>POD Sellers</h3>
-          <p class="project-summary">Built and scaled a measurable performance marketing engine across paid acquisition, tracking, store conversion and customer lifecycle.</p>
-          <ul class="system-list"><li>Paid channel scaling</li><li>Tracking architecture</li><li>Conversion funnel</li><li>CRM &amp; email lifecycle</li></ul>
-          <div class="metric-row"><div class="metric"><strong>10K+</strong><span>Orders per month</span></div><div class="metric"><strong>$2M+</strong><span>Total ad spend</span></div><div class="metric"><strong>30K+</strong><span>Monthly site visits</span></div></div>
-          <div class="tools"><span>FACEBOOK ADS</span><span>GOOGLE ADS</span><span>GTM</span><span>CRM</span><span>MAILCHIMP</span></div>
+        <div class="collage">
+          <figure class="shot shot-a"><img src="/portfolio-assets/pod-1.webp" alt="POD customer and order management dashboard" width="1280" height="766" loading="lazy"></figure>
+          <figure class="shot shot-b"><img src="/portfolio-assets/pod-2.webp" alt="Payoneer payment activity evidence" width="898" height="625" loading="lazy"></figure>
+          <figure class="shot shot-c"><img src="/portfolio-assets/pod-3.webp" alt="POD Facebook advertising dashboard" width="1599" height="780" loading="lazy"></figure>
+          <span class="proof-note">Performance proof</span>
         </div>
       </article>
 
-      <article class="project orange" id="content-system">
-        <div class="project-visual">
-          <div class="orb"></div>
-          <div class="project-top"><div class="project-number">02</div><span>AI CONTENT OPERATIONS</span></div>
-          <div class="system-ui">
-            <div class="ui-bar"><i></i><i></i><i></i></div>
-            <div class="flow"><div class="flow-node"><small>PLAN</small><strong>Content idea</strong></div><div class="arrow">→</div><div class="flow-node"><small>CREATE</small><strong>AI studio</strong></div><div class="arrow">→</div><div class="flow-node"><small>SCALE</small><strong>Multi-channel</strong></div></div>
-            <div class="mini-bars"><span></span><span></span><span></span></div>
-          </div>
-          <div class="visual-result"><strong>+200%</strong><span>content performance increase</span></div>
+      <article class="project-slide orange" id="content-system">
+        <div class="slide-head">
+          <div class="slide-title"><div class="slide-kicker">02 / AI content operations</div><h3>Social Content System</h3><p>Designed an AI-assisted operating system that turns isolated content production into a repeatable multi-channel pipeline.</p></div>
+          <div class="slide-results"><div class="slide-results-label">Results</div><div class="result-grid"><div class="result-item"><strong>Millions</strong><span>of users reached</span></div><div class="result-item"><strong>−50%</strong><span>production time</span></div><div class="result-item"><strong>+200%</strong><span>content performance</span></div></div><div class="slide-tools"><b>Tools</b> ChatGPT · Kling · MidJourney · So9 · Canva · CapCut · n8n</div></div>
         </div>
-        <div class="project-body">
-          <div class="project-meta"><span>PROJECT 02</span><span>CONTENT PRODUCTION</span></div>
-          <h3>Social Content System</h3>
-          <p class="project-summary">Designed an AI-assisted content operating system that moved the team from isolated production to a repeatable multi-channel pipeline.</p>
-          <ul class="system-list"><li>Content planning flow</li><li>AI asset generation</li><li>Editing standards</li><li>Automated distribution</li></ul>
-          <div class="metric-row"><div class="metric"><strong>Millions</strong><span>Users reached</span></div><div class="metric"><strong>−50%</strong><span>Production time</span></div><div class="metric"><strong>+200%</strong><span>Content performance</span></div></div>
-          <div class="tools"><span>CHATGPT</span><span>KLING</span><span>MIDJOURNEY</span><span>CANVA</span><span>CAPCUT</span><span>N8N</span></div>
+        <div class="collage reverse">
+          <figure class="shot shot-a"><img src="/portfolio-assets/social-1.webp" alt="Social content reach performance dashboard" width="1599" height="860" loading="lazy"></figure>
+          <figure class="shot shot-b"><img src="/portfolio-assets/social-2.webp" alt="Social page insights chart" width="992" height="451" loading="lazy"></figure>
+          <figure class="shot shot-c"><img src="/portfolio-assets/social-3.webp" alt="Social content results analytics" width="762" height="850" loading="lazy"></figure>
+          <span class="proof-note">Content proof</span>
         </div>
       </article>
 
-      <article class="project navy" id="ladys-house">
-        <div class="project-visual">
-          <div class="orb"></div>
-          <div class="project-top"><div class="project-number">03</div><span>RETENTION GROWTH LOOP</span></div>
-          <div class="system-ui">
-            <div class="ui-bar"><i></i><i></i><i></i></div>
-            <div class="flow"><div class="flow-node"><small>ACQUIRE</small><strong>SEO + Ads</strong></div><div class="arrow">→</div><div class="flow-node"><small>CONVERT</small><strong>CRM journey</strong></div><div class="arrow">→</div><div class="flow-node"><small>RETAIN</small><strong>Repeat sales</strong></div></div>
-            <div class="mini-bars"><span></span><span></span><span></span></div>
-          </div>
-          <div class="visual-result"><strong>₫400M</strong><span>revenue from returning customers</span></div>
+      <article class="project-slide navy" id="ladys-house">
+        <div class="slide-head">
+          <div class="slide-title"><div class="slide-kicker">03 / Beauty &amp; services</div><h3>Lady's House</h3><p>Connected acquisition, CRM, retention and reporting into one growth loop with clearer customer journeys and unit economics.</p></div>
+          <div class="slide-results"><div class="slide-results-label">Results</div><div class="result-grid"><div class="result-item"><strong>₫400M</strong><span>returning-customer revenue</span></div><div class="result-item"><strong>40%</strong><span>SEO conversion</span></div><div class="result-item"><strong>10–20%</strong><span>marketing cost / revenue</span></div></div><div class="slide-tools"><b>Tools</b> Meta Ads · Google Ads · SEO · Google Sheets · Myspa CRM · Content Planner · Looker Studio</div></div>
         </div>
-        <div class="project-body">
-          <div class="project-meta"><span>PROJECT 03</span><span>BEAUTY &amp; SERVICES</span></div>
-          <h3>Lady's House</h3>
-          <p class="project-summary">Connected acquisition, CRM, retention and reporting into one growth loop with clearer customer journeys and unit economics.</p>
-          <ul class="system-list"><li>SEO &amp; paid acquisition</li><li>Customer journey</li><li>Retention campaigns</li><li>Performance dashboard</li></ul>
-          <div class="metric-row"><div class="metric"><strong>₫400M</strong><span>Returning revenue</span></div><div class="metric"><strong>40%</strong><span>SEO conversion</span></div><div class="metric"><strong>10–20%</strong><span>Marketing / revenue</span></div></div>
-          <div class="tools"><span>META ADS</span><span>GOOGLE ADS</span><span>SEO</span><span>MYSPA CRM</span><span>LOOKER STUDIO</span></div>
+        <div class="collage">
+          <figure class="shot shot-a"><img src="/portfolio-assets/lady-1.webp" alt="Lady's House customer messaging metrics" width="639" height="321" loading="lazy"></figure>
+          <figure class="shot shot-b"><img src="/portfolio-assets/lady-2.webp" alt="Lady's House local SEO performance" width="1280" height="816" loading="lazy"></figure>
+          <figure class="shot shot-c"><img src="/portfolio-assets/lady-3.webp" alt="Lady's House marketing performance chart" width="1599" height="511" loading="lazy"></figure>
+          <span class="proof-note">Growth proof</span>
         </div>
       </article>
 
-      <article class="project lime" id="runbylinh">
-        <div class="project-visual">
-          <div class="orb"></div>
-          <div class="project-top"><div class="project-number">04</div><span>LEAN AUTOMATION</span></div>
-          <div class="system-ui">
-            <div class="ui-bar"><i></i><i></i><i></i></div>
-            <div class="flow"><div class="flow-node"><small>CAPTURE</small><strong>Lead form</strong></div><div class="arrow">→</div><div class="flow-node"><small>AUTOMATE</small><strong>Chatbot + Flow</strong></div><div class="arrow">→</div><div class="flow-node"><small>OPERATE</small><strong>Lark workspace</strong></div></div>
-            <div class="mini-bars"><span></span><span></span><span></span></div>
-          </div>
-          <div class="visual-result"><strong>−80%</strong><span>manual effort through automation</span></div>
+      <article class="project-slide lime" id="runbylinh">
+        <div class="slide-head">
+          <div class="slide-title"><div class="slide-kicker">04 / Marketing automation</div><h3>Runbylinh</h3><p>Redesigned the marketing workflow around automation, structured data handoffs and a leaner team operating model.</p></div>
+          <div class="slide-results"><div class="slide-results-label">Results</div><div class="result-grid"><div class="result-item"><strong>−50%</strong><span>marketing cost</span></div><div class="result-item"><strong>−80%</strong><span>human effort</span></div><div class="result-item"><strong>+10%</strong><span>conversion rate</span></div></div><div class="slide-tools"><b>Tools</b> Meta Ads · Google Sheets · Chatbot · Ladipage · Ladiflow · Larksuite</div></div>
         </div>
-        <div class="project-body">
-          <div class="project-meta"><span>PROJECT 04</span><span>MARKETING AUTOMATION</span></div>
-          <h3>Runbylinh</h3>
-          <p class="project-summary">Redesigned the marketing workflow around automation, structured data handoffs and a leaner team operating model.</p>
-          <ul class="system-list"><li>Lead capture system</li><li>Chatbot qualification</li><li>Automated handoffs</li><li>Team workflow design</li></ul>
-          <div class="metric-row"><div class="metric"><strong>−50%</strong><span>Marketing cost</span></div><div class="metric"><strong>−80%</strong><span>Human effort</span></div><div class="metric"><strong>+10%</strong><span>Conversion rate</span></div></div>
-          <div class="tools"><span>META ADS</span><span>GOOGLE SHEETS</span><span>CHATBOT</span><span>LADIFLOW</span><span>LARKSUITE</span></div>
+        <div class="collage reverse">
+          <figure class="shot shot-a"><img src="/portfolio-assets/run-1.webp" alt="Runbylinh customer management table" width="1599" height="617" loading="lazy"></figure>
+          <figure class="shot shot-b"><img src="/portfolio-assets/run-2.webp" alt="Runbylinh returning purchase report" width="860" height="419" loading="lazy"></figure>
+          <figure class="shot shot-c"><img src="/portfolio-assets/run-3.webp" alt="Runbylinh automated Lark workflow" width="888" height="334" loading="lazy"></figure>
+          <span class="proof-note">Automation proof</span>
         </div>
       </article>
 
-      <article class="project" id="sbooks">
-        <div class="project-visual">
-          <div class="orb"></div>
-          <div class="project-top"><div class="project-number">05</div><span>OWNED AUDIENCE SYSTEM</span></div>
-          <div class="system-ui">
-            <div class="ui-bar"><i></i><i></i><i></i></div>
-            <div class="flow"><div class="flow-node"><small>SOURCE</small><strong>Marketplace</strong></div><div class="arrow">→</div><div class="flow-node"><small>OWN</small><strong>Web + Mautic</strong></div><div class="arrow">→</div><div class="flow-node"><small>NURTURE</small><strong>Zalo OA</strong></div></div>
-            <div class="mini-bars"><span></span><span></span><span></span></div>
-          </div>
-          <div class="visual-result"><strong>10K+</strong><span>new Zalo OA followers per month</span></div>
+      <article class="project-slide" id="sbooks">
+        <div class="slide-head">
+          <div class="slide-title"><div class="slide-kicker">05 / Ecommerce &amp; CRM</div><h3>Sbooks.vn</h3><p>Moved marketplace customers into owned channels through a coordinated website, CRM, automation and Zalo OA system.</p></div>
+          <div class="slide-results"><div class="slide-results-label">Results</div><div class="result-grid"><div class="result-item"><strong>3,000+</strong><span>marketplace → web customers</span></div><div class="result-item"><strong>~10%</strong><span>conversion rate</span></div><div class="result-item"><strong>10,000+</strong><span>Zalo OA followers / month</span></div></div><div class="slide-tools"><b>Tools</b> ChatGPT · Mautic · n8n · Canva · Chative · Coze Bot · Gemini</div></div>
         </div>
-        <div class="project-body">
-          <div class="project-meta"><span>PROJECT 05</span><span>ECOMMERCE &amp; CRM</span></div>
-          <h3>Sbooks.vn</h3>
-          <p class="project-summary">Moved marketplace customers into owned channels with a coordinated website, CRM, automation and Zalo OA retention system.</p>
-          <ul class="system-list"><li>Marketplace migration</li><li>Owned customer data</li><li>CRM nurturing</li><li>Zalo audience growth</li></ul>
-          <div class="metric-row"><div class="metric"><strong>3K+</strong><span>New web customers</span></div><div class="metric"><strong>~10%</strong><span>Conversion rate</span></div><div class="metric"><strong>10K+</strong><span>Zalo followers / month</span></div></div>
-          <div class="tools"><span>MAUTIC</span><span>N8N</span><span>CHATGPT</span><span>CHATIVE</span><span>COZE BOT</span><span>GEMINI</span></div>
+        <div class="collage">
+          <figure class="shot shot-a"><img src="/portfolio-assets/sbooks-1.webp" alt="Sbooks affiliate sales report" width="1132" height="657" loading="lazy"></figure>
+          <figure class="shot shot-b"><img src="/portfolio-assets/sbooks-2.webp" alt="Sbooks daily order dashboard" width="1559" height="775" loading="lazy"></figure>
+          <figure class="shot shot-c"><img src="/portfolio-assets/sbooks-3.webp" alt="Sbooks ecommerce order statistics" width="1280" height="404" loading="lazy"></figure>
+          <span class="proof-note">Commerce proof</span>
         </div>
       </article>
 
-      <article class="project orange" id="gicos">
-        <div class="project-visual">
-          <div class="orb"></div>
-          <div class="project-top"><div class="project-number">06</div><span>RESPONSE AUTOMATION</span></div>
-          <div class="system-ui">
-            <div class="ui-bar"><i></i><i></i><i></i></div>
-            <div class="flow"><div class="flow-node"><small>LEAD</small><strong>Meta + Landing</strong></div><div class="arrow">→</div><div class="flow-node"><small>ROUTE</small><strong>CRM + Bot</strong></div><div class="arrow">→</div><div class="flow-node"><small>RESPOND</small><strong>Sales in 1h</strong></div></div>
-            <div class="mini-bars"><span></span><span></span><span></span></div>
-          </div>
-          <div class="visual-result"><strong>24×</strong><span>faster lead response time</span></div>
+      <article class="project-slide orange" id="gicos">
+        <div class="slide-head">
+          <div class="slide-title"><div class="slide-kicker">06 / CRM &amp; sales ops</div><h3>Gicos</h3><p>Connected lead capture, CRM routing, email automation and chatbot touchpoints to remove the biggest delay in the sales flow.</p></div>
+          <div class="slide-results"><div class="slide-results-label">Results</div><div class="result-grid"><div class="result-item"><strong>2 days</strong><span>previous response time</span></div><div class="result-item"><strong>1 hour</strong><span>new response time</span></div><div class="result-item"><strong>24×</strong><span>faster follow-up</span></div></div><div class="slide-tools"><b>Tools</b> CRM · Meta Ads · Email Automation · Chatbot · Ladipage</div></div>
         </div>
-        <div class="project-body">
-          <div class="project-meta"><span>PROJECT 06</span><span>CRM &amp; SALES OPS</span></div>
-          <h3>Gicos</h3>
-          <p class="project-summary">Connected lead capture, CRM routing, email automation and chatbot touchpoints to remove the biggest delay in the sales flow.</p>
-          <ul class="system-list"><li>Lead capture flow</li><li>CRM routing rules</li><li>Automated follow-up</li><li>Response monitoring</li></ul>
-          <div class="metric-row"><div class="metric"><strong>2 days</strong><span>Previous response</span></div><div class="metric"><strong>1 hour</strong><span>New response</span></div><div class="metric"><strong>24×</strong><span>Faster follow-up</span></div></div>
-          <div class="tools"><span>CRM</span><span>META ADS</span><span>EMAIL AUTOMATION</span><span>CHATBOT</span><span>LADIPAGE</span></div>
+        <div class="collage phone">
+          <figure class="shot shot-a"><img src="/portfolio-assets/gicos-1.webp" alt="Gicos message performance summary" width="346" height="240" loading="lazy"></figure>
+          <figure class="shot shot-b"><img src="/portfolio-assets/gicos-2.webp" alt="Gicos mobile professional dashboard" width="900" height="1600" loading="lazy"></figure>
+          <figure class="shot shot-c"><img src="/portfolio-assets/gicos-3.webp" alt="Gicos brand mark" width="533" height="200" loading="lazy"></figure>
+          <span class="proof-note">Response proof</span>
         </div>
       </article>
     </section>
