@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b0d0c">
-  <title>Facebook AI Content Machine — Coaching 1 tháng cùng Drake Nguyễn</title>
-  <meta name="description" content="Chương trình coaching 1 tháng, 12 buổi dành cho marketer, chủ doanh nghiệp SME và freelancer muốn xây Facebook Content Machine bằng AI, Reels và automation.">
-  <meta name="keywords" content="Facebook Marketing AI, AI Content System, Content Machine, Facebook Reels, AI Automation, Coaching Marketing, Drake Nguyễn">
+  <title>AI Video Content System - Coaching thực chiến cùng Drake Nguyễn</title>
+  <meta name="description" content="Chương trình coaching thực chiến 10 buổi, 30 giờ giúp marketer, content creator, freelancer và chủ doanh nghiệp xây hệ thống nội dung, video AI và automation.">
+  <meta name="keywords" content="AI Video Content System, AI Content System, Facebook Content, TikTok Content, YouTube Content, AI Video, AI Automation, Drake Nguyễn">
   <meta name="author" content="Drake Nguyễn">
   <link rel="canonical" href="https://drakenguyen.me/Facebook-AI-Workflow/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Facebook Marketing × AI Content System">
-  <meta property="og:description" content="Tạo 30 ngày nội dung Facebook trong 2 giờ. Xây hệ thống Content Machine cho cá nhân và doanh nghiệp.">
+  <meta property="og:title" content="AI Video Content System - Coaching thực chiến 10 buổi">
+  <meta property="og:description" content="Xây hệ thống từ research, insight, content, kịch bản đến video AI, automation và scale đa nền tảng.">
   <meta property="og:url" content="https://drakenguyen.me/Facebook-AI-Workflow/">
   <meta property="og:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Drakenguyen.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -25,8 +25,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": "Facebook Marketing × AI Content System",
-    "description": "Chương trình coaching 1 tháng, 12 buổi giúp marketer, chủ doanh nghiệp SME và freelancer xây hệ thống nội dung Facebook, Reels và automation bằng AI.",
+    "name": "AI Video Content System",
+    "description": "Chương trình coaching thực chiến 10 buổi, 30 giờ giúp học viên xây hệ thống research, content, video AI và automation cho Facebook, TikTok và YouTube.",
     "provider": {
       "@type": "Person",
       "name": "Drake Nguyễn",
@@ -37,12 +37,12 @@
     },
     "offers": {
       "@type": "Offer",
-      "price": "9990000",
+      "price": "10000000",
       "priceCurrency": "VND",
       "availability": "https://schema.org/InStock"
     },
-    "timeRequired": "P1M",
-    "numberOfCredits": 12,
+    "timeRequired": "PT30H",
+    "numberOfCredits": 10,
     "inLanguage": "vi"
   }
   </script>
@@ -250,14 +250,27 @@
     .week-output { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(11,13,12,.2); }
     .week-output strong { display: block; font-size: 17px; }
     .sessions { display: grid; gap: 12px; }
-    .session { padding: 26px 28px; display: grid; grid-template-columns: 58px 1fr auto; gap: 20px; align-items: start; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); transition: border-color .25s, transform .25s; }
-    .session:hover { border-color: rgba(215,255,63,.38); transform: translateX(5px); }
+    .session { display: block; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); overflow: hidden; transition: border-color .25s, transform .25s; }
+    .session:hover, .session[open] { border-color: rgba(215,255,63,.38); }
+    .session > summary { display: grid; grid-template-columns: 58px 1fr auto; gap: 20px; align-items: start; padding: 26px 28px; list-style: none; cursor: pointer; }
+    .session > summary::-webkit-details-marker { display: none; }
     .session-no { color: var(--lime); font-family: var(--mono); font-size: 12px; }
     .session h4 { margin: -3px 0 9px; font-size: 21px; letter-spacing: -.025em; }
     .session p { margin: 0; color: var(--muted); font-size: 14px; }
-    .session ul { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 0; padding: 0; list-style: none; }
-    .session li { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; color: #c8cdc5; font-size: 10px; }
+    .session > summary ul { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .session > summary li { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; color: #c8cdc5; font-size: 10px; }
     .deliverable { white-space: nowrap; color: var(--lime); font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }
+    .deliverable::after { content: "+"; display: inline-grid; place-items: center; width: 20px; height: 20px; margin-left: 8px; border: 1px solid rgba(215,255,63,.35); border-radius: 50%; }
+    .session[open] .deliverable::after { content: "-"; }
+    .session-body { padding: 0 28px 28px 106px; border-top: 1px solid var(--line); }
+    .session-goal { margin: 0; padding: 22px 0; color: #d9ddd6; font-size: 14px; }
+    .session-goal strong { color: var(--lime); }
+    .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .lesson-block { padding: 18px; border-radius: 16px; background: #101310; border: 1px solid rgba(255,255,255,.08); }
+    .lesson-block h5 { margin: 0 0 12px; color: var(--lime); font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; }
+    .lesson-block ul { margin: 0; padding-left: 17px; color: var(--muted); font-size: 12px; }
+    .lesson-block li + li { margin-top: 6px; }
+    .lesson-block strong { color: #f2f4ee; }
 
     .workflow { padding: 112px 0; background: var(--paper); color: var(--ink); }
     .workflow .section-head p { color: #5f625d; }
@@ -269,6 +282,11 @@
     .workflow-step .mono { color: #747b70; font-size: 10px; }
     .workflow-step strong { display: block; margin: 72px 0 14px; font-size: 22px; letter-spacing: -.035em; }
     .workflow-step p { margin: 0; color: #62665f; font-size: 13px; }
+    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 54px; }
+    .method-card { padding: 26px; border-radius: 22px; background: rgba(255,255,255,.5); border: 1px solid rgba(11,13,12,.14); }
+    .method-card span { color: #6e746a; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .method-card h3 { margin: 26px 0 10px; font-size: 23px; letter-spacing: -.035em; }
+    .method-card p { margin: 0; color: #62665f; font-size: 13px; }
 
     .assets { padding: 112px 0; }
     .assets-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; align-items: start; }
@@ -382,14 +400,17 @@
       .audience-card { min-height: 250px; }
       .audience-card h3 { margin-top: 42px; }
       .not-for { align-items: flex-start; flex-direction: column; }
-      .session { grid-template-columns: 44px 1fr; padding: 22px 18px; }
+      .session > summary { grid-template-columns: 44px 1fr; padding: 22px 18px; }
       .deliverable { grid-column: 2; }
+      .session-body { padding: 0 18px 22px 62px; }
+      .lesson-grid { grid-template-columns: 1fr; }
       .workflow-track { grid-template-columns: 1fr; border-top: 0; }
       .workflow-step, .workflow-step:first-child { min-height: auto; padding: 26px 24px; border: 1px solid rgba(11,13,12,.15); border-bottom: 0; }
       .workflow-step:last-child { border-bottom: 1px solid rgba(11,13,12,.15); }
       .workflow-step::after, .workflow-step:nth-child(3)::after { display: grid; content: "↓"; right: 24px; top: auto; bottom: -15px; }
       .workflow-step:last-child::after { display: none; }
       .workflow-step strong { margin-top: 34px; }
+      .method-grid { grid-template-columns: 1fr; }
       .asset-row { grid-template-columns: 48px 1fr; padding: 22px 0; }
       .asset-row b { grid-column: 2; justify-self: start; }
       .mentor-card { border-radius: 26px; }
@@ -421,8 +442,9 @@
       .week-tab { padding: 12px 8px; }
       .week-summary { padding: 28px 22px; }
       .week-summary h3 { font-size: 36px; }
-      .session { grid-template-columns: 1fr; gap: 10px; }
+      .session > summary { grid-template-columns: 1fr; gap: 10px; }
       .deliverable { grid-column: 1; }
+      .session-body { padding: 0 16px 20px; }
       .mentor-photo { min-height: 360px; }
       .new-price { font-size: 43px; }
     }
@@ -439,11 +461,11 @@
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Về đầu trang">
         <span class="brand-mark">AI</span>
-        <span class="brand-copy">Facebook Content Machine<small>by Drake Nguyễn</small></span>
+        <span class="brand-copy">AI Video Content System<small>by Drake Nguyễn</small></span>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Điều hướng chính">
         <a href="#ket-qua">Kết quả</a>
-        <a href="#lo-trinh">12 buổi</a>
+        <a href="#lo-trinh">10 buổi</a>
         <a href="#tai-nguyen">Tài nguyên</a>
         <a href="#mentor">Mentor</a>
         <a href="#hoc-phi">Học phí</a>
@@ -457,33 +479,33 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <span class="eyebrow">Coaching 1 tháng · 12 buổi</span>
-          <h1>Biến Facebook thành <em>Content Machine.</em></h1>
-          <p>Dành cho <strong>marketer, chủ doanh nghiệp và freelancer đã biết Marketing cơ bản</strong> nhưng muốn sản xuất nội dung nhanh hơn 5–10 lần bằng AI, Reels và Automation.</p>
+          <span class="eyebrow">Coaching thực chiến · 10 buổi · 30 giờ</span>
+          <h1>Xây một <em>AI Video Content System.</em></h1>
+          <p>Dành cho <strong>marketer, content creator, freelancer, chủ doanh nghiệp và người xây thương hiệu cá nhân</strong> muốn làm chủ quy trình từ insight đến content, video AI và automation.</p>
           <div class="hero-actions">
             <a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Nhận tư vấn 1:1</a>
-            <a class="btn btn-secondary" href="#lo-trinh">Xem lộ trình 12 buổi</a>
+            <a class="btn btn-secondary" href="#lo-trinh">Xem lộ trình 10 buổi</a>
           </div>
           <div class="hero-meta">
-            <span>Học online trực tiếp</span>
-            <span>Thực hành trên business thật</span>
-            <span>Hỗ trợ xuyên suốt 30 ngày</span>
+            <span>2 giờ hướng dẫn + 1 giờ workshop</span>
+            <span>Thực hành trên hệ thống thật</span>
+            <span>Facebook · TikTok · YouTube</span>
           </div>
         </div>
 
         <div class="system-card reveal" aria-label="Mô phỏng hệ thống nội dung AI">
           <div class="window-bar"><span>Content OS / Dashboard</span><span class="dots"><i></i><i></i><i></i></span></div>
           <div class="metric-main">
-            <small>Mục tiêu năng suất</small>
-            <strong>5–10×</strong>
-            <p>Tốc độ sản xuất nội dung với hệ thống đúng</p>
+            <small>Thời lượng đào tạo & thực hành</small>
+            <strong>30 giờ</strong>
+            <p>Xây từng phần của hệ thống ngay trong khóa học</p>
           </div>
           <div class="metrics-row">
-            <div class="mini-metric"><small>Facebook posts</small><strong>30 ngày</strong><span>hoàn thiện trong khoảng 2 giờ</span></div>
-            <div class="mini-metric"><small>Reels scripts</small><strong>30 video</strong><span>xây trong một ngày sản xuất</span></div>
+            <div class="mini-metric"><small>Production output</small><strong>10 video</strong><span>hoàn thiện tối thiểu trong khóa</span></div>
+            <div class="mini-metric"><small>Content roadmap</small><strong>90 ngày</strong><span>có kế hoạch để tiếp tục triển khai</span></div>
           </div>
-          <div class="flow-line"><b>Insight</b><i>→</i><span>Content</span><i>→</i><span>Reels</span><i>→</i><span>Inbox</span><i>→</i><b>Sale</b></div>
-          <div class="price-chip"><span><small>Ưu đãi còn</small>9,99 triệu</span></div>
+          <div class="flow-line"><b>Research</b><i>→</i><span>Content</span><i>→</i><span>Script</span><i>→</i><span>Video</span><i>→</i><b>Scale</b></div>
+          <div class="price-chip"><span><small>Ưu đãi còn</small>10 triệu</span></div>
         </div>
       </div>
     </section>
@@ -491,29 +513,29 @@
     <section class="fit" id="phu-hop">
       <div class="container">
         <div class="section-head reveal">
-          <div><span class="eyebrow">Không dành cho người mới bắt đầu</span><h2>Đúng người. Đúng bài toán. Đúng tốc độ.</h2></div>
-          <p>Chương trình không dạy “AI là gì”, “Prompt là gì” hay cách đăng bài. Ta đi thẳng vào chiến lược, hệ thống và đầu ra có thể dùng ngay.</p>
+          <div><span class="eyebrow">Không học công cụ theo kiểu rời rạc</span><h2>Học để sở hữu hệ thống, không chỉ biết dùng AI.</h2></div>
+          <p>Chương trình đi từ nền tảng thương hiệu, research và prompt đến content, storytelling, video AI, dashboard, automation và scale đa nền tảng.</p>
         </div>
         <div class="audience-grid">
-          <article class="audience-card reveal"><span class="index">01</span><h3>Chủ doanh nghiệp SME</h3><p>Muốn team sản xuất đều hơn, giảm phụ thuộc từng cá nhân và biến nội dung thành một hệ thống hỗ trợ bán hàng.</p></article>
-          <article class="audience-card reveal"><span class="index">02</span><h3>Marketer 2–5 năm</h3><p>Đã biết xây kênh, chạy chiến dịch nhưng cần một workflow AI để tăng năng suất mà vẫn giữ chất lượng chiến lược.</p></article>
-          <article class="audience-card reveal"><span class="index">03</span><h3>Freelancer / chuyên gia</h3><p>Muốn xây thương hiệu cá nhân, duy trì nội dung đa định dạng và biến sự chú ý thành inbox, lead, khách hàng.</p></article>
+          <article class="audience-card reveal"><span class="index">01</span><h3>Marketer & Content Creator</h3><p>Muốn chuẩn hóa từ research, content plan đến kịch bản và video để sản xuất nhanh hơn nhưng vẫn giữ tư duy chiến lược.</p></article>
+          <article class="audience-card reveal"><span class="index">02</span><h3>Chủ doanh nghiệp</h3><p>Muốn xây một hệ thống nội dung có thể giao cho team, quản lý tiến độ, đo lường hiệu suất và nhân rộng có kiểm soát.</p></article>
+          <article class="audience-card reveal"><span class="index">03</span><h3>Freelancer & Personal Brand</h3><p>Muốn phát triển Facebook, TikTok hoặc YouTube bằng content có góc nhìn riêng, video nhất quán và workflow phù hợp nguồn lực.</p></article>
         </div>
-        <div class="not-for reveal"><strong>Chương trình sẽ không phù hợp nếu…</strong><p>Bạn chưa có nền tảng Marketing, chỉ muốn học vài prompt rời rạc hoặc kỳ vọng AI thay thế hoàn toàn tư duy và trải nghiệm thật.</p></div>
+        <div class="not-for reveal"><strong>Chương trình sẽ không phù hợp nếu...</strong><p>Bạn chỉ muốn sưu tầm vài prompt, học một công cụ riêng lẻ hoặc kỳ vọng AI thay thế hoàn toàn tư duy, trải nghiệm và bước kiểm soát của con người.</p></div>
       </div>
     </section>
 
     <section class="outcomes" id="ket-qua">
       <div class="container">
         <div class="section-head reveal">
-          <div><span class="section-number">01 / Kết quả</span><h2>Sau 30 ngày, bạn không chỉ có content. Bạn có một cỗ máy.</h2></div>
-          <p>Mỗi tuần đều có đầu ra cụ thể. Kết thúc chương trình, toàn bộ chiến lược, thư viện nội dung và workflow thuộc về bạn.</p>
+          <div><span class="section-number">01 / Kết quả</span><h2>Sau 10 buổi, bạn có một hệ thống có thể tiếp tục vận hành.</h2></div>
+          <p>Mỗi buổi xây một phần của hệ thống. Kết thúc chương trình, bạn sở hữu dữ liệu research, prompt, nội dung, video, dashboard và roadmap để triển khai tiếp.</p>
         </div>
         <div class="outcomes-grid reveal">
-          <article class="outcome"><small>Strategy</small><strong>90 ngày</strong><p>Roadmap Facebook rõ trục nội dung, mục tiêu và nhịp triển khai.</p></article>
-          <article class="outcome"><small>Idea bank</small><strong>200+</strong><p>Ý tưởng được phân loại theo insight, pain point và hành trình mua.</p></article>
-          <article class="outcome"><small>Production</small><strong>30 + 30</strong><p>Bài Facebook hoàn chỉnh và kịch bản Reels có thể sản xuất ngay.</p></article>
-          <article class="outcome"><small>System</small><strong>01 OS</strong><p>Hệ thống bán tự động nối research, content, Reels, inbox và sale.</p></article>
+          <article class="outcome"><small>Strategy</small><strong>90 ngày</strong><p>Content Matrix, lịch triển khai và roadmap đa nền tảng.</p></article>
+          <article class="outcome"><small>Research & prompts</small><strong>100+</strong><p>Dữ liệu insight ban đầu cùng AI Brand Voice và Prompt Library.</p></article>
+          <article class="outcome"><small>Production</small><strong>10 video</strong><p>Kèm 10 bài Facebook, 10 kịch bản và 30 ý tưởng Reels.</p></article>
+          <article class="outcome"><small>Operating system</small><strong>01 OS</strong><p>Content Workflow, Database và Dashboard quản lý hoàn chỉnh.</p></article>
         </div>
       </div>
     </section>
@@ -521,49 +543,133 @@
     <section class="curriculum" id="lo-trinh">
       <div class="container">
         <div class="section-head reveal">
-          <div><span class="section-number">02 / Lộ trình</span><h2>4 tuần. 12 buổi. Xây từ chiến lược đến hệ thống tăng trưởng.</h2></div>
-          <p>Chọn từng tuần để xem nội dung chi tiết. Mỗi buổi tập trung vào một “khối” của Content Machine và kết thúc bằng tài sản thực tế.</p>
+          <div><span class="section-number">02 / Lộ trình</span><h2>10 buổi. 30 giờ. Xây trọn AI Video Content System.</h2></div>
+          <p>Mỗi buổi gồm 120 phút hướng dẫn và 60 phút workshop. Bấm vào từng buổi để xem mục tiêu, nội dung, thực hành, deliverable và bài tập chi tiết.</p>
         </div>
-        <div class="curriculum-controls reveal" role="tablist" aria-label="Các tuần học">
-          <button class="week-tab active" role="tab" aria-selected="true" data-week="week-1">Tuần 1 · Strategy</button>
-          <button class="week-tab" role="tab" aria-selected="false" data-week="week-2">Tuần 2 · Content</button>
-          <button class="week-tab" role="tab" aria-selected="false" data-week="week-3">Tuần 3 · Reels</button>
-          <button class="week-tab" role="tab" aria-selected="false" data-week="week-4">Tuần 4 · Growth</button>
+        <div class="curriculum-controls reveal" role="tablist" aria-label="Các chặng học">
+          <button class="week-tab active" role="tab" aria-selected="true" data-week="phase-1">Chặng 1 · Foundation</button>
+          <button class="week-tab" role="tab" aria-selected="false" data-week="phase-2">Chặng 2 · Content</button>
+          <button class="week-tab" role="tab" aria-selected="false" data-week="phase-3">Chặng 3 · Video</button>
+          <button class="week-tab" role="tab" aria-selected="false" data-week="phase-4">Chặng 4 · Scale</button>
         </div>
 
-        <div class="week-panel active" id="week-1" role="tabpanel">
-          <aside class="week-summary"><span class="mono">Week 01 / Foundation</span><h3>AI-Powered Facebook Strategy</h3><p>Hiểu Facebook hiện tại, chốt trục nội dung và biến research thành kho insight có cấu trúc.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Roadmap 90 ngày + Content Matrix + 200 ý tưởng</strong></div></aside>
+        <div class="week-panel active" id="phase-1" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Phase 01 / Buổi 1-3</span><h3>Foundation, Research & Prompt System</h3><p>Chốt nền tảng thương hiệu, hiểu khách hàng và xây bộ não AI có thể tái sử dụng.</p><div class="week-output"><span class="mono">Đầu ra chặng</span><strong>Content System Map + Insight Database + AI Brand Voice + Prompt Library</strong></div></aside>
           <div class="sessions">
-            <article class="session"><span class="session-no">01</span><div><h4>Facebook 2026 đang hoạt động như thế nào?</h4><p>Giải mã thuật toán phân phối, định dạng còn hiệu quả, tín hiệu nội dung đang chết dần và điểm nghẽn của kênh hiện tại.</p><ul><li>Audit fanpage</li><li>Audit profile</li><li>Gap analysis</li></ul></div><span class="deliverable">→ Roadmap 90 ngày</span></article>
-            <article class="session"><span class="session-no">02</span><div><h4>Content Pillars & Content Matrix</h4><p>Xây hệ trục Awareness – Engagement – Trust – Conversion và tỷ lệ 70% giá trị, 20% câu chuyện, 10% bán hàng theo thực tế thương hiệu.</p><ul><li>4 mục tiêu</li><li>Content pillars</li><li>Publishing mix</li></ul></div><span class="deliverable">→ Ma trận hoàn chỉnh</span></article>
-            <article class="session"><span class="session-no">03</span><div><h4>AI Research Engine</h4><p>Kết hợp ChatGPT, Claude và Perplexity để nghiên cứu khách hàng, bóc pain point, kiểm chứng insight và lưu dữ liệu cho cả team.</p><ul><li>Customer research</li><li>Insight mining</li><li>Pain-point map</li></ul></div><span class="deliverable">→ 200 content ideas</span></article>
+            <details class="session" open>
+              <summary><span class="session-no">01</span><div><h4>Xây dựng AI Content System cá nhân</h4><p>Xác định xây nội dung cho ai, phục vụ mục tiêu gì, AI tham gia ở đâu và hệ thống sẽ vận hành như thế nào.</p><ul><li>WHO - PROBLEM - DESIRE</li><li>Content Pillars</li><li>90-day goal</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Hoàn thiện nền tảng chiến lược cho hệ thống nội dung cá nhân hoặc doanh nghiệp.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Content Marketing thay đổi thế nào trong thời đại AI.</li><li>Sự khác nhau giữa người dùng AI và người sở hữu hệ thống AI.</li><li>Việc AI làm tốt, việc vẫn cần tư duy con người.</li><li>Xác định ngành nghề, sản phẩm, USP, thị trường ngách và khách hàng.</li><li>Framework: WHO - PROBLEM - DESIRE - SOLUTION - CONTENT.</li><li>Thiết lập mục tiêu kinh doanh và mục tiêu nội dung 90 ngày.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Viết mô tả thương hiệu cá nhân.</li><li>Chọn một nhóm khách hàng trọng tâm.</li><li>Xác định 5 vấn đề lớn của khách hàng.</li><li>Thiết kế 4-5 Content Pillars.</li><li>Phân chia vai trò AI trong hệ thống.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>Bản định vị nội dung cá nhân.</li><li>Customer Profile cơ bản.</li><li>4-5 Content Pillars.</li><li>Mục tiêu nội dung 90 ngày.</li><li>Sơ đồ AI Content System cá nhân.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Hoàn thiện 50 ý tưởng ban đầu.</li><li>Thu thập 20 nội dung cùng ngành.</li><li>Xác định 10 vấn đề khách hàng thường gặp.</li></ul></section>
+              </div></div>
+            </details>
+
+            <details class="session">
+              <summary><span class="session-no">02</span><div><h4>AI Research Engine</h4><p>Dùng đúng AI cho từng nhiệm vụ để nghiên cứu khách hàng, thị trường, đối thủ, xu hướng và chủ đề có sức hút.</p><ul><li>Customer insight</li><li>Competitor mining</li><li>Tool selection</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Xây cơ sở dữ liệu research đủ sâu để nuôi toàn bộ Content System.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Chọn ChatGPT, Claude, Perplexity, Gemini và công cụ tìm kiếm theo nhiệm vụ.</li><li>Phân biệt công cụ tư duy, tìm kiếm có nguồn, xử lý tài liệu, phân tích và brainstorming.</li><li>Research 4 nhóm: Pain Point, Fear, Dream, Objection.</li><li>Khai thác câu hỏi, sai lầm, niềm tin sai, thất bại và ngôn ngữ khách hàng.</li><li>Competitor Content Mining: Hook, cấu trúc và góc tiếp cận.</li><li>Phát triển góc nhìn mới thay vì sao chép.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Tạo 30 Pain Points.</li><li>Tạo 20 Fears, 20 Desires và 20 Objections.</li><li>Tạo 30 câu hỏi khách hàng.</li><li>Lập danh sách đối thủ cần theo dõi.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>Customer Insight Database.</li><li>Customer Avatar chi tiết.</li><li>Competitor Research Sheet.</li><li>100 dữ liệu insight ban đầu.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Thu thập thêm 50 insight thực tế.</li><li>Lưu 20 nội dung hiệu suất tốt.</li><li>Viết 10 ý tưởng từ insight đã tìm.</li></ul></section>
+              </div></div>
+            </details>
+
+            <details class="session">
+              <summary><span class="session-no">03</span><div><h4>Prompt Engineering cho Content Creator</h4><p>Thoát khỏi prompt ngẫu nhiên bằng một hệ thống có context, quy tắc, định dạng và bước kiểm tra chất lượng.</p><ul><li>Master Prompt</li><li>Brand Voice</li><li>Quality Check</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Xây bộ prompt có thể sử dụng lặp lại và giữ đúng giọng thương hiệu.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Cấu trúc Role, Context, Objective, Input, Constraints, Process, Output, Example và Quality Check.</li><li>Framework: ROLE - CONTEXT - TASK - RULES - OUTPUT - EVALUATION.</li><li>Prompt research, đối thủ, ý tưởng, Facebook, Storytelling và Hook.</li><li>Prompt kịch bản, Storyboard, hình ảnh, video và chỉnh sửa.</li><li>AI Brand Voice: cách nói, từ ngữ, quan điểm, độ dài câu, mở bài và CTA.</li><li>Đưa ví dụ và xác định từ không được sử dụng.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Xây Master Prompt cá nhân.</li><li>Tạo Brand Voice Prompt.</li><li>Tạo prompt ý tưởng, viết bài và kịch bản.</li><li>Tạo prompt kiểm tra chất lượng đầu ra.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>Bộ 10-15 prompt thường dùng.</li><li>AI Brand Voice.</li><li>Master Content Prompt.</li><li>Checklist đánh giá nội dung AI.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Thử nghiệm prompt với 10 chủ đề.</li><li>Ghi lại lỗi AI thường gặp.</li><li>Tối ưu ít nhất 5 prompt.</li></ul></section>
+              </div></div>
+            </details>
           </div>
         </div>
 
-        <div class="week-panel" id="week-2" role="tabpanel">
-          <aside class="week-summary"><span class="mono">Week 02 / Production</span><h3>Facebook Content Factory</h3><p>Biến một chủ đề thành hàng chục góc nhìn, sau đó sản xuất bài viết có chiều sâu mà vẫn giữ giọng thương hiệu.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Content Bank + 20 Story Post + 30 bài hoàn chỉnh</strong></div></aside>
+        <div class="week-panel" id="phase-2" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Phase 02 / Buổi 4-6</span><h3>Strategy, Facebook Content & Personal Brand</h3><p>Biến insight thành ma trận 90 ngày, bài Facebook có chất riêng và kho câu chuyện cá nhân.</p><div class="week-output"><span class="mono">Đầu ra chặng</span><strong>100 Content Angles + 10 Facebook Posts + Story Database</strong></div></aside>
           <div class="sessions">
-            <article class="session"><span class="session-no">04</span><div><h4>Tạo 100 Content Angles</h4><p>Mở rộng một topic thành hệ góc nhìn: sai lầm, kinh nghiệm, case study, tranh luận, checklist, phản biện, hướng dẫn và chuyển đổi.</p><ul><li>Angle generator</li><li>Topic expansion</li><li>Anti-duplicate</li></ul></div><span class="deliverable">→ Content Bank</span></article>
-            <article class="session"><span class="session-no">05</span><div><h4>Storytelling bằng AI</h4><p>Huấn luyện AI viết theo trải nghiệm thật với Hero Journey, Before/After và Problem/Solution mà không tạo ra giọng văn “mùi AI”.</p><ul><li>Hero Journey</li><li>Before / After</li><li>Story extraction</li></ul></div><span class="deliverable">→ 20 Story Post</span></article>
-            <article class="session"><span class="session-no">06</span><div><h4>AI Copywriting đa định dạng</h4><p>Từ cùng một insight, tái cấu trúc thành status, carousel, long-form post và Facebook Notes với hook, flow và CTA phù hợp.</p><ul><li>Status</li><li>Carousel</li><li>Long-form</li><li>Facebook Notes</li></ul></div><span class="deliverable">→ 30 bài hoàn chỉnh</span></article>
+            <details class="session">
+              <summary><span class="session-no">04</span><div><h4>AI Content Strategy & Content Matrix 90 ngày</h4><p>Kết hợp insight, pillar, format, objective và góc nhìn cá nhân thành kế hoạch có hệ thống.</p><ul><li>Content Funnel</li><li>100 Angles</li><li>90-day roadmap</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Biến dữ liệu insight thành lịch nội dung có thể triển khai và mở rộng.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Content Funnel: Awareness, Engagement, Trust và Conversion.</li><li>Phân biệt Topic, Pillar, Angle, Format, Hook, Message và Objective.</li><li>Content Matrix = Insight x Pillar x Format x Objective x Personal Perspective.</li><li>Mở rộng một chủ đề thành hướng dẫn, phân tích, story, case study, checklist và phản biện.</li><li>Chuyển chủ đề thành video giải thích, tình huống, Before - After và nhiều format khác.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Chọn 5 Content Pillars.</li><li>Tạo 20 chủ đề cho mỗi Pillar.</li><li>Phân bổ theo 4 mục tiêu.</li><li>Xây lịch 30 ngày và mở rộng thành 90 ngày.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>Content Matrix.</li><li>100 Content Angles.</li><li>Lịch nội dung 30 ngày.</li><li>Roadmap nội dung 90 ngày.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Hoàn thiện 90 ngày nội dung.</li><li>Chọn 30 chủ đề ưu tiên.</li><li>Chuẩn bị dữ liệu cho Content Factory.</li></ul></section>
+              </div></div>
+            </details>
+
+            <details class="session">
+              <summary><span class="session-no">05</span><div><h4>AI Facebook Content Factory</h4><p>Viết content nhanh hơn nhưng vẫn có trải nghiệm, quan điểm, chi tiết và nhịp điệu của người thật.</p><ul><li>9 post formats</li><li>Humanize AI</li><li>10 finished posts</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Xây quy trình viết Facebook nhất quán mà không tạo ra nội dung máy móc.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Educational, Story, Opinion, Case Study và List Post.</li><li>Problem - Solution, Behind-the-scenes, Experience và Conversion Post.</li><li>Quy trình: Insight - Angle - Hook - Body - Example - Takeaway - CTA.</li><li>Loại bỏ sáo rỗng, thêm trải nghiệm, quan điểm và chi tiết cụ thể.</li><li>Điều chỉnh nhịp câu, ngôn ngữ nói và độ chân thật.</li><li>Biến bản nháp AI thành nội dung có chất riêng.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>3 bài kiến thức và 2 bài quan điểm.</li><li>2 bài Storytelling và 1 Case Study.</li><li>1 bài giới thiệu sản phẩm hoặc dịch vụ.</li><li>1 bài xây thương hiệu cá nhân.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>10 bài Facebook hoàn chỉnh.</li><li>Bộ prompt viết Facebook.</li><li>Quy trình chỉnh sửa nội dung AI.</li><li>Checklist Humanize Content.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Đăng tối thiểu 5 bài.</li><li>Theo dõi phản hồi.</li><li>Ghi nhận Hook và chủ đề tương tác tốt.</li></ul></section>
+              </div></div>
+            </details>
+
+            <details class="session">
+              <summary><span class="session-no">06</span><div><h4>AI Storytelling & Personal Brand Content</h4><p>Dùng AI phỏng vấn chính mình để chuyển trải nghiệm thật thành câu chuyện, bài viết và kịch bản Reels.</p><ul><li>Story Database</li><li>Self-interview</li><li>Story Reels</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Khai thác trải nghiệm cá nhân thành nội dung có cảm xúc mà không bị giả tạo.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Before - After, Mistake - Lesson và Failure - Turning Point.</li><li>Problem - Discovery - Change, Client Story và Behind-the-scenes.</li><li>Belief Transformation và Hero Journey phiên bản ngắn.</li><li>Nguồn chuyện từ công việc, sai lầm, khách hàng, thành công và quyết định khó.</li><li>AI phỏng vấn ký ức, tìm xung đột, bài học và cách mở bài.</li><li>Chuyển một câu chuyện thành nhiều định dạng nhưng giữ sự thật.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Tạo Story Database.</li><li>Khai thác 10 câu chuyện cá nhân.</li><li>Viết hoàn chỉnh 3 Story Post.</li><li>Chuyển 1 Story Post thành Reels và tạo 10 Hook.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>Story Database.</li><li>10 câu chuyện có thể phát triển.</li><li>3 Story Post hoàn chỉnh.</li><li>1 kịch bản Story Reels.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Đăng 2-3 Story Post.</li><li>Ghi lại phản hồi người xem.</li><li>Hoàn thiện thêm 10 câu chuyện cá nhân.</li></ul></section>
+              </div></div>
+            </details>
           </div>
         </div>
 
-        <div class="week-panel" id="week-3" role="tabpanel">
-          <aside class="week-summary"><span class="mono">Week 03 / Video</span><h3>Facebook Reels System</h3><p>Xây công thức video riêng, chuẩn hóa pipeline từ ý tưởng đến shotlist và hoàn thiện batch video đầu tiên.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Reels Formula + 30 kịch bản + 10 video đầu tiên</strong></div></aside>
+        <div class="week-panel" id="phase-3" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Phase 03 / Buổi 7-9</span><h3>Reels Strategy, Script Factory & AI Video</h3><p>Xây video giữ chân, biến ý tưởng thành storyboard và sản xuất bằng AI với style nhất quán.</p><div class="week-output"><span class="mono">Đầu ra chặng</span><strong>50 Hooks + 30 Reels Ideas + 10 Scripts + 10 Videos</strong></div></aside>
           <div class="sessions">
-            <article class="session"><span class="session-no">07</span><div><h4>Thuật toán Reels & Retention</h4><p>Đọc hành vi người xem qua Hook, Retention và Completion Rate; tìm cấu trúc có khả năng lặp lại cho đúng thị trường.</p><ul><li>3-second hook</li><li>Retention curve</li><li>Completion rate</li></ul></div><span class="deliverable">→ Công thức Reels riêng</span></article>
-            <article class="session"><span class="session-no">08</span><div><h4>AI Script Factory</h4><p>Thiết kế pipeline ChatGPT → Script → Storyboard → Shotlist để một ý tưởng nhanh chóng trở thành kế hoạch quay rõ ràng.</p><ul><li>Script</li><li>Storyboard</li><li>Shotlist</li><li>Batch planning</li></ul></div><span class="deliverable">→ 30 kịch bản Reels</span></article>
-            <article class="session"><span class="session-no">09</span><div><h4>AI Video Production</h4><p>Kết hợp ChatGPT, Kling, Vidu và CapCut để tạo footage, edit nhanh, chuẩn hóa caption, nhịp dựng và nhận diện.</p><ul><li>ChatGPT</li><li>Kling</li><li>Vidu</li><li>CapCut</li></ul></div><span class="deliverable">→ 10 video đầu tiên</span></article>
+            <details class="session">
+              <summary><span class="session-no">07</span><div><h4>AI Reels Strategy & Viral Framework</h4><p>Thiết kế video ngắn có Hook rõ, khoảng trống tò mò, Pattern Interrupt và Payoff giữ chân.</p><ul><li>Retention</li><li>50 Hooks</li><li>Video analysis</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Hiểu cấu trúc video ngắn và xây Reels Framework phù hợp thương hiệu.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Cấu trúc Hook, Context, Curiosity, Value, Pattern Interrupt, Payoff và CTA.</li><li>Hook vấn đề, kết quả, cảnh báo, sai lầm, câu hỏi và bí mật.</li><li>Hook trái chiều, Before - After, Story và Hook hình ảnh.</li><li>Retention: không giải thích sớm, cắt phần thừa, B-roll, Caption và âm thanh.</li><li>Pattern Interrupt và Payoff cuối video.</li><li>Dùng AI chép, phân tích và phát triển phiên bản mới từ video hiệu quả.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Phân tích 10 video ngắn.</li><li>Viết lại 20 Hook.</li><li>Tạo Reels Framework riêng.</li><li>Chọn 10 ý tưởng phù hợp thương hiệu.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>Reels Framework cá nhân.</li><li>50 Hook.</li><li>30 ý tưởng Reels.</li><li>Video Analysis Template.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Quay thử 3 Hook.</li><li>Chọn 10 ý tưởng để viết kịch bản.</li><li>Chuẩn bị cho AI Script Factory.</li></ul></section>
+              </div></div>
+            </details>
+
+            <details class="session">
+              <summary><span class="session-no">08</span><div><h4>AI Script Factory & Storyboard</h4><p>Biến Idea thành Insight, Angle, Hook, Script, Storyboard, Shot List, Visual Prompt và kế hoạch sản xuất.</p><ul><li>10 script types</li><li>Storyboard</li><li>Shot List</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Xây quy trình biến một ý tưởng thành kịch bản video hoàn chỉnh theo nhiều thời lượng.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Pipeline: Idea - Insight - Angle - Hook - Script - Storyboard - Shot List - Visual Prompt - Production.</li><li>Talking Head, Voice-over, Storytelling, Educational, List và Case Study.</li><li>Review, Commentary, Faceless và AI Character Video.</li><li>Kịch bản 15, 30, 60, 90 giây và video 3-5 phút.</li><li>Visual Planning: Voice, Visual, Expression, Camera, Movement và Background.</li><li>Text Overlay, Sound Effect, Duration và Transition.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Viết 5 kịch bản video.</li><li>Tạo Storyboard cho 2 video.</li><li>Tạo Shot List.</li><li>Viết prompt hình ảnh, video và chuẩn bị asset.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>5 kịch bản hoàn chỉnh.</li><li>2 Storyboard và 2 Shot List.</li><li>Bộ prompt tạo Visual.</li><li>Script Production Template.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Thu âm 3 kịch bản.</li><li>Chuẩn bị hình ảnh hoặc footage.</li><li>Hoàn thiện 10 kịch bản trong Content Bank.</li></ul></section>
+              </div></div>
+            </details>
+
+            <details class="session">
+              <summary><span class="session-no">09</span><div><h4>AI Video Production</h4><p>Kết hợp AI viết, hình ảnh, giọng đọc, Lip-sync, Image-to-video, editing và subtitle thành video hoàn chỉnh.</p><ul><li>AI video stack</li><li>Style consistency</li><li>3-5 videos</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Biết chọn và kết hợp công cụ để sản xuất video AI nhất quán với thương hiệu.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Hệ sinh thái script, image, character, voice, Lip-sync, AI Avatar, music và editing.</li><li>Công cụ tham khảo: ChatGPT, Claude, Midjourney, Flux, Kling, Veo, Vidu và Runway.</li><li>HeyGen, ElevenLabs, CapCut, Canva và công cụ phù hợp từng thời điểm.</li><li>Pipeline: Script - Voice - Character - Scene - Animation - Editing - Subtitle - Export.</li><li>Giữ nhất quán nhân vật, màu sắc, style, giọng đọc, bối cảnh và tỷ lệ khung hình.</li><li>Xử lý chuyển động lỗi, tay, mặt, vật thể và đầu ra AI sai.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>1 video Talking Head hỗ trợ AI.</li><li>1 video Voice-over.</li><li>1 video Image-to-video.</li><li>1 video Faceless hoặc AI Character.</li><li>Caption và Subtitle hoàn chỉnh.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable</h5><ul><li>Tối thiểu 3-5 video hoàn chỉnh.</li><li>Bộ prompt AI Video.</li><li>Character Sheet hoặc Visual Style Guide.</li><li>Quy trình sản xuất video cá nhân.</li></ul></section>
+                <section class="lesson-block"><h5>Bài tập về nhà</h5><ul><li>Hoàn thành tổng cộng 10 video.</li><li>Đăng thử tối thiểu 3 video.</li><li>Ghi nhận dữ liệu phản hồi ban đầu.</li></ul></section>
+              </div></div>
+            </details>
           </div>
         </div>
 
-        <div class="week-panel" id="week-4" role="tabpanel">
-          <aside class="week-summary"><span class="mono">Week 04 / Scale</span><h3>Growth & Automation</h3><p>Nối các mảnh rời thành một workflow vận hành được, tạo funnel và xây kế hoạch scale 90 ngày tiếp theo.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Workflow bán tự động + Funnel + Growth Plan 90 ngày</strong></div></aside>
+        <div class="week-panel" id="phase-4" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Phase 04 / Buổi 10</span><h3>Automation, Content OS & Scale</h3><p>Kết nối toàn bộ dữ liệu, prompt, content, script và production thành hệ thống vận hành lâu dài.</p><div class="week-output"><span class="mono">Đầu ra cuối khóa</span><strong>Content Dashboard + AI Workflow + 30-day Plan + 90-day Roadmap</strong></div></aside>
           <div class="sessions">
-            <article class="session"><span class="session-no">10</span><div><h4>Xây AI Content Workflow</h4><p>Chuẩn hóa luồng Google Sheet → AI → Facebook Post → Reels Script, phân vai người – AI và tạo điểm kiểm soát chất lượng.</p><ul><li>Google Sheet</li><li>Prompt chain</li><li>Quality gate</li><li>Automation map</li></ul></div><span class="deliverable">→ Hệ thống bán tự động</span></article>
-            <article class="session"><span class="session-no">11</span><div><h4>Facebook Funnel</h4><p>Thiết kế hành trình Nội dung → Inbox → Lead → Sale; gắn CTA, kịch bản hội thoại và điểm theo dõi chuyển đổi.</p><ul><li>Content CTA</li><li>Inbox flow</li><li>Lead capture</li><li>Sale handoff</li></ul></div><span class="deliverable">→ Funnel cá nhân</span></article>
-            <article class="session"><span class="session-no">12</span><div><h4>Scale & Optimization</h4><p>Review content, fanpage, Reels và funnel; chọn đòn bẩy tăng trưởng, KPI và lịch tối ưu cho chu kỳ 90 ngày tiếp theo.</p><ul><li>Performance review</li><li>KPI</li><li>Scale map</li></ul></div><span class="deliverable">→ Kế hoạch 90 ngày</span></article>
+            <details class="session" open>
+              <summary><span class="session-no">10</span><div><h4>AI Content Automation & Hệ thống Scale</h4><p>Thiết kế Content Operating System, quản lý dữ liệu và tự động hóa các bước lặp lại mà vẫn kiểm soát chất lượng.</p><ul><li>Content OS</li><li>Automation</li><li>Scale system</li></ul></div><span class="deliverable">Xem chi tiết</span></summary>
+              <div class="session-body"><p class="session-goal"><strong>Mục tiêu:</strong> Biến toàn bộ kiến thức thành một quy trình cá nhân có thể vận hành, đo lường, cải tiến và nhân rộng.</p><div class="lesson-grid">
+                <section class="lesson-block"><h5>Lý thuyết · 120 phút</h5><ul><li>Content OS: Research - Idea Bank - Calendar - Writing - Script - Production - Review - Publish - Data - Optimization.</li><li>Quản lý Insight, Idea, Prompt, Script, Asset, Calendar, Status, Performance và Learning Database.</li><li>Kết nối Google Sheets, Notion, AI, Cloud Storage, quản lý file và lịch đăng.</li><li>Workflow: Insight thành Idea; Idea thành Outline, Post, Script và Storyboard.</li><li>Storyboard thành prompt hình ảnh; tổng hợp dữ liệu và tái sử dụng đa nền tảng.</li><li>Batch Production, Content Repurposing, kiểm duyệt, chống trùng lặp và nhân rộng nội dung hiệu quả.</li></ul></section>
+                <section class="lesson-block"><h5>Workshop · 60 phút</h5><ul><li>Thiết kế Workflow cá nhân.</li><li>Tạo Content Dashboard.</li><li>Kết nối Research - Idea - Script - Production.</li><li>Lập kế hoạch sản xuất 30 ngày.</li><li>Audit toàn bộ hệ thống đã xây.</li></ul></section>
+                <section class="lesson-block"><h5>Deliverable cuối khóa</h5><ul><li>AI Content Workflow hoàn chỉnh.</li><li>Content Dashboard, Prompt Library và Database.</li><li>Kế hoạch sản xuất 30 ngày.</li><li>Roadmap phát triển 90 ngày.</li><li>Bộ 10 video hoàn chỉnh.</li></ul></section>
+                <section class="lesson-block"><h5>Nguyên tắc Scale</h5><ul><li>Tăng số lượng nhưng không giảm chất lượng.</li><li>Tách rõ công việc AI và con người.</li><li>Một nội dung thành nhiều định dạng.</li><li>Thiết lập điểm kiểm duyệt.</li><li>Dùng dữ liệu hiệu suất để cải tiến.</li></ul></section>
+              </div></div>
+            </details>
           </div>
         </div>
       </div>
@@ -571,27 +677,32 @@
 
     <section class="workflow" id="he-thong">
       <div class="container">
-        <div class="section-head reveal"><div><span class="section-number">03 / Hệ thống</span><h2>Một workflow nối thẳng từ insight đến doanh thu.</h2></div><p>Không tạo nội dung rời rạc. Mỗi bước nhận dữ liệu từ bước trước và tạo đầu vào rõ ràng cho bước sau.</p></div>
+        <div class="section-head reveal"><div><span class="section-number">03 / Hệ thống</span><h2>Một workflow nối từ research đến dữ liệu tối ưu.</h2></div><p>Không tạo nội dung rời rạc. Mỗi bước nhận dữ liệu từ bước trước, tạo đầu vào rõ ràng cho bước sau và được lưu lại để tái sử dụng.</p></div>
         <div class="workflow-track reveal">
           <article class="workflow-step"><span class="mono">Input 01</span><strong>Research Engine</strong><p>Khách hàng, pain point, xu hướng và ngôn ngữ thị trường.</p></article>
-          <article class="workflow-step"><span class="mono">Build 02</span><strong>Content Bank</strong><p>200+ ý tưởng được gắn pillar, angle và mục tiêu hành trình.</p></article>
-          <article class="workflow-step"><span class="mono">Produce 03</span><strong>Post + Reels</strong><p>AI hỗ trợ viết, biến đổi định dạng và chuẩn bị kế hoạch sản xuất.</p></article>
-          <article class="workflow-step"><span class="mono">Convert 04</span><strong>Inbox + Lead</strong><p>CTA và kịch bản hội thoại kéo sự chú ý về điểm chuyển đổi.</p></article>
-          <article class="workflow-step"><span class="mono">Improve 05</span><strong>Data Loop</strong><p>Dữ liệu hiệu suất quay lại cải thiện insight, hook và nội dung mới.</p></article>
+          <article class="workflow-step"><span class="mono">Build 02</span><strong>Idea Bank</strong><p>Insight được mở rộng thành pillar, angle, hook và lịch nội dung.</p></article>
+          <article class="workflow-step"><span class="mono">Write 03</span><strong>Post + Script</strong><p>AI hỗ trợ viết, humanize và chuyển một ý tưởng thành nhiều định dạng.</p></article>
+          <article class="workflow-step"><span class="mono">Produce 04</span><strong>AI Video</strong><p>Storyboard, asset, voice, animation, editing, subtitle và xuất bản.</p></article>
+          <article class="workflow-step"><span class="mono">Improve 05</span><strong>Data Loop</strong><p>Dữ liệu hiệu suất quay lại cải thiện insight, hook và quy trình mới.</p></article>
+        </div>
+        <div class="method-grid reveal">
+          <article class="method-card"><span>Phương pháp 01</span><h3>Hiểu nguyên lý trước</h3><p>Học viên nắm tư duy và biết vì sao một công cụ hoặc workflow được sử dụng trước khi bắt đầu thao tác.</p></article>
+          <article class="method-card"><span>Phương pháp 02</span><h3>Xây tài sản ngay trong buổi</h3><p>Giảng viên cùng học viên thực hành trực tiếp để mỗi buổi đều hoàn thành một phần của hệ thống.</p></article>
+          <article class="method-card"><span>Phương pháp 03</span><h3>Cá nhân hóa theo nguồn lực</h3><p>Hệ thống được thiết kế theo ngành, sản phẩm, năng lực, nền tảng và mục tiêu thực tế của từng học viên.</p></article>
         </div>
       </div>
     </section>
 
     <section class="assets" id="tai-nguyen">
       <div class="container assets-layout">
-        <div class="assets-copy reveal"><span class="eyebrow">Bộ tài nguyên đi kèm</span><h2>Không học xong rồi tự bơi.</h2><p>Bạn nhận toàn bộ framework, template và thư viện dùng trong chương trình để tiếp tục vận hành sau 30 ngày.</p></div>
+        <div class="assets-copy reveal"><span class="eyebrow">Quyền lợi học viên</span><h2>Không học xong rồi tự bơi.</h2><p>Bạn nhận bộ tài liệu, template và hệ thống quản lý dùng xuyên suốt khóa học để tiếp tục vận hành sau buổi 10.</p></div>
         <div class="assets-list reveal">
-          <article class="asset-row"><span>01</span><div><h3>100 Hook Facebook</h3><p>Phân loại theo mục tiêu thu hút, tranh luận, giáo dục và chuyển đổi.</p></div><b>Template</b></article>
-          <article class="asset-row"><span>02</span><div><h3>50 CTA chuyển đổi</h3><p>CTA cho comment, inbox, lead magnet, offer và nội dung bán hàng.</p></div><b>Template</b></article>
-          <article class="asset-row"><span>03</span><div><h3>20 Story Framework</h3><p>Khung kể chuyện giúp khai thác trải nghiệm thật và giọng thương hiệu.</p></div><b>Framework</b></article>
-          <article class="asset-row"><span>04</span><div><h3>30 Reels Framework</h3><p>Cấu trúc hook, diễn biến và payoff cho nhiều mục tiêu video.</p></div><b>Framework</b></article>
-          <article class="asset-row"><span>05</span><div><h3>AI Prompt Library</h3><p>Hệ prompt cho research, angles, copywriting, script và repurpose.</p></div><b>AI asset</b></article>
-          <article class="asset-row"><span>06</span><div><h3>Content & Reels System</h3><p>Content Matrix, Reels Scripts và workflow vận hành trên Google Sheet.</p></div><b>Workflow</b></article>
+          <article class="asset-row"><span>01</span><div><h3>10 buổi học trực tiếp</h3><p>Tổng cộng 30 giờ gồm hướng dẫn tư duy, workshop và hoàn thiện hệ thống cá nhân.</p></div><b>Coaching</b></article>
+          <article class="asset-row"><span>02</span><div><h3>Research & Content Matrix</h3><p>Template Customer Research, Customer Avatar, Insight Database và Content Matrix 90 ngày.</p></div><b>Template</b></article>
+          <article class="asset-row"><span>03</span><div><h3>Facebook Content & Reels Script</h3><p>Template viết bài, Humanize Content, Reels Script và Video Analysis.</p></div><b>Template</b></article>
+          <article class="asset-row"><span>04</span><div><h3>Storyboard & AI Video Prompt</h3><p>Template Storyboard, Shot List, Visual Prompt, Video Prompt và Production.</p></div><b>Production</b></article>
+          <article class="asset-row"><span>05</span><div><h3>Prompt Library & Content Dashboard</h3><p>AI Brand Voice, Master Prompt, Content Database và Dashboard quản lý tiến độ.</p></div><b>System</b></article>
+          <article class="asset-row"><span>06</span><div><h3>Audit & hỗ trợ bài tập</h3><p>Audit hệ thống cuối khóa, hỗ trợ chỉnh sửa bài tập và cập nhật workflow theo nhu cầu thực tế.</p></div><b>Support</b></article>
         </div>
       </div>
     </section>
@@ -599,7 +710,7 @@
     <section class="mentor" id="mentor">
       <div class="container">
         <div class="mentor-card reveal">
-          <div class="mentor-photo"><img src="../Drakenguyen.png" alt="Drake Nguyễn — mentor Facebook Marketing và AI Automation" loading="lazy"></div>
+          <div class="mentor-photo"><img src="../Drakenguyen.png" alt="Drake Nguyễn - mentor AI Content và AI Automation" loading="lazy"></div>
           <div class="mentor-copy"><span class="eyebrow">Người đồng hành</span><h2>Drake Nguyễn</h2><p>Background CMO, Digital Marketing và AI Automation. Drake tập trung vào cách đưa AI vào vận hành thực tế: giảm thao tác lặp lại, tăng tốc sản xuất và giữ tư duy Marketing ở trung tâm.</p><div class="mentor-tags"><span>CMO mindset</span><span>AI Automation</span><span>n8n Workflow</span><span>Facebook Growth</span><span>Content Systems</span></div><div class="mentor-quote">“Mục tiêu không phải học thêm một công cụ. Mục tiêu là xây được hệ thống giúp bạn tạo kết quả nhanh và đều hơn.”</div></div>
         </div>
       </div>
@@ -608,8 +719,8 @@
     <section class="pricing" id="hoc-phi">
       <div class="container">
         <div class="price-box reveal">
-          <div class="price-copy"><span class="eyebrow">Coaching thực chiến 1 tháng</span><h2>Xây hệ thống một lần. Dùng cho nhiều chiến dịch.</h2><p>Học trực tiếp, làm trên chính business hoặc thương hiệu của bạn. Sau mỗi buổi đều có phần việc, tài sản và bước tiếp theo rõ ràng.</p><ul class="includes"><li>12 buổi coaching trực tiếp</li><li>Roadmap Facebook 90 ngày</li><li>Content Bank 200+ ý tưởng</li><li>30 bài + 30 kịch bản Reels</li><li>10 video đầu tiên</li><li>Prompt & Framework Library</li><li>Funnel cá nhân</li><li>Workflow bán tự động</li></ul></div>
-          <aside class="price-panel"><span class="label">Ưu đãi chương trình hiện tại</span><div class="old-price">20.000.000đ</div><div class="new-price">9.990.000<small>đ</small></div><div class="price-note">Mức phí trọn gói cho toàn bộ chương trình 1 tháng.</div><a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Đăng ký tư vấn</a><div class="support-row">Trao đổi trước để xác định chương trình có phù hợp với bạn hay không.</div></aside>
+          <div class="price-copy"><span class="eyebrow">10 buổi · 30 giờ thực chiến</span><h2>Xây hệ thống một lần. Vận hành và cải tiến lâu dài.</h2><p>Học trực tiếp, thực hành trên ngành nghề, sản phẩm, nền tảng và nguồn lực thật của bạn. Sau mỗi buổi đều có tài sản và bài tập cụ thể.</p><ul class="includes"><li>10 buổi coaching trực tiếp</li><li>30 giờ hướng dẫn và workshop</li><li>Customer & Competitor Database</li><li>Content Matrix và Roadmap 90 ngày</li><li>AI Brand Voice và Prompt Library</li><li>10 bài Facebook + 10 kịch bản</li><li>10 video hoàn chỉnh</li><li>Content Dashboard và AI Workflow</li></ul></div>
+          <aside class="price-panel"><span class="label">Ưu đãi chương trình hiện tại</span><div class="old-price">20.000.000đ</div><div class="new-price">10.000.000<small>đ</small></div><div class="price-note">Tương đương 1.000.000đ mỗi buổi, gồm 3 giờ hướng dẫn và thực hành.</div><a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Đăng ký tư vấn</a><div class="support-row">Trao đổi trước để xác định chương trình có phù hợp với bạn hay không.</div></aside>
         </div>
       </div>
     </section>
@@ -619,25 +730,25 @@
         <div class="faq-intro reveal"><span class="eyebrow">Câu hỏi thường gặp</span><h2>Trước khi bắt đầu.</h2><p>Nếu còn câu hỏi khác, bạn có thể nhắn trực tiếp để được tư vấn theo đúng tình trạng kênh và business.</p></div>
         <div class="faq-list reveal">
           <article class="faq-item open"><button class="faq-question" aria-expanded="true"><span>Tôi chưa từng dùng AI chuyên sâu có học được không?</span><span>+</span></button><div class="faq-answer"><p>Có, nếu bạn đã có nền tảng Marketing và từng trực tiếp làm nội dung hoặc vận hành kênh. Chương trình không yêu cầu biết code, nhưng sẽ không dành thời gian dạy các khái niệm AI quá cơ bản.</p></div></article>
-          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Chương trình là khóa học quay sẵn hay học trực tiếp?</span><span>+</span></button><div class="faq-answer"><p>Đây là chương trình coaching trực tiếp trong 1 tháng. Nội dung được áp dụng vào chính fanpage, profile, offer và business của học viên.</p></div></article>
-          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Tôi có cần dùng toàn bộ ChatGPT, Claude, Perplexity, Kling, Vidu?</span><span>+</span></button><div class="faq-answer"><p>Không bắt buộc phải dùng mọi công cụ ngay từ đầu. Ta sẽ chọn stack phù hợp với mục tiêu, nguồn lực, kỹ năng và ngân sách hiện tại của bạn.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Chương trình là khóa học quay sẵn hay học trực tiếp?</span><span>+</span></button><div class="faq-answer"><p>Đây là 10 buổi coaching trực tiếp, mỗi buổi 3 giờ gồm 2 giờ hướng dẫn và 1 giờ workshop. Nội dung được áp dụng vào chính ngành nghề, sản phẩm, thương hiệu và nền tảng của học viên.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Tôi có cần dùng toàn bộ công cụ AI được nhắc đến không?</span><span>+</span></button><div class="faq-answer"><p>Không. ChatGPT, Claude, Perplexity, Gemini, Flux, Kling, Veo, Vidu, Runway, HeyGen, ElevenLabs và các công cụ khác là danh sách tham khảo. Stack thực tế được chọn theo mục tiêu, nguồn lực và thời điểm triển khai.</p></div></article>
           <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>AI có làm nội dung bị đại trà và mất giọng thương hiệu không?</span><span>+</span></button><div class="faq-answer"><p>Có thể, nếu dùng prompt rời rạc. Vì vậy chương trình tập trung xây context, dữ liệu nguồn, tiêu chuẩn biên tập và quality gate để AI hỗ trợ tốc độ nhưng con người vẫn kiểm soát chiến lược và giọng thương hiệu.</p></div></article>
-          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Sau 1 tháng tôi có thể tự vận hành tiếp không?</span><span>+</span></button><div class="faq-answer"><p>Mục tiêu của chương trình là bàn giao một hệ thống bạn có thể tiếp tục dùng và cải tiến. Bạn giữ toàn bộ Content Matrix, prompt, framework, script, workflow và kế hoạch 90 ngày.</p></div></article>
-          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Học phí 9.990.000đ đã bao gồm những gì?</span><span>+</span></button><div class="faq-answer"><p>Đã bao gồm 12 buổi coaching trong 1 tháng, các buổi audit và review, bộ template – prompt – framework, tài sản nội dung được xây trong chương trình và hỗ trợ xuyên suốt quá trình học.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Sau 10 buổi tôi có thể tự vận hành tiếp không?</span><span>+</span></button><div class="faq-answer"><p>Mục tiêu của chương trình là bàn giao một hệ thống bạn có thể tiếp tục dùng, đo lường và cải tiến. Bạn giữ toàn bộ database, Content Matrix, prompt, framework, script, workflow, dashboard và kế hoạch 90 ngày.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Học phí 10.000.000đ đã bao gồm những gì?</span><span>+</span></button><div class="faq-answer"><p>Đã bao gồm 10 buổi coaching trực tiếp, 30 giờ đào tạo và thực hành, bộ tài liệu AI Content System, các template, audit cuối khóa, hỗ trợ chỉnh sửa bài tập và cập nhật công cụ phù hợp nhu cầu thực tế.</p></div></article>
         </div>
       </div>
     </section>
 
     <section class="final-cta">
-      <div class="container reveal"><span class="eyebrow">Facebook Marketing × AI Content System</span><h2>Đừng tạo thêm vài bài viết. Hãy xây một <span>Content Machine.</span></h2><p>Nhắn Drake để audit nhanh tình trạng hiện tại và xác định chương trình có phù hợp với bạn, đội ngũ hoặc business hay không.</p><div class="hero-actions"><a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Nhắn Zalo cho Drake</a><a class="btn btn-secondary" href="https://m.me/drakenguyen.me" target="_blank" rel="noopener">Nhắn qua Messenger</a></div></div>
+      <div class="container reveal"><span class="eyebrow">AI Video Content System</span><h2>Đừng chỉ tạo vài video AI. Hãy xây một <span>hệ thống vận hành được.</span></h2><p>Một hệ thống biết dùng AI khi nào, cho việc gì, cần dữ liệu gì và kiểm soát chất lượng đầu ra ra sao. Nhắn Drake để xác định chương trình có phù hợp với bạn hoặc đội ngũ hay không.</p><div class="hero-actions"><a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Nhắn Zalo cho Drake</a><a class="btn btn-secondary" href="https://m.me/drakenguyen.me" target="_blank" rel="noopener">Nhắn qua Messenger</a></div></div>
     </section>
   </main>
 
   <footer>
-    <div class="container footer-row"><div>© <span id="year"></span> Drake Nguyễn. Facebook AI Content Machine.</div><div class="footer-links"><a href="https://zalo.me/0968333342" target="_blank" rel="noopener">Zalo</a><a href="https://m.me/drakenguyen.me" target="_blank" rel="noopener">Messenger</a><a href="https://t.me/Drakenguyen" target="_blank" rel="noopener">Telegram</a></div></div>
+    <div class="container footer-row"><div>© <span id="year"></span> Drake Nguyễn. AI Video Content System.</div><div class="footer-links"><a href="https://zalo.me/0968333342" target="_blank" rel="noopener">Zalo</a><a href="https://m.me/drakenguyen.me" target="_blank" rel="noopener">Messenger</a><a href="https://t.me/Drakenguyen" target="_blank" rel="noopener">Telegram</a></div></div>
   </footer>
 
-  <div class="mobile-bar"><div><small>Ưu đãi trọn khóa</small><strong>9.990.000đ</strong></div><a href="https://zalo.me/0968333342" target="_blank" rel="noopener">Tư vấn ngay</a></div>
+  <div class="mobile-bar"><div><small>Ưu đãi trọn khóa</small><strong>10.000.000đ</strong></div><a href="https://zalo.me/0968333342" target="_blank" rel="noopener">Tư vấn ngay</a></div>
 
   <script>
     const header = document.getElementById('siteHeader');
