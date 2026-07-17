@@ -145,27 +145,48 @@
     .collage.phone .shot-c{grid-column:1/8;grid-row:3/5}
     .proof-note{position:absolute;z-index:3;right:20px;bottom:17px;padding:7px 10px;background:var(--project-color,var(--blue));color:#fff;font-family:ui-monospace,monospace;font-size:.52rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 
-    .contact{background:var(--navy);color:#fff}
-    .contact-title{max-width:1050px;margin-bottom:0;font-size:clamp(4.2rem,8.5vw,9.2rem);font-weight:880;letter-spacing:-.085em;line-height:.9}
+    .contact{position:relative;overflow:hidden;background:#061f35;color:#fff}
+    .contact::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 82%)}
+    .contact::after{content:"";position:absolute;width:560px;height:560px;right:-310px;top:-240px;border:1px solid rgba(255,255,255,.12);border-radius:50%;box-shadow:0 0 0 90px rgba(255,255,255,.018),0 0 0 180px rgba(255,255,255,.012)}
+    .contact .shell{position:relative;z-index:2}
+    .contact .section-label{color:#ff8b6a}
+    .contact-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:46px;align-items:end}
+    .contact-title{max-width:920px;margin-bottom:0;font-size:clamp(4rem,7.7vw,8.4rem);font-weight:880;letter-spacing:-.085em;line-height:.88}
     .contact-title em{color:var(--orange);font-family:Georgia,"Times New Roman",serif;font-weight:400}
-    .contact-grid{margin-top:70px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
-    .email-card{padding:clamp(38px,6vw,72px);background:var(--orange)}
-    .email-card small,.channel small{font-family:ui-monospace,monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
-    .email-card h3{margin:82px 0 32px;font-size:clamp(2.5rem,5vw,5.2rem);letter-spacing:-.07em;line-height:.98}
-    .email-card a{padding-bottom:5px;border-bottom:2px solid #fff;font-size:clamp(.95rem,2vw,1.4rem);font-weight:800}
-    .channels{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .channel{min-height:230px;padding:28px;display:flex;flex-direction:column;background:#0e416f;transition:transform .2s}
-    .channel:nth-child(2){background:var(--blue)}
-    .channel:nth-child(3),.channel:nth-child(4){background:#fff;color:var(--ink)}
-    .channel:hover{transform:translateY(-4px)}
-    .channel b{margin-top:auto;font-size:1.4rem;letter-spacing:-.04em}
-    .channel p{margin:8px 0 0;font-size:.74rem;opacity:.62}
+    .availability{margin-bottom:10px;padding:13px 16px;display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.17);border-radius:999px;background:rgba(255,255,255,.055);font-family:ui-monospace,monospace;font-size:.61rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+    .availability i{width:9px;height:9px;border-radius:50%;background:#6ee7a0;box-shadow:0 0 0 5px rgba(110,231,160,.13);animation:pulse 2.2s infinite}
+    @keyframes pulse{50%{box-shadow:0 0 0 9px rgba(110,231,160,0)}}
+    .contact-stage{margin-top:72px;display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    .contact-primary{position:relative;min-height:512px;padding:clamp(34px,5vw,62px);display:flex;flex-direction:column;overflow:hidden;background:var(--orange);color:#fff;transition:transform .25s,box-shadow .25s}
+    .contact-primary::before{content:"";position:absolute;width:390px;height:390px;right:-140px;bottom:-180px;border:1px solid rgba(255,255,255,.32);border-radius:50%;box-shadow:0 0 0 54px rgba(255,255,255,.06),0 0 0 108px rgba(255,255,255,.035)}
+    .contact-primary:hover{transform:translateY(-5px);box-shadow:0 28px 70px rgba(0,0,0,.22)}
+    .primary-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:ui-monospace,monospace;font-size:.63rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .primary-top i{width:52px;height:52px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.5);border-radius:50%;font-family:Inter,sans-serif;font-size:1.3rem;font-style:normal;transition:transform .25s}
+    .contact-primary:hover .primary-top i{transform:rotate(45deg)}
+    .contact-primary strong{position:relative;z-index:2;margin:auto 0 28px;display:block;font-size:clamp(2.25rem,4.4vw,5rem);font-weight:880;letter-spacing:-.075em;line-height:.91;word-break:break-word}
+    .contact-primary p{position:relative;z-index:2;max-width:490px;margin:0;padding-top:18px;border-top:1px solid rgba(255,255,255,.38);font-size:.82rem;line-height:1.6;opacity:.82}
+    .channels{display:flex;flex-direction:column;gap:10px}
+    .channel{min-height:118px;padding:24px 25px;display:grid;grid-template-columns:34px minmax(0,1fr) 42px;gap:16px;align-items:center;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.06);transition:transform .2s,background .2s,border-color .2s}
+    .channel:hover{transform:translateX(6px);border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.11)}
+    .channel small{align-self:start;color:#ff8b6a;font-family:ui-monospace,monospace;font-size:.57rem;font-weight:800;letter-spacing:.08em}
+    .channel-copy b{display:block;font-size:1.3rem;letter-spacing:-.045em}
+    .channel-copy p{margin:7px 0 0;color:rgba(255,255,255,.53);font-size:.7rem;line-height:1.4}
+    .channel-arrow{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#fff;color:var(--ink);font-size:1rem;transition:transform .2s,background .2s,color .2s}
+    .channel:hover .channel-arrow{transform:rotate(45deg);background:var(--orange);color:#fff}
+    .contact-meta{margin-top:22px;padding-top:22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.46);font-family:ui-monospace,monospace;font-size:.59rem;letter-spacing:.06em;text-transform:uppercase}
 
-    footer{padding:72px 0 28px;background:#071d30;color:#fff}
-    .footer-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:40px}
-    .footer-brand{font-size:clamp(1.7rem,3vw,3rem);font-weight:880;letter-spacing:-.07em}
-    footer p,footer .footer-link{margin:0 0 10px;color:rgba(255,255,255,.62);font-size:.78rem;line-height:1.5}
-    .footer-bottom{margin-top:64px;padding-top:20px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.38);font-family:ui-monospace,monospace;font-size:.61rem;text-transform:uppercase}
+    footer{padding:78px 0 28px;background:#041522;color:#fff}
+    .footer-grid{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:70px;align-items:start}
+    .footer-brand{display:inline-block;font-size:clamp(2rem,3.7vw,4rem);font-weight:900;letter-spacing:-.08em;line-height:.9}
+    .footer-blurb{max-width:330px;margin:20px 0 0;color:rgba(255,255,255,.46);font-size:.78rem;line-height:1.65}
+    .footer-label{display:block;margin-bottom:18px;color:rgba(255,255,255,.35);font-family:ui-monospace,monospace;font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .footer-links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 24px}
+    .footer-link{width:max-content;color:rgba(255,255,255,.72);font-size:.78rem;font-weight:700;transition:color .2s,transform .2s}
+    .footer-link:hover{color:#fff;transform:translateX(3px)}
+    .footer-signoff strong{display:block;color:var(--orange);font-size:clamp(1.45rem,2.2vw,2.35rem);letter-spacing:-.055em;line-height:1.04}
+    .footer-bottom{margin-top:68px;padding-top:20px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.35);font-family:ui-monospace,monospace;font-size:.58rem;letter-spacing:.05em;text-transform:uppercase}
+    .back-top{color:rgba(255,255,255,.7);transition:color .2s}
+    .back-top:hover{color:var(--orange)}
 
     .reveal{animation:reveal .72s both cubic-bezier(.2,.8,.2,1)}
     @keyframes reveal{from{opacity:0;transform:translateY(22px)}}
@@ -177,14 +198,16 @@
       .nav-links{position:fixed;z-index:60;right:16px;bottom:16px;left:16px;justify-content:center;background:rgba(245,242,234,.96);box-shadow:0 18px 50px rgba(16,38,59,.2)}
       .hero{min-height:auto;grid-template-columns:1fr;gap:90px}
       .portrait-wrap{width:min(85%,470px);justify-self:center}
-      .intro-grid,.section-head,.work-intro,.contact-grid{grid-template-columns:1fr}
+      .intro-grid,.section-head,.work-intro,.contact-head,.contact-stage{grid-template-columns:1fr}
       .section-head,.work-intro{gap:26px}
+      .availability{justify-self:start}
       .work-index{justify-content:flex-start}
       .capability-grid{grid-template-columns:1fr}
       .capability{min-height:230px}
       .slide-head{grid-template-columns:1fr;gap:28px}
       .collage{height:520px}
-      .footer-grid{grid-template-columns:1fr 1fr}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:54px}
+      .footer-signoff{grid-column:1/-1}
     }
     @media(max-width:620px){
       .shell{width:min(100% - 24px,560px)}
@@ -202,9 +225,15 @@
       .collage .shot,.collage.reverse .shot,.collage.phone .shot{grid-column:auto;grid-row:auto;aspect-ratio:16/9;transform:none}
       .collage.phone .shot-b{aspect-ratio:4/5}
       .proof-note{right:10px;bottom:10px}
-      .channels{grid-template-columns:1fr}
-      .email-card{padding:50px 24px}
+      .contact-title{font-size:clamp(3.5rem,16vw,5.5rem)}
+      .contact-stage{margin-top:48px}
+      .contact-primary{min-height:430px;padding:34px 24px}
+      .contact-primary strong{font-size:clamp(2.1rem,10vw,3.5rem)}
+      .channel{min-height:104px;padding:20px 18px;grid-template-columns:28px minmax(0,1fr) 38px;gap:12px}
+      .channel-arrow{width:38px;height:38px}
       .footer-grid{grid-template-columns:1fr}
+      .footer-signoff{grid-column:auto}
+      .footer-links{max-width:320px}
       .footer-bottom{padding-bottom:76px;flex-direction:column;gap:14px}
     }
   </style>
@@ -369,28 +398,35 @@
 
     <section class="contact section" id="contact">
       <div class="shell">
-        <div class="section-label">04 / CONTACT</div>
-        <h2 class="contact-title">Have a sharp<br>problem? <em>Talk.</em></h2>
-        <div class="contact-grid">
-          <article class="email-card"><small>Best for projects</small><h3>Tell me what is stuck — and what better looks like.</h3><a href="mailto:Drakenguyen.me@gmail.com">Drakenguyen.me@gmail.com ↗</a></article>
+        <div class="contact-head">
+          <div><div class="section-label">04 / CONTACT · START WITH CONTEXT</div><h2 class="contact-title">Let's build<br>something <em>better.</em></h2></div>
+          <div class="availability"><i></i><span>Available for sharp problems</span></div>
+        </div>
+        <div class="contact-stage">
+          <a class="contact-primary" href="mailto:Drakenguyen.me@gmail.com" aria-label="Email Drake Nguyễn">
+            <span class="primary-top"><span>Start a conversation</span><i>↗</i></span>
+            <strong>Drakenguyen.me<br>@gmail.com</strong>
+            <p>Tell me what is stuck, what you have tried and what a better outcome looks like. I usually reply within one business day.</p>
+          </a>
           <div class="channels">
-            <a class="channel" href="https://m.me/drakenguyen.me" target="_blank" rel="noreferrer"><small>Direct</small><b>Messenger ↗</b><p>Quick questions and introductions.</p></a>
-            <a class="channel" href="https://t.me/Drakenguyen" target="_blank" rel="noreferrer"><small>Direct</small><b>Telegram ↗</b><p>Fast, focused conversations.</p></a>
-            <a class="channel" href="https://zalo.me/0968333342" target="_blank" rel="noreferrer"><small>Vietnam</small><b>Zalo ↗</b><p>Local business conversations.</p></a>
-            <a class="channel" href="https://wa.me/84968333342" target="_blank" rel="noreferrer"><small>International</small><b>WhatsApp ↗</b><p>International collaboration.</p></a>
+            <a class="channel" href="https://m.me/drakenguyen.me" target="_blank" rel="noreferrer"><small>01</small><span class="channel-copy"><b>Messenger</b><p>Quick questions &amp; introductions</p></span><span class="channel-arrow">↗</span></a>
+            <a class="channel" href="https://t.me/Drakenguyen" target="_blank" rel="noreferrer"><small>02</small><span class="channel-copy"><b>Telegram</b><p>Fast, focused conversations</p></span><span class="channel-arrow">↗</span></a>
+            <a class="channel" href="https://zalo.me/0968333342" target="_blank" rel="noreferrer"><small>03</small><span class="channel-copy"><b>Zalo</b><p>Vietnam business conversations</p></span><span class="channel-arrow">↗</span></a>
+            <a class="channel" href="https://wa.me/84968333342" target="_blank" rel="noreferrer"><small>04</small><span class="channel-copy"><b>WhatsApp</b><p>International collaboration</p></span><span class="channel-arrow">↗</span></a>
           </div>
         </div>
+        <div class="contact-meta"><span>Based in Ho Chi Minh City · Working globally</span><span>Growth · Automation · AI Systems</span><span>GMT+7</span></div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="footer-grid shell">
-      <a class="footer-brand" href="#about">DRAKE NGUYỄN</a>
-      <div><p>Digital Growth · Automation · AI Strategy</p><a class="footer-link" href="mailto:Drakenguyen.me@gmail.com">Drakenguyen.me@gmail.com</a></div>
-      <div><a class="footer-link" href="/">View CV ↗</a><br><a class="footer-link" href="#projects">Project systems ↗</a></div>
+      <div><a class="footer-brand" href="#about">DRAKE<br>NGUYỄN®</a><p class="footer-blurb">I turn growth problems into measurable systems — connecting strategy, people, data and automation.</p></div>
+      <div><span class="footer-label">Explore &amp; connect</span><div class="footer-links"><a class="footer-link" href="#about">About</a><a class="footer-link" href="#projects">Projects</a><a class="footer-link" href="/">View CV ↗</a><a class="footer-link" href="mailto:Drakenguyen.me@gmail.com">Email ↗</a><a class="footer-link" href="https://t.me/Drakenguyen" target="_blank" rel="noreferrer">Telegram ↗</a><a class="footer-link" href="https://zalo.me/0968333342" target="_blank" rel="noreferrer">Zalo ↗</a></div></div>
+      <div class="footer-signoff"><span class="footer-label">Operating principle</span><strong>Build smart.<br>Scale with clarity.</strong></div>
     </div>
-    <div class="footer-bottom shell"><span>© 2026 Drake Nguyễn</span><span>Build smart. Scale with clarity.</span></div>
+    <div class="footer-bottom shell"><span>© 2026 Drake Nguyễn · All rights reserved</span><a class="back-top" href="#about">Back to top ↑</a></div>
   </footer>
 </body>
 </html>
