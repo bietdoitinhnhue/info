@@ -53,56 +53,57 @@
     .nav-cta i{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:var(--orange);color:#fff;font-style:normal;transition:transform .2s}
     .nav-cta:hover i{transform:rotate(45deg)}
 
-    .hero{min-height:calc(100vh - 76px);padding-block:88px 72px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:clamp(55px,8vw,110px)}
+    .hero{min-height:calc(100vh - 76px);padding-block:76px;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);align-items:center;gap:clamp(56px,8vw,112px)}
+    .hero-copy{min-width:0}
+    .hero-meta{margin-bottom:34px;padding-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line)}
     .eyebrow,.section-label{margin:0 0 22px;color:var(--blue);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
-    .eyebrow{display:flex;align-items:center;gap:10px}
+    .eyebrow{margin:0;display:flex;align-items:center;gap:10px}
     .eyebrow::before{content:"";width:32px;height:2px;background:var(--orange)}
+    .hero-location{color:var(--muted);font-family:ui-monospace,monospace;font-size:.58rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
     h1,h2,h3,p{margin-top:0}
-    h1{max-width:760px;margin-bottom:0;font-size:clamp(3.9rem,6.7vw,7rem);font-weight:880;letter-spacing:-.08em;line-height:.92}
+    h1{max-width:760px;margin-bottom:0;font-size:clamp(4rem,6.5vw,6.8rem);font-weight:880;letter-spacing:-.08em;line-height:.9}
     h1 em,.editorial em{color:var(--blue);font-family:Georgia,"Times New Roman",serif;font-weight:400}
-    .hero-copy>p:not(.eyebrow){max-width:650px;margin:30px 0 0;color:var(--muted);font-size:1.08rem;line-height:1.72}
-    .hero-actions{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+    .hero-lede{max-width:610px;margin:30px 0 0;color:var(--muted);font-size:1.04rem;line-height:1.72}
+    .hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
     .btn{min-height:54px;padding:0 8px 0 22px;display:inline-flex;align-items:center;gap:18px;border-radius:999px;background:var(--ink);color:#fff;font-size:.88rem;font-weight:800}
     .btn i{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:var(--orange);font-style:normal;transition:transform .2s}
     .btn:hover i{transform:translate(3px,-3px)}
     .plain-link{padding:15px 0;border-bottom:1px solid var(--ink);font-size:.88rem;font-weight:800}
-    .stats{margin-top:58px;padding-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;border-top:1px solid var(--line)}
-    .stats strong{display:block;font-size:clamp(1.65rem,2.5vw,2.45rem);letter-spacing:-.07em}
+    .stats{margin-top:48px;padding-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;border-top:1px solid var(--line)}
+    .stats strong{display:block;font-size:clamp(1.55rem,2.3vw,2.25rem);letter-spacing:-.07em}
     .stats span{display:block;margin-top:6px;color:var(--muted);font-size:.72rem;line-height:1.4}
 
-    .portrait-wrap{position:relative;width:min(100%,475px);justify-self:end}
-    .portrait-shadow{position:absolute;inset:-20px 22px 24px -22px;border-radius:48% 48% 12px 12px;background:var(--blue);transform:rotate(-4deg)}
-    .portrait-shadow::before{content:"";position:absolute;width:74px;height:74px;right:-36px;top:42px;border-radius:50%;background:var(--orange)}
-    .portrait{position:relative;aspect-ratio:.84;overflow:hidden;border:8px solid #fff;border-radius:48% 48% 12px 12px;background:#dce9f8;box-shadow:var(--shadow)}
+    .portrait-wrap{position:relative;width:min(100%,460px);margin:0;justify-self:end}
+    .portrait{position:relative;aspect-ratio:.84;overflow:hidden;background:#dce9f8}
+    .portrait::before{content:"";position:absolute;z-index:2;inset:0;border:1px solid rgba(16,38,59,.11);pointer-events:none}
     .portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
-    .float-tag{position:absolute;z-index:3;padding:12px 16px;border-radius:999px;background:#fff;box-shadow:0 12px 35px rgba(16,38,59,.16);font-family:ui-monospace,monospace;font-size:.62rem;font-weight:850;letter-spacing:.06em;white-space:nowrap}
-    .tag-a{left:-46px;top:24%;color:var(--blue);transform:rotate(-3deg)}
-    .tag-b{right:-24px;bottom:34px}
-    .tag-b::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:#24ad60;box-shadow:0 0 0 4px rgba(36,173,96,.14)}
-
-    .marquee{overflow:hidden;padding:16px 0;background:var(--orange);color:#fff;font-size:.95rem;font-weight:880;letter-spacing:.12em;white-space:nowrap}
-    .marquee div{width:max-content;animation:slide 27s linear infinite}
-    .marquee b{margin-inline:20px;color:var(--ink)}
-    @keyframes slide{to{transform:translateX(-38%)}}
+    .portrait-caption{padding-top:15px;display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-family:ui-monospace,monospace;font-size:.58rem;font-weight:750;letter-spacing:.07em;line-height:1.45;text-transform:uppercase}
+    .portrait-caption strong{color:var(--ink);font-size:.66rem}
 
     .section{padding-block:clamp(92px,10vw,150px)}
-    .intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(50px,9vw,130px);align-items:end}
-    .editorial{margin:0;color:var(--navy);font-size:clamp(3rem,6vw,6.3rem);font-weight:850;letter-spacing:-.078em;line-height:.96}
+    .about-clean{border-top:1px solid var(--line);background:#fffdf8}
+    .about-intro{display:grid;grid-template-columns:.36fr 1.64fr;gap:60px}
+    .about-intro .section-label{margin:8px 0 0}
+    .intro-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:clamp(50px,8vw,112px);align-items:start}
+    .editorial{margin:0;color:var(--navy);font-size:clamp(2.9rem,5.4vw,5.7rem);font-weight:850;letter-spacing:-.078em;line-height:.96}
     .editorial em{color:var(--orange)}
     .intro-copy p{color:var(--muted);font-size:1.02rem;line-height:1.76}
-    .intro-copy .note{margin-top:30px;padding:18px 20px;border-left:4px solid var(--blue);background:#fff;color:var(--blue);font-size:.84rem;font-weight:780}
+    .principles{margin:32px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+    .principles li{padding:15px 0;display:grid;grid-template-columns:34px 1fr;gap:12px;border-bottom:1px solid var(--line);font-size:.79rem;font-weight:730;line-height:1.45}
+    .principles span{color:var(--orange);font-family:ui-monospace,monospace;font-size:.6rem;letter-spacing:.08em}
 
-    .capabilities{background:var(--navy);color:#fff}
+    .capabilities{border-top:1px solid var(--line);background:var(--paper);color:var(--ink)}
     .section-head{margin-bottom:56px;display:grid;grid-template-columns:1.3fr .7fr;gap:70px;align-items:end}
     .section-head h2{max-width:850px;margin-bottom:0;font-size:clamp(3.1rem,5.8vw,6rem);font-weight:860;letter-spacing:-.075em;line-height:.95}
-    .section-head>p{margin-bottom:0;color:rgba(255,255,255,.66);line-height:1.75}
+    .section-head>p{margin-bottom:0;color:var(--muted);line-height:1.75}
     .capability-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .capability{min-height:285px;padding:30px;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.15);background:#0d3a63}
-    .capability:nth-child(2){background:var(--blue)}
-    .capability:nth-child(3){background:var(--orange)}
-    .capability small{font-family:ui-monospace,monospace;font-size:.66rem;opacity:.7}
+    .capability{min-height:300px;padding:30px;display:flex;flex-direction:column;border:1px solid var(--line);background:rgba(255,255,255,.48);transition:transform .2s,border-color .2s,background .2s}
+    .capability:hover{transform:translateY(-4px);border-color:var(--blue);background:#fff}
+    .capability small{color:var(--blue);font-family:ui-monospace,monospace;font-size:.63rem;font-weight:800;letter-spacing:.08em}
+    .capability:nth-child(2) small{color:var(--orange)}
+    .capability:nth-child(3) small{color:#719000}
     .capability h3{margin:auto 0 15px;font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:-.055em;line-height:1}
-    .capability p{margin-bottom:0;font-size:.86rem;line-height:1.6;opacity:.72}
+    .capability p{margin-bottom:0;color:var(--muted);font-size:.84rem;line-height:1.6}
 
     .work-hero{padding-block:clamp(95px,11vw,165px) 70px}
     .work-hero h2{max-width:1040px;margin-bottom:0;font-size:clamp(4.5rem,9vw,9.8rem);font-weight:880;letter-spacing:-.085em;line-height:.88}
@@ -198,7 +199,8 @@
       .nav-links{position:fixed;z-index:60;right:16px;bottom:16px;left:16px;justify-content:center;background:rgba(245,242,234,.96);box-shadow:0 18px 50px rgba(16,38,59,.2)}
       .hero{min-height:auto;grid-template-columns:1fr;gap:90px}
       .portrait-wrap{width:min(85%,470px);justify-self:center}
-      .intro-grid,.section-head,.work-intro,.contact-head,.contact-stage{grid-template-columns:1fr}
+      .about-intro,.intro-grid,.section-head,.work-intro,.contact-head,.contact-stage{grid-template-columns:1fr}
+      .about-intro{gap:34px}
       .section-head,.work-intro{gap:26px}
       .availability{justify-self:start}
       .work-index{justify-content:flex-start}
@@ -213,9 +215,11 @@
       .shell{width:min(100% - 24px,560px)}
       .nav-cta{font-size:0}.nav-cta i{font-size:.88rem}
       .hero{padding-top:62px}
+      .hero-meta{align-items:flex-start;flex-direction:column;gap:12px}
       h1{font-size:clamp(3.1rem,15vw,4.8rem)}
       .stats{gap:8px}.stats span{font-size:.63rem}
-      .tag-a{left:-20px}.tag-b{right:-8px}
+      .portrait-wrap{width:100%}
+      .portrait-caption{font-size:.52rem}
       .project-slide{margin-bottom:22px;padding:27px 20px 24px}
       .slide-title h3{font-size:clamp(2.5rem,12vw,4.2rem)}
       .result-grid{gap:9px}
@@ -256,12 +260,12 @@
   <main>
     <section class="hero shell" id="about">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Head of Growth &amp; Automation</p>
+        <div class="hero-meta"><p class="eyebrow">Head of Growth &amp; Automation</p><span class="hero-location">Ho Chi Minh City · GMT+7</span></div>
         <h1>I turn growth<br>problems into<br><em>systems.</em></h1>
-        <p>10+ years across digital marketing, ecommerce, AI and system architecture — building lean operations that scale with clarity.</p>
+        <p class="hero-lede">10+ years across digital marketing, ecommerce, AI and system architecture — building lean operations that scale with clarity.</p>
         <div class="hero-actions">
-          <a class="btn" href="#projects">Explore project systems <i>↗</i></a>
-          <a class="plain-link" href="#contact">Discuss a problem ↗</a>
+          <a class="btn" href="#projects">View selected work <i>↗</i></a>
+          <a class="plain-link" href="#contact">Start a conversation ↗</a>
         </div>
         <div class="stats">
           <div><strong>10+</strong><span>Years in digital growth</span></div>
@@ -269,24 +273,22 @@
           <div><strong>10K+</strong><span>Orders per month</span></div>
         </div>
       </div>
-      <div class="portrait-wrap reveal">
-        <div class="portrait-shadow"></div>
+      <figure class="portrait-wrap reveal">
         <div class="portrait"><img src="/Anh_CV.jpg" alt="Drake Nguyễn" width="700" height="850"></div>
-        <div class="float-tag tag-a">GROWTH × SYSTEM × AI</div>
-        <div class="float-tag tag-b">AVAILABLE FOR SHARP PROBLEMS</div>
-      </div>
+        <figcaption class="portrait-caption"><strong>Drake Nguyễn</strong><span>Growth × Automation × AI</span></figcaption>
+      </figure>
     </section>
 
-    <div class="marquee" aria-hidden="true"><div>GROWTH STRATEGY <b>✦</b> AI AUTOMATION <b>✦</b> PERFORMANCE MARKETING <b>✦</b> CRM &amp; DATA FLOW <b>✦</b> TEAM OPERATIONS <b>✦</b> GROWTH STRATEGY <b>✦</b> AI AUTOMATION</div></div>
-
-    <section class="section shell">
-      <div class="section-label">01 / OPERATING PHILOSOPHY</div>
-      <div class="intro-grid">
-        <blockquote class="editorial">“Don't work harder.<br>Build a <em>better system.</em>”</blockquote>
-        <div class="intro-copy">
-          <p>I don't begin with a tool. I begin with the constraint: where time is lost, where data breaks, where customers drop and where teams get stuck.</p>
-          <p>Then I connect strategy, people, data and automation into one system that can be measured, improved and scaled.</p>
-          <div class="note">Lean by AI — less repetitive work, faster decisions, clearer ownership.</div>
+    <section class="about-clean section">
+      <div class="about-intro shell">
+        <div class="section-label">01 / ABOUT &amp; APPROACH</div>
+        <div class="intro-grid">
+          <blockquote class="editorial">“Don't work harder.<br>Build a <em>better system.</em>”</blockquote>
+          <div class="intro-copy">
+            <p>I don't begin with a tool. I begin with the constraint: where time is lost, where data breaks, where customers drop and where teams get stuck.</p>
+            <p>Then I connect strategy, people, data and automation into one system that can be measured, improved and scaled.</p>
+            <ul class="principles"><li><span>01</span>Business outcome before channel tactics</li><li><span>02</span>Simple workflows before complex stacks</li><li><span>03</span>Clear ownership before more headcount</li></ul>
+          </div>
         </div>
       </div>
     </section>
@@ -294,7 +296,7 @@
     <section class="capabilities section">
       <div class="shell">
         <div class="section-head">
-          <div><div class="section-label">02 / WHAT I BUILD</div><h2>From scattered activity to a growth operating system.</h2></div>
+          <div><div class="section-label">02 / WHAT I BUILD</div><h2>Three disciplines.<br>One growth system.</h2></div>
           <p>Strategy only matters when it reaches execution. I work across acquisition, automation and operations so the whole loop improves together.</p>
         </div>
         <div class="capability-grid">
