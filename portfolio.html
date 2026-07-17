@@ -105,6 +105,30 @@
     .capability h3{margin:auto 0 15px;font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:-.055em;line-height:1}
     .capability p{margin-bottom:0;color:var(--muted);font-size:.84rem;line-height:1.6}
 
+    .ai-stack{border-top:1px solid var(--line);background:#fffdf8}
+    .ai-stack-layout{display:grid;grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);gap:clamp(56px,8vw,110px);align-items:start}
+    .ai-stack-copy{position:sticky;top:110px}
+    .ai-stack-copy h2{max-width:520px;margin-bottom:0;font-size:clamp(3.2rem,5.4vw,5.7rem);font-weight:870;letter-spacing:-.078em;line-height:.94}
+    .ai-stack-copy h2 em{color:var(--blue);font-family:Georgia,"Times New Roman",serif;font-weight:400}
+    .ai-stack-copy>p{max-width:500px;margin:28px 0 0;color:var(--muted);font-size:.98rem;line-height:1.72}
+    .ai-loop{margin-top:38px;border-top:1px solid var(--line)}
+    .ai-loop div{padding:13px 0;display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line);font-family:ui-monospace,monospace;font-size:.61rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+    .ai-loop span{color:var(--orange)}
+    .ai-loop i{color:var(--muted);font-style:normal;font-weight:500}
+    .ai-tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .ai-tool{min-height:255px;display:flex;flex-direction:column;border:1px solid var(--line);background:var(--paper);transition:transform .2s,border-color .2s,box-shadow .2s}
+    .ai-tool:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 16px 40px rgba(16,38,59,.08)}
+    .ai-logo{height:126px;padding:25px;display:grid;place-items:center;border-bottom:1px solid var(--line);background:#fff}
+    .ai-logo img{width:auto;max-width:82%;max-height:68px;object-fit:contain}
+    .ai-tool.kling .ai-logo{background:#071725}
+    .ai-tool.kling .ai-logo img{max-height:82px}
+    .ai-tool.openai .ai-logo img,.ai-tool.did .ai-logo img{max-height:78px}
+    .ai-tool-body{padding:20px 22px 22px;display:flex;flex:1;flex-direction:column}
+    .ai-tool-head{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+    .ai-tool h3{margin:0;font-size:1.22rem;letter-spacing:-.045em}
+    .ai-tool small{color:var(--blue);font-family:ui-monospace,monospace;font-size:.51rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .ai-tool p{margin:auto 0 0;padding-top:16px;color:var(--muted);font-size:.72rem;line-height:1.5}
+
     .work-hero{padding-block:clamp(95px,11vw,165px) 70px}
     .work-hero h2{max-width:1040px;margin-bottom:0;font-size:clamp(4.5rem,9vw,9.8rem);font-weight:880;letter-spacing:-.085em;line-height:.88}
     .work-hero h2 em{color:var(--orange);font-family:Georgia,"Times New Roman",serif;font-weight:400}
@@ -206,6 +230,8 @@
       .work-index{justify-content:flex-start}
       .capability-grid{grid-template-columns:1fr}
       .capability{min-height:230px}
+      .ai-stack-layout{grid-template-columns:1fr}
+      .ai-stack-copy{position:static}
       .slide-head{grid-template-columns:1fr;gap:28px}
       .collage{height:520px}
       .footer-grid{grid-template-columns:1fr 1fr;gap:54px}
@@ -220,6 +246,8 @@
       .stats{gap:8px}.stats span{font-size:.63rem}
       .portrait-wrap{width:100%}
       .portrait-caption{font-size:.52rem}
+      .ai-tools-grid{grid-template-columns:1fr}
+      .ai-tool{min-height:230px}
       .project-slide{margin-bottom:22px;padding:27px 20px 24px}
       .slide-title h3{font-size:clamp(2.5rem,12vw,4.2rem)}
       .result-grid{gap:9px}
@@ -307,8 +335,29 @@
       </div>
     </section>
 
+    <section class="ai-stack section" aria-labelledby="ai-stack-title">
+      <div class="ai-stack-layout shell">
+        <div class="ai-stack-copy">
+          <div class="section-label">03 / AI OPERATING LAYER</div>
+          <h2 id="ai-stack-title">AI is not the strategy.<br>It is the <em>accelerator.</em></h2>
+          <p>Tools change fast. The operating logic does not: research the problem, create the right assets, automate the repetitive work and measure the outcome.</p>
+          <div class="ai-loop" aria-label="AI workflow"><div><span>01</span><b>Research</b><i>Understand</i></div><div><span>02</span><b>Create</b><i>Produce</i></div><div><span>03</span><b>Automate</b><i>Scale</i></div><div><span>04</span><b>Measure</b><i>Improve</i></div></div>
+        </div>
+        <div class="ai-tools-grid" aria-label="Selected AI tools">
+          <article class="ai-tool openai"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-openai.webp" alt="OpenAI logo" width="225" height="225" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>OpenAI</h3><small>Reasoning</small></div><p>Strategy synthesis, writing systems and rapid workflow prototypes.</p></div></article>
+          <article class="ai-tool"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-claude.webp" alt="Claude logo" width="426" height="320" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>Claude</h3><small>Analysis</small></div><p>Long-context analysis, structured thinking and documentation.</p></div></article>
+          <article class="ai-tool"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-gemini.webp" alt="Google Gemini logo" width="720" height="266" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>Gemini</h3><small>Multimodal</small></div><p>Research, multimodal understanding and Google-connected workflows.</p></div></article>
+          <article class="ai-tool kling"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-kling.webp" alt="Kling AI logo" width="280" height="280" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>Kling AI</h3><small>Video</small></div><p>Image-to-video production, motion concepts and visual storytelling.</p></div></article>
+          <article class="ai-tool"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-midjourney.webp" alt="Midjourney logo" width="335" height="280" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>Midjourney</h3><small>Visual</small></div><p>Art direction, campaign concepts and high-speed visual exploration.</p></div></article>
+          <article class="ai-tool"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-heygen.webp" alt="HeyGen logo" width="569" height="320" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>HeyGen</h3><small>Avatar</small></div><p>AI presenters, localization and scalable talking-head content.</p></div></article>
+          <article class="ai-tool"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-elevenlabs.webp" alt="ElevenLabs logo" width="568" height="320" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>ElevenLabs</h3><small>Voice</small></div><p>Voice design, multilingual narration and audio production.</p></div></article>
+          <article class="ai-tool did"><div class="ai-logo"><img src="/portfolio-assets/ai/ai-did.webp" alt="D-ID logo" width="280" height="280" loading="lazy"></div><div class="ai-tool-body"><div class="ai-tool-head"><h3>D-ID</h3><small>Video AI</small></div><p>Talking avatars, presenter videos and fast content adaptation.</p></div></article>
+        </div>
+      </div>
+    </section>
+
     <section class="work-hero shell" id="projects">
-      <div class="section-label">03 / PROJECT HIGHLIGHTS</div>
+      <div class="section-label">04 / PROJECT HIGHLIGHTS</div>
       <h2>Selected work.<br><em>Real results.</em></h2>
       <div class="work-intro">
         <p>Six growth systems across ecommerce, content, CRM and automation — organized like the original Canva portfolio, with the result first and the proof directly below.</p>
@@ -401,7 +450,7 @@
     <section class="contact section" id="contact">
       <div class="shell">
         <div class="contact-head">
-          <div><div class="section-label">04 / CONTACT · START WITH CONTEXT</div><h2 class="contact-title">Let's build<br>something <em>better.</em></h2></div>
+          <div><div class="section-label">05 / CONTACT · START WITH CONTEXT</div><h2 class="contact-title">Let's build<br>something <em>better.</em></h2></div>
           <div class="availability"><i></i><span>Available for sharp problems</span></div>
         </div>
         <div class="contact-stage">
