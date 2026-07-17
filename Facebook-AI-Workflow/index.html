@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d0c">
+  <title>Facebook AI Content Machine — Coaching 1 tháng cùng Drake Nguyễn</title>
+  <meta name="description" content="Chương trình coaching 1 tháng, 12 buổi dành cho marketer, chủ doanh nghiệp SME và freelancer muốn xây Facebook Content Machine bằng AI, Reels và automation.">
+  <meta name="keywords" content="Facebook Marketing AI, AI Content System, Content Machine, Facebook Reels, AI Automation, Coaching Marketing, Drake Nguyễn">
+  <meta name="author" content="Drake Nguyễn">
+  <link rel="canonical" href="https://drakenguyen.me/Facebook-AI-Workflow/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Facebook Marketing × AI Content System">
+  <meta property="og:description" content="Tạo 30 ngày nội dung Facebook trong 2 giờ. Xây hệ thống Content Machine cho cá nhân và doanh nghiệp.">
+  <meta property="og:url" content="https://drakenguyen.me/Facebook-AI-Workflow/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/info/refs/heads/main/Drakenguyen.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Facebook Marketing × AI Content System",
+    "description": "Chương trình coaching 1 tháng, 12 buổi giúp marketer, chủ doanh nghiệp SME và freelancer xây hệ thống nội dung Facebook, Reels và automation bằng AI.",
+    "provider": {
+      "@type": "Person",
+      "name": "Drake Nguyễn",
+      "sameAs": [
+        "https://m.me/drakenguyen.me",
+        "https://t.me/Drakenguyen"
+      ]
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "9990000",
+      "priceCurrency": "VND",
+      "availability": "https://schema.org/InStock"
+    },
+    "timeRequired": "P1M",
+    "numberOfCredits": 12,
+    "inLanguage": "vi"
+  }
+  </script>
+
+  <style>
+    :root {
+      --ink: #0b0d0c;
+      --ink-soft: #121512;
+      --panel: #171a17;
+      --panel-2: #1d211e;
+      --line: rgba(255, 255, 255, .12);
+      --line-strong: rgba(255, 255, 255, .22);
+      --paper: #f3f1e9;
+      --paper-2: #e9e6dc;
+      --lime: #d7ff3f;
+      --lime-deep: #9fcd00;
+      --violet: #a88cff;
+      --coral: #ff7a5c;
+      --text: #f5f6ef;
+      --muted: #acb1a8;
+      --shadow: 0 30px 90px rgba(0, 0, 0, .32);
+      --radius: 28px;
+      --font: "Be Vietnam Pro", system-ui, sans-serif;
+      --mono: "DM Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    img { display: block; max-width: 100%; }
+    ::selection { background: var(--lime); color: var(--ink); }
+
+    .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .mono { font-family: var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+    .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 56px; }
+    .section-head h2 { margin: 12px 0 0; max-width: 780px; font-size: clamp(38px, 5vw, 68px); line-height: 1.03; letter-spacing: -.055em; }
+    .section-head p { margin: 0; max-width: 520px; color: var(--muted); font-size: 17px; }
+    .section-number { color: var(--lime); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      border-bottom: 1px solid transparent;
+      transition: background .3s, border-color .3s, backdrop-filter .3s;
+    }
+    .site-header.scrolled { background: rgba(11, 13, 12, .84); border-color: var(--line); backdrop-filter: blur(18px); }
+    .nav { height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 11px; background: var(--lime); color: var(--ink); font-family: var(--mono); font-size: 15px; box-shadow: 0 0 0 5px rgba(215,255,63,.08); }
+    .brand-copy { line-height: 1.05; }
+    .brand-copy small { display: block; margin-top: 4px; color: var(--muted); font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: #d2d5cf; font-size: 13px; font-weight: 600; }
+    .nav-links a:not(.nav-cta) { position: relative; }
+    .nav-links a:not(.nav-cta)::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -7px; height: 1px; background: var(--lime); transition: right .25s; }
+    .nav-links a:hover::after { right: 0; }
+    .nav-cta, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--lime);
+      color: var(--ink);
+      padding: 13px 20px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s, background .25s;
+    }
+    .nav-cta:hover, .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(215,255,63,.18); background: #e1ff6c; }
+    .btn { min-height: 56px; padding: 16px 26px; }
+    .btn::after { content: "↗"; font-size: 18px; }
+    .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--line-strong); }
+    .btn-secondary::after { content: "↓"; }
+    .btn-secondary:hover { background: rgba(255,255,255,.06); box-shadow: none; }
+    .menu-btn { display: none; width: 46px; height: 46px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--text); cursor: pointer; }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 154px 0 86px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 760px;
+      height: 760px;
+      right: -300px;
+      top: -260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,140,255,.24), transparent 68%);
+      filter: blur(10px);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .13;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, #000, transparent 86%);
+    }
+    .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.08fr .92fr; gap: 58px; align-items: center; }
+    .hero .eyebrow { color: var(--lime); }
+    .hero h1 { margin: 22px 0 24px; font-size: clamp(54px, 7.3vw, 100px); line-height: .92; letter-spacing: -.072em; max-width: 780px; }
+    .hero h1 em { display: block; color: var(--lime); font-style: normal; }
+    .hero-copy > p { margin: 0; max-width: 660px; color: #c1c6bd; font-size: clamp(17px, 2vw, 21px); line-height: 1.65; }
+    .hero-copy > p strong { color: #fff; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 18px 28px; margin-top: 30px; color: var(--muted); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+    .hero-meta span { display: flex; align-items: center; gap: 8px; }
+    .hero-meta span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); }
+
+    .system-card {
+      position: relative;
+      background: rgba(23,26,23,.86);
+      border: 1px solid var(--line-strong);
+      border-radius: 34px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      transform: rotate(1.5deg);
+    }
+    .system-card::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; z-index: -1; border: 1px solid rgba(215,255,63,.2); border-radius: 34px; }
+    .window-bar { display: flex; align-items: center; justify-content: space-between; padding: 5px 4px 22px; color: var(--muted); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+    .dots { display: flex; gap: 6px; }
+    .dots i { width: 8px; height: 8px; border-radius: 50%; background: #4c514c; }
+    .dots i:first-child { background: var(--coral); }
+    .dots i:nth-child(2) { background: #ffd76a; }
+    .dots i:nth-child(3) { background: var(--lime); }
+    .metric-main { padding: 26px; border-radius: 23px; background: var(--lime); color: var(--ink); }
+    .metric-main small, .mini-metric small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; opacity: .66; }
+    .metric-main strong { display: block; margin: 8px 0 5px; font-size: clamp(54px, 6vw, 78px); line-height: 1; letter-spacing: -.07em; }
+    .metric-main p { margin: 0; font-weight: 700; font-size: 14px; }
+    .metrics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .mini-metric { min-height: 128px; padding: 21px; border-radius: 20px; background: #242824; border: 1px solid rgba(255,255,255,.08); }
+    .mini-metric strong { display: block; margin: 13px 0 7px; font-size: 30px; line-height: 1; letter-spacing: -.05em; }
+    .mini-metric span { color: var(--muted); font-size: 12px; }
+    .flow-line { display: flex; align-items: center; justify-content: space-between; gap: 5px; margin-top: 12px; padding: 15px 17px; border-radius: 18px; background: #101210; border: 1px solid var(--line); font-family: var(--mono); font-size: 9px; color: #c9cec6; text-transform: uppercase; }
+    .flow-line b { color: var(--lime); font-weight: 500; }
+    .flow-line i { color: #5f655e; font-style: normal; }
+    .price-chip { position: absolute; right: -18px; bottom: 42px; display: grid; place-items: center; width: 118px; height: 118px; border-radius: 50%; background: var(--violet); color: var(--ink); transform: rotate(-9deg); box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+    .price-chip span { display: block; text-align: center; font-weight: 800; font-size: 20px; line-height: 1.1; }
+    .price-chip small { display: block; font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: .1em; }
+
+    .fit { padding: 108px 0; background: var(--paper); color: var(--ink); }
+    .fit .eyebrow { color: #667100; }
+    .fit .section-head p { color: #5f625d; }
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .audience-card { position: relative; min-height: 310px; padding: 30px; border: 1px solid rgba(11,13,12,.13); border-radius: var(--radius); background: rgba(255,255,255,.45); overflow: hidden; transition: transform .3s, background .3s; }
+    .audience-card:hover { transform: translateY(-6px); background: #fff; }
+    .audience-card .index { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: var(--lime); font-family: var(--mono); font-size: 12px; }
+    .audience-card h3 { margin: 58px 0 13px; font-size: 28px; letter-spacing: -.04em; }
+    .audience-card p { margin: 0; color: #5d615b; font-size: 15px; }
+    .not-for { margin-top: 18px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-radius: 20px; background: var(--ink); color: var(--text); }
+    .not-for strong { color: var(--coral); }
+    .not-for p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .outcomes { padding: 112px 0; }
+    .outcomes-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .outcome { min-height: 255px; padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .outcome small { color: var(--lime); font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+    .outcome strong { display: block; margin: 42px 0 16px; font-size: 42px; line-height: 1; letter-spacing: -.06em; }
+    .outcome p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .curriculum { padding: 112px 0; background: #101310; }
+    .curriculum-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+    .week-tab { padding: 13px 18px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: #b7bcb4; cursor: pointer; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; transition: .25s; }
+    .week-tab:hover, .week-tab.active { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+    .week-panel { display: none; grid-template-columns: .72fr 1.28fr; gap: 18px; animation: rise .4s ease; }
+    .week-panel.active { display: grid; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .week-summary { padding: 34px; border-radius: var(--radius); background: var(--lime); color: var(--ink); }
+    .week-summary .mono { font-size: 11px; }
+    .week-summary h3 { margin: 80px 0 18px; font-size: 42px; line-height: 1.05; letter-spacing: -.055em; }
+    .week-summary p { margin: 0; font-size: 15px; }
+    .week-output { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(11,13,12,.2); }
+    .week-output strong { display: block; font-size: 17px; }
+    .sessions { display: grid; gap: 12px; }
+    .session { padding: 26px 28px; display: grid; grid-template-columns: 58px 1fr auto; gap: 20px; align-items: start; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); transition: border-color .25s, transform .25s; }
+    .session:hover { border-color: rgba(215,255,63,.38); transform: translateX(5px); }
+    .session-no { color: var(--lime); font-family: var(--mono); font-size: 12px; }
+    .session h4 { margin: -3px 0 9px; font-size: 21px; letter-spacing: -.025em; }
+    .session p { margin: 0; color: var(--muted); font-size: 14px; }
+    .session ul { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .session li { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; color: #c8cdc5; font-size: 10px; }
+    .deliverable { white-space: nowrap; color: var(--lime); font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }
+
+    .workflow { padding: 112px 0; background: var(--paper); color: var(--ink); }
+    .workflow .section-head p { color: #5f625d; }
+    .workflow-track { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid rgba(11,13,12,.2); }
+    .workflow-step { position: relative; min-height: 260px; padding: 26px 22px; border-right: 1px solid rgba(11,13,12,.15); }
+    .workflow-step:first-child { border-left: 1px solid rgba(11,13,12,.15); }
+    .workflow-step::after { content: "→"; position: absolute; right: -15px; top: 32px; z-index: 2; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: var(--lime); }
+    .workflow-step:last-child::after { display: none; }
+    .workflow-step .mono { color: #747b70; font-size: 10px; }
+    .workflow-step strong { display: block; margin: 72px 0 14px; font-size: 22px; letter-spacing: -.035em; }
+    .workflow-step p { margin: 0; color: #62665f; font-size: 13px; }
+
+    .assets { padding: 112px 0; }
+    .assets-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; align-items: start; }
+    .assets-copy { position: sticky; top: 120px; }
+    .assets-copy h2 { margin: 14px 0 22px; font-size: clamp(42px, 5vw, 68px); line-height: 1; letter-spacing: -.055em; }
+    .assets-copy p { margin: 0; color: var(--muted); }
+    .assets-list { border-top: 1px solid var(--line); }
+    .asset-row { display: grid; grid-template-columns: 70px 1fr auto; gap: 22px; align-items: center; min-height: 128px; border-bottom: 1px solid var(--line); }
+    .asset-row > span { color: var(--lime); font-family: var(--mono); font-size: 11px; }
+    .asset-row h3 { margin: 0 0 5px; font-size: 23px; letter-spacing: -.03em; }
+    .asset-row p { margin: 0; color: var(--muted); font-size: 13px; }
+    .asset-row b { padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; color: #c9cec7; font-family: var(--mono); font-size: 9px; font-weight: 500; text-transform: uppercase; }
+
+    .mentor { padding: 112px 0; background: var(--paper); color: var(--ink); }
+    .mentor-card { display: grid; grid-template-columns: .9fr 1.1fr; min-height: 650px; border-radius: 36px; overflow: hidden; background: #dedbd0; }
+    .mentor-photo { position: relative; min-height: 560px; background: #c9c6bb; overflow: hidden; }
+    .mentor-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .mentor-photo::after { content: "Drake Nguyễn"; position: absolute; left: 28px; bottom: 24px; padding: 9px 13px; border-radius: 999px; background: var(--lime); color: var(--ink); font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+    .mentor-copy { padding: clamp(38px, 6vw, 78px); display: flex; flex-direction: column; justify-content: center; }
+    .mentor-copy h2 { margin: 18px 0 24px; font-size: clamp(42px, 5vw, 70px); line-height: 1; letter-spacing: -.06em; }
+    .mentor-copy > p { margin: 0; color: #565b54; font-size: 16px; }
+    .mentor-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+    .mentor-tags span { padding: 9px 12px; border: 1px solid rgba(11,13,12,.18); border-radius: 999px; font-family: var(--mono); font-size: 9px; text-transform: uppercase; }
+    .mentor-quote { margin-top: 36px; padding: 22px 0 0; border-top: 1px solid rgba(11,13,12,.17); font-weight: 700; font-size: 19px; line-height: 1.55; }
+
+    .pricing { padding: 112px 0; overflow: hidden; }
+    .price-box { position: relative; display: grid; grid-template-columns: 1fr .82fr; gap: 40px; padding: clamp(34px, 6vw, 72px); border: 1px solid rgba(215,255,63,.32); border-radius: 38px; background: linear-gradient(135deg, #181c18, #0e100e); box-shadow: 0 0 0 1px rgba(255,255,255,.03), var(--shadow); overflow: hidden; }
+    .price-box::before { content: ""; position: absolute; width: 500px; height: 500px; right: -170px; bottom: -270px; border-radius: 50%; background: var(--lime); opacity: .1; filter: blur(20px); }
+    .price-copy h2 { margin: 16px 0 22px; font-size: clamp(42px, 5vw, 70px); line-height: 1; letter-spacing: -.06em; }
+    .price-copy > p { max-width: 560px; margin: 0; color: var(--muted); }
+    .includes { display: grid; grid-template-columns: 1fr 1fr; gap: 11px 24px; margin: 30px 0 0; padding: 0; list-style: none; }
+    .includes li { position: relative; padding-left: 24px; color: #d2d6cf; font-size: 14px; }
+    .includes li::before { content: "✓"; position: absolute; left: 0; color: var(--lime); font-weight: 800; }
+    .price-panel { position: relative; z-index: 1; padding: 30px; border-radius: 26px; background: var(--paper); color: var(--ink); }
+    .price-panel .label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+    .old-price { margin: 22px 0 0; color: #7d8179; font-size: 20px; text-decoration: line-through; }
+    .new-price { margin: 2px 0 8px; font-size: clamp(44px, 5vw, 64px); line-height: 1; font-weight: 800; letter-spacing: -.07em; }
+    .new-price small { font-size: 18px; letter-spacing: -.02em; }
+    .price-note { color: #60645d; font-size: 12px; }
+    .price-panel .btn { width: 100%; margin-top: 26px; background: var(--ink); color: var(--lime); }
+    .price-panel .btn:hover { background: #202420; }
+    .support-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 16px; color: #676b64; font-size: 11px; text-align: center; }
+
+    .faq { padding: 112px 0; background: var(--paper); color: var(--ink); }
+    .faq-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 80px; }
+    .faq h2 { margin: 14px 0 16px; font-size: clamp(44px, 5vw, 70px); line-height: 1; letter-spacing: -.06em; }
+    .faq-intro p { margin: 0; color: #62665e; }
+    .faq-list { border-top: 1px solid rgba(11,13,12,.2); }
+    .faq-item { border-bottom: 1px solid rgba(11,13,12,.2); }
+    .faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 0; border: 0; background: none; color: var(--ink); text-align: left; font-weight: 700; cursor: pointer; }
+    .faq-question span:last-child { width: 30px; height: 30px; display: grid; place-items: center; flex: 0 0 auto; border: 1px solid rgba(11,13,12,.2); border-radius: 50%; transition: transform .3s; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-answer p { margin: 0; padding: 0 50px 24px 0; color: #62665e; font-size: 14px; }
+    .faq-item.open .faq-question span:last-child { transform: rotate(45deg); }
+    .faq-item.open .faq-answer { max-height: 220px; }
+
+    .final-cta { padding: 120px 0 90px; text-align: center; }
+    .final-cta .eyebrow { color: var(--lime); }
+    .final-cta h2 { max-width: 980px; margin: 22px auto 24px; font-size: clamp(54px, 8vw, 104px); line-height: .94; letter-spacing: -.075em; }
+    .final-cta h2 span { color: var(--lime); }
+    .final-cta p { max-width: 650px; margin: 0 auto; color: var(--muted); font-size: 17px; }
+    .final-cta .hero-actions { justify-content: center; }
+
+    footer { padding: 30px 0 38px; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; color: var(--muted); font-size: 11px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a:hover { color: var(--lime); }
+
+    .mobile-bar { display: none; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 1020px) {
+      .hero-grid, .section-head, .assets-layout, .faq-layout { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .hero-copy { text-align: center; }
+      .hero-copy > p { margin-inline: auto; }
+      .hero-actions, .hero-meta { justify-content: center; }
+      .system-card { max-width: 620px; margin: 24px auto 0; transform: none; }
+      .section-head { gap: 20px; }
+      .section-head p { max-width: 680px; }
+      .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+      .week-panel { grid-template-columns: 1fr; }
+      .week-summary h3 { margin-top: 40px; }
+      .workflow-track { grid-template-columns: repeat(3, 1fr); }
+      .workflow-step:nth-child(3) { border-right: 1px solid rgba(11,13,12,.15); }
+      .workflow-step:nth-child(3)::after { display: none; }
+      .assets-copy { position: static; }
+      .mentor-card, .price-box { grid-template-columns: 1fr; }
+      .mentor-photo { min-height: 620px; }
+    }
+
+    @media (max-width: 780px) {
+      .container { width: min(100% - 28px, 1180px); }
+      .nav { height: 72px; }
+      .brand-copy { font-size: 14px; }
+      .nav-links { position: fixed; inset: 72px 0 0; display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 28px 20px; background: rgba(11,13,12,.98); transform: translateX(100%); transition: transform .3s ease; }
+      .nav-links.open { transform: none; }
+      .nav-links a { padding: 18px 8px; border-bottom: 1px solid var(--line); font-size: 20px; }
+      .nav-links .nav-cta { margin-top: 20px; border: 0; }
+      .menu-btn { display: grid; place-items: center; }
+      .hero { padding: 122px 0 76px; }
+      .hero h1 { font-size: clamp(49px, 14vw, 74px); }
+      .system-card { padding: 14px; border-radius: 25px; }
+      .system-card::before { display: none; }
+      .metric-main { padding: 22px; }
+      .price-chip { right: -6px; bottom: -34px; width: 96px; height: 96px; }
+      .section-head h2, .assets-copy h2, .mentor-copy h2, .price-copy h2, .faq h2 { font-size: 42px; }
+      .fit, .outcomes, .curriculum, .workflow, .assets, .mentor, .pricing, .faq { padding: 82px 0; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .audience-card { min-height: 250px; }
+      .audience-card h3 { margin-top: 42px; }
+      .not-for { align-items: flex-start; flex-direction: column; }
+      .session { grid-template-columns: 44px 1fr; padding: 22px 18px; }
+      .deliverable { grid-column: 2; }
+      .workflow-track { grid-template-columns: 1fr; border-top: 0; }
+      .workflow-step, .workflow-step:first-child { min-height: auto; padding: 26px 24px; border: 1px solid rgba(11,13,12,.15); border-bottom: 0; }
+      .workflow-step:last-child { border-bottom: 1px solid rgba(11,13,12,.15); }
+      .workflow-step::after, .workflow-step:nth-child(3)::after { display: grid; content: "↓"; right: 24px; top: auto; bottom: -15px; }
+      .workflow-step:last-child::after { display: none; }
+      .workflow-step strong { margin-top: 34px; }
+      .asset-row { grid-template-columns: 48px 1fr; padding: 22px 0; }
+      .asset-row b { grid-column: 2; justify-self: start; }
+      .mentor-card { border-radius: 26px; }
+      .mentor-photo { min-height: 460px; }
+      .mentor-copy { padding: 36px 24px; }
+      .price-box { padding: 26px 18px; border-radius: 28px; }
+      .price-panel { padding: 25px 20px; }
+      .includes { grid-template-columns: 1fr; }
+      .faq-layout { gap: 42px; }
+      .final-cta { padding: 90px 0 110px; }
+      .final-cta h2 { font-size: clamp(50px, 14vw, 76px); }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+      .mobile-bar { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 90; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 11px 11px 17px; border: 1px solid var(--line-strong); border-radius: 18px; background: rgba(20,23,20,.94); box-shadow: 0 16px 50px rgba(0,0,0,.45); backdrop-filter: blur(18px); }
+      .mobile-bar small { display: block; color: var(--muted); font-family: var(--mono); font-size: 8px; text-transform: uppercase; }
+      .mobile-bar strong { font-size: 16px; }
+      .mobile-bar a { padding: 12px 16px; border-radius: 12px; background: var(--lime); color: var(--ink); font-size: 12px; font-weight: 800; }
+    }
+
+    @media (max-width: 520px) {
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .hero-meta { flex-direction: column; align-items: center; }
+      .metrics-row { grid-template-columns: 1fr; }
+      .flow-line { font-size: 7px; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .outcome { min-height: 210px; }
+      .outcome strong { margin-top: 28px; }
+      .curriculum-controls { display: grid; grid-template-columns: 1fr 1fr; }
+      .week-tab { padding: 12px 8px; }
+      .week-summary { padding: 28px 22px; }
+      .week-summary h3 { font-size: 36px; }
+      .session { grid-template-columns: 1fr; gap: 10px; }
+      .deliverable { grid-column: 1; }
+      .mentor-photo { min-height: 360px; }
+      .new-price { font-size: 43px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Về đầu trang">
+        <span class="brand-mark">AI</span>
+        <span class="brand-copy">Facebook Content Machine<small>by Drake Nguyễn</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Điều hướng chính">
+        <a href="#ket-qua">Kết quả</a>
+        <a href="#lo-trinh">12 buổi</a>
+        <a href="#tai-nguyen">Tài nguyên</a>
+        <a href="#mentor">Mentor</a>
+        <a href="#hoc-phi">Học phí</a>
+        <a class="nav-cta" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Tư vấn lộ trình ↗</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Mở menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Coaching 1 tháng · 12 buổi</span>
+          <h1>Biến Facebook thành <em>Content Machine.</em></h1>
+          <p>Dành cho <strong>marketer, chủ doanh nghiệp và freelancer đã biết Marketing cơ bản</strong> nhưng muốn sản xuất nội dung nhanh hơn 5–10 lần bằng AI, Reels và Automation.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Nhận tư vấn 1:1</a>
+            <a class="btn btn-secondary" href="#lo-trinh">Xem lộ trình 12 buổi</a>
+          </div>
+          <div class="hero-meta">
+            <span>Học online trực tiếp</span>
+            <span>Thực hành trên business thật</span>
+            <span>Hỗ trợ xuyên suốt 30 ngày</span>
+          </div>
+        </div>
+
+        <div class="system-card reveal" aria-label="Mô phỏng hệ thống nội dung AI">
+          <div class="window-bar"><span>Content OS / Dashboard</span><span class="dots"><i></i><i></i><i></i></span></div>
+          <div class="metric-main">
+            <small>Mục tiêu năng suất</small>
+            <strong>5–10×</strong>
+            <p>Tốc độ sản xuất nội dung với hệ thống đúng</p>
+          </div>
+          <div class="metrics-row">
+            <div class="mini-metric"><small>Facebook posts</small><strong>30 ngày</strong><span>hoàn thiện trong khoảng 2 giờ</span></div>
+            <div class="mini-metric"><small>Reels scripts</small><strong>30 video</strong><span>xây trong một ngày sản xuất</span></div>
+          </div>
+          <div class="flow-line"><b>Insight</b><i>→</i><span>Content</span><i>→</i><span>Reels</span><i>→</i><span>Inbox</span><i>→</i><b>Sale</b></div>
+          <div class="price-chip"><span><small>Ưu đãi còn</small>9,99 triệu</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fit" id="phu-hop">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">Không dành cho người mới bắt đầu</span><h2>Đúng người. Đúng bài toán. Đúng tốc độ.</h2></div>
+          <p>Chương trình không dạy “AI là gì”, “Prompt là gì” hay cách đăng bài. Ta đi thẳng vào chiến lược, hệ thống và đầu ra có thể dùng ngay.</p>
+        </div>
+        <div class="audience-grid">
+          <article class="audience-card reveal"><span class="index">01</span><h3>Chủ doanh nghiệp SME</h3><p>Muốn team sản xuất đều hơn, giảm phụ thuộc từng cá nhân và biến nội dung thành một hệ thống hỗ trợ bán hàng.</p></article>
+          <article class="audience-card reveal"><span class="index">02</span><h3>Marketer 2–5 năm</h3><p>Đã biết xây kênh, chạy chiến dịch nhưng cần một workflow AI để tăng năng suất mà vẫn giữ chất lượng chiến lược.</p></article>
+          <article class="audience-card reveal"><span class="index">03</span><h3>Freelancer / chuyên gia</h3><p>Muốn xây thương hiệu cá nhân, duy trì nội dung đa định dạng và biến sự chú ý thành inbox, lead, khách hàng.</p></article>
+        </div>
+        <div class="not-for reveal"><strong>Chương trình sẽ không phù hợp nếu…</strong><p>Bạn chưa có nền tảng Marketing, chỉ muốn học vài prompt rời rạc hoặc kỳ vọng AI thay thế hoàn toàn tư duy và trải nghiệm thật.</p></div>
+      </div>
+    </section>
+
+    <section class="outcomes" id="ket-qua">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="section-number">01 / Kết quả</span><h2>Sau 30 ngày, bạn không chỉ có content. Bạn có một cỗ máy.</h2></div>
+          <p>Mỗi tuần đều có đầu ra cụ thể. Kết thúc chương trình, toàn bộ chiến lược, thư viện nội dung và workflow thuộc về bạn.</p>
+        </div>
+        <div class="outcomes-grid reveal">
+          <article class="outcome"><small>Strategy</small><strong>90 ngày</strong><p>Roadmap Facebook rõ trục nội dung, mục tiêu và nhịp triển khai.</p></article>
+          <article class="outcome"><small>Idea bank</small><strong>200+</strong><p>Ý tưởng được phân loại theo insight, pain point và hành trình mua.</p></article>
+          <article class="outcome"><small>Production</small><strong>30 + 30</strong><p>Bài Facebook hoàn chỉnh và kịch bản Reels có thể sản xuất ngay.</p></article>
+          <article class="outcome"><small>System</small><strong>01 OS</strong><p>Hệ thống bán tự động nối research, content, Reels, inbox và sale.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="curriculum" id="lo-trinh">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="section-number">02 / Lộ trình</span><h2>4 tuần. 12 buổi. Xây từ chiến lược đến hệ thống tăng trưởng.</h2></div>
+          <p>Chọn từng tuần để xem nội dung chi tiết. Mỗi buổi tập trung vào một “khối” của Content Machine và kết thúc bằng tài sản thực tế.</p>
+        </div>
+        <div class="curriculum-controls reveal" role="tablist" aria-label="Các tuần học">
+          <button class="week-tab active" role="tab" aria-selected="true" data-week="week-1">Tuần 1 · Strategy</button>
+          <button class="week-tab" role="tab" aria-selected="false" data-week="week-2">Tuần 2 · Content</button>
+          <button class="week-tab" role="tab" aria-selected="false" data-week="week-3">Tuần 3 · Reels</button>
+          <button class="week-tab" role="tab" aria-selected="false" data-week="week-4">Tuần 4 · Growth</button>
+        </div>
+
+        <div class="week-panel active" id="week-1" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Week 01 / Foundation</span><h3>AI-Powered Facebook Strategy</h3><p>Hiểu Facebook hiện tại, chốt trục nội dung và biến research thành kho insight có cấu trúc.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Roadmap 90 ngày + Content Matrix + 200 ý tưởng</strong></div></aside>
+          <div class="sessions">
+            <article class="session"><span class="session-no">01</span><div><h4>Facebook 2026 đang hoạt động như thế nào?</h4><p>Giải mã thuật toán phân phối, định dạng còn hiệu quả, tín hiệu nội dung đang chết dần và điểm nghẽn của kênh hiện tại.</p><ul><li>Audit fanpage</li><li>Audit profile</li><li>Gap analysis</li></ul></div><span class="deliverable">→ Roadmap 90 ngày</span></article>
+            <article class="session"><span class="session-no">02</span><div><h4>Content Pillars & Content Matrix</h4><p>Xây hệ trục Awareness – Engagement – Trust – Conversion và tỷ lệ 70% giá trị, 20% câu chuyện, 10% bán hàng theo thực tế thương hiệu.</p><ul><li>4 mục tiêu</li><li>Content pillars</li><li>Publishing mix</li></ul></div><span class="deliverable">→ Ma trận hoàn chỉnh</span></article>
+            <article class="session"><span class="session-no">03</span><div><h4>AI Research Engine</h4><p>Kết hợp ChatGPT, Claude và Perplexity để nghiên cứu khách hàng, bóc pain point, kiểm chứng insight và lưu dữ liệu cho cả team.</p><ul><li>Customer research</li><li>Insight mining</li><li>Pain-point map</li></ul></div><span class="deliverable">→ 200 content ideas</span></article>
+          </div>
+        </div>
+
+        <div class="week-panel" id="week-2" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Week 02 / Production</span><h3>Facebook Content Factory</h3><p>Biến một chủ đề thành hàng chục góc nhìn, sau đó sản xuất bài viết có chiều sâu mà vẫn giữ giọng thương hiệu.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Content Bank + 20 Story Post + 30 bài hoàn chỉnh</strong></div></aside>
+          <div class="sessions">
+            <article class="session"><span class="session-no">04</span><div><h4>Tạo 100 Content Angles</h4><p>Mở rộng một topic thành hệ góc nhìn: sai lầm, kinh nghiệm, case study, tranh luận, checklist, phản biện, hướng dẫn và chuyển đổi.</p><ul><li>Angle generator</li><li>Topic expansion</li><li>Anti-duplicate</li></ul></div><span class="deliverable">→ Content Bank</span></article>
+            <article class="session"><span class="session-no">05</span><div><h4>Storytelling bằng AI</h4><p>Huấn luyện AI viết theo trải nghiệm thật với Hero Journey, Before/After và Problem/Solution mà không tạo ra giọng văn “mùi AI”.</p><ul><li>Hero Journey</li><li>Before / After</li><li>Story extraction</li></ul></div><span class="deliverable">→ 20 Story Post</span></article>
+            <article class="session"><span class="session-no">06</span><div><h4>AI Copywriting đa định dạng</h4><p>Từ cùng một insight, tái cấu trúc thành status, carousel, long-form post và Facebook Notes với hook, flow và CTA phù hợp.</p><ul><li>Status</li><li>Carousel</li><li>Long-form</li><li>Facebook Notes</li></ul></div><span class="deliverable">→ 30 bài hoàn chỉnh</span></article>
+          </div>
+        </div>
+
+        <div class="week-panel" id="week-3" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Week 03 / Video</span><h3>Facebook Reels System</h3><p>Xây công thức video riêng, chuẩn hóa pipeline từ ý tưởng đến shotlist và hoàn thiện batch video đầu tiên.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Reels Formula + 30 kịch bản + 10 video đầu tiên</strong></div></aside>
+          <div class="sessions">
+            <article class="session"><span class="session-no">07</span><div><h4>Thuật toán Reels & Retention</h4><p>Đọc hành vi người xem qua Hook, Retention và Completion Rate; tìm cấu trúc có khả năng lặp lại cho đúng thị trường.</p><ul><li>3-second hook</li><li>Retention curve</li><li>Completion rate</li></ul></div><span class="deliverable">→ Công thức Reels riêng</span></article>
+            <article class="session"><span class="session-no">08</span><div><h4>AI Script Factory</h4><p>Thiết kế pipeline ChatGPT → Script → Storyboard → Shotlist để một ý tưởng nhanh chóng trở thành kế hoạch quay rõ ràng.</p><ul><li>Script</li><li>Storyboard</li><li>Shotlist</li><li>Batch planning</li></ul></div><span class="deliverable">→ 30 kịch bản Reels</span></article>
+            <article class="session"><span class="session-no">09</span><div><h4>AI Video Production</h4><p>Kết hợp ChatGPT, Kling, Vidu và CapCut để tạo footage, edit nhanh, chuẩn hóa caption, nhịp dựng và nhận diện.</p><ul><li>ChatGPT</li><li>Kling</li><li>Vidu</li><li>CapCut</li></ul></div><span class="deliverable">→ 10 video đầu tiên</span></article>
+          </div>
+        </div>
+
+        <div class="week-panel" id="week-4" role="tabpanel">
+          <aside class="week-summary"><span class="mono">Week 04 / Scale</span><h3>Growth & Automation</h3><p>Nối các mảnh rời thành một workflow vận hành được, tạo funnel và xây kế hoạch scale 90 ngày tiếp theo.</p><div class="week-output"><span class="mono">Đầu ra tuần</span><strong>Workflow bán tự động + Funnel + Growth Plan 90 ngày</strong></div></aside>
+          <div class="sessions">
+            <article class="session"><span class="session-no">10</span><div><h4>Xây AI Content Workflow</h4><p>Chuẩn hóa luồng Google Sheet → AI → Facebook Post → Reels Script, phân vai người – AI và tạo điểm kiểm soát chất lượng.</p><ul><li>Google Sheet</li><li>Prompt chain</li><li>Quality gate</li><li>Automation map</li></ul></div><span class="deliverable">→ Hệ thống bán tự động</span></article>
+            <article class="session"><span class="session-no">11</span><div><h4>Facebook Funnel</h4><p>Thiết kế hành trình Nội dung → Inbox → Lead → Sale; gắn CTA, kịch bản hội thoại và điểm theo dõi chuyển đổi.</p><ul><li>Content CTA</li><li>Inbox flow</li><li>Lead capture</li><li>Sale handoff</li></ul></div><span class="deliverable">→ Funnel cá nhân</span></article>
+            <article class="session"><span class="session-no">12</span><div><h4>Scale & Optimization</h4><p>Review content, fanpage, Reels và funnel; chọn đòn bẩy tăng trưởng, KPI và lịch tối ưu cho chu kỳ 90 ngày tiếp theo.</p><ul><li>Performance review</li><li>KPI</li><li>Scale map</li></ul></div><span class="deliverable">→ Kế hoạch 90 ngày</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow" id="he-thong">
+      <div class="container">
+        <div class="section-head reveal"><div><span class="section-number">03 / Hệ thống</span><h2>Một workflow nối thẳng từ insight đến doanh thu.</h2></div><p>Không tạo nội dung rời rạc. Mỗi bước nhận dữ liệu từ bước trước và tạo đầu vào rõ ràng cho bước sau.</p></div>
+        <div class="workflow-track reveal">
+          <article class="workflow-step"><span class="mono">Input 01</span><strong>Research Engine</strong><p>Khách hàng, pain point, xu hướng và ngôn ngữ thị trường.</p></article>
+          <article class="workflow-step"><span class="mono">Build 02</span><strong>Content Bank</strong><p>200+ ý tưởng được gắn pillar, angle và mục tiêu hành trình.</p></article>
+          <article class="workflow-step"><span class="mono">Produce 03</span><strong>Post + Reels</strong><p>AI hỗ trợ viết, biến đổi định dạng và chuẩn bị kế hoạch sản xuất.</p></article>
+          <article class="workflow-step"><span class="mono">Convert 04</span><strong>Inbox + Lead</strong><p>CTA và kịch bản hội thoại kéo sự chú ý về điểm chuyển đổi.</p></article>
+          <article class="workflow-step"><span class="mono">Improve 05</span><strong>Data Loop</strong><p>Dữ liệu hiệu suất quay lại cải thiện insight, hook và nội dung mới.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="assets" id="tai-nguyen">
+      <div class="container assets-layout">
+        <div class="assets-copy reveal"><span class="eyebrow">Bộ tài nguyên đi kèm</span><h2>Không học xong rồi tự bơi.</h2><p>Bạn nhận toàn bộ framework, template và thư viện dùng trong chương trình để tiếp tục vận hành sau 30 ngày.</p></div>
+        <div class="assets-list reveal">
+          <article class="asset-row"><span>01</span><div><h3>100 Hook Facebook</h3><p>Phân loại theo mục tiêu thu hút, tranh luận, giáo dục và chuyển đổi.</p></div><b>Template</b></article>
+          <article class="asset-row"><span>02</span><div><h3>50 CTA chuyển đổi</h3><p>CTA cho comment, inbox, lead magnet, offer và nội dung bán hàng.</p></div><b>Template</b></article>
+          <article class="asset-row"><span>03</span><div><h3>20 Story Framework</h3><p>Khung kể chuyện giúp khai thác trải nghiệm thật và giọng thương hiệu.</p></div><b>Framework</b></article>
+          <article class="asset-row"><span>04</span><div><h3>30 Reels Framework</h3><p>Cấu trúc hook, diễn biến và payoff cho nhiều mục tiêu video.</p></div><b>Framework</b></article>
+          <article class="asset-row"><span>05</span><div><h3>AI Prompt Library</h3><p>Hệ prompt cho research, angles, copywriting, script và repurpose.</p></div><b>AI asset</b></article>
+          <article class="asset-row"><span>06</span><div><h3>Content & Reels System</h3><p>Content Matrix, Reels Scripts và workflow vận hành trên Google Sheet.</p></div><b>Workflow</b></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mentor" id="mentor">
+      <div class="container">
+        <div class="mentor-card reveal">
+          <div class="mentor-photo"><img src="../Drakenguyen.png" alt="Drake Nguyễn — mentor Facebook Marketing và AI Automation" loading="lazy"></div>
+          <div class="mentor-copy"><span class="eyebrow">Người đồng hành</span><h2>Drake Nguyễn</h2><p>Background CMO, Digital Marketing và AI Automation. Drake tập trung vào cách đưa AI vào vận hành thực tế: giảm thao tác lặp lại, tăng tốc sản xuất và giữ tư duy Marketing ở trung tâm.</p><div class="mentor-tags"><span>CMO mindset</span><span>AI Automation</span><span>n8n Workflow</span><span>Facebook Growth</span><span>Content Systems</span></div><div class="mentor-quote">“Mục tiêu không phải học thêm một công cụ. Mục tiêu là xây được hệ thống giúp bạn tạo kết quả nhanh và đều hơn.”</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="hoc-phi">
+      <div class="container">
+        <div class="price-box reveal">
+          <div class="price-copy"><span class="eyebrow">Coaching thực chiến 1 tháng</span><h2>Xây hệ thống một lần. Dùng cho nhiều chiến dịch.</h2><p>Học trực tiếp, làm trên chính business hoặc thương hiệu của bạn. Sau mỗi buổi đều có phần việc, tài sản và bước tiếp theo rõ ràng.</p><ul class="includes"><li>12 buổi coaching trực tiếp</li><li>Roadmap Facebook 90 ngày</li><li>Content Bank 200+ ý tưởng</li><li>30 bài + 30 kịch bản Reels</li><li>10 video đầu tiên</li><li>Prompt & Framework Library</li><li>Funnel cá nhân</li><li>Workflow bán tự động</li></ul></div>
+          <aside class="price-panel"><span class="label">Ưu đãi chương trình hiện tại</span><div class="old-price">20.000.000đ</div><div class="new-price">9.990.000<small>đ</small></div><div class="price-note">Mức phí trọn gói cho toàn bộ chương trình 1 tháng.</div><a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Đăng ký tư vấn</a><div class="support-row">Trao đổi trước để xác định chương trình có phù hợp với bạn hay không.</div></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container faq-layout">
+        <div class="faq-intro reveal"><span class="eyebrow">Câu hỏi thường gặp</span><h2>Trước khi bắt đầu.</h2><p>Nếu còn câu hỏi khác, bạn có thể nhắn trực tiếp để được tư vấn theo đúng tình trạng kênh và business.</p></div>
+        <div class="faq-list reveal">
+          <article class="faq-item open"><button class="faq-question" aria-expanded="true"><span>Tôi chưa từng dùng AI chuyên sâu có học được không?</span><span>+</span></button><div class="faq-answer"><p>Có, nếu bạn đã có nền tảng Marketing và từng trực tiếp làm nội dung hoặc vận hành kênh. Chương trình không yêu cầu biết code, nhưng sẽ không dành thời gian dạy các khái niệm AI quá cơ bản.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Chương trình là khóa học quay sẵn hay học trực tiếp?</span><span>+</span></button><div class="faq-answer"><p>Đây là chương trình coaching trực tiếp trong 1 tháng. Nội dung được áp dụng vào chính fanpage, profile, offer và business của học viên.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Tôi có cần dùng toàn bộ ChatGPT, Claude, Perplexity, Kling, Vidu?</span><span>+</span></button><div class="faq-answer"><p>Không bắt buộc phải dùng mọi công cụ ngay từ đầu. Ta sẽ chọn stack phù hợp với mục tiêu, nguồn lực, kỹ năng và ngân sách hiện tại của bạn.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>AI có làm nội dung bị đại trà và mất giọng thương hiệu không?</span><span>+</span></button><div class="faq-answer"><p>Có thể, nếu dùng prompt rời rạc. Vì vậy chương trình tập trung xây context, dữ liệu nguồn, tiêu chuẩn biên tập và quality gate để AI hỗ trợ tốc độ nhưng con người vẫn kiểm soát chiến lược và giọng thương hiệu.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Sau 1 tháng tôi có thể tự vận hành tiếp không?</span><span>+</span></button><div class="faq-answer"><p>Mục tiêu của chương trình là bàn giao một hệ thống bạn có thể tiếp tục dùng và cải tiến. Bạn giữ toàn bộ Content Matrix, prompt, framework, script, workflow và kế hoạch 90 ngày.</p></div></article>
+          <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Học phí 9.990.000đ đã bao gồm những gì?</span><span>+</span></button><div class="faq-answer"><p>Đã bao gồm 12 buổi coaching trong 1 tháng, các buổi audit và review, bộ template – prompt – framework, tài sản nội dung được xây trong chương trình và hỗ trợ xuyên suốt quá trình học.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container reveal"><span class="eyebrow">Facebook Marketing × AI Content System</span><h2>Đừng tạo thêm vài bài viết. Hãy xây một <span>Content Machine.</span></h2><p>Nhắn Drake để audit nhanh tình trạng hiện tại và xác định chương trình có phù hợp với bạn, đội ngũ hoặc business hay không.</p><div class="hero-actions"><a class="btn" href="https://zalo.me/0968333342" target="_blank" rel="noopener">Nhắn Zalo cho Drake</a><a class="btn btn-secondary" href="https://m.me/drakenguyen.me" target="_blank" rel="noopener">Nhắn qua Messenger</a></div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row"><div>© <span id="year"></span> Drake Nguyễn. Facebook AI Content Machine.</div><div class="footer-links"><a href="https://zalo.me/0968333342" target="_blank" rel="noopener">Zalo</a><a href="https://m.me/drakenguyen.me" target="_blank" rel="noopener">Messenger</a><a href="https://t.me/Drakenguyen" target="_blank" rel="noopener">Telegram</a></div></div>
+  </footer>
+
+  <div class="mobile-bar"><div><small>Ưu đãi trọn khóa</small><strong>9.990.000đ</strong></div><a href="https://zalo.me/0968333342" target="_blank" rel="noopener">Tư vấn ngay</a></div>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 20);
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      document.body.classList.toggle('menu-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.textContent = open ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
+
+    document.querySelectorAll('.week-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.week-tab').forEach(item => {
+          item.classList.remove('active');
+          item.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.week-panel').forEach(panel => panel.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.dataset.week).classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const opening = !item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(row => {
+          row.classList.remove('open');
+          row.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (opening) {
+          item.classList.add('open');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reducedMotion && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
