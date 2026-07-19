@@ -537,6 +537,30 @@
     .method-card h3 { margin: 26px 0 10px; font-size: 23px; letter-spacing: -.035em; }
     .method-card p { margin: 0; color: #62665f; font-size: 13px; }
 
+    .reasons { padding: 112px 0; background: #090b0a; overflow: hidden; }
+    .reasons .section-head { margin-bottom: 52px; }
+    .reasons .section-head p { color: var(--muted); }
+    .reasons-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .reason-card { position: relative; display: flex; min-height: 580px; flex-direction: column; border: 1px solid rgba(255,255,255,.1); border-radius: 28px; background: #111411; overflow: hidden; transition: transform .3s, border-color .3s; }
+    .reason-card:hover { transform: translateY(-6px); border-color: rgba(215,255,63,.38); }
+    .reason-card.featured { grid-column: 1 / -1; min-height: 470px; display: grid; grid-template-columns: 1.08fr .92fr; }
+    .reason-visual { position: relative; min-height: 280px; background: #0e110f; overflow: hidden; }
+    .featured .reason-visual { min-height: 470px; order: 2; }
+    .reason-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,11,10,.48), transparent 55%); pointer-events: none; }
+    .reason-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .reason-card:hover .reason-visual img { transform: scale(1.035); }
+    .reason-no { position: absolute; z-index: 2; top: 18px; left: 18px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; color: var(--ink); background: var(--lime); font-family: var(--mono); font-size: 11px; font-weight: 700; box-shadow: 0 8px 25px rgba(0,0,0,.3); }
+    .reason-copy { display: flex; padding: 30px; flex: 1; flex-direction: column; }
+    .featured .reason-copy { padding: clamp(34px, 5vw, 64px); justify-content: center; }
+    .reason-copy small { color: var(--lime); font-family: var(--mono); font-size: 9px; letter-spacing: .09em; text-transform: uppercase; }
+    .reason-copy h3 { margin: 15px 0 14px; max-width: 620px; font-size: clamp(26px, 3vw, 42px); line-height: 1.05; letter-spacing: -.05em; }
+    .reason-card:not(.featured) .reason-copy h3 { font-size: clamp(25px, 2.5vw, 34px); }
+    .reason-copy p { margin: 0; color: #aeb4ab; font-size: 14px; line-height: 1.7; }
+    .reason-benefit { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 24px; color: #e9ece6; font-size: 12px; font-weight: 700; }
+    .reason-benefit::before { content: "✓"; display: grid; place-items: center; width: 22px; height: 22px; flex: 0 0 auto; border-radius: 50%; color: var(--ink); background: var(--lime); font-size: 11px; }
+    .reasons-cta { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 16px; padding: 28px 32px; border: 1px solid rgba(215,255,63,.3); border-radius: 24px; background: linear-gradient(100deg, rgba(215,255,63,.1), rgba(168,140,255,.08)); }
+    .reasons-cta strong { max-width: 740px; font-size: clamp(20px, 2.5vw, 30px); line-height: 1.25; letter-spacing: -.035em; }
+
     .assets { padding: 112px 0; }
     .assets-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; align-items: start; }
     .assets-copy { position: sticky; top: 120px; }
@@ -623,6 +647,7 @@
       .workflow-route { grid-template-columns: repeat(5, minmax(210px, 1fr)); overflow-x: auto; padding: 0 2px 12px; scroll-snap-type: x proximity; scrollbar-color: rgba(215,255,63,.35) transparent; }
       .workflow-node { scroll-snap-align: start; }
       .workflow-feedback { grid-template-columns: auto 1fr; }
+      .reason-card.featured { grid-template-columns: 1fr 1fr; }
       .feedback-steps { grid-column: 1 / -1; flex-wrap: wrap; padding-left: 68px; }
       .assets-copy { position: static; }
       .mentor-card, .price-box { grid-template-columns: 1fr; }
@@ -645,7 +670,7 @@
       .metric-main { padding: 22px; }
       .price-chip { right: -6px; bottom: -34px; width: 96px; height: 96px; }
       .section-head h2, .assets-copy h2, .mentor-copy h2, .price-copy h2, .faq h2 { font-size: 42px; }
-      .fit, .outcomes, .curriculum, .workflow, .assets, .mentor, .pricing, .faq { padding: 82px 0; }
+      .fit, .outcomes, .curriculum, .workflow, .reasons, .assets, .mentor, .pricing, .faq { padding: 82px 0; }
       .proof { padding-bottom: 82px; }
       .proof-head { align-items: flex-start; flex-direction: column; }
       .proof-grid { grid-template-columns: 1fr; }
@@ -664,6 +689,10 @@
       .workflow-node:not(:last-child)::after { content: "↓"; top: auto; right: 24px; bottom: -22px; }
       .node-copy { padding-top: 27px; }
       .workflow-feedback { grid-template-columns: 48px 1fr; padding: 18px; }
+      .reasons-grid { grid-template-columns: 1fr; }
+      .reason-card.featured { grid-column: auto; display: flex; min-height: 580px; }
+      .featured .reason-visual { min-height: 280px; order: 0; }
+      .reasons-cta { align-items: flex-start; flex-direction: column; }
       .feedback-steps { grid-column: 1 / -1; padding-left: 0; }
       .method-grid { grid-template-columns: 1fr; }
       .asset-row { grid-template-columns: 48px 1fr; padding: 22px 0; }
@@ -1007,6 +1036,38 @@
           <article class="method-card"><span>Phương pháp 02</span><h3>Xây tài sản ngay trong buổi</h3><p>Giảng viên cùng học viên thực hành trực tiếp để mỗi buổi đều hoàn thành một phần của hệ thống.</p></article>
           <article class="method-card"><span>Phương pháp 03</span><h3>Cá nhân hóa theo nguồn lực</h3><p>Hệ thống được thiết kế theo ngành, sản phẩm, năng lực, nền tảng và mục tiêu thực tế của từng học viên.</p></article>
         </div>
+      </div>
+    </section>
+
+    <section class="reasons" id="vi-sao-hoc-ngay">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">04 / Vì sao học ngay</span><h2>Đừng chỉ theo kịp AI.<br><span class="accent">Hãy biến nó thành lợi thế.</span></h2></div>
+          <p>AI không còn là lợi thế nếu chỉ dừng ở biết công cụ. Lợi thế thật sự nằm ở tốc độ, quy trình và tài sản nội dung bạn có thể tái sử dụng mỗi ngày.</p>
+        </div>
+        <div class="reasons-grid">
+          <article class="reason-card featured reveal">
+            <div class="reason-copy"><small>Lý do 01 / Tốc độ</small><h3>Thị trường không chờ bạn học chậm.</h3><p>Tốc độ sản xuất content đang trở thành lợi thế cạnh tranh. Khi người khác có thể kiểm thử 20 góc nội dung, bạn không thể mất cả tuần cho một bài viết.</p><div class="reason-benefit">Rút ngắn từ ý tưởng đến xuất bản</div></div>
+            <div class="reason-visual"><span class="reason-no">01</span><img src="reasons/reason-01-speed.webp" alt="Đồng hồ và luồng nội dung minh họa lợi thế tốc độ sản xuất content" loading="lazy" width="800" height="600"></div>
+          </article>
+          <article class="reason-card reveal">
+            <div class="reason-visual"><span class="reason-no">02</span><img src="reasons/reason-02-system.webp" alt="Các công cụ rời rạc hội tụ thành một hệ thống sản xuất nội dung" loading="lazy" width="800" height="600"></div>
+            <div class="reason-copy"><small>Lý do 02 / Hệ thống</small><h3>Biết công cụ chưa tạo ra kết quả.</h3><p>ChatGPT, Kling hay CapCut chỉ là từng mảnh rời. Kết quả chỉ ổn định khi research, insight, Brand Voice, script, visual và quality control được nối thành workflow.</p><div class="reason-benefit">Biến công cụ thành quy trình lặp lại</div></div>
+          </article>
+          <article class="reason-card reveal">
+            <div class="reason-visual"><span class="reason-no">03</span><img src="reasons/reason-03-batch.webp" alt="Lịch nội dung được tổ chức theo batch giúp tiết kiệm nguồn lực" loading="lazy" width="800" height="600"></div>
+            <div class="reason-copy"><small>Lý do 03 / Hiệu suất</small><h3>Chi phí content đang âm thầm tăng.</h3><p>Không có batch production, đội ngũ liên tục chuyển việc, sửa đi sửa lại và thiếu tài sản tái sử dụng. Hệ thống tốt giúp tăng sản lượng mà không đánh đổi chất lượng.</p><div class="reason-benefit">Tiết kiệm thời gian và nguồn lực</div></div>
+          </article>
+          <article class="reason-card reveal">
+            <div class="reason-visual"><span class="reason-no">04</span><img src="reasons/reason-04-video.webp" alt="Khung video dọc cùng storyboard và biểu đồ retention" loading="lazy" width="800" height="600"></div>
+            <div class="reason-copy"><small>Lý do 04 / Video-first</small><h3>Video ngắn đã là kỹ năng bắt buộc.</h3><p>Facebook, TikTok và YouTube đều ưu tiên trải nghiệm video. Người làm Marketing cần hiểu hook, retention, storyboard và nhịp dựng, không chỉ biết viết caption.</p><div class="reason-benefit">Tự sản xuất video có chiến lược</div></div>
+          </article>
+          <article class="reason-card reveal">
+            <div class="reason-visual"><span class="reason-no">05</span><img src="reasons/reason-05-assets.webp" alt="Kho tài sản nội dung kết nối với roadmap tăng trưởng 90 ngày" loading="lazy" width="800" height="600"></div>
+            <div class="reason-copy"><small>Lý do 05 / Tích lũy</small><h3>Tài sản nội dung tạo lợi thế dài hạn.</h3><p>Insight Database, Prompt Library, Script Bank và Visual Asset Library giúp mỗi chu kỳ sau nhanh, chính xác và nhất quán hơn chu kỳ trước.</p><div class="reason-benefit">Sở hữu hệ thống dùng được 30-90 ngày</div></div>
+          </article>
+        </div>
+        <div class="reasons-cta reveal"><strong>Bạn không cần thêm 10 công cụ. Bạn cần một hệ thống biết dùng đúng công cụ vào đúng bước.</strong><a class="btn primary" href="#lo-trinh">Xem chương trình 10 buổi <span>→</span></a></div>
       </div>
     </section>
 
