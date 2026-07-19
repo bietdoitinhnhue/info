@@ -445,15 +445,93 @@
 
     .workflow { padding: 112px 0; background: var(--paper); color: var(--ink); }
     .workflow .section-head p { color: #5f625d; }
-    .workflow-track { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid rgba(11,13,12,.2); }
-    .workflow-step { position: relative; min-height: 260px; padding: 26px 22px; border-right: 1px solid rgba(11,13,12,.15); }
-    .workflow-step:first-child { border-left: 1px solid rgba(11,13,12,.15); }
-    .workflow-step::after { content: "→"; position: absolute; right: -15px; top: 32px; z-index: 2; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: var(--lime); }
-    .workflow-step:last-child::after { display: none; }
-    .workflow-step .mono { color: #747b70; font-size: 10px; }
-    .workflow-step strong { display: block; margin: 72px 0 14px; font-size: 22px; letter-spacing: -.035em; }
-    .workflow-step p { margin: 0; color: #62665f; font-size: 13px; }
-    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 54px; }
+    .workflow-visual {
+      position: relative;
+      padding: 26px;
+      border-radius: 34px;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 88% 8%, rgba(168,140,255,.17), transparent 27%),
+        radial-gradient(circle at 10% 92%, rgba(215,255,63,.11), transparent 30%),
+        #0d100e;
+      border: 1px solid rgba(11,13,12,.2);
+      box-shadow: 0 34px 90px rgba(11,13,12,.18);
+      overflow: hidden;
+    }
+    .workflow-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .16;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, #000, transparent 88%);
+    }
+    .workflow-visual-head { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 22px; margin-bottom: 24px; }
+    .workflow-visual-title { display: flex; align-items: center; gap: 11px; color: var(--lime); font-family: var(--mono); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
+    .workflow-visual-title::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 6px rgba(215,255,63,.1); }
+    .workflow-legend { display: flex; flex-wrap: wrap; gap: 8px; }
+    .workflow-legend span { padding: 7px 10px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; color: #aeb4ab; font-family: var(--mono); font-size: 8px; letter-spacing: .06em; text-transform: uppercase; }
+    .workflow-legend i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--lime); }
+    .workflow-legend span:nth-child(2) i { background: var(--violet); }
+    .workflow-legend span:nth-child(3) i { background: var(--coral); }
+    .workflow-route { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .workflow-node {
+      --node-accent: var(--lime);
+      position: relative;
+      display: flex;
+      min-width: 0;
+      min-height: 330px;
+      padding: 18px;
+      flex-direction: column;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      overflow: visible;
+      transition: transform .3s, border-color .3s, background .3s;
+    }
+    .workflow-node:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--node-accent) 50%, transparent); background: linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.035)); }
+    .workflow-node:nth-child(2) { --node-accent: var(--violet); }
+    .workflow-node:nth-child(3) { --node-accent: #6fe7ff; }
+    .workflow-node:nth-child(4) { --node-accent: var(--coral); }
+    .workflow-node:nth-child(5) { --node-accent: var(--lime); }
+    .workflow-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      z-index: 4;
+      top: 44px;
+      right: -22px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--lime);
+      color: var(--ink);
+      font-weight: 900;
+      box-shadow: 0 0 0 5px #0d100e;
+    }
+    .node-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .node-index { color: #777e75; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; }
+    .node-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; color: var(--node-accent); background: color-mix(in srgb, var(--node-accent) 11%, transparent); border: 1px solid color-mix(in srgb, var(--node-accent) 32%, transparent); }
+    .node-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .node-copy { padding-top: 38px; }
+    .node-copy small { color: var(--node-accent); font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+    .node-copy h3 { margin: 9px 0 12px; color: #f6f7f2; font-size: 20px; line-height: 1.12; letter-spacing: -.04em; }
+    .node-copy p { margin: 0; color: #9ea49b; font-size: 12px; line-height: 1.55; }
+    .node-output { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1); }
+    .node-output span { display: block; margin-bottom: 5px; color: #71776f; font-family: var(--mono); font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+    .node-output strong { display: flex; align-items: center; gap: 7px; color: #e8ebe5; font-size: 11px; line-height: 1.4; }
+    .node-output strong::before { content: ""; width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: var(--node-accent); box-shadow: 0 0 12px color-mix(in srgb, var(--node-accent) 60%, transparent); }
+    .workflow-feedback { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; margin-top: 18px; padding: 19px 22px; border: 1px solid rgba(215,255,63,.25); border-radius: 20px; background: rgba(215,255,63,.07); }
+    .feedback-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--lime); color: var(--ink); font-size: 27px; font-weight: 800; }
+    .feedback-copy span { color: var(--lime); font-family: var(--mono); font-size: 8px; letter-spacing: .09em; text-transform: uppercase; }
+    .feedback-copy strong { display: block; margin-top: 4px; color: #f4f6ef; font-size: 14px; }
+    .feedback-steps { display: flex; align-items: center; gap: 7px; color: #c7ccc4; font-size: 10px; }
+    .feedback-steps span { padding: 7px 9px; border-radius: 999px; background: rgba(255,255,255,.06); white-space: nowrap; }
+    .feedback-steps i { color: var(--lime); font-style: normal; }
+    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 34px; }
     .method-card { padding: 26px; border-radius: 22px; background: rgba(255,255,255,.5); border: 1px solid rgba(11,13,12,.14); }
     .method-card span { color: #6e746a; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
     .method-card h3 { margin: 26px 0 10px; font-size: 23px; letter-spacing: -.035em; }
@@ -542,9 +620,10 @@
       .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
       .week-panel { grid-template-columns: 1fr; }
       .week-summary h3 { margin-top: 40px; }
-      .workflow-track { grid-template-columns: repeat(3, 1fr); }
-      .workflow-step:nth-child(3) { border-right: 1px solid rgba(11,13,12,.15); }
-      .workflow-step:nth-child(3)::after { display: none; }
+      .workflow-route { grid-template-columns: repeat(5, minmax(210px, 1fr)); overflow-x: auto; padding: 0 2px 12px; scroll-snap-type: x proximity; scrollbar-color: rgba(215,255,63,.35) transparent; }
+      .workflow-node { scroll-snap-align: start; }
+      .workflow-feedback { grid-template-columns: auto 1fr; }
+      .feedback-steps { grid-column: 1 / -1; flex-wrap: wrap; padding-left: 68px; }
       .assets-copy { position: static; }
       .mentor-card, .price-box { grid-template-columns: 1fr; }
       .mentor-photo { min-height: 620px; }
@@ -578,12 +657,14 @@
       .deliverable { grid-column: 2; }
       .session-body { padding: 0 18px 22px 62px; }
       .lesson-grid { grid-template-columns: 1fr; }
-      .workflow-track { grid-template-columns: 1fr; border-top: 0; }
-      .workflow-step, .workflow-step:first-child { min-height: auto; padding: 26px 24px; border: 1px solid rgba(11,13,12,.15); border-bottom: 0; }
-      .workflow-step:last-child { border-bottom: 1px solid rgba(11,13,12,.15); }
-      .workflow-step::after, .workflow-step:nth-child(3)::after { display: grid; content: "↓"; right: 24px; top: auto; bottom: -15px; }
-      .workflow-step:last-child::after { display: none; }
-      .workflow-step strong { margin-top: 34px; }
+      .workflow-visual { padding: 17px; border-radius: 25px; }
+      .workflow-visual-head { align-items: flex-start; flex-direction: column; }
+      .workflow-route { grid-template-columns: 1fr; gap: 14px; overflow: visible; padding: 0; }
+      .workflow-node { min-height: 290px; scroll-snap-align: none; }
+      .workflow-node:not(:last-child)::after { content: "↓"; top: auto; right: 24px; bottom: -22px; }
+      .node-copy { padding-top: 27px; }
+      .workflow-feedback { grid-template-columns: 48px 1fr; padding: 18px; }
+      .feedback-steps { grid-column: 1 / -1; padding-left: 0; }
       .method-grid { grid-template-columns: 1fr; }
       .asset-row { grid-template-columns: 48px 1fr; padding: 22px 0; }
       .asset-row b { grid-column: 2; justify-self: start; }
@@ -876,13 +957,50 @@
 
     <section class="workflow" id="he-thong">
       <div class="container">
-        <div class="section-head reveal"><div><span class="section-number">03 / Hệ thống</span><h2>Một workflow nối từ research đến dữ liệu tối ưu.</h2></div><p>Không tạo nội dung rời rạc. Mỗi bước nhận dữ liệu từ bước trước, tạo đầu vào rõ ràng cho bước sau và được lưu lại để tái sử dụng.</p></div>
-        <div class="workflow-track reveal">
-          <article class="workflow-step"><span class="mono">Input 01</span><strong>Research Engine</strong><p>Khách hàng, pain point, xu hướng và ngôn ngữ thị trường.</p></article>
-          <article class="workflow-step"><span class="mono">Build 02</span><strong>Idea Bank</strong><p>Insight được mở rộng thành pillar, angle, hook và lịch nội dung.</p></article>
-          <article class="workflow-step"><span class="mono">Write 03</span><strong>Post + Script</strong><p>AI hỗ trợ viết, humanize và chuyển một ý tưởng thành nhiều định dạng.</p></article>
-          <article class="workflow-step"><span class="mono">Produce 04</span><strong>AI Video</strong><p>Storyboard, asset, voice, animation, editing, subtitle và xuất bản.</p></article>
-          <article class="workflow-step"><span class="mono">Improve 05</span><strong>Data Loop</strong><p>Dữ liệu hiệu suất quay lại cải thiện insight, hook và quy trình mới.</p></article>
+        <div class="section-head reveal"><div><span class="section-number">03 / Hệ thống</span><h2 id="workflow-title">Một workflow nối từ research đến dữ liệu tối ưu.</h2></div><p>Không tạo nội dung rời rạc. Mỗi bước nhận dữ liệu từ bước trước, tạo đầu vào rõ ràng cho bước sau và được lưu lại để tái sử dụng.</p></div>
+        <div class="workflow-visual reveal" aria-labelledby="workflow-title">
+          <div class="workflow-visual-head">
+            <div class="workflow-visual-title">Content Operating System</div>
+            <div class="workflow-legend" aria-hidden="true"><span><i></i>Input</span><span><i></i>Production</span><span><i></i>Optimization</span></div>
+          </div>
+
+          <div class="workflow-route">
+            <article class="workflow-node">
+              <div class="node-top"><span class="node-index">01 / INPUT</span><div class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5M7.5 10.5h6M10.5 7.5v6"></path></svg></div></div>
+              <div class="node-copy"><small>Research Engine</small><h3>Hiểu thị trường</h3><p>Thu thập khách hàng, pain point, xu hướng và ngôn ngữ họ thực sự sử dụng.</p></div>
+              <div class="node-output"><span>Output</span><strong>Insight Database</strong></div>
+            </article>
+
+            <article class="workflow-node">
+              <div class="node-top"><span class="node-index">02 / BUILD</span><div class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M8 14c-1.3-1.2-2-2.8-2-4.5a6 6 0 0 1 12 0c0 1.7-.7 3.3-2 4.5-.8.7-1 1.4-1 2H9c0-.6-.2-1.3-1-2Z"></path></svg></div></div>
+              <div class="node-copy"><small>Idea Bank</small><h3>Mở rộng insight</h3><p>Chuyển dữ liệu thành pillar, angle, hook, series và lịch nội dung có chủ đích.</p></div>
+              <div class="node-output"><span>Output</span><strong>Content Matrix</strong></div>
+            </article>
+
+            <article class="workflow-node">
+              <div class="node-top"><span class="node-index">03 / WRITE</span><div class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h5"></path></svg></div></div>
+              <div class="node-copy"><small>Post + Script</small><h3>Viết và humanize</h3><p>AI hỗ trợ viết, biên tập Brand Voice và chuyển một ý tưởng thành nhiều định dạng.</p></div>
+              <div class="node-output"><span>Output</span><strong>Post + Reels Script</strong></div>
+            </article>
+
+            <article class="workflow-node">
+              <div class="node-top"><span class="node-index">04 / PRODUCE</span><div class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m10 9 5 3-5 3z"></path></svg></div></div>
+              <div class="node-copy"><small>AI Video</small><h3>Sản xuất và xuất bản</h3><p>Storyboard, visual asset, voice, animation, editing, subtitle và publishing.</p></div>
+              <div class="node-output"><span>Output</span><strong>Published Content</strong></div>
+            </article>
+
+            <article class="workflow-node">
+              <div class="node-top"><span class="node-index">05 / IMPROVE</span><div class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.8-4M4 4v5h5M4 13a8 8 0 0 0 14.8 4M20 20v-5h-5"></path></svg></div></div>
+              <div class="node-copy"><small>Data Loop</small><h3>Tìm winning pattern</h3><p>Đọc hiệu suất để nhận ra hook, format và chủ đề cần phát triển thành phiên bản mới.</p></div>
+              <div class="node-output"><span>Output</span><strong>Optimization Pattern</strong></div>
+            </article>
+          </div>
+
+          <div class="workflow-feedback">
+            <div class="feedback-icon" aria-hidden="true">↺</div>
+            <div class="feedback-copy"><span>Continuous Feedback Loop</span><strong>Dữ liệu tốt quay lại làm research và nội dung mới chính xác hơn.</strong></div>
+            <div class="feedback-steps" aria-label="Đo lường, tìm pattern, điều chỉnh và tái sản xuất"><span>Đo lường</span><i>→</i><span>Tìm pattern</span><i>→</i><span>Điều chỉnh</span><i>→</i><span>Tái sản xuất</span></div>
+          </div>
         </div>
         <div class="method-grid reveal">
           <article class="method-card"><span>Phương pháp 01</span><h3>Hiểu nguyên lý trước</h3><p>Học viên nắm tư duy và biết vì sao một công cụ hoặc workflow được sử dụng trước khi bắt đầu thao tác.</p></article>
