@@ -1896,10 +1896,10 @@
             </div>
             <div class="goal-stack">
               <section class="goal-block emergency-goal">
-                <div class="goal-block-head"><div><span>Quỹ 01</span><strong>Quỹ khẩn cấp</strong></div><small>Tự trích từ thu nhập</small></div>
+                <div class="goal-block-head"><div><span>Quỹ 01</span><strong>Quỹ khẩn cấp</strong></div><small>Nhập số tiền cụ thể</small></div>
                 <div class="finance-fields two-columns">
                   <label class="finance-field"><span>Hiện đang có</span><span class="finance-input-wrap"><input id="emergencyCurrent" data-finance-currency type="text" inputmode="numeric" value="30.000.000"><b>VNĐ</b></span></label>
-                  <label class="finance-field"><span>Mục tiêu bảo vệ</span><span class="finance-input-wrap"><input id="emergencyTargetMonths" type="number" min="1" max="24" step="1" value="6"><b>tháng chi tiêu</b></span></label>
+                  <label class="finance-field"><span>Số tiền mục tiêu</span><span class="finance-input-wrap"><input id="emergencyGoalAmount" data-finance-currency type="text" inputmode="numeric" value="72.000.000"><b>VNĐ</b></span></label>
                   <label class="finance-field"><span>Hoàn thành trong</span><span class="finance-input-wrap"><input id="emergencyDeadlineMonths" type="number" min="1" max="120" step="1" value="18"><b>tháng</b></span></label>
                   <label class="finance-field auto-field"><span>Tự động trích mỗi tháng</span><span class="finance-input-wrap"><input id="emergencyContribution" type="text" value="2.333.000" readonly aria-live="polite"><b>VNĐ</b></span></label>
                 </div>
@@ -1917,24 +1917,24 @@
               </section>
 
               <section class="goal-block investment-goal">
-                <div class="goal-block-head"><div><span>Quỹ 03</span><strong>Đầu tư dài hạn</strong></div><small>Tính theo lãi kép kỳ vọng</small></div>
+                <div class="goal-block-head"><div><span>Quỹ 03</span><strong>Đầu tư dài hạn</strong></div><small>Cuốn chiếu theo số thực góp</small></div>
                 <div class="finance-fields two-columns">
                   <label class="finance-field"><span>Vốn đầu tư hiện có</span><span class="finance-input-wrap"><input id="investmentCurrent" data-finance-currency type="text" inputmode="numeric" value="0"><b>VNĐ</b></span></label>
                   <label class="finance-field"><span>Số tiền mục tiêu</span><span class="finance-input-wrap"><input id="investmentGoalAmount" data-finance-currency type="text" inputmode="numeric" value="200.000.000"><b>VNĐ</b></span></label>
                   <label class="finance-field"><span>Thời hạn đầu tư</span><span class="finance-input-wrap"><input id="investmentDeadlineYears" type="number" min="1" max="50" step="1" value="10"><b>năm</b></span></label>
                   <label class="finance-field"><span>Lợi suất kỳ vọng</span><span class="finance-input-wrap"><input id="investmentExpectedReturn" type="number" min="0" max="100" step="0.5" value="10"><b>%/năm</b></span></label>
-                  <label class="finance-field auto-field full"><span>Tự động đầu tư mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyInvestment" type="text" value="1.000.000" readonly aria-live="polite"><b>VNĐ · giới hạn 1 triệu - 1 tỷ</b></span></label>
+                  <label class="finance-field full"><span>Số tiền thực góp mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyInvestment" data-finance-currency type="text" inputmode="numeric" value="1.000.000"><b>VNĐ · 1 triệu - 1 tỷ</b></span></label>
                 </div>
               </section>
 
               <section class="goal-block risk-goal">
-                <div class="goal-block-head"><div><span>Quỹ 04</span><strong>Đầu tư rủi ro</strong></div><small>Biến động cao · giới hạn vốn riêng</small></div>
+                <div class="goal-block-head"><div><span>Quỹ 04</span><strong>Đầu tư rủi ro</strong></div><small>Cuốn chiếu theo số thực góp</small></div>
                 <div class="finance-fields two-columns">
                   <label class="finance-field"><span>Vốn rủi ro hiện có</span><span class="finance-input-wrap"><input id="riskInvestmentCurrent" data-finance-currency type="text" inputmode="numeric" value="0"><b>VNĐ</b></span></label>
                   <label class="finance-field"><span>Số tiền mục tiêu</span><span class="finance-input-wrap"><input id="riskInvestmentGoalAmount" data-finance-currency type="text" inputmode="numeric" value="50.000.000"><b>VNĐ</b></span></label>
                   <label class="finance-field"><span>Thời hạn đầu tư</span><span class="finance-input-wrap"><input id="riskInvestmentDeadlineYears" type="number" min="1" max="50" step="1" value="5"><b>năm</b></span></label>
                   <label class="finance-field"><span>Lợi suất giả định</span><span class="finance-input-wrap"><input id="riskInvestmentExpectedReturn" type="number" min="0" max="200" step="0.5" value="12"><b>%/năm</b></span></label>
-                  <label class="finance-field auto-field full"><span>Tự động trích mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyRiskInvestment" type="text" value="613.000" readonly aria-live="polite"><b>VNĐ · có thể về 0 khi đủ mục tiêu</b></span></label>
+                  <label class="finance-field full"><span>Số tiền thực góp mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyRiskInvestment" data-finance-currency type="text" inputmode="numeric" value="613.000"><b>VNĐ · tối đa 1 tỷ</b></span></label>
                 </div>
               </section>
             </div>
@@ -1949,7 +1949,7 @@
         </div>
 
         <section class="fund-balance-card" aria-labelledby="fundBalanceTitle">
-          <div class="fund-balance-head"><div><span>Tổng quan tài sản</span><h3 id="fundBalanceTitle">Bốn quỹ của bạn</h3></div><small>Theo dõi số dư, mục tiêu và khoản trích hằng tháng</small></div>
+          <div class="fund-balance-head"><div><span>Tổng quan tài sản</span><h3 id="fundBalanceTitle">Bốn quỹ của bạn</h3></div><small>Quỹ an toàn theo mục tiêu tiền · đầu tư dự phóng từ số thực góp</small></div>
           <div class="fund-balance-grid">
             <article class="emergency" id="fundEmergencyCard">
               <header><i>01</i><div><span>Quỹ khẩn cấp</span><small>Số dư hiện tại</small></div><b id="fundEmergencyProgress">0%</b></header>
@@ -1964,12 +1964,12 @@
             <article class="long-term" id="fundInvestmentCard">
               <header><i>03</i><div><span>Đầu tư dài hạn</span><small>Số dư hiện tại</small></div><b id="fundInvestmentProgress">0%</b></header>
               <strong id="fundInvestmentBalance">0 ₫</strong><div class="fund-progress"><i></i></div>
-              <footer><span><small>Trích mỗi tháng</small><b id="fundInvestmentPlan">+0 ₫</b></span><span><small>Mục tiêu</small><b id="fundInvestmentTarget">0 ₫</b></span></footer>
+              <footer><span><small>Thực góp/tháng</small><b id="fundInvestmentPlan">+0 ₫</b></span><span><small>Dự phóng cuối kỳ</small><b id="fundInvestmentTarget">0 ₫</b></span></footer>
             </article>
             <article class="risk" id="fundRiskCard">
               <header><i>04</i><div><span>Đầu tư rủi ro</span><small>Số dư hiện tại</small></div><b id="fundRiskProgress">0%</b></header>
               <strong id="fundRiskBalance">0 ₫</strong><div class="fund-progress"><i></i></div>
-              <footer><span><small>Trích mỗi tháng</small><b id="fundRiskPlan">+0 ₫</b></span><span><small>Mục tiêu</small><b id="fundRiskTarget">0 ₫</b></span></footer>
+              <footer><span><small>Thực góp/tháng</small><b id="fundRiskPlan">+0 ₫</b></span><span><small>Dự phóng cuối kỳ</small><b id="fundRiskTarget">0 ₫</b></span></footer>
             </article>
           </div>
         </section>
