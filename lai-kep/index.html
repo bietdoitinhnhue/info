@@ -1917,13 +1917,24 @@
               </section>
 
               <section class="goal-block investment-goal">
-                <div class="goal-block-head"><div><span>Quỹ 03</span><strong>Mục tiêu đầu tư</strong></div><small>Tính theo lãi kép kỳ vọng</small></div>
+                <div class="goal-block-head"><div><span>Quỹ 03</span><strong>Đầu tư dài hạn</strong></div><small>Tính theo lãi kép kỳ vọng</small></div>
                 <div class="finance-fields two-columns">
                   <label class="finance-field"><span>Vốn đầu tư hiện có</span><span class="finance-input-wrap"><input id="investmentCurrent" data-finance-currency type="text" inputmode="numeric" value="0"><b>VNĐ</b></span></label>
                   <label class="finance-field"><span>Số tiền mục tiêu</span><span class="finance-input-wrap"><input id="investmentGoalAmount" data-finance-currency type="text" inputmode="numeric" value="200.000.000"><b>VNĐ</b></span></label>
                   <label class="finance-field"><span>Thời hạn đầu tư</span><span class="finance-input-wrap"><input id="investmentDeadlineYears" type="number" min="1" max="50" step="1" value="10"><b>năm</b></span></label>
                   <label class="finance-field"><span>Lợi suất kỳ vọng</span><span class="finance-input-wrap"><input id="investmentExpectedReturn" type="number" min="0" max="100" step="0.5" value="10"><b>%/năm</b></span></label>
                   <label class="finance-field auto-field full"><span>Tự động đầu tư mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyInvestment" type="text" value="1.000.000" readonly aria-live="polite"><b>VNĐ · giới hạn 1 triệu - 1 tỷ</b></span></label>
+                </div>
+              </section>
+
+              <section class="goal-block risk-goal">
+                <div class="goal-block-head"><div><span>Quỹ 04</span><strong>Đầu tư rủi ro</strong></div><small>Biến động cao · giới hạn vốn riêng</small></div>
+                <div class="finance-fields two-columns">
+                  <label class="finance-field"><span>Vốn rủi ro hiện có</span><span class="finance-input-wrap"><input id="riskInvestmentCurrent" data-finance-currency type="text" inputmode="numeric" value="0"><b>VNĐ</b></span></label>
+                  <label class="finance-field"><span>Số tiền mục tiêu</span><span class="finance-input-wrap"><input id="riskInvestmentGoalAmount" data-finance-currency type="text" inputmode="numeric" value="50.000.000"><b>VNĐ</b></span></label>
+                  <label class="finance-field"><span>Thời hạn đầu tư</span><span class="finance-input-wrap"><input id="riskInvestmentDeadlineYears" type="number" min="1" max="50" step="1" value="5"><b>năm</b></span></label>
+                  <label class="finance-field"><span>Lợi suất giả định</span><span class="finance-input-wrap"><input id="riskInvestmentExpectedReturn" type="number" min="0" max="200" step="0.5" value="12"><b>%/năm</b></span></label>
+                  <label class="finance-field auto-field full"><span>Tự động trích mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyRiskInvestment" type="text" value="613.000" readonly aria-live="polite"><b>VNĐ · có thể về 0 khi đủ mục tiêu</b></span></label>
                 </div>
               </section>
             </div>
@@ -1937,6 +1948,16 @@
           <article><span>Dự kiến sạch nợ</span><strong id="debtFreeSummary">-</strong><small id="debtFreeSummaryNote">Theo chiến lược đang chọn</small></article>
         </div>
 
+        <section class="fund-balance-card" aria-labelledby="fundBalanceTitle">
+          <div class="fund-balance-head"><div><span>Số dư tài sản</span><h3 id="fundBalanceTitle">Bốn quỹ của bạn</h3></div><small>Số lớn là số dư hiện tại · dòng dưới là khoản tự trích mỗi tháng</small></div>
+          <div class="fund-balance-grid">
+            <article class="emergency"><span>Quỹ khẩn cấp</span><strong id="fundEmergencyBalance">0 ₫</strong><small id="fundEmergencyPlan">+0 ₫/tháng</small></article>
+            <article class="savings"><span>Quỹ tiết kiệm</span><strong id="fundSavingsBalance">0 ₫</strong><small id="fundSavingsPlan">+0 ₫/tháng</small></article>
+            <article class="long-term"><span>Đầu tư dài hạn</span><strong id="fundInvestmentBalance">0 ₫</strong><small id="fundInvestmentPlan">+0 ₫/tháng</small></article>
+            <article class="risk"><span>Đầu tư rủi ro</span><strong id="fundRiskBalance">0 ₫</strong><small id="fundRiskPlan">+0 ₫/tháng</small></article>
+          </div>
+        </section>
+
         <div class="pillar-grid" role="group" aria-label="Ba trụ cột tài chính">
           <article class="pillar obligation">
             <span class="pillar-index">Trụ cột 01</span><h3>Nghĩa vụ</h3><strong id="obligationTotal">0 ₫</strong>
@@ -1948,7 +1969,7 @@
           </article>
           <article class="pillar growth">
             <span class="pillar-index">Trụ cột 03</span><h3>Tăng trưởng</h3><strong id="growthTotal">0 ₫</strong>
-            <p>Đầu tư dài hạn vào danh mục Stock</p><div class="pillar-share" id="growthShare">0% thu nhập</div>
+            <p>Đầu tư dài hạn + quỹ đầu tư rủi ro</p><div class="pillar-share" id="growthShare">0% thu nhập</div>
           </article>
         </div>
 
