@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Tích Lũy</title>
+  <rect width="64" height="64" rx="18" fill="#10261f"/>
+  <path d="M14 46V35a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v11H14Z" fill="#b8f36b"/>
+  <path d="M27 46V25a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v21H27Z" fill="#b8f36b"/>
+  <path d="M40 46V16a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v30H40Z" fill="#b8f36b"/>
+  <path d="m17 25 10-8 8 3 12-10" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  <path d="m42 10h5v5" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+</svg>
