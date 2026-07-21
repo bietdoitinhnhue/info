@@ -1880,8 +1880,8 @@
             </div>
             <div class="finance-fields two-columns">
               <label class="finance-field full"><span>Thu nhập ròng mỗi tháng</span><span class="finance-input-wrap"><input id="financeIncome" data-finance-currency type="text" inputmode="numeric" value="30.000.000"><b>VNĐ</b></span></label>
-              <label class="finance-field full"><span>Để dành trả nợ bắt buộc/tháng</span><span class="finance-input-wrap"><input id="monthlyDebtReserve" data-finance-currency type="text" inputmode="numeric" value="5.000.000"><b>VNĐ</b></span></label>
-              <label class="finance-field full"><span>Trả nợ tăng tốc thêm</span><span class="finance-input-wrap"><input id="debtExtraPayment" data-finance-currency type="text" inputmode="numeric" value="1.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field full"><span>Số tiền trả nợ tối thiểu/tháng</span><span class="finance-input-wrap"><input id="monthlyDebtReserve" data-finance-currency type="text" inputmode="numeric" value="5.000.000"><b>VNĐ</b></span></label>
+              <div class="auto-debt-sweep full" aria-live="polite"><span>Phần dư tự động trả nhanh</span><strong id="autoDebtExtraDisplay">0 ₫</strong><small>Thu nhập − chi tiêu − các quỹ mục tiêu − nợ tối thiểu</small></div>
               <label class="finance-field"><span>Chi tiêu thiết yếu</span><span class="finance-input-wrap"><input id="essentialSpending" data-finance-currency type="text" inputmode="numeric" value="12.000.000"><b>VNĐ</b></span></label>
               <label class="finance-field"><span>Ngân sách gia đình</span><span class="finance-input-wrap"><input id="familyBudget" data-finance-currency type="text" inputmode="numeric" value="2.500.000"><b>VNĐ</b></span></label>
               <label class="finance-field"><span>Thiện nguyện</span><span class="finance-input-wrap"><input id="charityBudget" data-finance-currency type="text" inputmode="numeric" value="500.000"><b>VNĐ</b></span></label>
@@ -1965,7 +1965,7 @@
 
       <div class="finance-panel" id="debtWorkspace" role="tabpanel" aria-labelledby="debtTab" data-finance-panel="debt" hidden>
         <div class="debt-header" id="debt-workspace">
-          <div><span class="finance-kicker">Debt Freedom Lab</span><h2>Chọn chiến lược trả nợ</h2><p>Ngân sách trả nợ cố định gồm tổng tiền tối thiểu và khoản trả thêm. Khi một khoản kết thúc, số tiền được tự động cuốn sang khoản tiếp theo.</p></div>
+          <div><span class="finance-kicker">Debt Freedom Lab</span><h2>Chọn chiến lược trả nợ</h2><p>Ngân sách trả nợ gồm mức tối thiểu và toàn bộ dòng tiền còn dư sau các mục tiêu. Khi một khoản kết thúc, số tiền được tự động cuốn sang khoản tiếp theo.</p></div>
         </div>
 
         <div class="strategy-switcher" role="group" aria-label="Chiến lược trả nợ">
@@ -1978,7 +1978,7 @@
           <article><span>Ngày sạch nợ</span><strong id="debtFreeDate">-</strong><small id="debtDuration">0 tháng</small></article>
           <article><span>Tổng tiền lãi</span><strong id="totalDebtInterest">0 ₫</strong><small>Trong toàn bộ lộ trình</small></article>
           <article><span>Tiền lãi tiết kiệm</span><strong id="interestSaved">0 ₫</strong><small>So với chỉ trả tối thiểu</small></article>
-          <article><span>Ngân sách trả nợ/tháng</span><strong id="monthlyDebtBudget">0 ₫</strong><small>Phong bì bắt buộc + khoản tăng tốc</small></article>
+          <article><span>Ngân sách trả nợ/tháng</span><strong id="monthlyDebtBudget">0 ₫</strong><small>Tối thiểu + toàn bộ phần dư</small></article>
         </div>
 
         <div class="debt-layout">
