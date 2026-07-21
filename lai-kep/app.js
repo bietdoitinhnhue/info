@@ -3,7 +3,7 @@
 
   const SIMULATIONS = 1200;
   const defaults = {
-    monthlyContribution: 2000000,
+    monthlyContribution: 1000000,
     years: 10,
     startMonth: '2026-08',
     contributionGrowth: 10,
@@ -208,7 +208,7 @@
     const futureHomePrice = homeCurrentPrice * Math.pow(1 + homeGrowthRate / 100, years);
 
     return {
-      monthlyContribution: clamp(parseCurrency(els.monthlyContribution.value), 0, 1e12),
+      monthlyContribution: clamp(parseCurrency(els.monthlyContribution.value), 1e6, 1e9),
       years,
       startMonth: /^\d{4}-\d{2}$/.test(els.startMonth.value) ? els.startMonth.value : defaults.startMonth,
       contributionGrowth: clamp(numberValue(els.contributionGrowth, 0), -50, 100),
@@ -599,7 +599,7 @@
 
   const updateRangeLabel = (value) => {
     els.monthlyRangeLabel.textContent = formatCurrency(value, true);
-    if (value >= Number(els.monthlyRange.min) && value <= Number(els.monthlyRange.max)) els.monthlyRange.value = value;
+    els.monthlyRange.value = Math.round(clamp(value, 1e6, 1e9) / 1e6);
   };
 
   const showToast = (message) => {
@@ -617,7 +617,7 @@
       else if (['monthlyContribution', 'initialCapital', 'targetValue', 'currentUsdRate', 'goldPrice'].includes(key)) element.value = formatInputCurrency(value);
       else element.value = value;
     });
-    els.monthlyRange.value = defaults.monthlyContribution;
+    els.monthlyRange.value = defaults.monthlyContribution / 1e6;
     stockRows().forEach((stock) => { stock.input.value = defaultWeights[stock.code]; });
     document.querySelectorAll('.preset').forEach((button) => button.classList.toggle('active', button.dataset.return === '10'));
     updateProjection();
@@ -696,13 +696,16 @@
       input.select();
     });
     input.addEventListener('blur', () => {
-      input.value = formatInputCurrency(parseCurrency(input.value));
+      const value = input === els.monthlyContribution
+        ? clamp(parseCurrency(input.value), 1e6, 1e9)
+        : parseCurrency(input.value);
+      input.value = formatInputCurrency(value);
       updateProjection();
     });
   });
 
   els.monthlyRange.addEventListener('input', () => {
-    const value = Number(els.monthlyRange.value);
+    const value = Number(els.monthlyRange.value) * 1e6;
     els.monthlyContribution.value = formatInputCurrency(value);
     updateProjection();
   });
