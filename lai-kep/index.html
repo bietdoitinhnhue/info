@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#10261f">
-  <meta name="description" content="Mô phỏng đầu tư cổ phiếu Việt Nam theo 1.200 kịch bản, gồm biến động thị trường, phí giao dịch, thuế, cổ tức và danh mục theo tỷ trọng.">
+  <meta name="description" content="Công cụ quản lý tài chính cá nhân: dòng tiền, quỹ khẩn cấp, tiết kiệm, đầu tư và chiến lược trả nợ Snowball, Avalanche, Hybrid.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mô phỏng đầu tư Stock Việt Nam - Tích Lũy">
-  <meta property="og:description" content="Mô phỏng đầu tư cổ phiếu Việt Nam với biến động thị trường, phí, thuế, cổ tức và danh mục theo tỷ trọng.">
+  <meta property="og:title" content="Quản lý tài chính cá nhân - Tích Lũy">
+  <meta property="og:description" content="Quản lý dòng tiền, nợ, quỹ khẩn cấp, tiết kiệm và đầu tư trong một kế hoạch thống nhất.">
   <link rel="canonical" href="https://about.drakenguyen.me/lai-kep/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&amp;display=swap" rel="stylesheet">
-  <title>Mô phỏng đầu tư Stock Việt Nam | Tích Lũy</title>
+  <title>Quản lý tài chính cá nhân | Tích Lũy</title>
   <style>
     :root {
       --ink: #13231e;
@@ -1808,6 +1808,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="/lai-kep/finance.css">
 </head>
 <body>
   <header class="shell topbar">
@@ -1815,23 +1816,160 @@
       <span class="brand-mark" aria-hidden="true"></span>
       Tích Lũy
     </div>
-    <div class="top-note">1.200 kịch bản cập nhật theo thời gian thực</div>
+    <nav class="app-nav" aria-label="Điều hướng công cụ">
+      <a href="#finance-manager">Tổng quan</a>
+      <a href="#debt-workspace" data-open-finance-tab="debt">Nợ</a>
+      <a href="#investment-calculator">Đầu tư</a>
+    </nav>
+    <div class="top-note">Dữ liệu tự lưu trên thiết bị</div>
   </header>
 
   <main class="shell">
     <section class="hero">
       <div>
-        <div class="eyebrow">Mô phỏng danh mục Stock Việt Nam</div>
-        <h1>Đầu tư đều. Nhưng thị trường <em>không đi thẳng.</em></h1>
-        <p class="hero-copy">Dự phóng theo 1.200 kịch bản có năm tăng, năm giảm, phí giao dịch và thuế. Kết quả được trình bày theo dải xấu - trung vị - thuận lợi, sát thực tế đầu tư cổ phiếu hơn một đường tăng đều.</p>
+        <div class="eyebrow">Hệ thống quản lý tài chính cá nhân</div>
+        <h1>Không chỉ tích lũy. Hãy điều khiển <em>toàn bộ dòng tiền.</em></h1>
+        <p class="hero-copy">Theo dõi 3 trụ cột Nghĩa vụ - An toàn - Tăng trưởng; quản lý nợ, chi tiêu, gia đình, thiện nguyện, quỹ khẩn cấp, tiết kiệm và đầu tư trong cùng một kế hoạch.</p>
       </div>
-      <aside class="hero-card">
-        <strong>10 năm, 1 kỷ luật.</strong>
-        <p>Mặc định: 2 triệu/tháng từ 8/2026, tăng khoản góp 10%/năm, danh mục 7 mã và tái đầu tư cổ tức sau thuế.</p>
+      <aside class="hero-card" aria-label="Nguyên tắc quản lý tài chính">
+        <strong>Mỗi đồng đều có nhiệm vụ.</strong>
+        <p>Ưu tiên đúng thứ tự: giữ dòng tiền dương, dựng quỹ an toàn, xử lý nợ đắt và đầu tư cho mục tiêu mua nhà.</p>
       </aside>
     </section>
 
-    <section class="workspace" aria-label="Công cụ tính lãi kép">
+    <section class="finance-hub" id="finance-manager" aria-label="Quản lý tài chính cá nhân">
+      <div class="finance-hub-heading">
+        <div>
+          <span class="finance-kicker">Personal Finance OS</span>
+          <h2>3 trụ cột, 6 dòng tiền</h2>
+          <p>Nghĩa vụ gồm nợ, chi tiêu, gia đình &amp; thiện nguyện. An toàn gồm tiết kiệm và quỹ khẩn cấp. Tăng trưởng là phần vốn đầu tư dài hạn.</p>
+        </div>
+        <div class="finance-save-state" id="financeSaveState"><i></i> Đã lưu trên trình duyệt</div>
+      </div>
+
+      <div class="finance-toolbar">
+        <div class="finance-tabs" role="tablist" aria-label="Khu vực quản lý tài chính">
+          <button class="finance-tab active" id="overviewTab" type="button" role="tab" aria-selected="true" aria-controls="financeOverview" data-finance-tab="overview">Dòng tiền</button>
+          <button class="finance-tab" id="debtTab" type="button" role="tab" aria-selected="false" aria-controls="debtWorkspace" data-finance-tab="debt">Chiến lược nợ</button>
+        </div>
+        <div class="finance-actions">
+          <button class="finance-action" id="exportFinanceButton" type="button">Sao lưu JSON</button>
+          <button class="finance-action" id="importFinanceButton" type="button">Nhập JSON</button>
+          <input id="financeImportFile" type="file" accept="application/json,.json" hidden>
+          <button class="finance-action muted" id="resetFinanceButton" type="button">Đặt lại dữ liệu mẫu</button>
+        </div>
+      </div>
+
+      <div class="finance-panel" id="financeOverview" role="tabpanel" aria-labelledby="overviewTab" data-finance-panel="overview">
+        <div class="finance-input-grid">
+          <article class="finance-form-card">
+            <div class="finance-card-title">
+              <span>01</span>
+              <div><strong>Thu nhập &amp; nghĩa vụ</strong><small>Dòng tiền phải chi mỗi tháng</small></div>
+            </div>
+            <div class="finance-fields two-columns">
+              <label class="finance-field full"><span>Thu nhập ròng mỗi tháng</span><span class="finance-input-wrap"><input id="financeIncome" data-finance-currency type="text" inputmode="numeric" value="30.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Chi tiêu thiết yếu</span><span class="finance-input-wrap"><input id="essentialSpending" data-finance-currency type="text" inputmode="numeric" value="12.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Ngân sách gia đình</span><span class="finance-input-wrap"><input id="familyBudget" data-finance-currency type="text" inputmode="numeric" value="2.500.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Thiện nguyện</span><span class="finance-input-wrap"><input id="charityBudget" data-finance-currency type="text" inputmode="numeric" value="500.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Bắt đầu kế hoạch</span><span class="finance-input-wrap"><input id="financeStartMonth" type="month" value="2026-08"></span></label>
+            </div>
+          </article>
+
+          <article class="finance-form-card">
+            <div class="finance-card-title">
+              <span>02</span>
+              <div><strong>An toàn &amp; tăng trưởng</strong><small>Tiền dành cho tương lai</small></div>
+            </div>
+            <div class="finance-fields two-columns">
+              <label class="finance-field"><span>Tiết kiệm mục tiêu</span><span class="finance-input-wrap"><input id="monthlySavings" data-finance-currency type="text" inputmode="numeric" value="1.500.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Đầu tư mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyInvestment" data-finance-currency type="text" inputmode="numeric" value="2.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Quỹ khẩn cấp hiện có</span><span class="finance-input-wrap"><input id="emergencyCurrent" data-finance-currency type="text" inputmode="numeric" value="30.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Bổ sung quỹ/tháng</span><span class="finance-input-wrap"><input id="emergencyContribution" data-finance-currency type="text" inputmode="numeric" value="2.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field"><span>Mục tiêu quỹ khẩn cấp</span><span class="finance-input-wrap"><input id="emergencyTargetMonths" type="number" min="1" max="24" step="1" value="6"><b>tháng</b></span></label>
+              <label class="finance-field"><span>Trả nợ thêm mỗi tháng</span><span class="finance-input-wrap"><input id="debtExtraPayment" data-finance-currency type="text" inputmode="numeric" value="1.000.000"><b>VNĐ</b></span></label>
+            </div>
+          </article>
+        </div>
+
+        <div class="finance-metric-grid">
+          <article><span>Dòng tiền còn lại</span><strong id="availableCash">0 ₫</strong><small id="availableCashNote">Sau toàn bộ phân bổ</small></article>
+          <article><span>Điểm sức khỏe tài chính</span><strong id="financeScore">0/100</strong><small>Chỉ số tham khảo theo dòng tiền hiện tại</small></article>
+          <article><span>Quỹ khẩn cấp</span><strong id="emergencyRunway">0 tháng</strong><small id="emergencyTargetNote">Mục tiêu 6 tháng</small></article>
+          <article><span>Dự kiến sạch nợ</span><strong id="debtFreeSummary">-</strong><small id="debtFreeSummaryNote">Theo chiến lược đang chọn</small></article>
+        </div>
+
+        <div class="pillar-grid" role="group" aria-label="Ba trụ cột tài chính">
+          <article class="pillar obligation">
+            <span class="pillar-index">Trụ cột 01</span><h3>Nghĩa vụ</h3><strong id="obligationTotal">0 ₫</strong>
+            <p>Nợ + chi tiêu + gia đình &amp; thiện nguyện</p><div class="pillar-share" id="obligationShare">0% thu nhập</div>
+          </article>
+          <article class="pillar safety">
+            <span class="pillar-index">Trụ cột 02</span><h3>An toàn</h3><strong id="safetyTotal">0 ₫</strong>
+            <p>Tiết kiệm + bổ sung quỹ khẩn cấp</p><div class="pillar-share" id="safetyShare">0% thu nhập</div>
+          </article>
+          <article class="pillar growth">
+            <span class="pillar-index">Trụ cột 03</span><h3>Tăng trưởng</h3><strong id="growthTotal">0 ₫</strong>
+            <p>Đầu tư dài hạn vào danh mục Stock</p><div class="pillar-share" id="growthShare">0% thu nhập</div>
+          </article>
+        </div>
+
+        <div class="allocation-card">
+          <div class="allocation-card-head"><div><span>Bản đồ dòng tiền</span><h3>Mỗi đồng đang đi đâu?</h3></div><strong id="allocatedRate">0% đã phân bổ</strong></div>
+          <div class="budget-bar" id="budgetBar" role="img" aria-label="Tỷ trọng phân bổ thu nhập"></div>
+          <div class="budget-legend" id="budgetLegend"></div>
+        </div>
+
+        <article class="finance-recommendation" id="financeRecommendation">
+          <span>Ưu tiên tháng này</span><strong>Đang phân tích dòng tiền...</strong><p>Điều chỉnh các con số để nhận gợi ý phù hợp.</p>
+        </article>
+      </div>
+
+      <div class="finance-panel" id="debtWorkspace" role="tabpanel" aria-labelledby="debtTab" data-finance-panel="debt" hidden>
+        <div class="debt-header" id="debt-workspace">
+          <div><span class="finance-kicker">Debt Freedom Lab</span><h2>Chọn chiến lược trả nợ</h2><p>Ngân sách trả nợ cố định gồm tổng tiền tối thiểu và khoản trả thêm. Khi một khoản kết thúc, số tiền được tự động cuốn sang khoản tiếp theo.</p></div>
+        </div>
+
+        <div class="strategy-switcher" role="group" aria-label="Chiến lược trả nợ">
+          <button type="button" aria-pressed="false" data-debt-strategy="snowball"><span>Snowball</span><strong>Nợ nhỏ trước</strong><small>Tạo chiến thắng nhanh để giữ động lực.</small></button>
+          <button type="button" aria-pressed="false" data-debt-strategy="avalanche"><span>Avalanche</span><strong>Lãi cao trước</strong><small>Tối ưu tổng tiền lãi phải trả.</small></button>
+          <button class="active" type="button" aria-pressed="true" data-debt-strategy="hybrid"><span>Hybrid</span><strong>Kết hợp 2 chiến lược</strong><small>Xóa nợ nhỏ nhất, sau đó chuyển sang lãi cao.</small></button>
+        </div>
+
+        <div class="debt-metric-grid">
+          <article><span>Ngày sạch nợ</span><strong id="debtFreeDate">-</strong><small id="debtDuration">0 tháng</small></article>
+          <article><span>Tổng tiền lãi</span><strong id="totalDebtInterest">0 ₫</strong><small>Trong toàn bộ lộ trình</small></article>
+          <article><span>Tiền lãi tiết kiệm</span><strong id="interestSaved">0 ₫</strong><small>So với chỉ trả tối thiểu</small></article>
+          <article><span>Ngân sách trả nợ/tháng</span><strong id="monthlyDebtBudget">0 ₫</strong><small>Tối thiểu + khoản trả thêm</small></article>
+        </div>
+
+        <div class="debt-layout">
+          <section class="debt-editor">
+            <div class="debt-section-head"><div><span>Danh sách khoản nợ</span><h3>Nhập số dư và lãi suất</h3></div><button id="addDebtButton" type="button">+ Thêm khoản nợ</button></div>
+            <div class="debt-list-head"><span>Tên khoản nợ</span><span>Dư nợ</span><span>Lãi suất/năm</span><span>Tối thiểu/tháng</span><span></span></div>
+            <div class="debt-list" id="debtList"></div>
+            <p class="debt-editor-note">Lãi được tính theo dư nợ giảm dần từng tháng. Công cụ chưa mô hình hóa phí trả trước hạn hoặc lãi phạt riêng của từng hợp đồng.</p>
+          </section>
+
+          <aside class="strategy-comparison-wrap" aria-label="So sánh chiến lược trả nợ">
+            <div class="debt-section-head"><div><span>So sánh</span><h3>Ba đường về đích</h3></div></div>
+            <div class="strategy-comparison" id="strategyComparison"></div>
+          </aside>
+        </div>
+
+        <section class="debt-payoff-card">
+          <div class="debt-section-head"><div><span>Timeline trả nợ</span><h3>Thứ tự từng khoản được xóa</h3></div><strong id="debtPlanLabel">Hybrid</strong></div>
+          <div class="debt-payoff-timeline" id="debtPayoffTimeline"></div>
+        </section>
+
+        <section class="debt-schedule-card">
+          <div class="debt-section-head"><div><span>24 tháng đầu</span><h3>Lịch thanh toán dự kiến</h3></div><small>Hiển thị tổng hợp theo tháng</small></div>
+          <div class="debt-table-wrap"><table><thead><tr><th>Tháng</th><th>Khoản ưu tiên</th><th>Dư nợ đầu kỳ</th><th>Tiền lãi</th><th>Đã trả</th><th>Dư nợ cuối kỳ</th></tr></thead><tbody id="debtScheduleBody"></tbody></table></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="workspace" id="investment-calculator" aria-label="Công cụ tính lãi kép">
       <form class="panel control-panel" id="calculatorForm">
         <div class="panel-head">
           <div>
@@ -2159,7 +2297,7 @@
             <span>Mỗi mốc dùng giá trị Stock trung vị sau khi bán, đồng thời nâng giá căn nhà và khoản trả trước theo đúng giả định của từng năm.</span>
             <strong>Tự cập nhật theo kế hoạch</strong>
           </div>
-          <ol class="home-timeline" id="homeTimeline" aria-label="Timeline mục tiêu mua nhà theo từng năm"></ol>
+          <ol class="home-timeline" id="homeTimeline"></ol>
         </section>
 
         <section class="panel stock-panel">
@@ -2313,7 +2451,7 @@
 
   <footer>
     <div class="shell footer-inner">
-      <p><strong>Lưu ý:</strong> Đây là công cụ mô phỏng, không phải cam kết lợi nhuận hay khuyến nghị mua bán chứng khoán. Thị trường thực tế biến động theo từng giai đoạn và lợi nhuận có thể thấp hơn kỳ vọng.</p>
+      <p><strong>Lưu ý:</strong> Đây là công cụ lập kế hoạch tham khảo, không thay thế tư vấn tài chính hoặc điều khoản thực tế của hợp đồng vay. Hãy kiểm tra lãi phạt, phí trả trước hạn và nghĩa vụ thuế trước khi ra quyết định.</p>
       <span>© 2026 Tích Lũy</span>
     </div>
   </footer>
@@ -2750,5 +2888,6 @@
     })();
   </script>
   <script src="/lai-kep/app.js"></script>
+  <script src="/lai-kep/finance.js"></script>
 </body>
 </html>
