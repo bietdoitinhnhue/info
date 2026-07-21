@@ -30,7 +30,6 @@
     investmentGoalAmount: 200000000,
     investmentDeadlineYears: 10,
     investmentExpectedReturn: 10,
-    debtExtraPayment: 1000000,
     strategy: 'hybrid',
     debts: [
       { id: 'debt-consumer', name: 'Vay tiêu dùng', balance: 12000000, principalPayment: 680000, monthlyInterest: 120000 },
@@ -69,7 +68,7 @@
     investmentGoalAmount: document.getElementById('investmentGoalAmount'),
     investmentDeadlineYears: document.getElementById('investmentDeadlineYears'),
     investmentExpectedReturn: document.getElementById('investmentExpectedReturn'),
-    debtExtraPayment: document.getElementById('debtExtraPayment'),
+    autoDebtExtraDisplay: document.getElementById('autoDebtExtraDisplay'),
     availableCash: document.getElementById('availableCash'),
     availableCashNote: document.getElementById('availableCashNote'),
     financeScore: document.getElementById('financeScore'),
@@ -121,8 +120,7 @@
     investmentCurrent: 'investmentCurrent',
     investmentGoalAmount: 'investmentGoalAmount',
     investmentDeadlineYears: 'investmentDeadlineYears',
-    investmentExpectedReturn: 'investmentExpectedReturn',
-    debtExtraPayment: 'debtExtraPayment'
+    investmentExpectedReturn: 'investmentExpectedReturn'
   };
 
   let state = null;
@@ -201,7 +199,7 @@
     const numericKeys = [
       'income', 'essentialSpending', 'familyBudget', 'charityBudget', 'monthlyDebtReserve',
       'emergencyCurrent', 'savingsCurrent', 'savingsGoalAmount', 'investmentCurrent',
-      'investmentGoalAmount', 'debtExtraPayment'
+      'investmentGoalAmount'
     ];
     numericKeys.forEach((key) => { base[key] = clamp(safeNumber(source[key], base[key]), 0, 1e15); });
     base.emergencyTargetMonths = Math.round(clamp(safeNumber(source.emergencyTargetMonths, base.emergencyTargetMonths), 1, 24));
@@ -261,7 +259,6 @@
     elements.investmentGoalAmount.value = formatInputCurrency(state.investmentGoalAmount);
     elements.investmentDeadlineYears.value = state.investmentDeadlineYears;
     elements.investmentExpectedReturn.value = state.investmentExpectedReturn;
-    elements.debtExtraPayment.value = formatInputCurrency(state.debtExtraPayment);
   }
 
   function activeDebts() {
@@ -407,10 +404,11 @@
 
   function calculatePlans() {
     const debts = activeDebts();
+    const summary = budgetSummary();
     return {
-      snowball: simulateDebtStrategy(debts, state.monthlyDebtReserve, state.debtExtraPayment, 'snowball', state.startMonth),
-      avalanche: simulateDebtStrategy(debts, state.monthlyDebtReserve, state.debtExtraPayment, 'avalanche', state.startMonth),
-      hybrid: simulateDebtStrategy(debts, state.monthlyDebtReserve, state.debtExtraPayment, 'hybrid', state.startMonth),
+      snowball: simulateDebtStrategy(debts, summary.mandatoryDebtBudget, summary.autoDebtExtra, 'snowball', state.startMonth),
+      avalanche: simulateDebtStrategy(debts, summary.mandatoryDebtBudget, summary.autoDebtExtra, 'avalanche', state.startMonth),
+      hybrid: simulateDebtStrategy(debts, summary.mandatoryDebtBudget, summary.autoDebtExtra, 'hybrid', state.startMonth),
       baseline: simulateMinimumOnly(debts)
     };
   }
@@ -419,12 +417,30 @@
     const minimumDebt = totalDebtMinimums();
     const hasDebt = activeDebts().length > 0;
     const reserveShortfall = hasDebt ? Math.max(minimumDebt - state.monthlyDebtReserve, 0) : 0;
-    const debtBudget = hasDebt ? Math.max(minimumDebt, state.monthlyDebtReserve) + state.debtExtraPayment : 0;
-    const obligation = state.essentialSpending + state.familyBudget + state.charityBudget + debtBudget;
+    const mandatoryDebtBudget = hasDebt ? Math.max(minimumDebt, state.monthlyDebtReserve) : 0;
     const safety = state.monthlySavings + state.emergencyContribution;
     const growth = state.monthlyInvestment;
+    const baseObligation = state.essentialSpending + state.familyBudget + state.charityBudget + mandatoryDebtBudget;
+    const baseAllocated = baseObligation + safety + growth;
+    const rawAvailable = state.income - baseAllocated;
+    const autoDebtExtra = hasDebt ? Math.max(rawAvailable, 0) : 0;
+    const debtBudget = mandatoryDebtBudget + autoDebtExtra;
+    const obligation = state.essentialSpending + state.familyBudget + state.charityBudget + debtBudget;
     const allocated = obligation + safety + growth;
-    return { minimumDebt, reserveShortfall, debtBudget, obligation, safety, growth, allocated, available: state.income - allocated };
+    return {
+      hasDebt,
+      minimumDebt,
+      reserveShortfall,
+      mandatoryDebtBudget,
+      autoDebtExtra,
+      rawAvailable,
+      debtBudget,
+      obligation,
+      safety,
+      growth,
+      allocated,
+      available: state.income - allocated
+    };
   }
 
   function financialScore(summary) {
@@ -432,7 +448,7 @@
     const runway = state.essentialSpending > 0 ? state.emergencyCurrent / state.essentialSpending : state.emergencyTargetMonths;
     const cashScore = summary.available >= 0 ? 25 : clamp(25 + summary.available / income * 50, 0, 25);
     const emergencyScore = clamp(runway / state.emergencyTargetMonths, 0, 1) * 25;
-    const debtRatio = summary.debtBudget / income;
+    const debtRatio = summary.mandatoryDebtBudget / income;
     const debtScore = activeDebts().length === 0 ? 25 : debtRatio <= .2 ? 25 : debtRatio <= .35 ? 18 : debtRatio <= .5 ? 10 : 3;
     const futureRate = (summary.safety + summary.growth) / income;
     const futureScore = clamp(futureRate / .2, 0, 1) * 25;
@@ -448,9 +464,16 @@
     const emergencyProgress = emergencyTarget > 0 ? state.emergencyCurrent / emergencyTarget * 100 : 100;
     const score = financialScore(summary);
 
+    elements.autoDebtExtraDisplay.textContent = formatCurrency(summary.autoDebtExtra);
     elements.availableCash.textContent = formatCurrency(summary.available);
     elements.availableCash.classList.toggle('negative-value', summary.available < 0);
-    elements.availableCashNote.textContent = summary.available >= 0 ? 'Có thể phân bổ thêm hoặc tạo vùng đệm' : `Đang vượt thu nhập ${formatCurrency(Math.abs(summary.available), true)}`;
+    if (summary.autoDebtExtra > 0) {
+      elements.availableCashNote.textContent = `${formatCurrency(summary.autoDebtExtra, true)} phần dư đã tự động dồn trả nợ`;
+    } else if (summary.available >= 0) {
+      elements.availableCashNote.textContent = 'Có thể phân bổ thêm hoặc tạo vùng đệm';
+    } else {
+      elements.availableCashNote.textContent = `Đang vượt thu nhập ${formatCurrency(Math.abs(summary.available), true)}`;
+    }
     elements.financeScore.textContent = `${score}/100`;
     elements.emergencyRunway.textContent = `${runway.toLocaleString('vi-VN', { maximumFractionDigits: 1 })} tháng`;
     elements.emergencyTargetNote.textContent = `${formatPercent(emergencyProgress)} mục tiêu ${state.emergencyTargetMonths} tháng (${formatCurrency(emergencyTarget, true)})`;
@@ -492,7 +515,11 @@
     const highestAprDebt = activeDebts().sort((a, b) => b.apr - a.apr)[0];
     let recommendation = { good: false, title: 'Giữ dòng tiền dương trước', text: 'Giảm một phần chi tiêu linh hoạt hoặc tạm hạ mức đầu tư để tổng phân bổ không vượt thu nhập.' };
     if (summary.reserveShortfall > 0) {
-      recommendation = { good: false, title: 'Phong bì trả nợ bắt buộc đang thiếu', text: `Tổng gốc + lãi tháng đầu là ${formatCurrency(summary.minimumDebt, true)}, cao hơn số tiền để dành ${formatCurrency(summary.reserveShortfall, true)}. Hãy tăng phong bì trả nợ trước khi phân bổ thêm.` };
+      recommendation = { good: false, title: 'Mức trả nợ tối thiểu đang thiếu', text: `Tổng gốc + lãi tháng đầu là ${formatCurrency(summary.minimumDebt, true)}, cao hơn số tiền bạn nhập ${formatCurrency(summary.reserveShortfall, true)}. Công cụ đang dùng mức hợp đồng thực tế để tránh trả thiếu.` };
+    } else if (summary.available < 0) {
+      recommendation = { good: false, title: 'Mục tiêu đang vượt thu nhập', text: `Kế hoạch thiếu ${formatCurrency(Math.abs(summary.available), true)} mỗi tháng. Hãy kéo dài thời hạn mục tiêu, giảm chi linh hoạt hoặc điều chỉnh khoản đầu tư trước khi tăng tốc trả nợ.` };
+    } else if (summary.autoDebtExtra > 0) {
+      recommendation = { good: true, title: `Tự động dồn ${formatCurrency(summary.autoDebtExtra, true)} để trả nợ`, text: `Sau mọi nghĩa vụ và quỹ mục tiêu, toàn bộ phần dư được đưa vào ngân sách ${strategyNames[state.strategy]} để rút ngắn thời gian trả nợ.` };
     } else if (summary.available >= 0 && runway < 1) {
       recommendation = { good: false, title: 'Dựng 1 tháng quỹ khẩn cấp trước', text: `Ưu tiên phần tiền còn lại cho quỹ khẩn cấp đến ít nhất ${formatCurrency(state.essentialSpending, true)}, đồng thời vẫn trả tối thiểu mọi khoản nợ.` };
     } else if (summary.available >= 0 && highestAprDebt?.apr >= 15) {
