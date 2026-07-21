@@ -93,6 +93,8 @@
     futureGoldPrice: document.getElementById('futureGoldPrice'),
     goldGrowthNote: document.getElementById('goldGrowthNote'),
     goldEquivalent: document.getElementById('goldEquivalent'),
+    timelineDurationLabel: document.getElementById('timelineDurationLabel'),
+    homeTimeline: document.getElementById('homeTimeline'),
     growthChart: document.getElementById('growthChart'),
     projectionBody: document.getElementById('projectionBody'),
     allocationTotal: document.getElementById('allocationTotal'),
@@ -148,6 +150,14 @@
   const formatYearLabel = (startMonth, yearIndex) => {
     const [startYear] = startMonth.split('-').map(Number);
     return `Năm ${yearIndex} (${startYear + yearIndex - 1})`;
+  };
+
+  const formatTimelinePeriod = (startMonth, yearIndex) => {
+    const [startYear, startMonthNumber] = startMonth.split('-').map(Number);
+    const periodStart = new Date(startYear, startMonthNumber - 1 + (yearIndex - 1) * 12, 1);
+    const periodEnd = new Date(startYear, startMonthNumber - 1 + yearIndex * 12 - 1, 1);
+    const monthYear = (date) => `${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+    return `${monthYear(periodStart)} - ${monthYear(periodEnd)}`;
   };
 
   const getFinishDate = (startMonth, years) => {
@@ -242,6 +252,7 @@
   const simulateProjection = (input) => {
     const plan = contributionPlan(input);
     const buckets = Array.from({ length: input.years }, () => []);
+    const liquidationBuckets = Array.from({ length: input.years }, () => []);
     const finals = [];
     const tradeFeeRate = input.tradeFee / 100;
     const sellTaxRate = input.sellTax / 100;
@@ -288,6 +299,8 @@
         }
 
         buckets[year].push(portfolio + cashDividends);
+        const yearSellCosts = Math.max(portfolio, 0) * (tradeFeeRate + sellTaxRate);
+        liquidationBuckets[year].push(Math.max(portfolio - yearSellCosts, 0) + cashDividends);
       }
 
       const sellCosts = Math.max(portfolio, 0) * (tradeFeeRate + sellTaxRate);
@@ -302,15 +315,26 @@
 
     const rows = buckets.map((values, index) => {
       values.sort((first, second) => first - second);
+      const yearLiquidationValues = liquidationBuckets[index].sort((first, second) => first - second);
       const p10 = percentile(values, 0.1);
       const p50 = percentile(values, 0.5);
       const p90 = percentile(values, 0.9);
+      const yearNumber = index + 1;
+      const homePrice = input.homeCurrentPrice * Math.pow(1 + input.homeGrowthRate / 100, yearNumber);
+      const downPaymentTarget = homePrice * input.downPaymentRate / 100;
+      const liquidationP50 = percentile(yearLiquidationValues, 0.5);
       return {
         ...plan[index],
         p10,
         p50,
         p90,
-        medianProfit: p50 - plan[index].totalContributions
+        medianProfit: p50 - plan[index].totalContributions,
+        homePrice,
+        downPaymentTarget,
+        liquidationP50,
+        homeCoverage: downPaymentTarget > 0 ? liquidationP50 / downPaymentTarget * 100 : 100,
+        homeGap: Math.max(downPaymentTarget - liquidationP50, 0),
+        homeGoalProbability: yearLiquidationValues.filter((value) => value >= downPaymentTarget).length / SIMULATIONS * 100
       };
     });
 
@@ -397,6 +421,52 @@
     els.futureGoldPrice.textContent = `${formatCurrency(futureGoldPrice)}/lượng`;
     els.goldGrowthNote.textContent = `Từ ${formatCurrency(input.goldPrice, true)}, tăng ${formatPercent(input.goldGrowthRate, 2)}/năm`;
     els.goldEquivalent.textContent = `${(result.liquidationValue / futureGoldPrice).toLocaleString('vi-VN', { maximumFractionDigits: 2 })} lượng`;
+  };
+
+  const renderTimeline = (result) => {
+    els.timelineDurationLabel.textContent = `03 - Timeline ${result.input.years} năm`;
+    els.homeTimeline.innerHTML = result.rows.map((row, index) => {
+      const completed = row.homeCoverage >= 100;
+      const status = completed
+        ? 'Đủ khoản trả trước'
+        : row.homeCoverage >= 75
+          ? 'Đang về đích'
+          : row.homeCoverage >= 50
+            ? 'Qua nửa mục tiêu'
+            : 'Đang tích lũy';
+      const statusClass = completed ? 'completed' : row.homeCoverage >= 75 ? 'near' : '';
+      const gapText = completed
+        ? `Dư ${formatCurrency(row.liquidationP50 - row.downPaymentTarget, true)}`
+        : `Thiếu ${formatCurrency(row.homeGap, true)}`;
+
+      return `
+        <li class="timeline-item ${statusClass} ${index === result.rows.length - 1 ? 'final-milestone' : ''}">
+          <div class="timeline-marker" aria-hidden="true">${String(row.year).padStart(2, '0')}</div>
+          <article class="timeline-card">
+            <header class="timeline-card-head">
+              <div>
+                <span class="timeline-year">Năm ${row.year}</span>
+                <strong>${formatTimelinePeriod(result.input.startMonth, row.year)}</strong>
+              </div>
+              <span class="timeline-status">${status}</span>
+            </header>
+            <div class="timeline-values">
+              <div><span>Danh mục sau bán</span><strong>${formatCurrency(row.liquidationP50, true)}</strong></div>
+              <div><span>Giá nhà dự kiến</span><strong>${formatCurrency(row.homePrice, true)}</strong></div>
+              <div><span>Khoản trả trước</span><strong>${formatCurrency(row.downPaymentTarget, true)}</strong></div>
+              <div><span>Khoảng cách</span><strong class="${completed ? 'positive' : 'timeline-gap'}">${gapText}</strong></div>
+            </div>
+            <div class="timeline-progress-head">
+              <span>Hoàn thành ${formatPercent(row.homeCoverage)}</span>
+              <span>Xác suất đủ ${formatPercent(row.homeGoalProbability)}</span>
+            </div>
+            <div class="timeline-progress" role="progressbar" aria-label="Tiến độ mục tiêu mua nhà năm ${row.year}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(clamp(row.homeCoverage, 0, 100))}">
+              <div style="width:${clamp(row.homeCoverage, 0, 100)}%"></div>
+            </div>
+          </article>
+        </li>
+      `;
+    }).join('');
   };
 
   const renderTable = (result) => {
@@ -520,6 +590,7 @@
     els.years.value = input.years;
     latestProjection = simulateProjection(input);
     renderSummary(latestProjection);
+    renderTimeline(latestProjection);
     renderTable(latestProjection);
     renderChart(latestProjection);
     renderAllocation(input);
@@ -554,8 +625,8 @@
   };
 
   const projectionCsv = (result) => {
-    const header = ['Năm', 'Góp mỗi tháng', 'Góp trong năm', 'Tổng vốn góp', 'P10', 'P50 trung vị', 'P90', 'Lãi trung vị'];
-    const rows = result.rows.map((row) => [row.label, row.monthlyContribution, row.annualContribution, row.totalContributions, row.p10, row.p50, row.p90, row.medianProfit].map((value) => typeof value === 'number' ? Math.round(value) : value));
+    const header = ['Năm', 'Góp mỗi tháng', 'Góp trong năm', 'Tổng vốn góp', 'P10', 'P50 trung vị', 'P90', 'Lãi trung vị', 'Giá nhà dự kiến', 'Mục tiêu trả trước', 'Giá trị sau bán', 'Hoàn thành mục tiêu (%)', 'Còn thiếu', 'Xác suất đủ (%)'];
+    const rows = result.rows.map((row) => [row.label, row.monthlyContribution, row.annualContribution, row.totalContributions, row.p10, row.p50, row.p90, row.medianProfit, row.homePrice, row.downPaymentTarget, row.liquidationP50, row.homeCoverage, row.homeGap, row.homeGoalProbability].map((value) => typeof value === 'number' ? Math.round(value) : value));
     return `\uFEFF${[header, ...rows].map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n')}`;
   };
 
