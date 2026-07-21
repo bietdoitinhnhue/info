@@ -171,7 +171,7 @@
 
 .finance-input-grid {
   display: grid;
-  grid-template-columns: minmax(320px, .82fr) minmax(0, 1.18fr);
+  grid-template-columns: 1fr;
   gap: 16px;
   align-items: start;
 }
@@ -193,7 +193,26 @@
 
 .goal-stack {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 13px;
+}
+
+.cashflow-fields {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.cashflow-fields .finance-field.full {
+  grid-column: span 2;
+}
+
+.cashflow-card {
+  background:
+    linear-gradient(110deg, rgba(232, 251, 207, .2), transparent 45%),
+    var(--white);
+}
+
+.goals-card {
+  background: #fcfcf9;
 }
 
 .goal-block {
@@ -1246,10 +1265,19 @@
   }
 
   .finance-fields.two-columns,
+  .goal-stack,
   .pillar-grid,
   .strategy-switcher,
   .debt-payoff-timeline {
     grid-template-columns: 1fr;
+  }
+
+  .cashflow-fields {
+    grid-template-columns: 1fr !important;
+  }
+
+  .cashflow-fields .finance-field.full {
+    grid-column: 1 / -1;
   }
 
   .finance-metric-grid,
