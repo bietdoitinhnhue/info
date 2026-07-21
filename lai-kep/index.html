@@ -9,6 +9,7 @@
   <meta property="og:title" content="Quản lý tài chính cá nhân - Tích Lũy">
   <meta property="og:description" content="Quản lý dòng tiền, nợ, quỹ khẩn cấp, tiết kiệm và đầu tư trong một kế hoạch thống nhất.">
   <link rel="canonical" href="https://about.drakenguyen.me/lai-kep/">
+  <link rel="icon" type="image/svg+xml" href="/lai-kep/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&amp;display=swap" rel="stylesheet">
@@ -410,6 +411,16 @@
       font-size: 11px;
       font-weight: 750;
       text-align: right;
+    }
+
+    .range-scale {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 6px;
+      color: #89958e;
+      font-size: 8px;
+      font-weight: 650;
     }
 
     details {
@@ -1869,6 +1880,8 @@
             </div>
             <div class="finance-fields two-columns">
               <label class="finance-field full"><span>Thu nhập ròng mỗi tháng</span><span class="finance-input-wrap"><input id="financeIncome" data-finance-currency type="text" inputmode="numeric" value="30.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field full"><span>Để dành trả nợ bắt buộc/tháng</span><span class="finance-input-wrap"><input id="monthlyDebtReserve" data-finance-currency type="text" inputmode="numeric" value="5.000.000"><b>VNĐ</b></span></label>
+              <label class="finance-field full"><span>Trả nợ tăng tốc thêm</span><span class="finance-input-wrap"><input id="debtExtraPayment" data-finance-currency type="text" inputmode="numeric" value="1.000.000"><b>VNĐ</b></span></label>
               <label class="finance-field"><span>Chi tiêu thiết yếu</span><span class="finance-input-wrap"><input id="essentialSpending" data-finance-currency type="text" inputmode="numeric" value="12.000.000"><b>VNĐ</b></span></label>
               <label class="finance-field"><span>Ngân sách gia đình</span><span class="finance-input-wrap"><input id="familyBudget" data-finance-currency type="text" inputmode="numeric" value="2.500.000"><b>VNĐ</b></span></label>
               <label class="finance-field"><span>Thiện nguyện</span><span class="finance-input-wrap"><input id="charityBudget" data-finance-currency type="text" inputmode="numeric" value="500.000"><b>VNĐ</b></span></label>
@@ -1881,13 +1894,38 @@
               <span>02</span>
               <div><strong>An toàn &amp; tăng trưởng</strong><small>Tiền dành cho tương lai</small></div>
             </div>
-            <div class="finance-fields two-columns">
-              <label class="finance-field"><span>Tiết kiệm mục tiêu</span><span class="finance-input-wrap"><input id="monthlySavings" data-finance-currency type="text" inputmode="numeric" value="1.500.000"><b>VNĐ</b></span></label>
-              <label class="finance-field"><span>Đầu tư mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyInvestment" data-finance-currency type="text" inputmode="numeric" value="2.000.000"><b>VNĐ</b></span></label>
-              <label class="finance-field"><span>Quỹ khẩn cấp hiện có</span><span class="finance-input-wrap"><input id="emergencyCurrent" data-finance-currency type="text" inputmode="numeric" value="30.000.000"><b>VNĐ</b></span></label>
-              <label class="finance-field"><span>Bổ sung quỹ/tháng</span><span class="finance-input-wrap"><input id="emergencyContribution" data-finance-currency type="text" inputmode="numeric" value="2.000.000"><b>VNĐ</b></span></label>
-              <label class="finance-field"><span>Mục tiêu quỹ khẩn cấp</span><span class="finance-input-wrap"><input id="emergencyTargetMonths" type="number" min="1" max="24" step="1" value="6"><b>tháng</b></span></label>
-              <label class="finance-field"><span>Trả nợ thêm mỗi tháng</span><span class="finance-input-wrap"><input id="debtExtraPayment" data-finance-currency type="text" inputmode="numeric" value="1.000.000"><b>VNĐ</b></span></label>
+            <div class="goal-stack">
+              <section class="goal-block emergency-goal">
+                <div class="goal-block-head"><div><span>Quỹ 01</span><strong>Quỹ khẩn cấp</strong></div><small>Tự trích từ thu nhập</small></div>
+                <div class="finance-fields two-columns">
+                  <label class="finance-field"><span>Hiện đang có</span><span class="finance-input-wrap"><input id="emergencyCurrent" data-finance-currency type="text" inputmode="numeric" value="30.000.000"><b>VNĐ</b></span></label>
+                  <label class="finance-field"><span>Mục tiêu bảo vệ</span><span class="finance-input-wrap"><input id="emergencyTargetMonths" type="number" min="1" max="24" step="1" value="6"><b>tháng chi tiêu</b></span></label>
+                  <label class="finance-field"><span>Hoàn thành trong</span><span class="finance-input-wrap"><input id="emergencyDeadlineMonths" type="number" min="1" max="120" step="1" value="18"><b>tháng</b></span></label>
+                  <label class="finance-field auto-field"><span>Tự động trích mỗi tháng</span><span class="finance-input-wrap"><input id="emergencyContribution" type="text" value="2.333.000" readonly aria-live="polite"><b>VNĐ</b></span></label>
+                </div>
+              </section>
+
+              <section class="goal-block savings-goal">
+                <div class="goal-block-head"><div><span>Quỹ 02</span><strong>Tiết kiệm cá nhân</strong></div><small>Mua sắm, học tập, du lịch...</small></div>
+                <div class="finance-fields two-columns">
+                  <label class="finance-field full"><span>Tên mục tiêu</span><span class="finance-input-wrap"><input id="savingsGoalName" type="text" value="Quỹ cá nhân" maxlength="80"></span></label>
+                  <label class="finance-field"><span>Hiện đang có</span><span class="finance-input-wrap"><input id="savingsCurrent" data-finance-currency type="text" inputmode="numeric" value="0"><b>VNĐ</b></span></label>
+                  <label class="finance-field"><span>Số tiền mục tiêu</span><span class="finance-input-wrap"><input id="savingsGoalAmount" data-finance-currency type="text" inputmode="numeric" value="36.000.000"><b>VNĐ</b></span></label>
+                  <label class="finance-field"><span>Hoàn thành trong</span><span class="finance-input-wrap"><input id="savingsDeadlineMonths" type="number" min="1" max="240" step="1" value="24"><b>tháng</b></span></label>
+                  <label class="finance-field auto-field"><span>Tự động trích mỗi tháng</span><span class="finance-input-wrap"><input id="monthlySavings" type="text" value="1.500.000" readonly aria-live="polite"><b>VNĐ</b></span></label>
+                </div>
+              </section>
+
+              <section class="goal-block investment-goal">
+                <div class="goal-block-head"><div><span>Quỹ 03</span><strong>Mục tiêu đầu tư</strong></div><small>Tính theo lãi kép kỳ vọng</small></div>
+                <div class="finance-fields two-columns">
+                  <label class="finance-field"><span>Vốn đầu tư hiện có</span><span class="finance-input-wrap"><input id="investmentCurrent" data-finance-currency type="text" inputmode="numeric" value="0"><b>VNĐ</b></span></label>
+                  <label class="finance-field"><span>Số tiền mục tiêu</span><span class="finance-input-wrap"><input id="investmentGoalAmount" data-finance-currency type="text" inputmode="numeric" value="200.000.000"><b>VNĐ</b></span></label>
+                  <label class="finance-field"><span>Thời hạn đầu tư</span><span class="finance-input-wrap"><input id="investmentDeadlineYears" type="number" min="1" max="50" step="1" value="10"><b>năm</b></span></label>
+                  <label class="finance-field"><span>Lợi suất kỳ vọng</span><span class="finance-input-wrap"><input id="investmentExpectedReturn" type="number" min="0" max="100" step="0.5" value="10"><b>%/năm</b></span></label>
+                  <label class="finance-field auto-field full"><span>Tự động đầu tư mỗi tháng</span><span class="finance-input-wrap"><input id="monthlyInvestment" type="text" value="1.000.000" readonly aria-live="polite"><b>VNĐ · giới hạn 1 triệu - 1 tỷ</b></span></label>
+                </div>
+              </section>
             </div>
           </article>
         </div>
@@ -1940,15 +1978,15 @@
           <article><span>Ngày sạch nợ</span><strong id="debtFreeDate">-</strong><small id="debtDuration">0 tháng</small></article>
           <article><span>Tổng tiền lãi</span><strong id="totalDebtInterest">0 ₫</strong><small>Trong toàn bộ lộ trình</small></article>
           <article><span>Tiền lãi tiết kiệm</span><strong id="interestSaved">0 ₫</strong><small>So với chỉ trả tối thiểu</small></article>
-          <article><span>Ngân sách trả nợ/tháng</span><strong id="monthlyDebtBudget">0 ₫</strong><small>Tối thiểu + khoản trả thêm</small></article>
+          <article><span>Ngân sách trả nợ/tháng</span><strong id="monthlyDebtBudget">0 ₫</strong><small>Phong bì bắt buộc + khoản tăng tốc</small></article>
         </div>
 
         <div class="debt-layout">
           <section class="debt-editor">
             <div class="debt-section-head"><div><span>Danh sách khoản nợ</span><h3>Nhập số dư và lãi suất</h3></div><button id="addDebtButton" type="button">+ Thêm khoản nợ</button></div>
-            <div class="debt-list-head"><span>Tên khoản nợ</span><span>Dư nợ</span><span>Lãi suất/năm</span><span>Tối thiểu/tháng</span><span></span></div>
+            <div class="debt-list-head"><span>Tên khoản nợ</span><span>Dư nợ</span><span>Gốc/tháng</span><span>Lãi tháng hiện tại</span><span>Lãi suất quy đổi</span><span>Tổng tháng đầu</span><span></span></div>
             <div class="debt-list" id="debtList"></div>
-            <p class="debt-editor-note">Lãi được tính theo dư nợ giảm dần từng tháng. Công cụ chưa mô hình hóa phí trả trước hạn hoặc lãi phạt riêng của từng hợp đồng.</p>
+            <p class="debt-editor-note">Nhập tiền gốc và tiền lãi của tháng hiện tại. Công cụ quy đổi lãi suất từ dư nợ hiện tại, sau đó giảm tiền lãi theo dư nợ còn lại từng tháng. Chưa bao gồm phí trả trước hạn hoặc lãi phạt riêng của hợp đồng.</p>
           </section>
 
           <aside class="strategy-comparison-wrap" aria-label="So sánh chiến lược trả nợ">
@@ -1990,13 +2028,14 @@
           <div class="field">
             <label for="monthlyContribution">Đầu tư mỗi tháng <span class="hint">quan trọng nhất</span></label>
             <div class="input-wrap">
-              <input id="monthlyContribution" type="text" inputmode="numeric" value="2.000.000" autocomplete="off">
+              <input id="monthlyContribution" type="text" inputmode="numeric" value="1.000.000" autocomplete="off">
               <span class="suffix">VNĐ</span>
             </div>
             <div class="range-line">
-              <input id="monthlyRange" type="range" min="500000" max="50000000" step="500000" value="2000000" aria-label="Đầu tư mỗi tháng">
-              <span id="monthlyRangeLabel">2 triệu</span>
+              <input id="monthlyRange" type="range" min="1" max="1000" step="1" value="1" aria-label="Đầu tư mỗi tháng, từ 1 triệu đến 1 tỷ đồng">
+              <span id="monthlyRangeLabel">1 triệu</span>
             </div>
+            <div class="range-scale"><span>Tối thiểu 1 triệu</span><span>Tối đa 1 tỷ/tháng</span></div>
           </div>
 
           <div class="field-row">
@@ -2461,7 +2500,7 @@
   <script type="text/plain" id="legacyCalculator">
     (() => {
       const defaults = {
-        monthlyContribution: 2000000,
+        monthlyContribution: 1000000,
         years: 10,
         startMonth: '2026-08',
         contributionGrowth: 10,
