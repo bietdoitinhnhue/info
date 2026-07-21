@@ -1214,6 +1214,208 @@
       line-height: 1.6;
     }
 
+    .timeline-panel {
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .timeline-intro {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: -3px 0 22px;
+      padding: 13px 15px;
+      border-radius: 14px;
+      background: var(--mint-soft);
+      color: var(--ink-2);
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .timeline-intro strong {
+      flex: 0 0 auto;
+      color: var(--green);
+      font-size: 11px;
+    }
+
+    .home-timeline {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .home-timeline::before {
+      position: absolute;
+      top: 22px;
+      bottom: 22px;
+      left: 22px;
+      width: 2px;
+      border-radius: 999px;
+      background: #d7dfda;
+      content: '';
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .timeline-marker {
+      z-index: 1;
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      align-self: start;
+      border: 4px solid var(--white);
+      border-radius: 50%;
+      background: #e5e9e6;
+      color: #6d7b73;
+      font-size: 10px;
+      font-weight: 850;
+      box-shadow: 0 0 0 1px var(--line);
+    }
+
+    .timeline-item.near .timeline-marker {
+      background: #ffe2cc;
+      color: #a55016;
+    }
+
+    .timeline-item.completed .timeline-marker,
+    .timeline-item.final-milestone .timeline-marker {
+      background: var(--forest);
+      color: var(--mint);
+    }
+
+    .timeline-card {
+      padding: 15px 17px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fbfcfa;
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    .timeline-card:hover {
+      border-color: #b4c8bc;
+      transform: translateY(-1px);
+    }
+
+    .timeline-item.final-milestone .timeline-card {
+      border-color: #9cc2ae;
+      background: linear-gradient(135deg, #f4fbf7, #eef7f2);
+    }
+
+    .timeline-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 13px;
+    }
+
+    .timeline-card-head div,
+    .timeline-card-head strong,
+    .timeline-year {
+      display: block;
+    }
+
+    .timeline-year {
+      margin-bottom: 3px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .timeline-card-head strong {
+      color: var(--forest);
+      font-size: 13px;
+      letter-spacing: -.02em;
+    }
+
+    .timeline-status {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #eef0ed;
+      color: #64736b;
+      font-size: 8px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .timeline-item.near .timeline-status {
+      background: #fff0e4;
+      color: #a55016;
+    }
+
+    .timeline-item.completed .timeline-status {
+      background: var(--mint-soft);
+      color: var(--green);
+    }
+
+    .timeline-values {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .timeline-values > div {
+      padding: 10px 11px;
+      border-radius: 10px;
+      background: var(--white);
+    }
+
+    .timeline-values span,
+    .timeline-values strong {
+      display: block;
+    }
+
+    .timeline-values span {
+      margin-bottom: 5px;
+      color: #829088;
+      font-size: 8px;
+    }
+
+    .timeline-values strong {
+      color: var(--forest);
+      font-size: 11px;
+    }
+
+    .timeline-values .timeline-gap {
+      color: var(--red);
+    }
+
+    .timeline-progress-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 12px 0 6px;
+      color: #75847c;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .timeline-progress {
+      height: 6px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e6ebe8;
+    }
+
+    .timeline-progress > div {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--mint));
+      transition: width 280ms ease;
+    }
+
     .allocation-summary {
       display: flex;
       align-items: center;
@@ -1521,6 +1723,20 @@
 
       .benchmark-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .timeline-intro {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .timeline-values {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .timeline-card-head {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .rotation {
@@ -1932,10 +2148,24 @@
           <p class="market-reality-note">Kịch bản mặc định dành cho nhà ở tỉnh: giá khoảng 1,5 tỷ hôm nay, tăng 8%/năm sẽ thành khoảng 3,24 tỷ sau 10 năm. Mức tăng ngắn hạn 33% tại Hà Nội hay 36% tại TP.HCM không được áp dụng cho kịch bản này; bạn vẫn có thể đổi giá và tốc độ tăng theo tỉnh cụ thể. <a class="source-link" href="https://moc.gov.vn/vn/tin-tuc/1269/87076/bo-xay-dung-cong-bo-thong-tin-ve-nha-o-va-thi-truong-bat-dong-san-trong-quy-ii-nam-2025.aspx" target="_blank" rel="noopener noreferrer">Xem số liệu Bộ Xây dựng</a>.</p>
         </section>
 
+        <section class="panel timeline-panel">
+          <div class="section-heading">
+            <div>
+              <span class="step" id="timelineDurationLabel">03 - Timeline 10 năm</span>
+              <h2>Lộ trình tiến gần căn nhà</h2>
+            </div>
+          </div>
+          <div class="timeline-intro">
+            <span>Mỗi mốc dùng giá trị Stock trung vị sau khi bán, đồng thời nâng giá căn nhà và khoản trả trước theo đúng giả định của từng năm.</span>
+            <strong>Tự cập nhật theo kế hoạch</strong>
+          </div>
+          <ol class="home-timeline" id="homeTimeline" aria-label="Timeline mục tiêu mua nhà theo từng năm"></ol>
+        </section>
+
         <section class="panel stock-panel">
           <div class="section-heading">
             <div>
-              <span class="step">03 - Danh mục mẫu</span>
+              <span class="step">04 - Danh mục mẫu</span>
               <h2>Chia đều vốn cho 7 cổ phiếu VN-Index</h2>
             </div>
             <span class="allocation-total" id="allocationTotal">100%</span>
@@ -1994,7 +2224,7 @@
         <section class="panel chart-panel">
           <div class="section-heading">
             <div>
-              <span class="step">04 - Quỹ đạo <span class="scenario-badge">Monte Carlo</span></span>
+              <span class="step">05 - Quỹ đạo <span class="scenario-badge">Monte Carlo</span></span>
               <h2>Dải kết quả theo từng năm</h2>
             </div>
             <div class="legend">
@@ -2012,7 +2242,7 @@
         <section class="panel insight-panel">
           <div class="section-heading">
             <div>
-              <span class="step">05 - Điểm đáng chú ý</span>
+              <span class="step">06 - Điểm đáng chú ý</span>
               <h2>Ba con số nên nhớ</h2>
             </div>
           </div>
@@ -2038,7 +2268,7 @@
         <section class="panel table-panel">
           <div class="section-heading">
             <div>
-              <span class="step">06 - Chi tiết</span>
+              <span class="step">07 - Chi tiết</span>
               <h2>Dự phóng xác suất theo từng năm</h2>
             </div>
             <div class="table-actions">
