@@ -30,6 +30,11 @@
     investmentGoalAmount: 200000000,
     investmentDeadlineYears: 10,
     investmentExpectedReturn: 10,
+    monthlyRiskInvestment: 613000,
+    riskInvestmentCurrent: 0,
+    riskInvestmentGoalAmount: 50000000,
+    riskInvestmentDeadlineYears: 5,
+    riskInvestmentExpectedReturn: 12,
     strategy: 'hybrid',
     debts: [
       { id: 'debt-consumer', name: 'Vay tiêu dùng', balance: 12000000, principalPayment: 680000, monthlyInterest: 120000 },
@@ -68,6 +73,19 @@
     investmentGoalAmount: document.getElementById('investmentGoalAmount'),
     investmentDeadlineYears: document.getElementById('investmentDeadlineYears'),
     investmentExpectedReturn: document.getElementById('investmentExpectedReturn'),
+    monthlyRiskInvestment: document.getElementById('monthlyRiskInvestment'),
+    riskInvestmentCurrent: document.getElementById('riskInvestmentCurrent'),
+    riskInvestmentGoalAmount: document.getElementById('riskInvestmentGoalAmount'),
+    riskInvestmentDeadlineYears: document.getElementById('riskInvestmentDeadlineYears'),
+    riskInvestmentExpectedReturn: document.getElementById('riskInvestmentExpectedReturn'),
+    fundEmergencyBalance: document.getElementById('fundEmergencyBalance'),
+    fundEmergencyPlan: document.getElementById('fundEmergencyPlan'),
+    fundSavingsBalance: document.getElementById('fundSavingsBalance'),
+    fundSavingsPlan: document.getElementById('fundSavingsPlan'),
+    fundInvestmentBalance: document.getElementById('fundInvestmentBalance'),
+    fundInvestmentPlan: document.getElementById('fundInvestmentPlan'),
+    fundRiskBalance: document.getElementById('fundRiskBalance'),
+    fundRiskPlan: document.getElementById('fundRiskPlan'),
     autoDebtExtraDisplay: document.getElementById('autoDebtExtraDisplay'),
     availableCash: document.getElementById('availableCash'),
     availableCashNote: document.getElementById('availableCashNote'),
@@ -120,7 +138,11 @@
     investmentCurrent: 'investmentCurrent',
     investmentGoalAmount: 'investmentGoalAmount',
     investmentDeadlineYears: 'investmentDeadlineYears',
-    investmentExpectedReturn: 'investmentExpectedReturn'
+    investmentExpectedReturn: 'investmentExpectedReturn',
+    riskInvestmentCurrent: 'riskInvestmentCurrent',
+    riskInvestmentGoalAmount: 'riskInvestmentGoalAmount',
+    riskInvestmentDeadlineYears: 'riskInvestmentDeadlineYears',
+    riskInvestmentExpectedReturn: 'riskInvestmentExpectedReturn'
   };
 
   let state = null;
@@ -178,18 +200,31 @@
 
   function deriveGoalContributions(target) {
     const roundUpThousand = (value) => value > 0 ? Math.ceil(value / 1000) * 1000 : 0;
+    const compoundContribution = (current, goal, years, annualReturn) => {
+      const months = Math.max(Math.round(years * 12), 1);
+      const monthlyRate = annualReturn / 100 / 12;
+      const growthFactor = Math.pow(1 + monthlyRate, months);
+      const remainingGoal = Math.max(goal - current * growthFactor, 0);
+      const required = monthlyRate > 0
+        ? remainingGoal * monthlyRate / Math.max(growthFactor - 1, 1e-9)
+        : remainingGoal / months;
+      return roundUpThousand(required);
+    };
     const emergencyTarget = target.essentialSpending * target.emergencyTargetMonths;
     target.emergencyContribution = roundUpThousand(Math.max(emergencyTarget - target.emergencyCurrent, 0) / Math.max(target.emergencyDeadlineMonths, 1));
     target.monthlySavings = roundUpThousand(Math.max(target.savingsGoalAmount - target.savingsCurrent, 0) / Math.max(target.savingsDeadlineMonths, 1));
-
-    const investmentMonths = Math.max(Math.round(target.investmentDeadlineYears * 12), 1);
-    const monthlyRate = target.investmentExpectedReturn / 100 / 12;
-    const growthFactor = Math.pow(1 + monthlyRate, investmentMonths);
-    const remainingGoal = Math.max(target.investmentGoalAmount - target.investmentCurrent * growthFactor, 0);
-    const requiredInvestment = monthlyRate > 0
-      ? remainingGoal * monthlyRate / Math.max(growthFactor - 1, 1e-9)
-      : remainingGoal / investmentMonths;
-    target.monthlyInvestment = clamp(roundUpThousand(requiredInvestment), 1e6, 1e9);
+    target.monthlyInvestment = clamp(compoundContribution(
+      target.investmentCurrent,
+      target.investmentGoalAmount,
+      target.investmentDeadlineYears,
+      target.investmentExpectedReturn
+    ), 1e6, 1e9);
+    target.monthlyRiskInvestment = clamp(compoundContribution(
+      target.riskInvestmentCurrent,
+      target.riskInvestmentGoalAmount,
+      target.riskInvestmentDeadlineYears,
+      target.riskInvestmentExpectedReturn
+    ), 0, 1e9);
     return target;
   }
 
@@ -199,7 +234,7 @@
     const numericKeys = [
       'income', 'essentialSpending', 'familyBudget', 'charityBudget', 'monthlyDebtReserve',
       'emergencyCurrent', 'savingsCurrent', 'savingsGoalAmount', 'investmentCurrent',
-      'investmentGoalAmount'
+      'investmentGoalAmount', 'riskInvestmentCurrent', 'riskInvestmentGoalAmount'
     ];
     numericKeys.forEach((key) => { base[key] = clamp(safeNumber(source[key], base[key]), 0, 1e15); });
     base.emergencyTargetMonths = Math.round(clamp(safeNumber(source.emergencyTargetMonths, base.emergencyTargetMonths), 1, 24));
@@ -207,6 +242,8 @@
     base.savingsDeadlineMonths = Math.round(clamp(safeNumber(source.savingsDeadlineMonths, base.savingsDeadlineMonths), 1, 240));
     base.investmentDeadlineYears = Math.round(clamp(safeNumber(source.investmentDeadlineYears, base.investmentDeadlineYears), 1, 50));
     base.investmentExpectedReturn = clamp(safeNumber(source.investmentExpectedReturn, base.investmentExpectedReturn), 0, 100);
+    base.riskInvestmentDeadlineYears = Math.round(clamp(safeNumber(source.riskInvestmentDeadlineYears, base.riskInvestmentDeadlineYears), 1, 50));
+    base.riskInvestmentExpectedReturn = clamp(safeNumber(source.riskInvestmentExpectedReturn, base.riskInvestmentExpectedReturn), 0, 200);
     base.savingsGoalName = String(source.savingsGoalName || base.savingsGoalName).slice(0, 80);
     base.startMonth = /^\d{4}-\d{2}$/.test(source.startMonth) ? source.startMonth : base.startMonth;
     base.strategy = strategyNames[source.strategy] ? source.strategy : base.strategy;
@@ -259,6 +296,11 @@
     elements.investmentGoalAmount.value = formatInputCurrency(state.investmentGoalAmount);
     elements.investmentDeadlineYears.value = state.investmentDeadlineYears;
     elements.investmentExpectedReturn.value = state.investmentExpectedReturn;
+    elements.monthlyRiskInvestment.value = formatInputCurrency(state.monthlyRiskInvestment);
+    elements.riskInvestmentCurrent.value = formatInputCurrency(state.riskInvestmentCurrent);
+    elements.riskInvestmentGoalAmount.value = formatInputCurrency(state.riskInvestmentGoalAmount);
+    elements.riskInvestmentDeadlineYears.value = state.riskInvestmentDeadlineYears;
+    elements.riskInvestmentExpectedReturn.value = state.riskInvestmentExpectedReturn;
   }
 
   function activeDebts() {
@@ -419,7 +461,7 @@
     const reserveShortfall = hasDebt ? Math.max(minimumDebt - state.monthlyDebtReserve, 0) : 0;
     const mandatoryDebtBudget = hasDebt ? Math.max(minimumDebt, state.monthlyDebtReserve) : 0;
     const safety = state.monthlySavings + state.emergencyContribution;
-    const growth = state.monthlyInvestment;
+    const growth = state.monthlyInvestment + state.monthlyRiskInvestment;
     const baseObligation = state.essentialSpending + state.familyBudget + state.charityBudget + mandatoryDebtBudget;
     const baseAllocated = baseObligation + safety + growth;
     const rawAvailable = state.income - baseAllocated;
@@ -477,6 +519,14 @@
     elements.financeScore.textContent = `${score}/100`;
     elements.emergencyRunway.textContent = `${runway.toLocaleString('vi-VN', { maximumFractionDigits: 1 })} tháng`;
     elements.emergencyTargetNote.textContent = `${formatPercent(emergencyProgress)} mục tiêu ${state.emergencyTargetMonths} tháng (${formatCurrency(emergencyTarget, true)})`;
+    elements.fundEmergencyBalance.textContent = formatCurrency(state.emergencyCurrent);
+    elements.fundEmergencyPlan.textContent = `+${formatCurrency(state.emergencyContribution, true)}/tháng · mục tiêu ${formatCurrency(emergencyTarget, true)}`;
+    elements.fundSavingsBalance.textContent = formatCurrency(state.savingsCurrent);
+    elements.fundSavingsPlan.textContent = `+${formatCurrency(state.monthlySavings, true)}/tháng · mục tiêu ${formatCurrency(state.savingsGoalAmount, true)}`;
+    elements.fundInvestmentBalance.textContent = formatCurrency(state.investmentCurrent);
+    elements.fundInvestmentPlan.textContent = `+${formatCurrency(state.monthlyInvestment, true)}/tháng · mục tiêu ${formatCurrency(state.investmentGoalAmount, true)}`;
+    elements.fundRiskBalance.textContent = formatCurrency(state.riskInvestmentCurrent);
+    elements.fundRiskPlan.textContent = `+${formatCurrency(state.monthlyRiskInvestment, true)}/tháng · mục tiêu ${formatCurrency(state.riskInvestmentGoalAmount, true)}`;
 
     if (!activeDebts().length) {
       elements.debtFreeSummary.textContent = 'Không có nợ';
@@ -503,7 +553,8 @@
       { label: 'Gia đình & thiện nguyện', value: state.familyBudget + state.charityBudget, color: '#d8aa63' },
       { label: state.savingsGoalName || 'Tiết kiệm cá nhân', value: state.monthlySavings, color: '#75a889' },
       { label: 'Quỹ khẩn cấp', value: state.emergencyContribution, color: '#1b7655' },
-      { label: 'Đầu tư', value: state.monthlyInvestment, color: '#10261f' },
+      { label: 'Đầu tư dài hạn', value: state.monthlyInvestment, color: '#10261f' },
+      { label: 'Đầu tư rủi ro', value: state.monthlyRiskInvestment, color: '#7f4bb2' },
       { label: summary.available >= 0 ? 'Chưa phân bổ' : 'Thiếu hụt', value: Math.abs(summary.available), color: summary.available >= 0 ? '#b8f36b' : '#7f2d2a' }
     ].filter((item) => item.value > 0);
     const barTotal = Math.max(state.income, summary.allocated);
@@ -645,7 +696,9 @@
         emergencyDeadlineMonths: [1, 120],
         savingsDeadlineMonths: [1, 240],
         investmentDeadlineYears: [1, 50],
-        investmentExpectedReturn: [0, 100]
+        investmentExpectedReturn: [0, 100],
+        riskInvestmentDeadlineYears: [1, 50],
+        riskInvestmentExpectedReturn: [0, 200]
       };
       const [min, max] = limits[key] || [0, 1e15];
       state[key] = clamp(safeNumber(input.value, min), min, max);
@@ -654,6 +707,7 @@
     elements.emergencyContribution.value = formatInputCurrency(state.emergencyContribution);
     elements.monthlySavings.value = formatInputCurrency(state.monthlySavings);
     elements.monthlyInvestment.value = formatInputCurrency(state.monthlyInvestment);
+    elements.monthlyRiskInvestment.value = formatInputCurrency(state.monthlyRiskInvestment);
   }
 
   function updateDebtState(input) {
