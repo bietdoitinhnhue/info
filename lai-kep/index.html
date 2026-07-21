@@ -1949,12 +1949,28 @@
         </div>
 
         <section class="fund-balance-card" aria-labelledby="fundBalanceTitle">
-          <div class="fund-balance-head"><div><span>Số dư tài sản</span><h3 id="fundBalanceTitle">Bốn quỹ của bạn</h3></div><small>Số lớn là số dư hiện tại · dòng dưới là khoản tự trích mỗi tháng</small></div>
+          <div class="fund-balance-head"><div><span>Tổng quan tài sản</span><h3 id="fundBalanceTitle">Bốn quỹ của bạn</h3></div><small>Theo dõi số dư, mục tiêu và khoản trích hằng tháng</small></div>
           <div class="fund-balance-grid">
-            <article class="emergency"><span>Quỹ khẩn cấp</span><strong id="fundEmergencyBalance">0 ₫</strong><small id="fundEmergencyPlan">+0 ₫/tháng</small></article>
-            <article class="savings"><span>Quỹ tiết kiệm</span><strong id="fundSavingsBalance">0 ₫</strong><small id="fundSavingsPlan">+0 ₫/tháng</small></article>
-            <article class="long-term"><span>Đầu tư dài hạn</span><strong id="fundInvestmentBalance">0 ₫</strong><small id="fundInvestmentPlan">+0 ₫/tháng</small></article>
-            <article class="risk"><span>Đầu tư rủi ro</span><strong id="fundRiskBalance">0 ₫</strong><small id="fundRiskPlan">+0 ₫/tháng</small></article>
+            <article class="emergency" id="fundEmergencyCard">
+              <header><i>01</i><div><span>Quỹ khẩn cấp</span><small>Số dư hiện tại</small></div><b id="fundEmergencyProgress">0%</b></header>
+              <strong id="fundEmergencyBalance">0 ₫</strong><div class="fund-progress"><i></i></div>
+              <footer><span><small>Trích mỗi tháng</small><b id="fundEmergencyPlan">+0 ₫</b></span><span><small>Mục tiêu</small><b id="fundEmergencyTarget">0 ₫</b></span></footer>
+            </article>
+            <article class="savings" id="fundSavingsCard">
+              <header><i>02</i><div><span>Quỹ tiết kiệm</span><small>Số dư hiện tại</small></div><b id="fundSavingsProgress">0%</b></header>
+              <strong id="fundSavingsBalance">0 ₫</strong><div class="fund-progress"><i></i></div>
+              <footer><span><small>Trích mỗi tháng</small><b id="fundSavingsPlan">+0 ₫</b></span><span><small>Mục tiêu</small><b id="fundSavingsTarget">0 ₫</b></span></footer>
+            </article>
+            <article class="long-term" id="fundInvestmentCard">
+              <header><i>03</i><div><span>Đầu tư dài hạn</span><small>Số dư hiện tại</small></div><b id="fundInvestmentProgress">0%</b></header>
+              <strong id="fundInvestmentBalance">0 ₫</strong><div class="fund-progress"><i></i></div>
+              <footer><span><small>Trích mỗi tháng</small><b id="fundInvestmentPlan">+0 ₫</b></span><span><small>Mục tiêu</small><b id="fundInvestmentTarget">0 ₫</b></span></footer>
+            </article>
+            <article class="risk" id="fundRiskCard">
+              <header><i>04</i><div><span>Đầu tư rủi ro</span><small>Số dư hiện tại</small></div><b id="fundRiskProgress">0%</b></header>
+              <strong id="fundRiskBalance">0 ₫</strong><div class="fund-progress"><i></i></div>
+              <footer><span><small>Trích mỗi tháng</small><b id="fundRiskPlan">+0 ₫</b></span><span><small>Mục tiêu</small><b id="fundRiskTarget">0 ₫</b></span></footer>
+            </article>
           </div>
         </section>
 
