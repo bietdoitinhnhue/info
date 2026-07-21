@@ -15,7 +15,13 @@
     tradeFee: 0.15,
     sellTax: 0.1,
     dividendTax: 5,
-    targetValue: 1000000000,
+    targetValue: 3000000000,
+    homeGrowthRate: 10,
+    downPaymentRate: 30,
+    currentUsdRate: 26600,
+    vndDepreciationRate: 2.5,
+    goldPrice: 146000000,
+    goldGrowthRate: 8,
     reinvestDividends: true
   };
 
@@ -47,6 +53,12 @@
     sellTax: document.getElementById('sellTax'),
     dividendTax: document.getElementById('dividendTax'),
     targetValue: document.getElementById('targetValue'),
+    homeGrowthRate: document.getElementById('homeGrowthRate'),
+    downPaymentRate: document.getElementById('downPaymentRate'),
+    currentUsdRate: document.getElementById('currentUsdRate'),
+    vndDepreciationRate: document.getElementById('vndDepreciationRate'),
+    goldPrice: document.getElementById('goldPrice'),
+    goldGrowthRate: document.getElementById('goldGrowthRate'),
     reinvestDividends: document.getElementById('reinvestDividends'),
     resetButton: document.getElementById('resetButton'),
     finalValue: document.getElementById('finalValue'),
@@ -65,6 +77,22 @@
     contributionInsight: document.getElementById('contributionInsight'),
     estimatedCosts: document.getElementById('estimatedCosts'),
     wealthMultiple: document.getElementById('wealthMultiple'),
+    futureHomePrice: document.getElementById('futureHomePrice'),
+    homeGrowthNote: document.getElementById('homeGrowthNote'),
+    homeCoverage: document.getElementById('homeCoverage'),
+    homeCoverageBar: document.getElementById('homeCoverageBar'),
+    homeGap: document.getElementById('homeGap'),
+    downPaymentTarget: document.getElementById('downPaymentTarget'),
+    downPaymentNote: document.getElementById('downPaymentNote'),
+    homeGoalProbability: document.getElementById('homeGoalProbability'),
+    requiredMonthly: document.getElementById('requiredMonthly'),
+    homeGapValue: document.getElementById('homeGapValue'),
+    futureUsdRate: document.getElementById('futureUsdRate'),
+    usdRateNote: document.getElementById('usdRateNote'),
+    portfolioUsd: document.getElementById('portfolioUsd'),
+    futureGoldPrice: document.getElementById('futureGoldPrice'),
+    goldGrowthNote: document.getElementById('goldGrowthNote'),
+    goldEquivalent: document.getElementById('goldEquivalent'),
     growthChart: document.getElementById('growthChart'),
     projectionBody: document.getElementById('projectionBody'),
     allocationTotal: document.getElementById('allocationTotal'),
@@ -162,22 +190,38 @@
     };
   };
 
-  const getInputs = () => ({
-    monthlyContribution: clamp(parseCurrency(els.monthlyContribution.value), 0, 1e12),
-    years: Math.round(clamp(numberValue(els.years, defaults.years), 1, 50)),
-    startMonth: /^\d{4}-\d{2}$/.test(els.startMonth.value) ? els.startMonth.value : defaults.startMonth,
-    contributionGrowth: clamp(numberValue(els.contributionGrowth, 0), -50, 100),
-    annualReturn: clamp(numberValue(els.annualReturn, 0), -90, 100),
-    marketVolatility: clamp(numberValue(els.marketVolatility, 0), 0, 80),
-    initialCapital: clamp(parseCurrency(els.initialCapital.value), 0, 1e15),
-    dividendYield: clamp(numberValue(els.dividendYield, 0), 0, 30),
-    inflationRate: clamp(numberValue(els.inflationRate, 0), 0, 30),
-    tradeFee: clamp(numberValue(els.tradeFee, 0), 0, 5),
-    sellTax: clamp(numberValue(els.sellTax, 0), 0, 5),
-    dividendTax: clamp(numberValue(els.dividendTax, 0), 0, 30),
-    targetValue: clamp(parseCurrency(els.targetValue.value), 0, 1e16),
-    reinvestDividends: els.reinvestDividends.checked
-  });
+  const getInputs = () => {
+    const years = Math.round(clamp(numberValue(els.years, defaults.years), 1, 50));
+    const homeCurrentPrice = clamp(parseCurrency(els.targetValue.value), 0, 1e16);
+    const homeGrowthRate = clamp(numberValue(els.homeGrowthRate, defaults.homeGrowthRate), 0, 50);
+    const downPaymentRate = clamp(numberValue(els.downPaymentRate, defaults.downPaymentRate), 1, 100);
+    const futureHomePrice = homeCurrentPrice * Math.pow(1 + homeGrowthRate / 100, years);
+
+    return {
+      monthlyContribution: clamp(parseCurrency(els.monthlyContribution.value), 0, 1e12),
+      years,
+      startMonth: /^\d{4}-\d{2}$/.test(els.startMonth.value) ? els.startMonth.value : defaults.startMonth,
+      contributionGrowth: clamp(numberValue(els.contributionGrowth, 0), -50, 100),
+      annualReturn: clamp(numberValue(els.annualReturn, 0), -90, 100),
+      marketVolatility: clamp(numberValue(els.marketVolatility, 0), 0, 80),
+      initialCapital: clamp(parseCurrency(els.initialCapital.value), 0, 1e15),
+      dividendYield: clamp(numberValue(els.dividendYield, 0), 0, 30),
+      inflationRate: clamp(numberValue(els.inflationRate, 0), 0, 30),
+      tradeFee: clamp(numberValue(els.tradeFee, 0), 0, 5),
+      sellTax: clamp(numberValue(els.sellTax, 0), 0, 5),
+      dividendTax: clamp(numberValue(els.dividendTax, 0), 0, 30),
+      homeCurrentPrice,
+      homeGrowthRate,
+      downPaymentRate,
+      futureHomePrice,
+      targetValue: futureHomePrice * downPaymentRate / 100,
+      currentUsdRate: clamp(parseCurrency(els.currentUsdRate.value), 1, 1e9),
+      vndDepreciationRate: clamp(numberValue(els.vndDepreciationRate, defaults.vndDepreciationRate), 0, 20),
+      goldPrice: clamp(parseCurrency(els.goldPrice.value), 1, 1e12),
+      goldGrowthRate: clamp(numberValue(els.goldGrowthRate, defaults.goldGrowthRate), 0, 50),
+      reinvestDividends: els.reinvestDividends.checked
+    };
+  };
 
   const contributionPlan = (input) => {
     let total = input.initialCapital;
@@ -303,6 +347,13 @@
   const renderSummary = (result) => {
     const { input } = result;
     const finalMonthly = result.rows[result.rows.length - 1].monthlyContribution;
+    const homeGap = Math.max(input.targetValue - result.liquidationValue, 0);
+    const homeCoverage = input.targetValue > 0 ? result.liquidationValue / input.targetValue * 100 : 100;
+    const requiredMonthly = input.monthlyContribution > 0 && result.liquidationValue > 0 && result.liquidationValue < input.targetValue
+      ? input.monthlyContribution * input.targetValue / result.liquidationValue
+      : null;
+    const futureUsdRate = input.currentUsdRate * Math.pow(1 + input.vndDepreciationRate / 100, input.years);
+    const futureGoldPrice = input.goldPrice * Math.pow(1 + input.goldGrowthRate / 100, input.years);
     els.finalValue.textContent = formatCurrency(result.p50);
     els.finishDate.textContent = getFinishDate(input.startMonth, input.years);
     els.rangeText.textContent = `Dải 80% kết quả: ${formatCurrency(result.p10, true)} - ${formatCurrency(result.p90, true)}`;
@@ -313,7 +364,7 @@
     els.totalDividends.textContent = formatCurrency(result.grossDividends);
     els.liquidationValue.textContent = formatCurrency(result.liquidationValue);
     els.goalProbability.textContent = formatPercent(result.goalProbability);
-    els.goalNote.textContent = `Mục tiêu ${formatCurrency(input.targetValue, true)}`;
+    els.goalNote.textContent = `Trả trước ${formatPercent(input.downPaymentRate)}: ${formatCurrency(input.targetValue, true)}`;
     els.lossProbability.textContent = formatPercent(result.lossProbability);
     els.lossProbability.classList.toggle('negative', result.lossProbability >= 30);
     els.realValue.textContent = formatCurrency(result.realValue);
@@ -324,6 +375,28 @@
       : `Tăng ${formatPercent(input.contributionGrowth, 2)} sau mỗi 12 tháng.`;
     els.estimatedCosts.textContent = formatCurrency(result.totalCosts, true);
     els.wealthMultiple.textContent = `${result.wealthMultiple.toLocaleString('vi-VN', { maximumFractionDigits: 2 })}×`;
+    els.futureHomePrice.textContent = formatCurrency(input.futureHomePrice);
+    els.homeGrowthNote.textContent = `Từ ${formatCurrency(input.homeCurrentPrice, true)}, tăng ${formatPercent(input.homeGrowthRate, 2)}/năm trong ${input.years} năm`;
+    els.homeCoverage.textContent = formatPercent(homeCoverage);
+    els.homeCoverageBar.style.width = `${clamp(homeCoverage, 0, 100)}%`;
+    els.homeGap.textContent = homeGap > 0
+      ? `Còn thiếu ${formatCurrency(homeGap)} so với mục tiêu trả trước.`
+      : `Đã vượt mục tiêu trả trước ${formatCurrency(result.liquidationValue - input.targetValue)}.`;
+    els.downPaymentTarget.textContent = formatCurrency(input.targetValue);
+    els.downPaymentNote.textContent = `${formatPercent(input.downPaymentRate)} giá căn nhà tương lai`;
+    els.homeGoalProbability.textContent = formatPercent(result.goalProbability);
+    els.requiredMonthly.textContent = result.liquidationValue >= input.targetValue
+      ? 'Đã đủ mục tiêu'
+      : requiredMonthly
+        ? `${formatCurrency(requiredMonthly)}/tháng`
+        : 'Cần nhập mức góp';
+    els.homeGapValue.textContent = formatCurrency(homeGap);
+    els.futureUsdRate.textContent = `${Math.round(futureUsdRate).toLocaleString('vi-VN')} ₫/USD`;
+    els.usdRateNote.textContent = `Từ ${Math.round(input.currentUsdRate).toLocaleString('vi-VN')} ₫, VNĐ mất giá ${formatPercent(input.vndDepreciationRate, 2)}/năm`;
+    els.portfolioUsd.textContent = `${Math.round(result.liquidationValue / futureUsdRate).toLocaleString('vi-VN')} USD`;
+    els.futureGoldPrice.textContent = `${formatCurrency(futureGoldPrice)}/lượng`;
+    els.goldGrowthNote.textContent = `Từ ${formatCurrency(input.goldPrice, true)}, tăng ${formatPercent(input.goldGrowthRate, 2)}/năm`;
+    els.goldEquivalent.textContent = `${(result.liquidationValue / futureGoldPrice).toLocaleString('vi-VN', { maximumFractionDigits: 2 })} lượng`;
   };
 
   const renderTable = (result) => {
@@ -470,7 +543,7 @@
       const element = els[key];
       if (!element) return;
       if (element.type === 'checkbox') element.checked = value;
-      else if (['monthlyContribution', 'initialCapital', 'targetValue'].includes(key)) element.value = formatInputCurrency(value);
+      else if (['monthlyContribution', 'initialCapital', 'targetValue', 'currentUsdRate', 'goldPrice'].includes(key)) element.value = formatInputCurrency(value);
       else element.value = value;
     });
     els.monthlyRange.value = defaults.monthlyContribution;
@@ -515,7 +588,12 @@
       `Dải P10 - P90: ${formatCurrency(result.p10)} - ${formatCurrency(result.p90)}`,
       `Tài sản trung vị: ${formatCurrency(result.p50)}`,
       `Giá trị trung vị nếu bán toàn bộ: ${formatCurrency(result.liquidationValue)}`,
-      `Xác suất đạt ${formatCurrency(result.input.targetValue)}: ${formatPercent(result.goalProbability)}`
+      `Giá căn nhà hôm nay: ${formatCurrency(result.input.homeCurrentPrice)}`,
+      `Giá căn nhà dự phóng: ${formatCurrency(result.input.futureHomePrice)} (${formatPercent(result.input.homeGrowthRate)}/năm)`,
+      `Mục tiêu trả trước ${formatPercent(result.input.downPaymentRate)}: ${formatCurrency(result.input.targetValue)}`,
+      `Xác suất đạt mục tiêu trả trước: ${formatPercent(result.goalProbability)}`,
+      `USD/VNĐ dự phóng: ${Math.round(result.input.currentUsdRate * Math.pow(1 + result.input.vndDepreciationRate / 100, result.input.years)).toLocaleString('vi-VN')} ₫/USD`,
+      `Giá vàng dự phóng: ${formatCurrency(result.input.goldPrice * Math.pow(1 + result.input.goldGrowthRate / 100, result.input.years))}/lượng`
     ].join('\n');
     try {
       await navigator.clipboard.writeText(summary);
@@ -541,7 +619,7 @@
     input.addEventListener('change', updateProjection);
   });
 
-  [els.monthlyContribution, els.initialCapital, els.targetValue].forEach((input) => {
+  [els.monthlyContribution, els.initialCapital, els.targetValue, els.currentUsdRate, els.goldPrice].forEach((input) => {
     input.addEventListener('focus', () => {
       input.value = parseCurrency(input.value) || '';
       input.select();
