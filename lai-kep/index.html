@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#10261f">
-  <meta name="description" content="Công cụ tính lãi kép và dự phóng tài chính theo từng năm từ khoản đầu tư hàng tháng, mức tăng khoản góp, tăng trưởng tài sản và cổ tức.">
+  <meta name="description" content="Mô phỏng đầu tư cổ phiếu Việt Nam theo 1.200 kịch bản, gồm biến động thị trường, phí giao dịch, thuế, cổ tức và danh mục theo tỷ trọng.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Dự phóng lãi kép - Công cụ đầu tư định kỳ">
-  <meta property="og:description" content="Nhập số tiền đầu tư hàng tháng và xem hành trình tài chính của bạn theo từng năm.">
+  <meta property="og:title" content="Mô phỏng đầu tư Stock Việt Nam - Tích Lũy">
+  <meta property="og:description" content="Mô phỏng đầu tư cổ phiếu Việt Nam với biến động thị trường, phí, thuế, cổ tức và danh mục theo tỷ trọng.">
   <link rel="canonical" href="https://drakenguyen.me/lai-kep/">
-  <title>Dự phóng lãi kép | Đầu tư định kỳ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
+  <title>Mô phỏng đầu tư Stock Việt Nam | Tích Lũy</title>
   <style>
     :root {
       --ink: #13231e;
@@ -46,7 +49,7 @@
         radial-gradient(circle at 12% 12%, rgba(184, 243, 107, 0.18), transparent 24rem),
         var(--paper);
       color: var(--ink);
-      font-family: "Segoe UI", "Aptos", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
       font-variant-numeric: tabular-nums;
     }
 
@@ -165,7 +168,7 @@
     h1 {
       max-width: 870px;
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "DM Serif Display", Georgia, serif;
       font-size: clamp(46px, 6.7vw, 92px);
       font-weight: 500;
       letter-spacing: -0.055em;
@@ -197,7 +200,7 @@
       display: block;
       margin-bottom: 9px;
       color: var(--forest);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "DM Serif Display", Georgia, serif;
       font-size: 27px;
       font-weight: 500;
     }
@@ -587,7 +590,7 @@
       z-index: 1;
       margin: 0 0 10px;
       color: var(--mint);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "DM Serif Display", Georgia, serif;
       font-size: clamp(43px, 6.4vw, 75px);
       font-weight: 500;
       letter-spacing: -0.045em;
@@ -727,6 +730,11 @@
       background: var(--orange);
     }
 
+    .legend .range-legend {
+      height: 8px;
+      opacity: 0.25;
+    }
+
     .chart-wrap {
       position: relative;
       width: 100%;
@@ -750,7 +758,7 @@
 
     .chart-label {
       fill: #728079;
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Be Vietnam Pro", "Segoe UI", sans-serif;
       font-size: 11px;
     }
 
@@ -810,7 +818,7 @@
       display: block;
       margin-bottom: 18px;
       color: var(--green);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "DM Serif Display", Georgia, serif;
       font-size: 31px;
       line-height: 1;
     }
@@ -984,6 +992,257 @@
       transform: translateY(0);
     }
 
+    .result-range {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 7px 11px;
+      border: 1px solid rgba(184, 243, 107, 0.25);
+      border-radius: 999px;
+      background: rgba(184, 243, 107, 0.08);
+      color: #dce9e1;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .result-range::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--mint);
+      content: "";
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric strong {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 500;
+    }
+
+    .stock-panel {
+      padding: 28px;
+    }
+
+    .allocation-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #eef0e8;
+    }
+
+    .allocation-summary p {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .allocation-total {
+      flex: 0 0 auto;
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .allocation-total.bad {
+      color: var(--red);
+    }
+
+    .stock-allocation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .stock-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 72px;
+      gap: 12px;
+      align-items: center;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--white);
+    }
+
+    .stock-identity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .stock-code {
+      display: grid;
+      flex: 0 0 auto;
+      width: 44px;
+      height: 35px;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--forest);
+      color: var(--mint);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.03em;
+    }
+
+    .stock-copy {
+      min-width: 0;
+    }
+
+    .stock-copy strong,
+    .stock-copy small {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .stock-copy strong {
+      margin-bottom: 3px;
+      font-size: 11px;
+    }
+
+    .stock-copy small {
+      color: #7b8981;
+      font-size: 9px;
+    }
+
+    .weight-wrap {
+      position: relative;
+    }
+
+    .weight-wrap input {
+      min-height: 39px;
+      padding: 0 25px 0 9px;
+      border-radius: 9px;
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .weight-wrap span {
+      right: 8px;
+      font-size: 10px;
+    }
+
+    .stock-amount {
+      grid-column: 1 / -1;
+      margin-top: -5px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .rotation-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0 11px;
+    }
+
+    .rotation-head strong {
+      font-size: 12px;
+    }
+
+    .rebalance-button {
+      min-height: 32px;
+      padding: 0 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: white;
+      color: var(--ink-2);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .rotation {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .rotation-item {
+      padding: 9px 6px;
+      border-radius: 10px;
+      background: var(--mint-soft);
+      text-align: center;
+    }
+
+    .rotation-item span,
+    .rotation-item strong {
+      display: block;
+    }
+
+    .rotation-item span {
+      margin-bottom: 3px;
+      color: #74827a;
+      font-size: 8px;
+      font-weight: 650;
+    }
+
+    .rotation-item strong {
+      color: var(--forest);
+      font-size: 11px;
+    }
+
+    .stock-note {
+      margin: 12px 0 0;
+      color: #74827a;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .scenario-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--mint-soft);
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .range-band {
+      fill: rgba(27, 118, 85, 0.12);
+    }
+
+    .low-line,
+    .high-line {
+      fill: none;
+      stroke: rgba(27, 118, 85, 0.48);
+      stroke-dasharray: 5 7;
+      stroke-linecap: round;
+      stroke-width: 1.5;
+    }
+
+    .source-link {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .source-link:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 1000px) {
       .hero {
         grid-template-columns: 1fr;
@@ -1064,7 +1323,15 @@
       }
 
       .metric:last-child {
-        grid-column: 1 / -1;
+        grid-column: auto;
+      }
+
+      .stock-allocation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rotation {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
 
       .section-heading {
@@ -1139,19 +1406,19 @@
       <span class="brand-mark" aria-hidden="true"></span>
       Tích Lũy
     </div>
-    <div class="top-note">Mô phỏng cập nhật theo thời gian thực</div>
+    <div class="top-note">1.200 kịch bản cập nhật theo thời gian thực</div>
   </header>
 
   <main class="shell">
     <section class="hero">
       <div>
-        <div class="eyebrow">Công cụ dự phóng tài chính</div>
-        <h1>Lãi kép bắt đầu từ sự <em>đều đặn.</em></h1>
-        <p class="hero-copy">Nhập số tiền bạn có thể đầu tư mỗi tháng. Công cụ sẽ biến kế hoạch đó thành một lộ trình rõ ràng theo từng năm, gồm vốn góp, tăng trưởng và cổ tức.</p>
+        <div class="eyebrow">Mô phỏng danh mục Stock Việt Nam</div>
+        <h1>Đầu tư đều. Nhưng thị trường <em>không đi thẳng.</em></h1>
+        <p class="hero-copy">Dự phóng theo 1.200 kịch bản có năm tăng, năm giảm, phí giao dịch và thuế. Kết quả được trình bày theo dải xấu - trung vị - thuận lợi, sát thực tế đầu tư cổ phiếu hơn một đường tăng đều.</p>
       </div>
       <aside class="hero-card">
-        <strong>10 năm, 1 thói quen.</strong>
-        <p>Mô hình mặc định dùng 2 triệu đồng/tháng, tăng khoản góp 10% mỗi năm và tái đầu tư toàn bộ cổ tức.</p>
+        <strong>10 năm, 1 kỷ luật.</strong>
+        <p>Mặc định: 2 triệu/tháng từ 8/2026, tăng khoản góp 10%/năm, danh mục 7 mã và tái đầu tư cổ tức sau thuế.</p>
       </aside>
     </section>
 
@@ -1168,9 +1435,9 @@
         <div class="form-body">
           <div class="preset-label">Chọn nhanh một kịch bản</div>
           <div class="presets" role="group" aria-label="Kịch bản tăng trưởng">
-            <button class="preset" data-return="7" data-dividend="2" type="button">Thận trọng</button>
-            <button class="preset active" data-return="10" data-dividend="3" type="button">Cơ sở</button>
-            <button class="preset" data-return="14" data-dividend="2" type="button">Tăng tốc</button>
+            <button class="preset" data-return="7" data-volatility="14" data-dividend="2" type="button">Thận trọng</button>
+            <button class="preset active" data-return="10" data-volatility="20" data-dividend="3" type="button">Cơ sở</button>
+            <button class="preset" data-return="14" data-volatility="26" data-dividend="2" type="button">Tăng tốc</button>
           </div>
 
           <div class="field">
@@ -1210,9 +1477,17 @@
           </div>
 
           <div class="field">
-            <label for="annualReturn">Tăng trưởng tài sản kỳ vọng <span class="hint">chưa gồm cổ tức</span></label>
+            <label for="annualReturn">Tăng giá cổ phiếu kỳ vọng <span class="hint">trung bình dài hạn</span></label>
             <div class="input-wrap">
               <input id="annualReturn" type="number" min="-50" max="100" step="0.5" value="10">
+              <span class="suffix">%/năm</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="marketVolatility">Biến động thị trường <span class="hint">tạo năm âm/dương</span></label>
+            <div class="input-wrap">
+              <input id="marketVolatility" type="number" min="0" max="80" step="1" value="20">
               <span class="suffix">%/năm</span>
             </div>
           </div>
@@ -1245,6 +1520,40 @@
                 </div>
               </div>
 
+              <div class="field-row">
+                <div class="field">
+                  <label for="tradeFee">Phí công ty CK <span class="hint">mỗi chiều</span></label>
+                  <div class="input-wrap">
+                    <input id="tradeFee" type="number" min="0" max="5" step="0.01" value="0.15">
+                    <span class="suffix">%</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="sellTax">Thuế khi bán</label>
+                  <div class="input-wrap">
+                    <input id="sellTax" type="number" min="0" max="5" step="0.01" value="0.1">
+                    <span class="suffix">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="dividendTax">Thuế cổ tức tiền mặt</label>
+                  <div class="input-wrap">
+                    <input id="dividendTax" type="number" min="0" max="30" step="0.5" value="5">
+                    <span class="suffix">%</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="targetValue">Mục tiêu tài sản</label>
+                  <div class="input-wrap">
+                    <input id="targetValue" type="text" inputmode="numeric" value="1.000.000.000" autocomplete="off">
+                    <span class="suffix">VNĐ</span>
+                  </div>
+                </div>
+              </div>
+
               <div class="switch-row">
                 <div class="switch-copy">
                   <strong>Tái đầu tư cổ tức</strong>
@@ -1264,9 +1573,10 @@
 
       <div class="output" aria-live="polite">
         <section class="result-hero">
-          <div class="result-label">Tổng tài sản dự kiến</div>
+          <div class="result-label">Tài sản trung vị sau 1.200 kịch bản</div>
           <div class="result-value" id="finalValue">0 ₫</div>
           <div class="result-date" id="finishDate">Vào tháng 7/2036</div>
+          <div class="result-range" id="rangeText">Dải 80% kết quả: 0 ₫ - 0 ₫</div>
           <div class="result-strip">
             <div class="strip-item">
               <span>Tổng vốn đã góp</span>
@@ -1277,51 +1587,116 @@
               <strong class="positive" id="totalProfit">0 ₫</strong>
             </div>
             <div class="strip-item">
-              <span>Hiệu suất trên vốn</span>
-              <strong id="returnOnCapital">0%</strong>
+              <span>Cổ tức gộp ước tính</span>
+              <strong id="totalDividends">0 ₫</strong>
             </div>
           </div>
         </section>
 
         <section class="metrics" aria-label="Chỉ số tài chính">
           <article class="metric">
-            <span class="metric-label">Tổng cổ tức</span>
-            <strong id="totalDividends">0 ₫</strong>
-            <small id="dividendNote">Đã được tái đầu tư</small>
+            <span class="metric-label">Nếu bán toàn bộ</span>
+            <strong id="liquidationValue">0 ₫</strong>
+            <small>Đã trừ phí bán và thuế chuyển nhượng</small>
           </article>
           <article class="metric">
-            <span class="metric-label">Giá trị theo sức mua hôm nay</span>
+            <span class="metric-label">Xác suất đạt mục tiêu</span>
+            <strong id="goalProbability">0%</strong>
+            <small id="goalNote">Mục tiêu 1 tỷ đồng</small>
+          </article>
+          <article class="metric">
+            <span class="metric-label">Rủi ro thấp hơn vốn góp</span>
+            <strong id="lossProbability">0%</strong>
+            <small>Tính trên giá trị sau khi bán toàn bộ</small>
+          </article>
+          <article class="metric">
+            <span class="metric-label">Sức mua theo giá hôm nay</span>
             <strong id="realValue">0 ₫</strong>
             <small id="inflationNote">Sau khi tính lạm phát</small>
           </article>
-          <article class="metric">
-            <span class="metric-label">Hệ số tài sản</span>
-            <strong id="wealthMultiple">0×</strong>
-            <small>Mỗi 1 đồng vốn tự góp tạo ra</small>
-          </article>
+        </section>
+
+        <section class="panel stock-panel">
+          <div class="section-heading">
+            <div>
+              <span class="step">02 - Danh mục mẫu</span>
+              <h2>Chia vốn cho 7 cổ phiếu</h2>
+            </div>
+            <span class="allocation-total" id="allocationTotal">100%</span>
+          </div>
+
+          <div class="allocation-summary">
+            <p>Tỷ trọng dùng để chia vốn và tạo lịch mua luân phiên. Lợi nhuận kỳ vọng cùng mức biến động đang được áp dụng ở cấp toàn danh mục.</p>
+            <button class="rebalance-button" id="rebalanceButton" type="button">Cân về 100%</button>
+          </div>
+
+          <div class="stock-allocation-grid" id="stockAllocationGrid">
+            <div class="stock-row" data-stock="VCB">
+              <div class="stock-identity"><span class="stock-code">VCB</span><span class="stock-copy"><strong>Vietcombank</strong><small>Ngân hàng</small></span></div>
+              <div class="weight-wrap"><input class="stock-weight" type="number" min="0" max="100" step="1" value="20" aria-label="Tỷ trọng VCB"><span class="suffix">%</span></div>
+              <span class="stock-amount">0 ₫/tháng</span>
+            </div>
+            <div class="stock-row" data-stock="ACB">
+              <div class="stock-identity"><span class="stock-code">ACB</span><span class="stock-copy"><strong>ACB</strong><small>Ngân hàng</small></span></div>
+              <div class="weight-wrap"><input class="stock-weight" type="number" min="0" max="100" step="1" value="15" aria-label="Tỷ trọng ACB"><span class="suffix">%</span></div>
+              <span class="stock-amount">0 ₫/tháng</span>
+            </div>
+            <div class="stock-row" data-stock="BSR">
+              <div class="stock-identity"><span class="stock-code">BSR</span><span class="stock-copy"><strong>Lọc hóa dầu Bình Sơn</strong><small>Năng lượng</small></span></div>
+              <div class="weight-wrap"><input class="stock-weight" type="number" min="0" max="100" step="1" value="10" aria-label="Tỷ trọng BSR"><span class="suffix">%</span></div>
+              <span class="stock-amount">0 ₫/tháng</span>
+            </div>
+            <div class="stock-row" data-stock="VPB">
+              <div class="stock-identity"><span class="stock-code">VPB</span><span class="stock-copy"><strong>VPBank</strong><small>Ngân hàng</small></span></div>
+              <div class="weight-wrap"><input class="stock-weight" type="number" min="0" max="100" step="1" value="10" aria-label="Tỷ trọng VPB"><span class="suffix">%</span></div>
+              <span class="stock-amount">0 ₫/tháng</span>
+            </div>
+            <div class="stock-row" data-stock="MBB">
+              <div class="stock-identity"><span class="stock-code">MBB</span><span class="stock-copy"><strong>MB Bank</strong><small>Ngân hàng</small></span></div>
+              <div class="weight-wrap"><input class="stock-weight" type="number" min="0" max="100" step="1" value="15" aria-label="Tỷ trọng MBB"><span class="suffix">%</span></div>
+              <span class="stock-amount">0 ₫/tháng</span>
+            </div>
+            <div class="stock-row" data-stock="SSI">
+              <div class="stock-identity"><span class="stock-code">SSI</span><span class="stock-copy"><strong>Chứng khoán SSI</strong><small>Dịch vụ tài chính</small></span></div>
+              <div class="weight-wrap"><input class="stock-weight" type="number" min="0" max="100" step="1" value="15" aria-label="Tỷ trọng SSI"><span class="suffix">%</span></div>
+              <span class="stock-amount">0 ₫/tháng</span>
+            </div>
+            <div class="stock-row" data-stock="TCB">
+              <div class="stock-identity"><span class="stock-code">TCB</span><span class="stock-copy"><strong>Techcombank</strong><small>Ngân hàng</small></span></div>
+              <div class="weight-wrap"><input class="stock-weight" type="number" min="0" max="100" step="1" value="15" aria-label="Tỷ trọng TCB"><span class="suffix">%</span></div>
+              <span class="stock-amount">0 ₫/tháng</span>
+            </div>
+          </div>
+
+          <div class="rotation-head">
+            <strong>Lịch giải ngân luân phiên 12 tháng</strong>
+          </div>
+          <div class="rotation" id="rotationSchedule"></div>
+          <p class="stock-note">Với ngân sách nhỏ, lịch luân phiên ưu tiên dùng trọn ngân sách tháng cho mã đang thiếu tỷ trọng thay vì chia thành 7 lệnh quá nhỏ. Khi số dư đủ lớn, bạn có thể mua bù theo tỷ trọng thực tế.</p>
         </section>
 
         <section class="panel chart-panel">
           <div class="section-heading">
             <div>
-              <span class="step">02 - Quỹ đạo</span>
-              <h2>Tài sản tăng qua từng năm</h2>
+              <span class="step">03 - Quỹ đạo <span class="scenario-badge">Monte Carlo</span></span>
+              <h2>Dải kết quả theo từng năm</h2>
             </div>
             <div class="legend">
-              <span><i></i>Tổng tài sản</span>
+              <span><i></i>Trung vị</span>
+              <span><i class="range-legend"></i>Dải P10 - P90</span>
               <span><i class="contribution-line"></i>Vốn đã góp</span>
             </div>
           </div>
           <div class="chart-wrap">
             <svg id="growthChart" viewBox="0 0 840 330" role="img" aria-label="Biểu đồ tài sản và vốn góp theo năm"></svg>
           </div>
-          <p class="chart-caption">Đường chênh lệch giữa tổng tài sản và vốn đã góp thể hiện phần giá trị được tạo ra bởi tăng trưởng tài sản và cổ tức.</p>
+          <p class="chart-caption">P10 là kịch bản chỉ khoảng 10% mô phỏng thấp hơn; P90 là kịch bản chỉ khoảng 10% mô phỏng cao hơn. Khoảng xanh không phải cam kết lợi nhuận.</p>
         </section>
 
         <section class="panel insight-panel">
           <div class="section-heading">
             <div>
-              <span class="step">03 - Điểm đáng chú ý</span>
+              <span class="step">04 - Điểm đáng chú ý</span>
               <h2>Ba con số nên nhớ</h2>
             </div>
           </div>
@@ -1332,14 +1707,14 @@
               <p id="contributionInsight">Tăng đều theo kế hoạch bạn đã đặt.</p>
             </article>
             <article class="insight">
-              <span class="insight-number" id="profitShare">0%</span>
-              <strong>Tỷ trọng lợi nhuận trong tài sản</strong>
-              <p>Phần tài sản đến từ lãi kép, không phải tiền túi tự góp.</p>
+              <span class="insight-number" id="estimatedCosts">0 ₫</span>
+              <strong>Phí và thuế trung vị</strong>
+              <p>Gồm phí mua, thuế cổ tức và chi phí ước tính khi bán toàn bộ.</p>
             </article>
             <article class="insight">
-              <span class="insight-number" id="compoundYear">-</span>
-              <strong>Năm lãi kép bắt đầu tăng tốc</strong>
-              <p id="compoundInsight">Khi lợi nhuận một năm vượt khoản vốn góp cùng năm.</p>
+              <span class="insight-number" id="wealthMultiple">0×</span>
+              <strong>Hệ số tài sản trung vị</strong>
+              <p>Mỗi 1 đồng vốn tự góp tạo thành bao nhiêu đồng tài sản.</p>
             </article>
           </div>
         </section>
@@ -1347,8 +1722,8 @@
         <section class="panel table-panel">
           <div class="section-heading">
             <div>
-              <span class="step">04 - Chi tiết</span>
-              <h2>Dự phóng theo từng năm</h2>
+              <span class="step">05 - Chi tiết</span>
+              <h2>Dự phóng xác suất theo từng năm</h2>
             </div>
             <div class="table-actions">
               <button class="ghost-button" id="copyButton" type="button">Sao chép tóm tắt</button>
@@ -1364,11 +1739,11 @@
                   <th>Năm</th>
                   <th>Góp/tháng</th>
                   <th>Góp trong năm</th>
-                  <th>Tăng trưởng</th>
-                  <th>Cổ tức</th>
                   <th>Tổng vốn góp</th>
-                  <th>Tài sản cuối năm</th>
-                  <th>Lãi lũy kế</th>
+                  <th>Kịch bản xấu P10</th>
+                  <th>Trung vị P50</th>
+                  <th>Thuận lợi P90</th>
+                  <th>Lãi trung vị</th>
                 </tr>
               </thead>
               <tbody id="projectionBody"></tbody>
@@ -1378,11 +1753,11 @@
           <div class="method">
             <div>
               <strong>Cách mô phỏng</strong>
-              <p>Khoản đầu tư được thêm vào đầu mỗi tháng. Tăng trưởng năm được quy đổi thành lãi suất hiệu dụng theo tháng. Mức góp mới được áp dụng sau mỗi 12 tháng.</p>
+              <p>Mỗi lần cập nhật chạy 1.200 đường đi ngẫu nhiên. Tăng trưởng kỳ vọng là xu hướng dài hạn; biến động tạo ra năm tăng và năm giảm. Khoản góp được đầu tư mỗi tháng sau khi trừ phí mua.</p>
             </div>
             <div>
-              <strong>Cách tính cổ tức</strong>
-              <p>Cổ tức được ước tính vào cuối mỗi năm trên giá trị danh mục tại thời điểm đó. Khi bật tái đầu tư, toàn bộ cổ tức được cộng lại vào danh mục.</p>
+              <strong>Phí và thuế đang dùng</strong>
+              <p>Phí công ty chứng khoán là giả định có thể sửa. Thuế bán mặc định 0,1% trên giá chuyển nhượng và thuế cổ tức tiền mặt mặc định 5%. Tham khảo <a class="source-link" href="https://baochinhphu.vn/muc-thue-suat-chuyen-nhuong-chung-khoan-hien-hanh-van-phu-hop-102251118085244141.htm" target="_blank" rel="noopener noreferrer">Cổng TTĐT Chính phủ</a>.</p>
             </div>
           </div>
         </section>
@@ -1399,7 +1774,7 @@
 
   <div class="toast" id="toast" role="status"></div>
 
-  <script>
+  <script type="text/plain" id="legacyCalculator">
     (() => {
       const defaults = {
         monthlyContribution: 2000000,
@@ -1828,5 +2203,6 @@
       updateProjection();
     })();
   </script>
+  <script src="/lai-kep/app.js"></script>
 </body>
 </html>
