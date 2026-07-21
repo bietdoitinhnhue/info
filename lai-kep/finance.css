@@ -215,6 +215,15 @@
   background: #f3f6ef;
 }
 
+.goal-block.risk-goal {
+  border-color: #dfd1ec;
+  background: #f8f2fc;
+}
+
+.goal-block.risk-goal .goal-block-head span {
+  color: #74429e;
+}
+
 .goal-block-head {
   display: flex;
   align-items: center;
@@ -428,6 +437,109 @@
 
 .finance-metric-grid strong.negative-value {
   color: var(--red);
+}
+
+.fund-balance-card {
+  margin-top: 13px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+}
+
+.fund-balance-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 13px;
+}
+
+.fund-balance-head span,
+.fund-balance-head h3,
+.fund-balance-head small {
+  display: block;
+}
+
+.fund-balance-head span {
+  margin-bottom: 4px;
+  color: var(--green);
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.fund-balance-head h3 {
+  margin: 0;
+  color: var(--forest);
+  font-size: 15px;
+}
+
+.fund-balance-head small {
+  color: #7d8b83;
+  font-size: 8px;
+  text-align: right;
+}
+
+.fund-balance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.fund-balance-grid article {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #e2e6e1;
+  border-left: 5px solid #1b7655;
+  border-radius: 13px;
+  background: #f7faf8;
+}
+
+.fund-balance-grid article.savings {
+  border-left-color: #d8aa63;
+  background: #fffaf2;
+}
+
+.fund-balance-grid article.long-term {
+  border-left-color: #10261f;
+  background: #f3f6ef;
+}
+
+.fund-balance-grid article.risk {
+  border-left-color: #7f4bb2;
+  background: #f8f2fc;
+}
+
+.fund-balance-grid span,
+.fund-balance-grid strong,
+.fund-balance-grid small {
+  display: block;
+}
+
+.fund-balance-grid span {
+  margin-bottom: 9px;
+  color: #697970;
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.fund-balance-grid strong {
+  overflow: hidden;
+  margin-bottom: 6px;
+  color: var(--forest);
+  font-size: clamp(16px, 1.8vw, 22px);
+  letter-spacing: -.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fund-balance-grid small {
+  color: #728178;
+  font-size: 7px;
+  line-height: 1.5;
 }
 
 .pillar-grid {
@@ -1017,7 +1129,8 @@
   }
 
   .finance-metric-grid,
-  .debt-metric-grid {
+  .debt-metric-grid,
+  .fund-balance-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1065,8 +1178,18 @@
   }
 
   .finance-metric-grid,
-  .debt-metric-grid {
+  .debt-metric-grid,
+  .fund-balance-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .fund-balance-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .fund-balance-head small {
+    text-align: left;
   }
 
   .finance-metric-grid article,
@@ -1113,7 +1236,8 @@
 
 @media (max-width: 430px) {
   .finance-metric-grid,
-  .debt-metric-grid {
+  .debt-metric-grid,
+  .fund-balance-grid {
     grid-template-columns: 1fr;
   }
 
