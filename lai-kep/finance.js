@@ -80,12 +80,24 @@
     riskInvestmentExpectedReturn: document.getElementById('riskInvestmentExpectedReturn'),
     fundEmergencyBalance: document.getElementById('fundEmergencyBalance'),
     fundEmergencyPlan: document.getElementById('fundEmergencyPlan'),
+    fundEmergencyTarget: document.getElementById('fundEmergencyTarget'),
+    fundEmergencyProgress: document.getElementById('fundEmergencyProgress'),
+    fundEmergencyCard: document.getElementById('fundEmergencyCard'),
     fundSavingsBalance: document.getElementById('fundSavingsBalance'),
     fundSavingsPlan: document.getElementById('fundSavingsPlan'),
+    fundSavingsTarget: document.getElementById('fundSavingsTarget'),
+    fundSavingsProgress: document.getElementById('fundSavingsProgress'),
+    fundSavingsCard: document.getElementById('fundSavingsCard'),
     fundInvestmentBalance: document.getElementById('fundInvestmentBalance'),
     fundInvestmentPlan: document.getElementById('fundInvestmentPlan'),
+    fundInvestmentTarget: document.getElementById('fundInvestmentTarget'),
+    fundInvestmentProgress: document.getElementById('fundInvestmentProgress'),
+    fundInvestmentCard: document.getElementById('fundInvestmentCard'),
     fundRiskBalance: document.getElementById('fundRiskBalance'),
     fundRiskPlan: document.getElementById('fundRiskPlan'),
+    fundRiskTarget: document.getElementById('fundRiskTarget'),
+    fundRiskProgress: document.getElementById('fundRiskProgress'),
+    fundRiskCard: document.getElementById('fundRiskCard'),
     autoDebtExtraDisplay: document.getElementById('autoDebtExtraDisplay'),
     availableCash: document.getElementById('availableCash'),
     availableCashNote: document.getElementById('availableCashNote'),
@@ -519,14 +531,18 @@
     elements.financeScore.textContent = `${score}/100`;
     elements.emergencyRunway.textContent = `${runway.toLocaleString('vi-VN', { maximumFractionDigits: 1 })} tháng`;
     elements.emergencyTargetNote.textContent = `${formatPercent(emergencyProgress)} mục tiêu ${state.emergencyTargetMonths} tháng (${formatCurrency(emergencyTarget, true)})`;
-    elements.fundEmergencyBalance.textContent = formatCurrency(state.emergencyCurrent);
-    elements.fundEmergencyPlan.textContent = `+${formatCurrency(state.emergencyContribution, true)}/tháng · mục tiêu ${formatCurrency(emergencyTarget, true)}`;
-    elements.fundSavingsBalance.textContent = formatCurrency(state.savingsCurrent);
-    elements.fundSavingsPlan.textContent = `+${formatCurrency(state.monthlySavings, true)}/tháng · mục tiêu ${formatCurrency(state.savingsGoalAmount, true)}`;
-    elements.fundInvestmentBalance.textContent = formatCurrency(state.investmentCurrent);
-    elements.fundInvestmentPlan.textContent = `+${formatCurrency(state.monthlyInvestment, true)}/tháng · mục tiêu ${formatCurrency(state.investmentGoalAmount, true)}`;
-    elements.fundRiskBalance.textContent = formatCurrency(state.riskInvestmentCurrent);
-    elements.fundRiskPlan.textContent = `+${formatCurrency(state.monthlyRiskInvestment, true)}/tháng · mục tiêu ${formatCurrency(state.riskInvestmentGoalAmount, true)}`;
+    const renderFund = (card, progressOutput, balanceOutput, planOutput, targetOutput, current, contribution, target) => {
+      const progress = target > 0 ? clamp(current / target * 100, 0, 100) : 100;
+      card.style.setProperty('--fund-progress', `${progress}%`);
+      progressOutput.textContent = formatPercent(progress, 0);
+      balanceOutput.textContent = formatCurrency(current);
+      planOutput.textContent = `+${formatCurrency(contribution, true)}`;
+      targetOutput.textContent = formatCurrency(target, true);
+    };
+    renderFund(elements.fundEmergencyCard, elements.fundEmergencyProgress, elements.fundEmergencyBalance, elements.fundEmergencyPlan, elements.fundEmergencyTarget, state.emergencyCurrent, state.emergencyContribution, emergencyTarget);
+    renderFund(elements.fundSavingsCard, elements.fundSavingsProgress, elements.fundSavingsBalance, elements.fundSavingsPlan, elements.fundSavingsTarget, state.savingsCurrent, state.monthlySavings, state.savingsGoalAmount);
+    renderFund(elements.fundInvestmentCard, elements.fundInvestmentProgress, elements.fundInvestmentBalance, elements.fundInvestmentPlan, elements.fundInvestmentTarget, state.investmentCurrent, state.monthlyInvestment, state.investmentGoalAmount);
+    renderFund(elements.fundRiskCard, elements.fundRiskProgress, elements.fundRiskBalance, elements.fundRiskPlan, elements.fundRiskTarget, state.riskInvestmentCurrent, state.monthlyRiskInvestment, state.riskInvestmentGoalAmount);
 
     if (!activeDebts().length) {
       elements.debtFreeSummary.textContent = 'Không có nợ';
