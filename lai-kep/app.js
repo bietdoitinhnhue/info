@@ -19,14 +19,15 @@
     reinvestDividends: true
   };
 
+  const equalStockWeight = 100 / 7;
   const defaultWeights = {
-    VCB: 20,
-    ACB: 15,
-    BSR: 10,
-    VPB: 10,
-    MBB: 15,
-    SSI: 15,
-    TCB: 15
+    VCB: equalStockWeight,
+    ACB: equalStockWeight,
+    BSR: equalStockWeight,
+    VPB: equalStockWeight,
+    MBB: equalStockWeight,
+    SSI: equalStockWeight,
+    TCB: equalStockWeight
   };
 
   const els = {
@@ -435,23 +436,10 @@
 
   const rebalanceWeights = () => {
     const stocks = stockRows();
-    const total = stocks.reduce((sum, stock) => sum + stock.weight, 0);
-    if (total <= 0) {
-      stocks.forEach((stock) => { stock.input.value = defaultWeights[stock.code]; });
-    } else {
-      const normalized = stocks.map((stock) => ({ stock, exact: stock.weight / total * 100 }));
-      let allocated = 0;
-      normalized.forEach((item) => {
-        item.floor = Math.floor(item.exact);
-        item.remainder = item.exact - item.floor;
-        allocated += item.floor;
-      });
-      normalized.sort((first, second) => second.remainder - first.remainder);
-      for (let index = 0; index < 100 - allocated; index += 1) normalized[index % normalized.length].floor += 1;
-      normalized.forEach((item) => { item.stock.input.value = item.floor; });
-    }
+    const equalWeight = 100 / stocks.length;
+    stocks.forEach((stock) => { stock.input.value = equalWeight.toFixed(4); });
     renderAllocation();
-    showToast('Đã cân tổng tỷ trọng về 100%');
+    showToast('Đã chia đều tỷ trọng cho 7 mã');
   };
 
   const updateProjection = () => {
