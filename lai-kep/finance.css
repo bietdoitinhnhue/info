@@ -173,6 +173,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 13px;
+  align-items: start;
 }
 
 .finance-form-card,
@@ -188,6 +189,61 @@
 
 .finance-form-card {
   padding: 18px;
+}
+
+.goal-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.goal-block {
+  padding: 13px;
+  border: 1px solid #e0e4df;
+  border-radius: 13px;
+  background: #fafbf9;
+}
+
+.goal-block.emergency-goal {
+  background: #f1f8f4;
+}
+
+.goal-block.savings-goal {
+  background: #fff8ef;
+}
+
+.goal-block.investment-goal {
+  background: #f3f6ef;
+}
+
+.goal-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 11px;
+}
+
+.goal-block-head span,
+.goal-block-head strong {
+  display: block;
+}
+
+.goal-block-head span {
+  margin-bottom: 2px;
+  color: var(--green);
+  font-size: 7px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.goal-block-head strong {
+  color: var(--forest);
+  font-size: 11px;
+}
+
+.goal-block-head small {
+  color: #7a8981;
+  font-size: 7px;
 }
 
 .finance-card-title {
@@ -266,6 +322,16 @@
   color: var(--forest);
   font-size: 11px;
   font-weight: 750;
+}
+
+.finance-field input[readonly] {
+  color: var(--green);
+  cursor: default;
+}
+
+.auto-field .finance-input-wrap {
+  border-color: #b8d4c4;
+  background: var(--mint-soft);
 }
 
 .finance-input-wrap:focus-within {
@@ -646,7 +712,7 @@
 .debt-list-head,
 .debt-row {
   display: grid;
-  grid-template-columns: minmax(130px, 1.25fr) minmax(110px, 1fr) 95px minmax(115px, 1fr) 30px;
+  grid-template-columns: minmax(125px, 1.2fr) minmax(100px, 1fr) minmax(95px, .9fr) minmax(100px, .95fr) 92px 92px 30px;
   gap: 8px;
   align-items: center;
 }
@@ -687,6 +753,38 @@
 
 .debt-row input:focus {
   border-color: var(--green);
+}
+
+.debt-derived {
+  display: block;
+  min-width: 0;
+  padding: 7px 8px;
+  border-radius: 8px;
+  background: #edf3ef;
+}
+
+.debt-derived small,
+.debt-derived strong {
+  display: block;
+}
+
+.debt-derived small {
+  display: none;
+  margin-bottom: 3px;
+  color: #7b8981;
+  font-size: 7px;
+}
+
+.debt-derived strong {
+  overflow: hidden;
+  color: var(--green);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.debt-derived-total {
+  background: var(--mint-soft);
 }
 
 .remove-debt {
@@ -972,6 +1070,10 @@
 
   .debt-row .debt-name {
     grid-column: 1 / -1;
+  }
+
+  .debt-derived small {
+    display: block;
   }
 
   .remove-debt {
