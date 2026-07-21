@@ -293,6 +293,35 @@
   grid-column: 1 / -1;
 }
 
+.auto-debt-sweep {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 12px 13px;
+  border: 1px solid #bfe2a0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f2f9e9, #e2f7c9);
+  color: var(--forest);
+}
+
+.auto-debt-sweep > span {
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.auto-debt-sweep strong {
+  color: var(--green);
+  font-size: 14px;
+}
+
+.auto-debt-sweep small {
+  grid-column: 1 / -1;
+  color: #6f7f75;
+  font-size: 7px;
+}
+
 .finance-field > span:not(.finance-input-wrap) {
   display: block;
   margin: 0 0 6px 2px;
