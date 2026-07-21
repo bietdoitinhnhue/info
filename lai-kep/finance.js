@@ -14,19 +14,29 @@
     essentialSpending: 12000000,
     familyBudget: 2500000,
     charityBudget: 500000,
+    monthlyDebtReserve: 5000000,
     startMonth: '2026-08',
     monthlySavings: 1500000,
-    monthlyInvestment: 2000000,
+    monthlyInvestment: 1000000,
     emergencyCurrent: 30000000,
-    emergencyContribution: 2000000,
+    emergencyContribution: 2334000,
     emergencyTargetMonths: 6,
+    emergencyDeadlineMonths: 18,
+    savingsGoalName: 'Quỹ cá nhân',
+    savingsCurrent: 0,
+    savingsGoalAmount: 36000000,
+    savingsDeadlineMonths: 24,
+    investmentCurrent: 0,
+    investmentGoalAmount: 200000000,
+    investmentDeadlineYears: 10,
+    investmentExpectedReturn: 10,
     debtExtraPayment: 1000000,
     strategy: 'hybrid',
     debts: [
-      { id: 'debt-consumer', name: 'Vay tiêu dùng', balance: 12000000, apr: 12, minimum: 800000 },
-      { id: 'debt-card', name: 'Thẻ tín dụng', balance: 25000000, apr: 28, minimum: 1200000 },
-      { id: 'debt-bnpl', name: 'Mua trước trả sau', balance: 18000000, apr: 20, minimum: 900000 },
-      { id: 'debt-vehicle', name: 'Vay xe', balance: 70000000, apr: 9.5, minimum: 2000000 }
+      { id: 'debt-consumer', name: 'Vay tiêu dùng', balance: 12000000, principalPayment: 680000, monthlyInterest: 120000 },
+      { id: 'debt-card', name: 'Thẻ tín dụng', balance: 25000000, principalPayment: 616667, monthlyInterest: 583333 },
+      { id: 'debt-bnpl', name: 'Mua trước trả sau', balance: 18000000, principalPayment: 600000, monthlyInterest: 300000 },
+      { id: 'debt-vehicle', name: 'Vay xe', balance: 70000000, principalPayment: 1445833, monthlyInterest: 554167 }
     ]
   };
 
@@ -43,12 +53,22 @@
     essentialSpending: document.getElementById('essentialSpending'),
     familyBudget: document.getElementById('familyBudget'),
     charityBudget: document.getElementById('charityBudget'),
+    monthlyDebtReserve: document.getElementById('monthlyDebtReserve'),
     startMonth: document.getElementById('financeStartMonth'),
     monthlySavings: document.getElementById('monthlySavings'),
     monthlyInvestment: document.getElementById('monthlyInvestment'),
     emergencyCurrent: document.getElementById('emergencyCurrent'),
     emergencyContribution: document.getElementById('emergencyContribution'),
     emergencyTargetMonths: document.getElementById('emergencyTargetMonths'),
+    emergencyDeadlineMonths: document.getElementById('emergencyDeadlineMonths'),
+    savingsGoalName: document.getElementById('savingsGoalName'),
+    savingsCurrent: document.getElementById('savingsCurrent'),
+    savingsGoalAmount: document.getElementById('savingsGoalAmount'),
+    savingsDeadlineMonths: document.getElementById('savingsDeadlineMonths'),
+    investmentCurrent: document.getElementById('investmentCurrent'),
+    investmentGoalAmount: document.getElementById('investmentGoalAmount'),
+    investmentDeadlineYears: document.getElementById('investmentDeadlineYears'),
+    investmentExpectedReturn: document.getElementById('investmentExpectedReturn'),
     debtExtraPayment: document.getElementById('debtExtraPayment'),
     availableCash: document.getElementById('availableCash'),
     availableCashNote: document.getElementById('availableCashNote'),
@@ -89,16 +109,23 @@
     essentialSpending: 'essentialSpending',
     familyBudget: 'familyBudget',
     charityBudget: 'charityBudget',
+    monthlyDebtReserve: 'monthlyDebtReserve',
     financeStartMonth: 'startMonth',
-    monthlySavings: 'monthlySavings',
-    monthlyInvestment: 'monthlyInvestment',
     emergencyCurrent: 'emergencyCurrent',
-    emergencyContribution: 'emergencyContribution',
     emergencyTargetMonths: 'emergencyTargetMonths',
+    emergencyDeadlineMonths: 'emergencyDeadlineMonths',
+    savingsGoalName: 'savingsGoalName',
+    savingsCurrent: 'savingsCurrent',
+    savingsGoalAmount: 'savingsGoalAmount',
+    savingsDeadlineMonths: 'savingsDeadlineMonths',
+    investmentCurrent: 'investmentCurrent',
+    investmentGoalAmount: 'investmentGoalAmount',
+    investmentDeadlineYears: 'investmentDeadlineYears',
+    investmentExpectedReturn: 'investmentExpectedReturn',
     debtExtraPayment: 'debtExtraPayment'
   };
 
-  let state = loadState();
+  let state = null;
   let renderTimer = null;
   let saveTimer = null;
 
@@ -127,41 +154,73 @@
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
   const uid = () => globalThis.crypto?.randomUUID?.() || `debt-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  state = loadState();
 
   function cloneDefaults() {
     return JSON.parse(JSON.stringify(defaultState));
   }
 
   function normalizeDebt(debt, index) {
+    const balance = clamp(safeNumber(debt?.balance), 0, 1e15);
+    const legacyApr = clamp(safeNumber(debt?.apr), 0, 200);
+    const legacyMinimum = clamp(safeNumber(debt?.minimum), 0, 1e12);
+    const inferredInterest = balance * legacyApr / 100 / 12;
+    const monthlyInterest = clamp(safeNumber(debt?.monthlyInterest, inferredInterest), 0, 1e12);
+    const principalPayment = clamp(safeNumber(debt?.principalPayment, Math.max(legacyMinimum - monthlyInterest, 0)), 0, 1e12);
     return {
       id: String(debt?.id || `debt-${index}-${Date.now()}`),
       name: String(debt?.name || `Khoản nợ ${index + 1}`).slice(0, 80),
-      balance: clamp(safeNumber(debt?.balance), 0, 1e15),
-      apr: clamp(safeNumber(debt?.apr), 0, 200),
-      minimum: clamp(safeNumber(debt?.minimum), 0, 1e12)
+      balance,
+      principalPayment,
+      monthlyInterest,
+      apr: balance > 0 ? clamp(monthlyInterest / balance * 12 * 100, 0, 200) : legacyApr,
+      minimum: principalPayment + monthlyInterest
     };
+  }
+
+  function deriveGoalContributions(target) {
+    const roundUpThousand = (value) => value > 0 ? Math.ceil(value / 1000) * 1000 : 0;
+    const emergencyTarget = target.essentialSpending * target.emergencyTargetMonths;
+    target.emergencyContribution = roundUpThousand(Math.max(emergencyTarget - target.emergencyCurrent, 0) / Math.max(target.emergencyDeadlineMonths, 1));
+    target.monthlySavings = roundUpThousand(Math.max(target.savingsGoalAmount - target.savingsCurrent, 0) / Math.max(target.savingsDeadlineMonths, 1));
+
+    const investmentMonths = Math.max(Math.round(target.investmentDeadlineYears * 12), 1);
+    const monthlyRate = target.investmentExpectedReturn / 100 / 12;
+    const growthFactor = Math.pow(1 + monthlyRate, investmentMonths);
+    const remainingGoal = Math.max(target.investmentGoalAmount - target.investmentCurrent * growthFactor, 0);
+    const requiredInvestment = monthlyRate > 0
+      ? remainingGoal * monthlyRate / Math.max(growthFactor - 1, 1e-9)
+      : remainingGoal / investmentMonths;
+    target.monthlyInvestment = clamp(roundUpThousand(requiredInvestment), 1e6, 1e9);
+    return target;
   }
 
   function normalizeState(candidate) {
     const base = cloneDefaults();
     const source = candidate && typeof candidate === 'object' ? candidate : {};
     const numericKeys = [
-      'income', 'essentialSpending', 'familyBudget', 'charityBudget', 'monthlySavings',
-      'monthlyInvestment', 'emergencyCurrent', 'emergencyContribution', 'debtExtraPayment'
+      'income', 'essentialSpending', 'familyBudget', 'charityBudget', 'monthlyDebtReserve',
+      'emergencyCurrent', 'savingsCurrent', 'savingsGoalAmount', 'investmentCurrent',
+      'investmentGoalAmount', 'debtExtraPayment'
     ];
     numericKeys.forEach((key) => { base[key] = clamp(safeNumber(source[key], base[key]), 0, 1e15); });
     base.emergencyTargetMonths = Math.round(clamp(safeNumber(source.emergencyTargetMonths, base.emergencyTargetMonths), 1, 24));
+    base.emergencyDeadlineMonths = Math.round(clamp(safeNumber(source.emergencyDeadlineMonths, base.emergencyDeadlineMonths), 1, 120));
+    base.savingsDeadlineMonths = Math.round(clamp(safeNumber(source.savingsDeadlineMonths, base.savingsDeadlineMonths), 1, 240));
+    base.investmentDeadlineYears = Math.round(clamp(safeNumber(source.investmentDeadlineYears, base.investmentDeadlineYears), 1, 50));
+    base.investmentExpectedReturn = clamp(safeNumber(source.investmentExpectedReturn, base.investmentExpectedReturn), 0, 100);
+    base.savingsGoalName = String(source.savingsGoalName || base.savingsGoalName).slice(0, 80);
     base.startMonth = /^\d{4}-\d{2}$/.test(source.startMonth) ? source.startMonth : base.startMonth;
     base.strategy = strategyNames[source.strategy] ? source.strategy : base.strategy;
-    if (Array.isArray(source.debts)) base.debts = source.debts.slice(0, 30).map(normalizeDebt);
-    return base;
+    base.debts = (Array.isArray(source.debts) ? source.debts : base.debts).slice(0, 30).map(normalizeDebt);
+    return deriveGoalContributions(base);
   }
 
   function loadState() {
     try {
       return normalizeState(JSON.parse(localStorage.getItem(STORAGE_KEY)));
     } catch {
-      return cloneDefaults();
+      return normalizeState(null);
     }
   }
 
@@ -186,12 +245,22 @@
     elements.essentialSpending.value = formatInputCurrency(state.essentialSpending);
     elements.familyBudget.value = formatInputCurrency(state.familyBudget);
     elements.charityBudget.value = formatInputCurrency(state.charityBudget);
+    elements.monthlyDebtReserve.value = formatInputCurrency(state.monthlyDebtReserve);
     elements.startMonth.value = state.startMonth;
     elements.monthlySavings.value = formatInputCurrency(state.monthlySavings);
     elements.monthlyInvestment.value = formatInputCurrency(state.monthlyInvestment);
     elements.emergencyCurrent.value = formatInputCurrency(state.emergencyCurrent);
     elements.emergencyContribution.value = formatInputCurrency(state.emergencyContribution);
     elements.emergencyTargetMonths.value = state.emergencyTargetMonths;
+    elements.emergencyDeadlineMonths.value = state.emergencyDeadlineMonths;
+    elements.savingsGoalName.value = state.savingsGoalName;
+    elements.savingsCurrent.value = formatInputCurrency(state.savingsCurrent);
+    elements.savingsGoalAmount.value = formatInputCurrency(state.savingsGoalAmount);
+    elements.savingsDeadlineMonths.value = state.savingsDeadlineMonths;
+    elements.investmentCurrent.value = formatInputCurrency(state.investmentCurrent);
+    elements.investmentGoalAmount.value = formatInputCurrency(state.investmentGoalAmount);
+    elements.investmentDeadlineYears.value = state.investmentDeadlineYears;
+    elements.investmentExpectedReturn.value = state.investmentExpectedReturn;
     elements.debtExtraPayment.value = formatInputCurrency(state.debtExtraPayment);
   }
 
@@ -225,11 +294,11 @@
     return [...remaining].sort((a, b) => b.apr - a.apr || a.balance - b.balance)[0];
   }
 
-  function simulateDebtStrategy(debts, extraPayment, strategy, startMonth) {
+  function simulateDebtStrategy(debts, debtReserve, extraPayment, strategy, startMonth) {
     const original = debts.filter((debt) => debt.balance > 0).map((debt) => ({ ...debt }));
     const work = original.map((debt) => ({ ...debt }));
     const minimumBudget = original.reduce((sum, debt) => sum + debt.minimum, 0);
-    const monthlyBudget = minimumBudget + Math.max(extraPayment, 0);
+    const monthlyBudget = Math.max(minimumBudget, Math.max(debtReserve, 0)) + Math.max(extraPayment, 0);
     const hybridStarter = [...original].sort((a, b) => a.balance - b.balance || b.apr - a.apr)[0]?.id;
     const paidIds = new Set();
     const payoffs = [];
@@ -249,6 +318,7 @@
       work.forEach((debt) => {
         if (debt.balance <= .5) return;
         const interest = debt.balance * debt.apr / 100 / 12;
+        debt.currentInterest = interest;
         debt.balance += interest;
         monthInterest += interest;
       });
@@ -256,7 +326,7 @@
 
       work.forEach((debt) => {
         if (debt.balance <= .5) return;
-        const payment = Math.min(debt.minimum, debt.balance);
+        const payment = Math.min(debt.principalPayment + (debt.currentInterest || 0), debt.balance);
         debt.balance -= payment;
         monthPayment += payment;
       });
@@ -321,14 +391,14 @@
         const interest = balance * source.apr / 100 / 12;
         totalInterest += interest;
         balance += interest;
-        const payment = Math.min(source.minimum, balance);
+        const payment = Math.min(source.principalPayment + interest, balance);
         balance -= payment;
         if (balance <= .5) {
           maxMonths = Math.max(maxMonths, month);
           paid = true;
           break;
         }
-        if (payment <= interest && month === MAX_MONTHS) break;
+        if (source.principalPayment <= .5 && month === MAX_MONTHS) break;
       }
       if (!paid) complete = false;
     });
@@ -338,21 +408,23 @@
   function calculatePlans() {
     const debts = activeDebts();
     return {
-      snowball: simulateDebtStrategy(debts, state.debtExtraPayment, 'snowball', state.startMonth),
-      avalanche: simulateDebtStrategy(debts, state.debtExtraPayment, 'avalanche', state.startMonth),
-      hybrid: simulateDebtStrategy(debts, state.debtExtraPayment, 'hybrid', state.startMonth),
+      snowball: simulateDebtStrategy(debts, state.monthlyDebtReserve, state.debtExtraPayment, 'snowball', state.startMonth),
+      avalanche: simulateDebtStrategy(debts, state.monthlyDebtReserve, state.debtExtraPayment, 'avalanche', state.startMonth),
+      hybrid: simulateDebtStrategy(debts, state.monthlyDebtReserve, state.debtExtraPayment, 'hybrid', state.startMonth),
       baseline: simulateMinimumOnly(debts)
     };
   }
 
   function budgetSummary() {
     const minimumDebt = totalDebtMinimums();
-    const debtBudget = activeDebts().length ? minimumDebt + state.debtExtraPayment : 0;
+    const hasDebt = activeDebts().length > 0;
+    const reserveShortfall = hasDebt ? Math.max(minimumDebt - state.monthlyDebtReserve, 0) : 0;
+    const debtBudget = hasDebt ? Math.max(minimumDebt, state.monthlyDebtReserve) + state.debtExtraPayment : 0;
     const obligation = state.essentialSpending + state.familyBudget + state.charityBudget + debtBudget;
     const safety = state.monthlySavings + state.emergencyContribution;
     const growth = state.monthlyInvestment;
     const allocated = obligation + safety + growth;
-    return { minimumDebt, debtBudget, obligation, safety, growth, allocated, available: state.income - allocated };
+    return { minimumDebt, reserveShortfall, debtBudget, obligation, safety, growth, allocated, available: state.income - allocated };
   }
 
   function financialScore(summary) {
@@ -406,7 +478,7 @@
       { label: 'Nợ', value: summary.debtBudget, color: '#bd4b43' },
       { label: 'Chi tiêu', value: state.essentialSpending, color: '#e9884d' },
       { label: 'Gia đình & thiện nguyện', value: state.familyBudget + state.charityBudget, color: '#d8aa63' },
-      { label: 'Tiết kiệm', value: state.monthlySavings, color: '#75a889' },
+      { label: state.savingsGoalName || 'Tiết kiệm cá nhân', value: state.monthlySavings, color: '#75a889' },
       { label: 'Quỹ khẩn cấp', value: state.emergencyContribution, color: '#1b7655' },
       { label: 'Đầu tư', value: state.monthlyInvestment, color: '#10261f' },
       { label: summary.available >= 0 ? 'Chưa phân bổ' : 'Thiếu hụt', value: Math.abs(summary.available), color: summary.available >= 0 ? '#b8f36b' : '#7f2d2a' }
@@ -419,7 +491,9 @@
 
     const highestAprDebt = activeDebts().sort((a, b) => b.apr - a.apr)[0];
     let recommendation = { good: false, title: 'Giữ dòng tiền dương trước', text: 'Giảm một phần chi tiêu linh hoạt hoặc tạm hạ mức đầu tư để tổng phân bổ không vượt thu nhập.' };
-    if (summary.available >= 0 && runway < 1) {
+    if (summary.reserveShortfall > 0) {
+      recommendation = { good: false, title: 'Phong bì trả nợ bắt buộc đang thiếu', text: `Tổng gốc + lãi tháng đầu là ${formatCurrency(summary.minimumDebt, true)}, cao hơn số tiền để dành ${formatCurrency(summary.reserveShortfall, true)}. Hãy tăng phong bì trả nợ trước khi phân bổ thêm.` };
+    } else if (summary.available >= 0 && runway < 1) {
       recommendation = { good: false, title: 'Dựng 1 tháng quỹ khẩn cấp trước', text: `Ưu tiên phần tiền còn lại cho quỹ khẩn cấp đến ít nhất ${formatCurrency(state.essentialSpending, true)}, đồng thời vẫn trả tối thiểu mọi khoản nợ.` };
     } else if (summary.available >= 0 && highestAprDebt?.apr >= 15) {
       recommendation = { good: false, title: `Tấn công ${highestAprDebt.name}`, text: `Khoản này có lãi ${formatPercent(highestAprDebt.apr, 2)}/năm. Avalanche tối ưu tiền lãi; Hybrid phù hợp nếu bạn vẫn cần một chiến thắng nhanh để duy trì kỷ luật.` };
@@ -442,8 +516,10 @@
       <div class="debt-row" data-debt-id="${escapeHtml(debt.id)}">
         <input class="debt-name" data-debt-field="name" type="text" value="${escapeHtml(debt.name)}" aria-label="Tên khoản nợ">
         <input data-debt-field="balance" data-debt-currency type="text" inputmode="numeric" value="${formatInputCurrency(debt.balance)}" aria-label="Dư nợ ${escapeHtml(debt.name)}">
-        <input data-debt-field="apr" type="number" min="0" max="200" step="0.1" value="${debt.apr}" aria-label="Lãi suất năm ${escapeHtml(debt.name)}">
-        <input data-debt-field="minimum" data-debt-currency type="text" inputmode="numeric" value="${formatInputCurrency(debt.minimum)}" aria-label="Thanh toán tối thiểu ${escapeHtml(debt.name)}">
+        <input data-debt-field="principalPayment" data-debt-currency type="text" inputmode="numeric" value="${formatInputCurrency(debt.principalPayment)}" aria-label="Tiền gốc mỗi tháng ${escapeHtml(debt.name)}">
+        <input data-debt-field="monthlyInterest" data-debt-currency type="text" inputmode="numeric" value="${formatInputCurrency(debt.monthlyInterest)}" aria-label="Tiền lãi tháng hiện tại ${escapeHtml(debt.name)}">
+        <span class="debt-derived" data-debt-derived-apr><small>Lãi suất quy đổi</small><strong>${formatPercent(debt.apr, 2)}/năm</strong></span>
+        <span class="debt-derived debt-derived-total" data-debt-derived-total><small>Gốc + lãi</small><strong>${formatCurrency(debt.minimum, true)}</strong></span>
         <button class="remove-debt" data-remove-debt="${escapeHtml(debt.id)}" type="button" aria-label="Xóa ${escapeHtml(debt.name)}">×</button>
       </div>
     `).join('');
@@ -502,6 +578,7 @@
     clearTimeout(renderTimer);
     renderTimer = setTimeout(() => {
       renderAll();
+      syncInvestmentCalculator();
       saveState();
     }, 100);
   }
@@ -533,11 +610,23 @@
   function updateFixedState(input) {
     const key = fixedInputKeys[input.id];
     if (!key) return;
-    if (input.type === 'month') state[key] = /^\d{4}-\d{2}$/.test(input.value) ? input.value : defaultState.startMonth;
-    else if (input.type === 'number') state[key] = input.id === 'emergencyTargetMonths'
-      ? Math.round(clamp(safeNumber(input.value, 1), 1, 24))
-      : Math.max(safeNumber(input.value), 0);
-    else state[key] = parseCurrency(input.value);
+    if (key === 'savingsGoalName') state[key] = input.value.slice(0, 80);
+    else if (input.type === 'month') state[key] = /^\d{4}-\d{2}$/.test(input.value) ? input.value : defaultState.startMonth;
+    else if (input.type === 'number') {
+      const limits = {
+        emergencyTargetMonths: [1, 24],
+        emergencyDeadlineMonths: [1, 120],
+        savingsDeadlineMonths: [1, 240],
+        investmentDeadlineYears: [1, 50],
+        investmentExpectedReturn: [0, 100]
+      };
+      const [min, max] = limits[key] || [0, 1e15];
+      state[key] = clamp(safeNumber(input.value, min), min, max);
+    } else state[key] = parseCurrency(input.value);
+    deriveGoalContributions(state);
+    elements.emergencyContribution.value = formatInputCurrency(state.emergencyContribution);
+    elements.monthlySavings.value = formatInputCurrency(state.monthlySavings);
+    elements.monthlyInvestment.value = formatInputCurrency(state.monthlyInvestment);
   }
 
   function updateDebtState(input) {
@@ -546,8 +635,13 @@
     const debt = state.debts.find((item) => item.id === row?.dataset.debtId);
     if (!debt || !field) return;
     if (field === 'name') debt.name = input.value.slice(0, 80);
-    else if (field === 'apr') debt.apr = clamp(safeNumber(input.value), 0, 200);
     else debt[field] = parseCurrency(input.value);
+    debt.apr = debt.balance > 0 ? clamp(debt.monthlyInterest / debt.balance * 12 * 100, 0, 200) : 0;
+    debt.minimum = debt.principalPayment + debt.monthlyInterest;
+    const aprOutput = row.querySelector('[data-debt-derived-apr] strong');
+    const totalOutput = row.querySelector('[data-debt-derived-total] strong');
+    if (aprOutput) aprOutput.textContent = `${formatPercent(debt.apr, 2)}/năm`;
+    if (totalOutput) totalOutput.textContent = formatCurrency(debt.minimum, true);
   }
 
   function exportFinanceData() {
@@ -605,7 +699,7 @@
     const input = event.target;
     if (!(input instanceof HTMLInputElement)) return;
     if (input.hasAttribute('data-finance-currency') || input.hasAttribute('data-debt-currency')) input.value = formatInputCurrency(parseCurrency(input.value));
-    if (input.id === 'monthlyInvestment' || input.id === 'financeStartMonth') syncInvestmentCalculator();
+    if (input.id === 'financeStartMonth') syncInvestmentCalculator();
   });
 
   root.addEventListener('click', (event) => {
@@ -630,7 +724,7 @@
   });
 
   elements.addDebtButton.addEventListener('click', () => {
-    state.debts.push({ id: uid(), name: `Khoản nợ ${state.debts.length + 1}`, balance: 0, apr: 0, minimum: 0 });
+    state.debts.push({ id: uid(), name: `Khoản nợ ${state.debts.length + 1}`, balance: 0, principalPayment: 0, monthlyInterest: 0, apr: 0, minimum: 0 });
     renderAll({ debts: true });
     saveState();
     elements.debtList.querySelector('.debt-row:last-child .debt-name')?.focus();
@@ -640,7 +734,7 @@
   elements.importFile?.addEventListener('change', () => importFinanceData(elements.importFile.files?.[0]));
   elements.resetButton.addEventListener('click', () => {
     if (!window.confirm('Đặt lại toàn bộ dữ liệu quản lý tài chính về kịch bản mẫu?')) return;
-    state = cloneDefaults();
+    state = normalizeState(null);
     setFixedInputs();
     renderAll({ debts: true });
     syncInvestmentCalculator();
