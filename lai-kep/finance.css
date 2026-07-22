@@ -197,6 +197,59 @@
   gap: 13px;
 }
 
+.goal-entry-guide {
+  margin-bottom: 14px;
+  padding: 15px 16px;
+  border: 1px solid #b8d9c5;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f0f8f3, #fbfdf9);
+}
+
+.goal-entry-guide > strong,
+.goal-entry-guide > small {
+  display: block;
+}
+
+.goal-entry-guide > strong {
+  margin-bottom: 10px;
+  color: var(--forest);
+  font-size: 12px;
+}
+
+.goal-entry-guide > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.goal-entry-guide > div span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #4f6258;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.goal-entry-guide > div b {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--forest);
+  color: var(--mint);
+  font-size: 9px;
+}
+
+.goal-entry-guide > small {
+  color: #718078;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
 .cashflow-fields {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 }
@@ -319,6 +372,52 @@
 
 .finance-field.full {
   grid-column: 1 / -1;
+}
+
+.finance-field {
+  display: block;
+  margin: 0;
+}
+
+.goal-target-field > span:first-child {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--forest) !important;
+  font-weight: 850 !important;
+}
+
+.goal-target-field em {
+  padding: 4px 6px;
+  border-radius: 999px;
+  background: var(--forest);
+  color: var(--mint);
+  font-size: 7px;
+  font-style: normal;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.goal-target-field .finance-input-wrap {
+  border: 2px solid var(--green);
+  background: #fff;
+  box-shadow: 0 5px 14px rgba(27, 118, 85, .08);
+}
+
+.goal-target-field input {
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.goal-example {
+  display: block;
+  margin-top: 5px;
+  color: #74837b;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .auto-debt-sweep {
@@ -1278,6 +1377,10 @@
 
   .cashflow-fields .finance-field.full {
     grid-column: 1 / -1;
+  }
+
+  .goal-entry-guide > div {
+    grid-template-columns: 1fr;
   }
 
   .finance-metric-grid,
