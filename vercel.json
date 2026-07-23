@@ -228,14 +228,67 @@
       "permanent": true
     },
     {
-      "source": "/diemtrinh.html",
-      "destination": "/diemtrinh",
-      "permanent": true
-    },
-    {
       "source": "/manifest-2026.html",
       "destination": "/manifest-2026",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "^/[pP][rR][oO][fF][iI][lL][eE]/?$",
+      "destination": "/profile"
+    },
+    {
+      "source": "^/[pP][rR][oO][fF][iI][lL][eE]/[pP][oO][rR][tT][fF][oO][lL][iI][oO]/?$",
+      "destination": "/profile/portfolio"
+    },
+    {
+      "source": "^/[pP][rR][oO][fF][iI][lL][eE]/[pP][oO][rR][tT][fF][oO][lL][iI][oO]/(.*)$",
+      "destination": "/profile/portfolio/$1"
+    },
+    {
+      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][dD][sS]-[cC][oO][uU][rR][sS][eE]/?$",
+      "destination": "/Course/ads-course"
+    },
+    {
+      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][dD][sS]-[cC][oO][uU][rR][sS][eE]/(.*)$",
+      "destination": "/Course/ads-course/$1"
+    },
+    {
+      "source": "^/[cC][oO][uU][rR][sS][eE]/[sS][oO][cC][iI][aA][lL]-[pP][rR][oO]/?$",
+      "destination": "/Course/social-pro"
+    },
+    {
+      "source": "^/[cC][oO][uU][rR][sS][eE]/[sS][oO][cC][iI][aA][lL]-[pP][rR][oO]/(.*)$",
+      "destination": "/Course/social-pro/$1"
+    },
+    {
+      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][iI]-[cC][oO][nN][tT][eE][nN][tT]-[sS][yY][sS][tT][eE][mM]/?$",
+      "destination": "/Course/ai-content-system"
+    },
+    {
+      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][iI]-[cC][oO][nN][tT][eE][nN][tT]-[sS][yY][sS][tT][eE][mM]/(.*)$",
+      "destination": "/Course/ai-content-system/$1"
+    },
+    {
+      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][sS][sS][eE][tT][sS]/(.*)$",
+      "destination": "/Course/assets/$1"
+    },
+    {
+      "source": "^/[tT][oO][oO][lL][sS]/[tT][aA][oO]-[qQ][rR]/?$",
+      "destination": "/tools/tao-QR"
+    },
+    {
+      "source": "^/[tT][oO][oO][lL][sS]/[tT][aA][oO]-[qQ][rR]/(.*)$",
+      "destination": "/tools/tao-QR/$1"
+    },
+    {
+      "source": "^/[lL][aA][iI]-[kK][eE][pP]/?$",
+      "destination": "/lai-kep"
+    },
+    {
+      "source": "^/[mM][aA][nN][iI][fF][eE][sS][tT]-2026/?$",
+      "destination": "/manifest-2026"
     }
   ]
 }
