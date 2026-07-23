@@ -7,8 +7,8 @@
         tab: "url",
         dotStyle: "rounded",
         cornerStyle: "extra-rounded",
-        qrColor: "#0f766e",
-        cornerColor: "#0f172a",
+        qrColor: "#082868",
+        cornerColor: "#ff7300",
         backgroundColor: "#ffffff"
     };
 

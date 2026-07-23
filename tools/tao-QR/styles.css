@@ -10,16 +10,22 @@
     --slate-200: #e2e8f0;
     --slate-100: #f1f5f9;
     --slate-50: #f8fafc;
-    --teal-700: #0f766e;
-    --teal-600: #0d9488;
-    --teal-500: #14b8a6;
-    --teal-100: #ccfbf1;
-    --teal-50: #f0fdfa;
+    --teal-700: #007aa3;
+    --teal-600: #00a9e0;
+    --teal-500: #27c8ff;
+    --teal-100: #d5f5ff;
+    --teal-50: #effbff;
+    --orange-600: #ee4d2d;
+    --orange-700: #d73210;
+    --orange-100: #ffe3dc;
+    --dark-bg: #0a0f1a;
+    --dark-surface: #111a2a;
+    --glow: rgba(0, 169, 224, .34);
     --white: #fff;
     --danger: #dc2626;
     --radius-lg: 24px;
     --radius-md: 16px;
-    --shadow-lg: 0 28px 70px rgba(15, 23, 42, .12);
+    --shadow-lg: 0 0 28px var(--glow), 0 28px 70px rgba(0, 0, 0, .3);
     --shadow-sm: 0 8px 24px rgba(15, 23, 42, .07);
 }
 
@@ -39,9 +45,10 @@ body {
     min-width: 320px;
     margin: 0;
     background:
-        radial-gradient(circle at 10% 7%, rgba(20, 184, 166, .08), transparent 27rem),
-        linear-gradient(180deg, #fff 0, var(--slate-50) 34rem);
-    color: var(--slate-800);
+        radial-gradient(circle at 12% 8%, rgba(0, 169, 224, .18), transparent 30rem),
+        radial-gradient(circle at 88% 35%, rgba(238, 77, 45, .09), transparent 28rem),
+        var(--dark-bg);
+    color: var(--slate-200);
     font-family: "Lexend", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
 }
@@ -106,7 +113,7 @@ svg {
     display: inline-flex;
     align-items: center;
     gap: 11px;
-    color: var(--slate-900);
+    color: var(--white);
     text-decoration: none;
 }
 
@@ -116,8 +123,8 @@ svg {
     height: 42px;
     place-items: center;
     border-radius: 13px;
-    background: linear-gradient(135deg, var(--teal-500), var(--teal-700));
-    box-shadow: 0 8px 18px rgba(13, 148, 136, .25);
+    background: linear-gradient(135deg, var(--teal-500), #006c91);
+    box-shadow: 0 0 18px rgba(0, 169, 224, .5);
     color: var(--white);
     font-size: 21px;
     font-weight: 700;
@@ -129,23 +136,15 @@ svg {
 }
 
 .brand strong {
-    font-size: 14px;
-    letter-spacing: -.02em;
-}
-
-.brand small {
-    color: var(--teal-700);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .15em;
-    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: -.025em;
 }
 
 .back-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--slate-600);
+    color: var(--slate-300);
     font-size: 13px;
     font-weight: 500;
     text-decoration: none;
@@ -153,7 +152,7 @@ svg {
 }
 
 .back-link:hover {
-    color: var(--teal-700);
+    color: var(--teal-500);
 }
 
 .back-link svg {
@@ -177,7 +176,7 @@ main {
     align-items: center;
     gap: 8px;
     margin-bottom: 18px;
-    color: var(--teal-700);
+    color: var(--teal-500);
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .14em;
@@ -194,7 +193,8 @@ main {
 
 .hero h1 {
     margin: 0;
-    color: var(--slate-900);
+    color: var(--white);
+    text-shadow: 0 0 28px rgba(0, 169, 224, .16);
     font-size: clamp(2.3rem, 6vw, 4.35rem);
     letter-spacing: -.06em;
     line-height: 1.02;
@@ -203,7 +203,7 @@ main {
 .hero > p {
     max-width: 670px;
     margin: 22px auto 0;
-    color: var(--slate-600);
+    color: var(--slate-300);
     font-size: clamp(.98rem, 2vw, 1.08rem);
     line-height: 1.75;
 }
@@ -222,7 +222,7 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    color: var(--slate-600);
+    color: var(--slate-300);
     font-size: 12px;
     font-weight: 500;
 }
@@ -241,7 +241,7 @@ main {
     display: grid;
     grid-template-columns: minmax(0, 1.38fr) minmax(340px, .72fr);
     overflow: hidden;
-    border: 1px solid var(--slate-200);
+    border: 1px solid rgba(0, 169, 224, .8);
     border-radius: var(--radius-lg);
     background: var(--white);
     box-shadow: var(--shadow-lg);
@@ -281,8 +281,8 @@ main {
     flex: 0 0 auto;
     place-items: center;
     border-radius: 9px;
-    background: var(--teal-50);
-    color: var(--teal-700);
+    background: var(--orange-100);
+    color: var(--orange-700);
     font-size: 11px;
     font-weight: 700;
 }
@@ -336,7 +336,7 @@ main {
 .tab-button.is-active {
     background: var(--white);
     box-shadow: 0 3px 10px rgba(15, 23, 42, .08);
-    color: var(--teal-700);
+    color: var(--orange-600);
 }
 
 .tab-button svg {
@@ -424,8 +424,8 @@ main {
 .field input:focus,
 .field select:focus,
 .custom-grid select:focus {
-    border-color: var(--teal-500);
-    box-shadow: 0 0 0 4px rgba(20, 184, 166, .1);
+    border-color: var(--orange-600);
+    box-shadow: 0 0 0 4px rgba(238, 77, 45, .11);
 }
 
 .field input:disabled {
@@ -558,13 +558,13 @@ main {
 
 .check-row input:focus-visible + .check-box,
 .check-card input:focus-visible + .check-box {
-    box-shadow: 0 0 0 4px rgba(20, 184, 166, .13);
+    box-shadow: 0 0 0 4px rgba(238, 77, 45, .13);
 }
 
 .check-row input:checked + .check-box,
 .check-card input:checked + .check-box {
-    border-color: var(--teal-600);
-    background: var(--teal-600);
+    border-color: var(--orange-600);
+    background: var(--orange-600);
     color: var(--white);
 }
 
@@ -806,8 +806,8 @@ main {
 
 .upload-button:hover,
 .text-button:hover {
-    border-color: var(--teal-500);
-    color: var(--teal-700);
+    border-color: var(--orange-600);
+    color: var(--orange-700);
 }
 
 .upload-button svg {
@@ -836,8 +836,8 @@ main {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--teal-500);
-    box-shadow: 0 0 0 5px rgba(20, 184, 166, .1);
+    background: var(--teal-600);
+    box-shadow: 0 0 0 5px rgba(0, 169, 224, .13);
 }
 
 .reset-button {
@@ -853,7 +853,7 @@ main {
 }
 
 .reset-button:hover {
-    color: var(--teal-700);
+    color: var(--orange-600);
 }
 
 .reset-button svg {
@@ -976,13 +976,13 @@ main {
 
 .primary-button {
     border: 0;
-    background: linear-gradient(135deg, var(--teal-600), var(--teal-700));
-    box-shadow: 0 10px 22px rgba(13, 148, 136, .22);
+    background: linear-gradient(135deg, var(--orange-600), var(--orange-700));
+    box-shadow: 0 10px 24px rgba(238, 77, 45, .28);
     color: var(--white);
 }
 
 .primary-button:hover {
-    box-shadow: 0 13px 26px rgba(13, 148, 136, .3);
+    box-shadow: 0 13px 28px rgba(238, 77, 45, .38);
     transform: translateY(-1px);
 }
 
@@ -1001,8 +1001,8 @@ main {
 }
 
 .secondary-button:hover {
-    border-color: var(--teal-500);
-    color: var(--teal-700);
+    border-color: var(--orange-600);
+    color: var(--orange-700);
 }
 
 .primary-button svg,
@@ -1049,9 +1049,10 @@ main {
     padding: 20px;
     align-items: flex-start;
     gap: 13px;
-    border: 1px solid var(--slate-200);
+    border: 1px solid rgba(0, 169, 224, .42);
     border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, .8);
+    background: rgba(17, 26, 42, .88);
+    box-shadow: 0 0 18px rgba(0, 169, 224, .08);
 }
 
 .info-icon {
@@ -1061,8 +1062,8 @@ main {
     flex: 0 0 auto;
     place-items: center;
     border-radius: 10px;
-    background: var(--teal-50);
-    color: var(--teal-700);
+    background: rgba(0, 169, 224, .12);
+    color: var(--teal-500);
 }
 
 .info-icon svg {
@@ -1072,13 +1073,13 @@ main {
 
 .info-grid h2 {
     margin: 1px 0 7px;
-    color: var(--slate-800);
+    color: var(--white);
     font-size: 12px;
 }
 
 .info-grid p {
     margin: 0;
-    color: var(--slate-500);
+    color: var(--slate-400);
     font-size: 9px;
     line-height: 1.65;
 }
@@ -1090,9 +1091,9 @@ footer {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    border-top: 1px solid var(--slate-200);
-    background: var(--white);
-    color: var(--slate-500);
+    border-top: 1px solid rgba(0, 169, 224, .22);
+    background: #070b13;
+    color: var(--slate-400);
     font-size: 9px;
 }
 
@@ -1107,18 +1108,18 @@ footer nav {
 }
 
 footer a {
-    color: var(--slate-600);
+    color: var(--slate-300);
     text-decoration: none;
 }
 
 footer a:hover {
-    color: var(--teal-700);
+    color: var(--teal-500);
 }
 
 button:focus-visible,
 a:focus-visible,
 label:has(input:focus-visible) {
-    outline: 3px solid rgba(20, 184, 166, .28);
+    outline: 3px solid rgba(238, 77, 45, .3);
     outline-offset: 3px;
 }
 

@@ -3,22 +3,35 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0f172a">
-    <title>Tạo mã QR miễn phí | Drake Nguyễn Tools</title>
+    <meta name="theme-color" content="#0A0F1A">
+    <title>Tạo mã QR miễn phí, đẹp và có logo | Drake Nguyễn</title>
     <meta name="description" content="Tạo mã QR miễn phí cho website, Wi-Fi, số điện thoại, danh bạ và chuyển khoản ngân hàng. Tùy chỉnh màu, kiểu chấm, logo và tải PNG hoặc SVG chất lượng cao.">
-    <meta name="keywords" content="tạo mã QR, QR miễn phí, QR WiFi, VietQR, QR có logo, Drake Nguyễn Tools">
+    <meta name="keywords" content="tạo mã QR, tạo QR miễn phí, QR WiFi, VietQR, QR có logo, QR ngân hàng, tải QR PNG, QR SVG, Drake Nguyễn">
+    <meta name="author" content="Drake Nguyễn">
+    <meta name="creator" content="Drake Nguyễn">
+    <meta name="application-name" content="Tạo QR - Drake Nguyễn">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://about.drakenguyen.me/tools/tao-QR">
 
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Drake Nguyễn">
     <meta property="og:locale" content="vi_VN">
-    <meta property="og:title" content="Tạo mã QR miễn phí | Drake Nguyễn Tools">
+    <meta property="og:title" content="Tạo mã QR miễn phí, đẹp và có logo | Drake Nguyễn">
     <meta property="og:description" content="Tạo QR đẹp cho website, Wi-Fi, danh bạ và chuyển khoản. Miễn phí, không hết hạn.">
     <meta property="og:url" content="https://about.drakenguyen.me/tools/tao-QR">
-    <meta property="og:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/server-manager/refs/heads/main/tao-qr.png">
+    <meta property="og:image" content="https://about.drakenguyen.me/tools/tao-QR/og-tao-qr.png">
+    <meta property="og:image:secure_url" content="https://about.drakenguyen.me/tools/tao-QR/og-tao-qr.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Công cụ tạo mã QR miễn phí của Drake Nguyễn">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tạo mã QR miễn phí | Drake Nguyễn Tools">
+    <meta name="twitter:creator" content="@Drakenguyen">
+    <meta name="twitter:title" content="Tạo mã QR miễn phí, đẹp và có logo | Drake Nguyễn">
     <meta name="twitter:description" content="Tạo QR đẹp, tùy chỉnh màu và logo, tải PNG hoặc SVG chất lượng cao.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/server-manager/refs/heads/main/tao-qr.png">
+    <meta name="twitter:image" content="https://about.drakenguyen.me/tools/tao-QR/og-tao-qr.png">
+    <meta name="twitter:image:alt" content="Công cụ tạo mã QR miễn phí của Drake Nguyễn">
 
     <link rel="icon" href="/tools/tao-QR/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,13 +45,25 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Drake QR",
+        "name": "Tạo mã QR miễn phí - Drake Nguyễn",
+        "alternateName": "Drake QR",
         "url": "https://about.drakenguyen.me/tools/tao-QR",
+        "image": "https://about.drakenguyen.me/tools/tao-QR/og-tao-qr.png",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "inLanguage": "vi",
         "isAccessibleForFree": true,
-        "description": "Công cụ tạo mã QR miễn phí cho URL, Wi-Fi, số điện thoại, danh bạ và chuyển khoản ngân hàng."
+        "description": "Công cụ tạo mã QR miễn phí cho URL, Wi-Fi, số điện thoại, danh bạ và chuyển khoản ngân hàng.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "VND"
+        },
+        "creator": {
+            "@type": "Person",
+            "name": "Drake Nguyễn",
+            "url": "https://about.drakenguyen.me/"
+        }
     }
     </script>
 </head>
@@ -50,7 +75,6 @@
             <span class="brand-mark" aria-hidden="true">D</span>
             <span>
                 <strong>Drake Nguyễn</strong>
-                <small>Tools</small>
             </span>
         </a>
         <a class="back-link" href="https://about.drakenguyen.me/">
@@ -271,15 +295,15 @@
                         <div class="color-field">
                             <label for="qr-color">Màu QR</label>
                             <div>
-                                <input id="qr-color" type="color" value="#0f766e">
-                                <output id="qr-color-value" for="qr-color">#0F766E</output>
+                                <input id="qr-color" type="color" value="#082868">
+                                <output id="qr-color-value" for="qr-color">#082868</output>
                             </div>
                         </div>
                         <div class="color-field">
                             <label for="corner-color">Màu góc</label>
                             <div>
-                                <input id="corner-color" type="color" value="#0f172a">
-                                <output id="corner-color-value" for="corner-color">#0F172A</output>
+                                <input id="corner-color" type="color" value="#ff7300">
+                                <output id="corner-color-value" for="corner-color">#FF7300</output>
                             </div>
                         </div>
                         <div class="color-field">
