@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f172a">
+    <title>Tạo mã QR miễn phí | Drake Nguyễn Tools</title>
+    <meta name="description" content="Tạo mã QR miễn phí cho website, Wi-Fi, số điện thoại, danh bạ và chuyển khoản ngân hàng. Tùy chỉnh màu, kiểu chấm, logo và tải PNG hoặc SVG chất lượng cao.">
+    <meta name="keywords" content="tạo mã QR, QR miễn phí, QR WiFi, VietQR, QR có logo, Drake Nguyễn Tools">
+    <link rel="canonical" href="https://about.drakenguyen.me/tools/tao-QR">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:title" content="Tạo mã QR miễn phí | Drake Nguyễn Tools">
+    <meta property="og:description" content="Tạo QR đẹp cho website, Wi-Fi, danh bạ và chuyển khoản. Miễn phí, không hết hạn.">
+    <meta property="og:url" content="https://about.drakenguyen.me/tools/tao-QR">
+    <meta property="og:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/server-manager/refs/heads/main/tao-qr.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tạo mã QR miễn phí | Drake Nguyễn Tools">
+    <meta name="twitter:description" content="Tạo QR đẹp, tùy chỉnh màu và logo, tải PNG hoặc SVG chất lượng cao.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/bietdoitinhnhue/server-manager/refs/heads/main/tao-qr.png">
+
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js" defer></script>
+    <script src="./app.js" defer></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Drake QR",
+        "url": "https://about.drakenguyen.me/tools/tao-QR",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "vi",
+        "isAccessibleForFree": true,
+        "description": "Công cụ tạo mã QR miễn phí cho URL, Wi-Fi, số điện thoại, danh bạ và chuyển khoản ngân hàng."
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#qr-tool">Đi đến công cụ</a>
+
+    <header class="site-header">
+        <a class="brand" href="https://about.drakenguyen.me/" aria-label="Về trang giới thiệu Drake Nguyễn">
+            <span class="brand-mark" aria-hidden="true">D</span>
+            <span>
+                <strong>Drake Nguyễn</strong>
+                <small>Tools</small>
+            </span>
+        </a>
+        <a class="back-link" href="https://about.drakenguyen.me/">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="m15 18-6-6 6-6"/>
+            </svg>
+            Về trang giới thiệu
+        </a>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="page-title">
+            <div class="eyebrow"><span></span> Công cụ miễn phí</div>
+            <h1 id="page-title">Tạo QR đẹp trong vài giây</h1>
+            <p>Tạo mã QR tĩnh, tùy chỉnh theo phong cách của bạn và tải file chất lượng cao. Không đăng ký, không quảng cáo, không hết hạn.</p>
+            <ul class="hero-points">
+                <li>
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                    Tạo ngay trên trình duyệt
+                </li>
+                <li>
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                    PNG 1024px &amp; SVG
+                </li>
+                <li>
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                    Thêm logo tùy ý
+                </li>
+            </ul>
+        </section>
+
+        <section id="qr-tool" class="tool-shell" aria-label="Công cụ tạo mã QR">
+            <div class="editor-panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="step">01</span>
+                        <h2>Chọn loại QR</h2>
+                    </div>
+                    <p>QR tự cập nhật khi bạn nhập nội dung</p>
+                </div>
+
+                <div class="tabs" role="tablist" aria-label="Loại mã QR">
+                    <button class="tab-button is-active" id="tab-url" type="button" role="tab" aria-selected="true" aria-controls="panel-url" data-tab="url">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        URL
+                    </button>
+                    <button class="tab-button" id="tab-phone" type="button" role="tab" aria-selected="false" aria-controls="panel-phone" data-tab="phone">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+                        SĐT
+                    </button>
+                    <button class="tab-button" id="tab-contact" type="button" role="tab" aria-selected="false" aria-controls="panel-contact" data-tab="contact">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Danh bạ
+                    </button>
+                    <button class="tab-button" id="tab-wifi" type="button" role="tab" aria-selected="false" aria-controls="panel-wifi" data-tab="wifi">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+                        Wi-Fi
+                    </button>
+                    <button class="tab-button" id="tab-bank" type="button" role="tab" aria-selected="false" aria-controls="panel-bank" data-tab="bank">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 10 9-6 9 6"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18M3 18h18"/></svg>
+                        Ngân hàng
+                    </button>
+                </div>
+
+                <div class="tab-panels">
+                    <div class="tab-panel is-active" id="panel-url" role="tabpanel" aria-labelledby="tab-url" data-panel="url">
+                        <div class="field">
+                            <label for="url-input">Đường dẫn website</label>
+                            <div class="input-with-icon">
+                                <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+                                <input id="url-input" type="url" value="https://drakenguyen.me" placeholder="https://drakenguyen.me" autocomplete="url">
+                            </div>
+                            <small>Nếu thiếu https://, công cụ sẽ tự động thêm vào.</small>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="panel-phone" role="tabpanel" aria-labelledby="tab-phone" data-panel="phone" hidden>
+                        <div class="field">
+                            <label for="phone-input">Số điện thoại</label>
+                            <div class="input-with-icon">
+                                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+                                <input id="phone-input" type="tel" placeholder="0968 3333 42" autocomplete="tel">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="panel-contact" role="tabpanel" aria-labelledby="tab-contact" data-panel="contact" hidden>
+                        <div class="field-grid">
+                            <div class="field field-full">
+                                <label for="contact-name">Họ và tên</label>
+                                <input id="contact-name" type="text" placeholder="Drake Nguyễn" autocomplete="name">
+                            </div>
+                            <div class="field">
+                                <label for="contact-phone">Số điện thoại</label>
+                                <input id="contact-phone" type="tel" placeholder="0968 3333 42" autocomplete="tel">
+                            </div>
+                            <div class="field">
+                                <label for="contact-email">Email</label>
+                                <input id="contact-email" type="email" placeholder="hello@example.com" autocomplete="email">
+                            </div>
+                            <div class="field field-full">
+                                <label for="contact-company">Công ty <span>(không bắt buộc)</span></label>
+                                <input id="contact-company" type="text" placeholder="Tên công ty" autocomplete="organization">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="panel-wifi" role="tabpanel" aria-labelledby="tab-wifi" data-panel="wifi" hidden>
+                        <div class="field-grid">
+                            <div class="field field-full">
+                                <label for="wifi-ssid">Tên mạng Wi-Fi (SSID)</label>
+                                <input id="wifi-ssid" type="text" placeholder="Tên mạng Wi-Fi" autocomplete="off">
+                            </div>
+                            <div class="field">
+                                <label for="wifi-password">Mật khẩu</label>
+                                <div class="password-field">
+                                    <input id="wifi-password" type="password" placeholder="Mật khẩu Wi-Fi" autocomplete="off">
+                                    <button id="toggle-password" type="button" aria-label="Hiện mật khẩu" title="Hiện hoặc ẩn mật khẩu">
+                                        <svg class="eye-open" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        <svg class="eye-off" aria-hidden="true" viewBox="0 0 24 24"><path d="m3 3 18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 4.2A9.7 9.7 0 0 1 12 4c6.5 0 10 8 10 8a18 18 0 0 1-2 3.1M6.6 6.6C3.5 8.4 2 12 2 12s3.5 8 10 8a9.7 9.7 0 0 0 4.1-.9"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="wifi-encryption">Chuẩn bảo mật</label>
+                                <select id="wifi-encryption">
+                                    <option value="WPA" selected>WPA / WPA2 / WPA3</option>
+                                    <option value="WEP">WEP</option>
+                                    <option value="nopass">Không mật khẩu</option>
+                                </select>
+                            </div>
+                            <label class="check-row field-full">
+                                <input id="wifi-hidden" type="checkbox">
+                                <span class="check-box" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                                </span>
+                                Mạng Wi-Fi ẩn
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="panel-bank" role="tabpanel" aria-labelledby="tab-bank" data-panel="bank" hidden>
+                        <div class="bank-note">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                            QR chuyển khoản được tạo theo chuẩn VietQR.
+                        </div>
+                        <div class="field-grid">
+                            <div class="field field-full bank-search-wrap">
+                                <label for="bank-search">Ngân hàng</label>
+                                <div class="input-with-icon">
+                                    <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                                    <input id="bank-search" type="text" placeholder="Gõ tên ngân hàng..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="bank-options">
+                                </div>
+                                <!-- [html-validate-disable-next prefer-native-element] -->
+                                <div id="bank-options" class="bank-options" role="listbox" hidden></div>
+                                <small id="bank-load-status">Đang tải danh sách ngân hàng...</small>
+                            </div>
+                            <div class="field">
+                                <label for="bank-account-number">Số tài khoản</label>
+                                <input id="bank-account-number" type="text" inputmode="numeric" placeholder="Nhập số tài khoản" autocomplete="off">
+                            </div>
+                            <div class="field">
+                                <label for="bank-account-name">Tên chủ tài khoản</label>
+                                <input id="bank-account-name" type="text" placeholder="NGUYEN VAN A" autocomplete="off">
+                            </div>
+                            <div class="field">
+                                <label for="bank-amount">Số tiền <span>(không bắt buộc)</span></label>
+                                <div class="money-field">
+                                    <input id="bank-amount" type="text" inputmode="numeric" placeholder="500.000" autocomplete="off">
+                                    <span>VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="bank-template">Mẫu hiển thị</label>
+                                <select id="bank-template">
+                                    <option value="compact2">QR + thông tin chuyển khoản</option>
+                                    <option value="compact">QR + logo ngân hàng</option>
+                                    <option value="qr_only">Chỉ mã QR</option>
+                                    <option value="print">Mẫu in đầy đủ</option>
+                                </select>
+                            </div>
+                            <div class="field field-full">
+                                <label for="bank-description">Nội dung chuyển khoản <span>(không bắt buộc)</span></label>
+                                <input id="bank-description" type="text" maxlength="50" placeholder="Nhập nội dung chuyển khoản" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="customize-section" class="customize-section">
+                    <div class="section-heading compact">
+                        <div>
+                            <span class="step">02</span>
+                            <h2>Tùy chỉnh giao diện</h2>
+                        </div>
+                    </div>
+
+                    <div class="custom-grid">
+                        <div class="field">
+                            <label for="dot-style">Kiểu chấm QR</label>
+                            <select id="dot-style">
+                                <option value="rounded" selected>Bo tròn</option>
+                                <option value="square">Vuông cổ điển</option>
+                                <option value="dots">Chấm tròn</option>
+                                <option value="extra-rounded">Bo siêu tròn</option>
+                                <option value="classy">Classy</option>
+                                <option value="classy-rounded">Classy bo tròn</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="corner-style">Kiểu góc QR</label>
+                            <select id="corner-style">
+                                <option value="extra-rounded" selected>Bo tròn</option>
+                                <option value="square">Vuông</option>
+                                <option value="dot">Tròn</option>
+                            </select>
+                        </div>
+                        <div class="color-field">
+                            <label for="qr-color">Màu QR</label>
+                            <div>
+                                <input id="qr-color" type="color" value="#0f766e">
+                                <output id="qr-color-value" for="qr-color">#0F766E</output>
+                            </div>
+                        </div>
+                        <div class="color-field">
+                            <label for="corner-color">Màu góc</label>
+                            <div>
+                                <input id="corner-color" type="color" value="#0f172a">
+                                <output id="corner-color-value" for="corner-color">#0F172A</output>
+                            </div>
+                        </div>
+                        <div class="color-field">
+                            <label for="background-color">Màu nền</label>
+                            <div>
+                                <input id="background-color" type="color" value="#ffffff">
+                                <output id="background-color-value" for="background-color">#FFFFFF</output>
+                            </div>
+                        </div>
+                        <label class="check-card">
+                            <input id="transparent-background" type="checkbox">
+                            <span class="check-box" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                            </span>
+                            <span>
+                                <strong>Nền trong suốt</strong>
+                                <small>Phù hợp khi chèn QR lên thiết kế</small>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="logo-row">
+                        <div>
+                            <span class="field-label">Logo ở giữa QR <small>(không bắt buộc)</small></span>
+                            <p>PNG hoặc JPG, tối đa 2 MB. Nên dùng logo nền trong suốt.</p>
+                        </div>
+                        <div class="logo-actions">
+                            <label class="upload-button" for="logo-upload">
+                                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                Chọn logo
+                            </label>
+                            <input id="logo-upload" type="file" accept="image/png,image/jpeg,image/webp">
+                            <button id="remove-logo" class="text-button" type="button" hidden>Xóa logo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="preview-panel" aria-labelledby="preview-title">
+                <div class="preview-heading">
+                    <div>
+                        <span class="live-dot" aria-hidden="true"></span>
+                        <h2 id="preview-title">Xem trước trực tiếp</h2>
+                    </div>
+                    <button id="reset-button" class="reset-button" type="button" title="Đặt lại tùy chỉnh">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+                        Đặt lại
+                    </button>
+                </div>
+
+                <div id="preview-stage" class="preview-stage">
+                    <div id="qr-preview" aria-live="polite"></div>
+                    <div id="preview-placeholder" class="preview-placeholder" hidden>
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM18 14h3M14 18v3"/></svg>
+                        <strong>Chưa đủ thông tin</strong>
+                        <span>Hãy chọn ngân hàng và nhập số tài khoản.</span>
+                    </div>
+                </div>
+
+                <div id="status-message" class="status-message" role="status">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                    QR đã sẵn sàng
+                </div>
+
+                <div class="download-group">
+                    <button id="download-png" class="primary-button" type="button">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                        Tải PNG
+                        <span>1024 px</span>
+                    </button>
+                    <button id="download-svg" class="secondary-button" type="button">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                        Tải SVG
+                    </button>
+                </div>
+                <p class="privacy-note">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    Nội dung QR thông thường được xử lý ngay trên thiết bị của bạn.
+                </p>
+            </aside>
+        </section>
+
+        <section class="info-grid" aria-label="Thông tin về mã QR">
+            <article>
+                <span class="info-icon">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </span>
+                <div>
+                    <h2>QR tĩnh, dùng lâu dài</h2>
+                    <p>Mã không phụ thuộc tài khoản hay gói trả phí. Liên kết chỉ thay đổi khi bạn tạo lại QR.</p>
+                </div>
+            </article>
+            <article>
+                <span class="info-icon">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 14.9V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.1M12 3v12M7 10l5 5 5-5"/></svg>
+                </span>
+                <div>
+                    <h2>Sẵn sàng để in</h2>
+                    <p>Tải PNG 1024px cho nhu cầu thông thường hoặc SVG để phóng lớn không vỡ nét.</p>
+                </div>
+            </article>
+            <article>
+                <span class="info-icon">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.6v-.1A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3V9.6h.1A1.7 1.7 0 0 0 4.6 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1A1.7 1.7 0 0 0 15.5 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.08.38.28.72.6 1 .3.25.7.39 1.1.4h.1v4h-.1A1.7 1.7 0 0 0 19.4 15z"/></svg>
+                </span>
+                <div>
+                    <h2>Tùy chỉnh linh hoạt</h2>
+                    <p>Đổi màu, kiểu chấm, kiểu góc, nền trong suốt và chèn logo thương hiệu của bạn.</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="current-year"></span> Drake Nguyễn. Công cụ miễn phí cho cộng đồng.</p>
+        <nav aria-label="Liên hệ">
+            <a href="https://m.me/drakemmo.me" target="_blank" rel="noopener noreferrer">Messenger</a>
+            <a href="https://t.me/Drakenguyen" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a href="https://zalo.me/0968333342" target="_blank" rel="noopener noreferrer">Zalo</a>
+        </nav>
+    </footer>
+</body>
+</html>
