@@ -1,3 +1,161 @@
 {
-  "cleanUrls": true
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/tools/tao-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/Tao-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAo-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAo-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/taO-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TaO-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAO-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAO-qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tao-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/Tao-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAo-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAo-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/taO-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TaO-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAO-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAO-Qr",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tao-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/Tao-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAo-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAo-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/taO-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TaO-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAO-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAO-qR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/Tao-QR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAo-QR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAo-QR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/taO-QR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TaO-QR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/tAO-QR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    },
+    {
+      "source": "/tools/TAO-QR",
+      "destination": "/tools/tao-QR",
+      "permanent": true
+    }
+  ]
 }
