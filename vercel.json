@@ -156,6 +156,86 @@
       "source": "/tools/TAO-QR",
       "destination": "/tools/tao-QR",
       "permanent": true
+    },
+    {
+      "source": "/profile/CV",
+      "destination": "/profile",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio.html",
+      "destination": "/profile/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/profile/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio-assets/:path*",
+      "destination": "/profile/portfolio/assets/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/Anh_CV.jpg",
+      "destination": "/profile/assets/brand/drake-cv.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/ads-course.html",
+      "destination": "/Course/ads-course",
+      "permanent": true
+    },
+    {
+      "source": "/ads-course",
+      "destination": "/Course/ads-course",
+      "permanent": true
+    },
+    {
+      "source": "/social-pro.html",
+      "destination": "/Course/social-pro",
+      "permanent": true
+    },
+    {
+      "source": "/social-pro",
+      "destination": "/Course/social-pro",
+      "permanent": true
+    },
+    {
+      "source": "/ai-content-system/Drake-Nguyen.jpg",
+      "destination": "/Course/ai-content-system/drake-nguyen.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/ai-content-system",
+      "destination": "/Course/ai-content-system",
+      "permanent": true
+    },
+    {
+      "source": "/ai-content-system/:path*",
+      "destination": "/Course/ai-content-system/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/AI-CONTENT-SYSTEM",
+      "destination": "/Course/ai-content-system",
+      "permanent": true
+    },
+    {
+      "source": "/AI-CONTENT-SYSTEM/:path*",
+      "destination": "/Course/ai-content-system/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/diemtrinh.html",
+      "destination": "/diemtrinh",
+      "permanent": true
+    },
+    {
+      "source": "/manifest-2026.html",
+      "destination": "/manifest-2026",
+      "permanent": true
     }
   ]
 }
