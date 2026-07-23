@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drake Nguyễn | Profile, Courses & Tools</title>
+  <meta name="description" content="Trang tổng hợp CV, portfolio, khóa học, công cụ và các dự án của Drake Nguyễn.">
+  <meta name="author" content="Drake Nguyễn">
+  <meta name="theme-color" content="#07111f">
+  <link rel="canonical" href="https://about.drakenguyen.me/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://about.drakenguyen.me/">
+  <meta property="og:title" content="Drake Nguyễn | Profile, Courses & Tools">
+  <meta property="og:description" content="Khám phá CV, portfolio, khóa học, công cụ và các dự án của Drake Nguyễn.">
+  <meta property="og:image" content="https://about.drakenguyen.me/profile/assets/brand/drake-cv.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Drake Nguyễn | Profile, Courses & Tools">
+  <meta name="twitter:description" content="Khám phá CV, portfolio, khóa học, công cụ và các dự án của Drake Nguyễn.">
+  <meta name="twitter:image" content="https://about.drakenguyen.me/profile/assets/brand/drake-cv.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Drake Nguyễn | Profile, Courses & Tools",
+    "url": "https://about.drakenguyen.me/",
+    "description": "Trang tổng hợp CV, portfolio, khóa học, công cụ và các dự án của Drake Nguyễn.",
+    "author": {
+      "@type": "Person",
+      "name": "Drake Nguyễn",
+      "url": "https://about.drakenguyen.me/profile"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f;
+      --surface: rgba(14, 28, 46, 0.78);
+      --surface-strong: #10233a;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #f8fafc;
+      --muted: #98a9bd;
+      --teal: #2dd4bf;
+      --cyan: #38bdf8;
+      --violet: #a78bfa;
+      --amber: #fbbf24;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(45, 212, 191, 0.15), transparent 32rem),
+        radial-gradient(circle at 90% 12%, rgba(56, 189, 248, 0.12), transparent 30rem),
+        radial-gradient(circle at 65% 90%, rgba(167, 139, 250, 0.1), transparent 28rem),
+        var(--bg);
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      opacity: 0.24;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    summary {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 28px 10px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid rgba(45, 212, 191, 0.5);
+      border-radius: 12px;
+      color: var(--teal);
+      background: rgba(45, 212, 191, 0.08);
+      box-shadow: inset 0 0 24px rgba(45, 212, 191, 0.08);
+    }
+
+    .quick-profile {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #d9e3ef;
+      background: rgba(15, 29, 47, 0.66);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 180ms ease;
+    }
+
+    .quick-profile:hover {
+      border-color: rgba(45, 212, 191, 0.5);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 42px;
+      align-items: end;
+      padding-block: clamp(70px, 11vw, 132px) clamp(46px, 7vw, 82px);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 22px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 32px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(44px, 8vw, 88px);
+      font-weight: 750;
+      letter-spacing: -0.065em;
+      line-height: 0.96;
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(105deg, var(--teal), var(--cyan) 52%, #d4c7ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-copy {
+      max-width: 690px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.75;
+    }
+
+    .hero-index {
+      display: grid;
+      gap: 10px;
+      min-width: 150px;
+      color: #c7d2df;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero-index span {
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .hub {
+      display: grid;
+      gap: 16px;
+      padding-bottom: 90px;
+    }
+
+    .hub-group {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    .hub-group:hover {
+      border-color: rgba(148, 163, 184, 0.34);
+    }
+
+    .hub-group[open] {
+      border-color: rgba(45, 212, 191, 0.34);
+    }
+
+    .hub-summary {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px 24px;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .hub-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .group-number {
+      display: grid;
+      width: 52px;
+      height: 52px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--teal);
+      background: rgba(45, 212, 191, 0.06);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+    }
+
+    .group-title {
+      margin: 0 0 5px;
+      font-size: clamp(20px, 3vw, 29px);
+      letter-spacing: -0.03em;
+    }
+
+    .group-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .toggle {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .toggle::before,
+    .toggle::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 1.5px;
+      content: "";
+      border-radius: 999px;
+      background: #d7e2ed;
+      transform: translate(-50%, -50%);
+      transition: transform 180ms ease;
+    }
+
+    .toggle::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .hub-group[open] .toggle::after {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    .group-content {
+      padding: 0 24px 24px;
+      animation: reveal 220ms ease both;
+    }
+
+    .group-content::before {
+      display: block;
+      height: 1px;
+      margin-bottom: 20px;
+      content: "";
+      background: var(--line);
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .link-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .link-card {
+      position: relative;
+      display: flex;
+      min-height: 168px;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      overflow: hidden;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      color: var(--text);
+      background: rgba(7, 17, 31, 0.68);
+      text-decoration: none;
+      transition: 180ms ease;
+    }
+
+    .link-card::after {
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 130px;
+      height: 130px;
+      content: "";
+      border-radius: 50%;
+      background: var(--card-glow, rgba(45, 212, 191, 0.12));
+      filter: blur(4px);
+      transition: transform 220ms ease;
+    }
+
+    .link-card:hover {
+      border-color: rgba(45, 212, 191, 0.48);
+      background: rgba(16, 35, 58, 0.82);
+      transform: translateY(-4px);
+    }
+
+    .link-card:hover::after {
+      transform: scale(1.25);
+    }
+
+    .card-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .card-icon {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--card-color, var(--teal));
+      background: rgba(255, 255, 255, 0.035);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .card-arrow {
+      color: #aab8c8;
+      font-size: 20px;
+      transition: 180ms ease;
+    }
+
+    .link-card:hover .card-arrow {
+      color: white;
+      transform: translate(3px, -3px);
+    }
+
+    .card-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-copy h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.025em;
+    }
+
+    .card-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .cyan {
+      --card-color: var(--cyan);
+      --card-glow: rgba(56, 189, 248, 0.13);
+    }
+
+    .violet {
+      --card-color: var(--violet);
+      --card-glow: rgba(167, 139, 250, 0.13);
+    }
+
+    .amber {
+      --card-color: var(--amber);
+      --card-glow: rgba(251, 191, 36, 0.12);
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-block: 26px 36px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .contact-links a {
+      color: #cad5e2;
+      text-decoration: none;
+    }
+
+    .contact-links a:hover {
+      color: var(--teal);
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-index {
+        display: none;
+      }
+
+      .link-grid.three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .topbar {
+        padding-top: 18px;
+      }
+
+      .brand {
+        font-size: 12px;
+      }
+
+      .quick-profile {
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding-block: 64px 42px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 14vw, 62px);
+      }
+
+      .hub-summary {
+        grid-template-columns: 46px minmax(0, 1fr) 36px;
+        gap: 12px;
+        padding: 18px 16px;
+      }
+
+      .group-number {
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+      }
+
+      .toggle {
+        width: 36px;
+        height: 36px;
+      }
+
+      .group-description {
+        font-size: 12px;
+      }
+
+      .group-content {
+        padding: 0 14px 14px;
+      }
+
+      .link-grid,
+      .link-grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .link-card {
+        min-height: 144px;
+      }
+
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar shell">
+    <a class="brand" href="/" aria-label="Drake Nguyễn - Trang chủ">
+      <span class="brand-mark">DN</span>
+      <span>Drake Nguyễn</span>
+    </a>
+    <a class="quick-profile" href="/profile">Xem CV <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Digital Growth · AI · Systems</p>
+        <h1 id="page-title">Chọn nơi bạn <span>muốn khám phá.</span></h1>
+        <p class="hero-copy">
+          Một điểm bắt đầu cho toàn bộ hồ sơ, dự án, khóa học và công cụ của Drake Nguyễn.
+          Mở từng nhóm bên dưới và chọn nội dung bạn cần xem.
+        </p>
+      </div>
+      <div class="hero-index" aria-hidden="true">
+        <span>01 · Profile</span>
+        <span>02 · Courses</span>
+        <span>03 · Tools</span>
+        <span>04 · Projects</span>
+      </div>
+    </section>
+
+    <section class="hub" aria-label="Danh mục nội dung">
+      <details class="hub-group" open>
+        <summary class="hub-summary">
+          <span class="group-number">01</span>
+          <span>
+            <h2 class="group-title">Profile</h2>
+            <p class="group-description">Hồ sơ năng lực, kinh nghiệm và các dự án nổi bật.</p>
+          </span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-content">
+          <div class="link-grid">
+            <a class="link-card" href="/profile">
+              <span class="card-top"><span class="card-icon">CV</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Curriculum Vitae</h3><p>Kinh nghiệm làm việc, kỹ năng và thông tin liên hệ.</p></span>
+            </a>
+            <a class="link-card cyan" href="/profile/portfolio">
+              <span class="card-top"><span class="card-icon">PF</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Portfolio</h3><p>Case study, hệ thống tăng trưởng và dự án đã triển khai.</p></span>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details class="hub-group">
+        <summary class="hub-summary">
+          <span class="group-number">02</span>
+          <span>
+            <h2 class="group-title">Courses</h2>
+            <p class="group-description">Các chương trình coaching thực chiến về Ads, Social và AI Content.</p>
+          </span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-content">
+          <div class="link-grid three">
+            <a class="link-card amber" href="/Course/ads-course">
+              <span class="card-top"><span class="card-icon">AD</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Ads Fast-Track</h3><p>Xây Fanpage và chạy Facebook Ads theo lộ trình 1:1.</p></span>
+            </a>
+            <a class="link-card violet" href="/Course/social-pro">
+              <span class="card-top"><span class="card-icon">SC</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Social Conversion Pro</h3><p>Xây kênh nội dung hướng đến tăng trưởng và chuyển đổi.</p></span>
+            </a>
+            <a class="link-card cyan" href="/Course/ai-content-system">
+              <span class="card-top"><span class="card-icon">AI</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>AI Content System</h3><p>Thiết kế hệ thống sản xuất nội dung bằng AI.</p></span>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details class="hub-group">
+        <summary class="hub-summary">
+          <span class="group-number">03</span>
+          <span>
+            <h2 class="group-title">Tools</h2>
+            <p class="group-description">Công cụ miễn phí phục vụ công việc, nội dung và tài chính cá nhân.</p>
+          </span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-content">
+          <div class="link-grid">
+            <a class="link-card cyan" href="/tools/tao-QR">
+              <span class="card-top"><span class="card-icon">QR</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Tạo mã QR</h3><p>Tạo, tùy chỉnh và tải mã QR nhanh chóng.</p></span>
+            </a>
+            <a class="link-card amber" href="/lai-kep">
+              <span class="card-top"><span class="card-icon">%</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Kế hoạch dòng tiền</h3><p>Tính toán mục tiêu, quỹ tài chính và tăng trưởng dài hạn.</p></span>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details class="hub-group">
+        <summary class="hub-summary">
+          <span class="group-number">04</span>
+          <span>
+            <h2 class="group-title">Projects & Pages</h2>
+            <p class="group-description">Các dự án, trang cá nhân và không gian thử nghiệm khác.</p>
+          </span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-content">
+          <div class="link-grid">
+            <a class="link-card violet" href="/manifest-2026">
+              <span class="card-top"><span class="card-icon">26</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Manifest 2026</h3><p>Không gian mục tiêu, định hướng và kế hoạch năm 2026.</p></span>
+            </a>
+            <a class="link-card" href="/diemtrinh">
+              <span class="card-top"><span class="card-icon">DT</span><span class="card-arrow">↗</span></span>
+              <span class="card-copy"><h3>Diễm Trinh</h3><p>Trang giới thiệu và nội dung của Diễm Trinh.</p></span>
+            </a>
+          </div>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>© 2026 Drake Nguyễn · Build smart. Scale with clarity.</span>
+    <span class="contact-links">
+      <a href="mailto:Drakenguyen.me@gmail.com">Email</a>
+      <a href="https://t.me/Drakenguyen" target="_blank" rel="noreferrer">Telegram</a>
+      <a href="https://zalo.me/0968333342" target="_blank" rel="noreferrer">Zalo</a>
+    </span>
+  </footer>
+</body>
+</html>
