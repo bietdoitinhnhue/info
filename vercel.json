@@ -235,59 +235,39 @@
   ],
   "rewrites": [
     {
-      "source": "^/[pP][rR][oO][fF][iI][lL][eE]/?$",
+      "source": "/:profile([pP][rR][oO][fF][iI][lL][eE])",
       "destination": "/profile"
     },
     {
-      "source": "^/[pP][rR][oO][fF][iI][lL][eE]/[pP][oO][rR][tT][fF][oO][lL][iI][oO]/?$",
-      "destination": "/profile/portfolio"
+      "source": "/:profile([pP][rR][oO][fF][iI][lL][eE])/:portfolio([pP][oO][rR][tT][fF][oO][lL][iI][oO])/:path*",
+      "destination": "/profile/portfolio/:path*"
     },
     {
-      "source": "^/[pP][rR][oO][fF][iI][lL][eE]/[pP][oO][rR][tT][fF][oO][lL][iI][oO]/(.*)$",
-      "destination": "/profile/portfolio/$1"
+      "source": "/:course([cC][oO][uU][rR][sS][eE])/:ads([aA][dD][sS]-[cC][oO][uU][rR][sS][eE])/:path*",
+      "destination": "/Course/ads-course/:path*"
     },
     {
-      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][dD][sS]-[cC][oO][uU][rR][sS][eE]/?$",
-      "destination": "/Course/ads-course"
+      "source": "/:course([cC][oO][uU][rR][sS][eE])/:social([sS][oO][cC][iI][aA][lL]-[pP][rR][oO])/:path*",
+      "destination": "/Course/social-pro/:path*"
     },
     {
-      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][dD][sS]-[cC][oO][uU][rR][sS][eE]/(.*)$",
-      "destination": "/Course/ads-course/$1"
+      "source": "/:course([cC][oO][uU][rR][sS][eE])/:ai([aA][iI]-[cC][oO][nN][tT][eE][nN][tT]-[sS][yY][sS][tT][eE][mM])/:path*",
+      "destination": "/Course/ai-content-system/:path*"
     },
     {
-      "source": "^/[cC][oO][uU][rR][sS][eE]/[sS][oO][cC][iI][aA][lL]-[pP][rR][oO]/?$",
-      "destination": "/Course/social-pro"
+      "source": "/:course([cC][oO][uU][rR][sS][eE])/:assets([aA][sS][sS][eE][tT][sS])/:path*",
+      "destination": "/Course/assets/:path*"
     },
     {
-      "source": "^/[cC][oO][uU][rR][sS][eE]/[sS][oO][cC][iI][aA][lL]-[pP][rR][oO]/(.*)$",
-      "destination": "/Course/social-pro/$1"
+      "source": "/:tools([tT][oO][oO][lL][sS])/:qr([tT][aA][oO]-[qQ][rR])/:path*",
+      "destination": "/tools/tao-QR/:path*"
     },
     {
-      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][iI]-[cC][oO][nN][tT][eE][nN][tT]-[sS][yY][sS][tT][eE][mM]/?$",
-      "destination": "/Course/ai-content-system"
-    },
-    {
-      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][iI]-[cC][oO][nN][tT][eE][nN][tT]-[sS][yY][sS][tT][eE][mM]/(.*)$",
-      "destination": "/Course/ai-content-system/$1"
-    },
-    {
-      "source": "^/[cC][oO][uU][rR][sS][eE]/[aA][sS][sS][eE][tT][sS]/(.*)$",
-      "destination": "/Course/assets/$1"
-    },
-    {
-      "source": "^/[tT][oO][oO][lL][sS]/[tT][aA][oO]-[qQ][rR]/?$",
-      "destination": "/tools/tao-QR"
-    },
-    {
-      "source": "^/[tT][oO][oO][lL][sS]/[tT][aA][oO]-[qQ][rR]/(.*)$",
-      "destination": "/tools/tao-QR/$1"
-    },
-    {
-      "source": "^/[lL][aA][iI]-[kK][eE][pP]/?$",
+      "source": "/:compound([lL][aA][iI]-[kK][eE][pP])",
       "destination": "/lai-kep"
     },
     {
-      "source": "^/[mM][aA][nN][iI][fF][eE][sS][tT]-2026/?$",
+      "source": "/:manifest([mM][aA][nN][iI][fF][eE][sS][tT]-2026)",
       "destination": "/manifest-2026"
     }
   ]
