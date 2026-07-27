@@ -263,6 +263,10 @@
       "destination": "/tools/tao-QR/:path*"
     },
     {
+      "source": "/:tools([tT][oO][oO][lL][sS])/:affiliate([lL][iI][nN][kK]-[bB][uU][iI][lL][dD][eE][rR]-[aA][fF][fF][iI][lL][iI][aA][tT][eE])/:path*",
+      "destination": "/tools/link-builder-affiliate/:path*"
+    },
+    {
       "source": "/:compound([lL][aA][iI]-[kK][eE][pP])",
       "destination": "/lai-kep"
     },
