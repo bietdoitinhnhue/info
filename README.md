@@ -13,6 +13,7 @@ Kho mã nguồn cho các website tĩnh của Drake Nguyễn. Các website đư�
 | `/Course/ai-content-system` | `Course/ai-content-system/index.html` | Landing page AI Video Content System |
 | `/Course/social-pro` | `Course/social-pro/index.html` | Lộ trình Social Conversion Pro |
 | `/tools/tao-QR` | `tools/tao-QR/index.html` | Công cụ tạo mã QR |
+| `/tools/link-builder-affiliate` | `tools/link-builder-affiliate/index.html` | Công cụ tạo link Shopee Affiliate |
 | `/lai-kep` | `lai-kep/index.html` | Công cụ lập kế hoạch tài chính |
 
 ## Cấu trúc repo
@@ -31,7 +32,8 @@ Kho mã nguồn cho các website tĩnh của Drake Nguyễn. Các website đư�
 │   ├── social-pro/                 # URL /Course/social-pro
 │   └── assets/case-studies/        # Ảnh dùng chung cho khóa học
 ├── tools/
-│   └── tao-QR/                     # URL /tools/tao-QR
+│   ├── tao-QR/                     # URL /tools/tao-QR
+│   └── link-builder-affiliate/     # URL /tools/link-builder-affiliate
 ├── lai-kep/
 └── vercel.json                     # Clean URL và redirect URL cũ
 ```
