@@ -121,26 +121,29 @@
         }
 
         const productIds = getProductIds(sourceUrl.pathname);
-        let outputUrl;
+        let landingUrl;
 
         if (productIds) {
-            outputUrl = new URL(`https://shopee.vn/product/${productIds.shopId}/${productIds.itemId}`);
+            landingUrl = new URL(`https://shopee.vn/product/${productIds.shopId}/${productIds.itemId}`);
         } else {
-            outputUrl = new URL(sourceUrl.toString());
-            outputUrl.protocol = "https:";
-            outputUrl.hostname = "shopee.vn";
-            stripOldTracking(outputUrl);
+            landingUrl = new URL(sourceUrl.toString());
+            landingUrl.protocol = "https:";
+            landingUrl.hostname = "shopee.vn";
+            stripOldTracking(landingUrl);
         }
 
-        stripOldTracking(outputUrl);
+        stripOldTracking(landingUrl);
 
-        const affiliateValue = `an_${affiliateId}`;
-        outputUrl.searchParams.set("mmp_pid", affiliateValue);
-        outputUrl.searchParams.set("utm_medium", "affiliates");
-        outputUrl.searchParams.set("utm_source", affiliateValue);
+        // Shopee's official third-party affiliate flow:
+        // https://s.shopee.vn/an_redir?origin_link=<encoded landing URL>&affiliate_id=<numeric ID>
+        // URLSearchParams encodes origin_link automatically.
+        const redirectUrl = new URL("https://s.shopee.vn/an_redir");
+        redirectUrl.searchParams.set("origin_link", landingUrl.toString());
+        redirectUrl.searchParams.set("affiliate_id", affiliateId);
 
         return {
-            url: outputUrl.toString(),
+            url: redirectUrl.toString(),
+            landingUrl: landingUrl.toString(),
             affiliateId,
             productIds
         };
@@ -151,8 +154,8 @@
         elements.resultUrl.value = data.url;
         elements.openLink.href = data.url;
         elements.resultNote.textContent = data.productIds
-            ? `Đã chuẩn hóa sản phẩm ${data.productIds.itemId}, xóa tracking cũ và gắn ID an_${data.affiliateId}.`
-            : `Đã xóa tracking cũ và gắn ID an_${data.affiliateId}.`;
+            ? `Đã chuẩn hóa sản phẩm ${data.productIds.itemId}, xóa tracking cũ và tạo link qua Shopee an_redir với Affiliate ID ${data.affiliateId}.`
+            : `Đã xóa tracking cũ và tạo link qua Shopee an_redir với Affiliate ID ${data.affiliateId}.`;
         elements.copyLabel.textContent = "Sao chép link";
         elements.result.hidden = false;
         elements.copyButton.focus();
