@@ -89,6 +89,7 @@ Thêm các biến môi trường sau trên Vercel:
 - `SHORTENER_VERCEL_PROJECT_ID`: Project ID, ví dụ `prj_...`. Có thể bỏ qua nếu runtime đã có `VERCEL_PROJECT_ID`.
 - `SHORTENER_VERCEL_TEAM_ID`: Team ID, ví dụ `team_...`. Có thể bỏ qua với project cá nhân hoặc khi runtime đã có `VERCEL_ORG_ID`.
 - `SHORTENER_PRIMARY_DOMAINS`: danh sách domain chính không cho người dùng nhận làm custom domain, phân tách bằng dấu phẩy. Ví dụ `about.drakenguyen.me`.
+- `SHORTENER_MAX_CUSTOM_DOMAINS`: giới hạn toàn project, mặc định `40` và tối đa `49`, để chừa quota cho domain hệ thống.
 
 Vercel Hobby giới hạn 50 custom domain cho mỗi project. Việc giới hạn 1 domain/tài khoản giúp tránh dùng hết quota ngoài ý muốn.
 

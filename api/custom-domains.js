@@ -10,6 +10,12 @@ const {
 
 const MAX_DOMAIN_CHANGES_PER_HOUR = 8;
 
+function maxProjectDomains() {
+    const configured = Number(process.env.SHORTENER_MAX_CUSTOM_DOMAINS || 40);
+    if (!Number.isFinite(configured)) return 40;
+    return Math.max(1, Math.min(49, Math.floor(configured)));
+}
+
 function readBody(req) {
     if (!req.body) return {};
     if (typeof req.body === "object") return req.body;
@@ -227,6 +233,11 @@ async function addDomain(req, res, user, body) {
     try {
         if (await redis(["GET", "user-domain:" + user.id])) {
             json(res, 409, { error: "Mỗi tài khoản được kết nối tối đa 1 custom domain." });
+            return;
+        }
+        const totalDomains = Number(await redis(["ZCARD", "all-domains"])) || 0;
+        if (totalDomains >= maxProjectDomains()) {
+            json(res, 409, { error: "Hệ thống đã đạt giới hạn custom domain. Hãy liên hệ admin." });
             return;
         }
         claimed = await redis(["SET", "custom-domain-owner:" + domain, user.id, "NX"]) === "OK";
