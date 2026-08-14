@@ -283,7 +283,18 @@ async function addDomain(req, res, user, body) {
                 // Keep the original error; an orphan domain can be removed in Vercel Settings.
             }
         }
-        if (claimed) await redis(["DEL", "custom-domain-owner:" + domain]);
+        if (claimed) {
+            try {
+                await redisPipeline([
+                    ["DEL", "custom-domain:" + domain],
+                    ["DEL", "custom-domain-owner:" + domain],
+                    ["DEL", "user-domain:" + user.id],
+                    ["ZREM", "all-domains", domain]
+                ]);
+            } catch {
+                // Keep the original error; the lock expires automatically if cleanup fails.
+            }
+        }
         throw error;
     } finally {
         await redis(["DEL", lockKey]);
