@@ -35,6 +35,10 @@
           <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
           Tạo link mới
         </a>
+        <a href="#custom-domain">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
+          Custom domain
+        </a>
         <a href="/">
           <svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
           Trang chủ
@@ -102,6 +106,37 @@
         </article>
       </section>
 
+      <section class="panel domain-panel" id="custom-domain">
+        <div class="panel-head">
+          <div>
+            <h2>Custom domain</h2>
+            <p class="panel-subtitle">Dùng domain riêng cho link dạng <strong>https://go.tenmien.com/ten-link</strong>.</p>
+          </div>
+          <span class="domain-badge" id="domain-badge">Chưa kết nối</span>
+        </div>
+
+        <form class="domain-form" id="domain-form">
+          <div>
+            <label for="domain-input">Domain hoặc subdomain</label>
+            <input id="domain-input" name="domain" type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="go.tenmien.com" required>
+            <small class="domain-help">Mỗi tài khoản kết nối tối đa 1 domain.</small>
+          </div>
+          <button class="secondary-button" id="domain-add-button" type="submit">Kết nối domain</button>
+        </form>
+
+        <div class="domain-detail" id="domain-detail" hidden>
+          <div class="domain-summary">
+            <div><small>Domain</small><strong id="domain-name"></strong></div>
+            <div><small>Trạng thái</small><strong id="domain-status"></strong></div>
+          </div>
+          <div class="dns-guide" id="dns-guide"></div>
+          <div class="domain-actions">
+            <button class="secondary-button" id="domain-check-button" type="button">Kiểm tra DNS</button>
+            <button class="danger-button" id="domain-remove-button" type="button">Gỡ domain</button>
+          </div>
+        </div>
+      </section>
+
       <section class="panel links-panel">
         <div class="panel-head">
           <h2>Link rút gọn</h2>
@@ -130,10 +165,101 @@
       var linksEmpty = document.getElementById("links-empty");
       var scopeSwitch = document.getElementById("scope-switch");
       var numberFormat = new Intl.NumberFormat("vi-VN");
+      var domainForm = document.getElementById("domain-form");
+      var domainDetail = document.getElementById("domain-detail");
+      var currentDomain = null;
 
       function showError(text) {
         message.textContent = text;
         message.hidden = false;
+      }
+
+      function setDomainBusy(busy) {
+        Array.from(document.querySelectorAll("#custom-domain button, #custom-domain input")).forEach(function (element) {
+          element.disabled = busy;
+        });
+      }
+
+      function dnsRow(label, type, name, value) {
+        var row = document.createElement("div");
+        row.className = "dns-row";
+        var title = document.createElement("small");
+        title.textContent = label;
+        var record = document.createElement("code");
+        record.textContent = type + "  " + name + "  " + value;
+        var copy = document.createElement("button");
+        copy.type = "button";
+        copy.className = "copy-dns";
+        copy.textContent = "Sao chép";
+        copy.addEventListener("click", async function () {
+          try { await navigator.clipboard.writeText(value); } catch (error) {}
+          copy.textContent = "Đã chép";
+          window.setTimeout(function () { copy.textContent = "Sao chép"; }, 1400);
+        });
+        row.append(title, record, copy);
+        return row;
+      }
+
+      function renderDomain(record) {
+        currentDomain = record || null;
+        var badge = document.getElementById("domain-badge");
+        var guide = document.getElementById("dns-guide");
+        guide.textContent = "";
+        domainForm.hidden = Boolean(record);
+        domainDetail.hidden = !record;
+        if (!record) {
+          badge.textContent = "Chưa kết nối";
+          badge.className = "domain-badge";
+          return;
+        }
+        var ready = record.status === "ready";
+        badge.textContent = ready ? "Đã xác minh" : "Chờ DNS";
+        badge.className = "domain-badge " + (ready ? "ready" : "pending");
+        document.getElementById("domain-name").textContent = record.domain;
+        document.getElementById("domain-status").textContent = ready ? "Sẵn sàng tạo link" : "Chưa trỏ DNS đúng";
+
+        var intro = document.createElement("p");
+        intro.className = "dns-title";
+        intro.textContent = ready
+          ? "Domain đã hoạt động. Bạn có thể chọn domain này khi tạo link mới."
+          : "Mở trang quản lý DNS của nhà cung cấp domain và thêm bản ghi sau:";
+        guide.appendChild(intro);
+        if (record.dns) guide.appendChild(dnsRow("Bản ghi trỏ về Vercel", record.dns.type, record.dns.name, record.dns.value));
+        (record.verification || []).forEach(function (item) {
+          guide.appendChild(dnsRow("Xác minh quyền sở hữu", item.type, item.domain, item.value));
+        });
+        if (!ready) {
+          var note = document.createElement("p");
+          note.className = "domain-help";
+          note.textContent = "DNS có thể cần vài phút đến 24 giờ để cập nhật. Sau đó bấm Kiểm tra DNS.";
+          guide.appendChild(note);
+        }
+      }
+
+      async function loadDomain() {
+        try {
+          var data = await api("/api/custom-domains");
+          renderDomain(data.domain);
+        } catch (error) {
+          showError(error.message);
+        }
+      }
+
+      async function domainAction(action, domain) {
+        setDomainBusy(true);
+        message.hidden = true;
+        try {
+          var data = await api("/api/custom-domains", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ action: action, domain: domain || undefined })
+          });
+          renderDomain(data.domain);
+        } catch (error) {
+          showError(error.message);
+        } finally {
+          setDomainBusy(false);
+        }
       }
 
       async function api(url, options) {
@@ -311,7 +437,7 @@
           var linkCell = document.createElement("td");
           linkCell.className = "link-cell";
           var shortLink = document.createElement("strong");
-          shortLink.textContent = window.location.host + "/go/" + link.slug;
+          shortLink.textContent = link.shortUrl || window.location.host + link.path;
           var destination = document.createElement("small");
           destination.textContent = link.destination;
           destination.title = link.destination;
@@ -386,6 +512,27 @@
         var button = event.target.closest("[data-scope]");
         if (button) loadLinks(button.dataset.scope);
       });
+      domainForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var domain = document.getElementById("domain-input").value.trim().toLowerCase();
+        if (domain) domainAction("add", domain);
+      });
+      document.getElementById("domain-check-button").addEventListener("click", function () {
+        domainAction("check");
+      });
+      document.getElementById("domain-remove-button").addEventListener("click", async function () {
+        if (!currentDomain || !window.confirm("Gỡ " + currentDomain.domain + " khỏi tài khoản? Các link đã tạo với domain này sẽ ngừng hoạt động.")) return;
+        setDomainBusy(true);
+        try {
+          await api("/api/custom-domains", { method: "DELETE" });
+          renderDomain(null);
+        } catch (error) {
+          showError(error.message);
+        } finally {
+          setDomainBusy(false);
+        }
+      });
+      loadDomain();
       loadLinks("mine");
     }());
   </script>

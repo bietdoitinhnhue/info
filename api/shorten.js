@@ -28,6 +28,14 @@ function normalizeSlug(value) {
         .replace(/^\/+|\/+$/g, "");
 }
 
+function normalizeDomain(value) {
+    const domain = String(value || "").trim().toLowerCase().replace(/\.$/, "");
+    if (!domain || domain.length > 253 || !domain.includes(".")) return "";
+    if (!/^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$/.test(domain)) return "";
+    if (domain.split(".").some(label => !label || label.length > 63 || label.startsWith("-") || label.endsWith("-"))) return "";
+    return domain;
+}
+
 function parseDestination(value) {
     const raw = String(value || "").trim();
     if (!raw || raw.length > MAX_LINK_LENGTH) return null;
@@ -142,6 +150,14 @@ async function handleRedirect(req, res) {
         return;
     }
 
+    if (String(req.query.custom || "") === "1") {
+        const requestDomain = normalizeDomain(String(req.headers.host || "").split(":")[0]);
+        if (!record.domain || requestDomain !== record.domain) {
+            json(res, 404, { error: "Link này không tồn tại trên domain hiện tại." });
+            return;
+        }
+    }
+
     try {
         await recordClick(req, slug);
     } catch (error) {
@@ -173,6 +189,7 @@ async function handleCreate(req, res) {
     const body = readBody(req);
     const slug = normalizeSlug(body.slug);
     const destination = parseDestination(body.destination);
+    const domain = body.domain ? normalizeDomain(body.domain) : "";
 
     if (!SLUG_PATTERN.test(slug)) {
         json(res, 400, {
@@ -185,6 +202,24 @@ async function handleCreate(req, res) {
             error: "Hãy nhập link đích http/https hợp lệ, tối đa 2.048 ký tự."
         });
         return;
+    }
+    if (body.domain && !domain) {
+        json(res, 400, { error: "Custom domain không hợp lệ." });
+        return;
+    }
+
+    if (domain) {
+        const rawDomain = await redis(["GET", "custom-domain:" + domain]);
+        let domainRecord = null;
+        try {
+            domainRecord = rawDomain ? JSON.parse(rawDomain) : null;
+        } catch {
+            domainRecord = null;
+        }
+        if (!domainRecord || domainRecord.userId !== user.id || domainRecord.status !== "ready") {
+            json(res, 403, { error: "Custom domain chưa được xác minh hoặc không thuộc tài khoản này." });
+            return;
+        }
     }
 
     const rate = await rateLimit(
@@ -202,6 +237,7 @@ async function handleCreate(req, res) {
     const record = {
         slug,
         destination,
+        domain: domain || null,
         userId: user.id,
         createdAt: now.toISOString()
     };
@@ -210,8 +246,16 @@ async function handleCreate(req, res) {
 
     if (created !== "OK") {
         const existing = parseLinkRecord(await redis(["GET", key]));
-        if (existing && existing.userId === user.id && existing.destination === destination) {
-            json(res, 200, { created: false, path: "/go/" + slug, slug });
+        if (existing && existing.userId === user.id && existing.destination === destination && (existing.domain || "") === domain) {
+            const existingDomain = existing.domain || null;
+            const path = existingDomain ? "/" + slug : "/go/" + slug;
+            json(res, 200, {
+                created: false,
+                path,
+                shortUrl: existingDomain ? "https://" + existingDomain + path : null,
+                domain: existingDomain,
+                slug
+            });
             return;
         }
         json(res, 409, { error: "URL mong muốn đã được sử dụng. Hãy chọn tên khác." });
@@ -223,7 +267,14 @@ async function handleCreate(req, res) {
         ["ZADD", "all-links", now.getTime(), slug]
     ]);
 
-    json(res, 201, { created: true, path: "/go/" + slug, slug });
+    const path = domain ? "/" + slug : "/go/" + slug;
+    json(res, 201, {
+        created: true,
+        path,
+        shortUrl: domain ? "https://" + domain + path : null,
+        domain: domain || null,
+        slug
+    });
 }
 
 module.exports = async function handler(req, res) {

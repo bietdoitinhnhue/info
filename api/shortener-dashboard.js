@@ -56,6 +56,9 @@ async function loadLinks(user, scope, page) {
         links.push({
             slug: pairs[i].slug,
             destination: record.destination,
+            domain: record.domain || null,
+            path: record.domain ? "/" + pairs[i].slug : "/go/" + pairs[i].slug,
+            shortUrl: record.domain ? "https://" + record.domain + "/" + pairs[i].slug : null,
             createdAt: record.createdAt || new Date(pairs[i].score).toISOString(),
             ownerId: record.userId,
             clicks: Number(results[i * 2 + 1]) || 0
@@ -127,6 +130,9 @@ async function loadDetail(user, slug) {
         link: {
             slug,
             destination: record.destination,
+            domain: record.domain || null,
+            path: record.domain ? "/" + slug : "/go/" + slug,
+            shortUrl: record.domain ? "https://" + record.domain + "/" + slug : null,
             createdAt: record.createdAt,
             ownerId: admin ? record.userId : undefined
         },

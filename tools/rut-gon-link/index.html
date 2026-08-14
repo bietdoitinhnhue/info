@@ -42,7 +42,7 @@
         var(--bg);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    button, input { font: inherit; }
+    button, input, select { font: inherit; }
     a { color: inherit; }
     .shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
     .header { display: flex; align-items: center; justify-content: space-between; min-height: 76px; }
@@ -137,7 +137,7 @@
     }
     .field + .field { margin-top: 20px; }
     label { display: block; margin-bottom: 9px; font-size: 14px; font-weight: 800; }
-    input {
+    input, select {
       width: 100%;
       height: 52px;
       border: 1px solid var(--line);
@@ -148,7 +148,7 @@
       background: #fff;
       transition: border-color .2s, box-shadow .2s;
     }
-    input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, .11); }
+    input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, .11); }
     .slug-wrap {
       display: flex;
       align-items: center;
@@ -282,6 +282,14 @@
           <input id="destination" name="destination" type="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="https://example.com/duong-dan-rat-dai" required>
         </div>
 
+        <div class="field" id="domain-field" hidden>
+          <label for="domain-select">Domain hiển thị</label>
+          <select id="domain-select" name="domain">
+            <option value="">Domain mặc định</option>
+          </select>
+          <small class="help">Custom domain chỉ hiện khi đã xác minh DNS trong Dashboard.</small>
+        </div>
+
         <div class="field">
           <label for="slug">URL mong muốn</label>
           <div class="slug-wrap">
@@ -314,6 +322,8 @@
       var destinationInput = document.getElementById("destination");
       var slugInput = document.getElementById("slug");
       var slugPrefix = document.getElementById("slug-prefix");
+      var domainField = document.getElementById("domain-field");
+      var domainSelect = document.getElementById("domain-select");
       var submitButton = document.getElementById("submit-button");
       var message = document.getElementById("message");
       var result = document.getElementById("result");
@@ -323,7 +333,12 @@
       var accountLink = document.getElementById("account-link");
 
       document.getElementById("year").textContent = new Date().getFullYear();
-      slugPrefix.textContent = window.location.host + "/go/";
+      function updateSlugPrefix() {
+        slugPrefix.textContent = domainSelect.value
+          ? domainSelect.value + "/"
+          : window.location.host + "/go/";
+      }
+      updateSlugPrefix();
 
       async function checkAccount() {
         try {
@@ -332,6 +347,15 @@
           if (data.authenticated) {
             accountLink.textContent = "Dashboard →";
             accountLink.href = "/tools/rut-gon-link/dashboard";
+            var domainResponse = await fetch("/api/custom-domains", { headers: { accept: "application/json" } });
+            var domainData = await domainResponse.json();
+            if (domainResponse.ok && domainData.domain && domainData.domain.status === "ready") {
+              var option = document.createElement("option");
+              option.value = domainData.domain.domain;
+              option.textContent = domainData.domain.domain + " (custom)";
+              domainSelect.appendChild(option);
+              domainField.hidden = false;
+            }
           }
         } catch (error) {
           // Keep the login link when account status cannot be loaded.
@@ -397,6 +421,7 @@
         var normalized = normalizeSlug(slugInput.value);
         if (slugInput.value !== normalized) slugInput.value = normalized;
       });
+      domainSelect.addEventListener("change", updateSlugPrefix);
 
       form.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -423,8 +448,8 @@
         submitButton.textContent = "Đang tạo…";
 
         try {
-          var data = await requestCreate({ destination: destination, slug: slug });
-          var shortUrl = window.location.origin + data.path;
+          var data = await requestCreate({ destination: destination, slug: slug, domain: domainSelect.value || undefined });
+          var shortUrl = data.shortUrl || window.location.origin + data.path;
           resultUrl.value = shortUrl;
           openLink.href = shortUrl;
           result.hidden = false;
