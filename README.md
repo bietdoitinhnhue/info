@@ -45,6 +45,7 @@ Kho mã nguồn cho các website tĩnh của Drake Nguyễn. Các website đư�
 │       └── dashboard/               # URL /tools/rut-gon-link/dashboard
 ├── api/
 │   ├── auth.js                      # Đăng ký, đăng nhập, session
+│   ├── custom-domains.js            # Kết nối và xác minh custom domain qua Vercel
 │   ├── shorten.js                   # Tạo link, redirect, analytics
 │   └── shortener-dashboard.js       # Dữ liệu dashboard có phân quyền
 ├── lib/
@@ -77,6 +78,19 @@ SHORTENER_ADMIN_EMAILS=admin@example.com,owner@example.com
 Trang cho phép đăng ký công khai. Mật khẩu được băm bằng scrypt, session lưu bằng cookie HttpOnly/Secure trong 30 ngày. Người dùng chỉ xem link của mình; email trong `SHORTENER_ADMIN_EMAILS` có thể chuyển sang phạm vi “Tất cả”.
 
 Analytics ghi nhận số đếm tổng hợp theo ngày, quốc gia, thành phố, referrer/social và thiết bị. Vị trí lấy từ header Vercel; hệ thống không lưu IP thô. Các link cũ được tạo trước hệ thống tài khoản vẫn redirect bình thường nhưng không được gán cho tài khoản.
+
+### Custom domain
+
+Mỗi tài khoản có thể kết nối tối đa 1 domain/subdomain trong Dashboard. Hệ thống thêm domain vào đúng Vercel Project, trả về bản ghi DNS được Vercel đề xuất và chỉ cho tạo link dạng `https://go.tenmien.com/ten-link` sau khi DNS đã xác minh. Apex domain dùng bản ghi A trỏ về IP Vercel; subdomain ưu tiên CNAME theo cấu hình của project.
+
+Thêm các biến môi trường sau trên Vercel:
+
+- `VERCEL_API_TOKEN`: Access Token của tài khoản/team có quyền quản lý Project; bật **Sensitive**.
+- `SHORTENER_VERCEL_PROJECT_ID`: Project ID, ví dụ `prj_...`. Có thể bỏ qua nếu runtime đã có `VERCEL_PROJECT_ID`.
+- `SHORTENER_VERCEL_TEAM_ID`: Team ID, ví dụ `team_...`. Có thể bỏ qua với project cá nhân hoặc khi runtime đã có `VERCEL_ORG_ID`.
+- `SHORTENER_PRIMARY_DOMAINS`: danh sách domain chính không cho người dùng nhận làm custom domain, phân tách bằng dấu phẩy. Ví dụ `about.drakenguyen.me`.
+
+Vercel Hobby giới hạn 50 custom domain cho mỗi project. Việc giới hạn 1 domain/tài khoản giúp tránh dùng hết quota ngoài ý muốn.
 
 ## Triển khai
 

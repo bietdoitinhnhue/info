@@ -277,6 +277,10 @@
     {
       "source": "/:manifest([mM][aA][nN][iI][fF][eE][sS][tT]-2026)",
       "destination": "/manifest-2026"
+    },
+    {
+      "source": "/:slug([a-z0-9][a-z0-9-]+)",
+      "destination": "/api/shorten?slug=:slug&custom=1"
     }
   ]
 }
