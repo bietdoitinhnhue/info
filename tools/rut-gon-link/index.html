@@ -60,6 +60,7 @@
     .brand-mark svg { width: 21px; }
     .back { color: var(--muted); font-size: 14px; font-weight: 700; text-decoration: none; }
     .back:hover { color: var(--primary); }
+    .header-links { display: flex; align-items: center; gap: 18px; }
     main {
       display: grid;
       grid-template-columns: minmax(0, .86fr) minmax(420px, 1.14fr);
@@ -248,7 +249,10 @@
       </span>
       <span>Drake Nguyễn · Free Tools</span>
     </a>
-    <a class="back" href="/#tools">Xem các công cụ khác →</a>
+    <nav class="header-links" aria-label="Tài khoản và công cụ">
+      <a class="back" href="/#tools">Công cụ khác</a>
+      <a class="back" id="account-link" href="/tools/rut-gon-link/auth">Đăng nhập →</a>
+    </nav>
   </header>
 
   <main class="shell">
@@ -316,10 +320,23 @@
       var resultUrl = document.getElementById("result-url");
       var copyButton = document.getElementById("copy-button");
       var openLink = document.getElementById("open-link");
-      var createKey = sessionStorage.getItem("shortener-create-key") || "";
+      var accountLink = document.getElementById("account-link");
 
       document.getElementById("year").textContent = new Date().getFullYear();
       slugPrefix.textContent = window.location.host + "/go/";
+
+      async function checkAccount() {
+        try {
+          var response = await fetch("/api/auth", { headers: { accept: "application/json" } });
+          var data = await response.json();
+          if (data.authenticated) {
+            accountLink.textContent = "Dashboard →";
+            accountLink.href = "/tools/rut-gon-link/dashboard";
+          }
+        } catch (error) {
+          // Keep the login link when account status cannot be loaded.
+        }
+      }
 
       function normalizeSlug(value) {
         return value
@@ -352,13 +369,10 @@
         }
       }
 
-      async function requestCreate(payload, allowKeyPrompt) {
-        var headers = { "content-type": "application/json" };
-        if (createKey) headers["x-shortener-key"] = createKey;
-
+      async function requestCreate(payload) {
         var response = await fetch("/api/shorten", {
           method: "POST",
-          headers: headers,
+          headers: { "content-type": "application/json" },
           body: JSON.stringify(payload)
         });
 
@@ -369,20 +383,13 @@
           data.error = "Máy chủ trả về dữ liệu không hợp lệ.";
         }
 
-        if (response.status === 401 && data.requiresKey && allowKeyPrompt) {
-          var entered = window.prompt("Nhập mã quản trị để tạo link:");
-          if (entered) {
-            createKey = entered;
-            sessionStorage.setItem("shortener-create-key", entered);
-            return requestCreate(payload, false);
-          }
+        if (response.status === 401 && data.requiresAuth) {
+          var next = window.location.pathname;
+          window.location.href = "/tools/rut-gon-link/auth?next=" + encodeURIComponent(next);
+          throw new Error("Đang chuyển đến trang đăng nhập…");
         }
 
-        if (!response.ok) {
-          if (response.status === 401) sessionStorage.removeItem("shortener-create-key");
-          throw new Error(data.error || "Không thể tạo link.");
-        }
-
+        if (!response.ok) throw new Error(data.error || "Không thể tạo link.");
         return data;
       }
 
@@ -416,7 +423,7 @@
         submitButton.textContent = "Đang tạo…";
 
         try {
-          var data = await requestCreate({ destination: destination, slug: slug }, true);
+          var data = await requestCreate({ destination: destination, slug: slug });
           var shortUrl = window.location.origin + data.path;
           resultUrl.value = shortUrl;
           openLink.href = shortUrl;
@@ -430,6 +437,8 @@
           submitButton.innerHTML = "Tạo link rút gọn <span aria-hidden=\"true\">→</span>";
         }
       });
+
+      checkAccount();
 
       copyButton.addEventListener("click", async function () {
         var value = resultUrl.value;
