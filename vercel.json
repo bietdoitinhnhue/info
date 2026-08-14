@@ -235,6 +235,10 @@
   ],
   "rewrites": [
     {
+      "source": "/go/:slug",
+      "destination": "/api/shorten?slug=:slug"
+    },
+    {
       "source": "/:profile([pP][rR][oO][fF][iI][lL][eE])",
       "destination": "/profile"
     },
