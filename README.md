@@ -15,7 +15,9 @@ Kho mã nguồn cho các website tĩnh của Drake Nguyễn. Các website đư�
 | `/tools/tao-QR` | `tools/tao-QR/index.html` | Công cụ tạo mã QR |
 | `/tools/link-builder-affiliate` | `tools/link-builder-affiliate/index.html` | Công cụ tạo link Shopee Affiliate |
 | `/tools/rut-gon-link` | `tools/rut-gon-link/index.html` | Công cụ rút gọn link với URL tùy chọn |
-| `/go/:slug` | `api/shorten.js` | Chuyển hướng link rút gọn |
+| `/tools/rut-gon-link/auth` | `tools/rut-gon-link/auth/index.html` | Đăng ký và đăng nhập |
+| `/tools/rut-gon-link/dashboard` | `tools/rut-gon-link/dashboard/index.html` | Dashboard link và analytics |
+| `/go/:slug` | `api/shorten.js` | Chuyển hướng và ghi nhận click |
 | `/lai-kep` | `lai-kep/index.html` | Công cụ lập kế hoạch tài chính |
 
 ## Cấu trúc repo
@@ -36,7 +38,17 @@ Kho mã nguồn cho các website tĩnh của Drake Nguyễn. Các website đư�
 ├── tools/
 │   ├── tao-QR/                     # URL /tools/tao-QR
 │   ├── link-builder-affiliate/     # URL /tools/link-builder-affiliate
-│   └── rut-gon-link/               # URL /tools/rut-gon-link
+│   └── rut-gon-link/
+│       ├── index.html               # URL /tools/rut-gon-link
+│       ├── account.css              # Giao diện auth và dashboard
+│       ├── auth/                    # URL /tools/rut-gon-link/auth
+│       └── dashboard/               # URL /tools/rut-gon-link/dashboard
+├── api/
+│   ├── auth.js                      # Đăng ký, đăng nhập, session
+│   ├── shorten.js                   # Tạo link, redirect, analytics
+│   └── shortener-dashboard.js       # Dữ liệu dashboard có phân quyền
+├── lib/
+│   └── shortener-store.js           # Redis, mật khẩu và session dùng chung
 ├── lai-kep/
 └── vercel.json                     # Clean URL và redirect URL cũ
 ```
@@ -56,7 +68,15 @@ Công cụ dùng Redis qua REST để lưu URL. Trên Vercel, kết nối Upstas
 - `KV_REST_API_URL` và `KV_REST_API_TOKEN` (Vercel Marketplace).
 - `UPSTASH_REDIS_REST_URL` và `UPSTASH_REDIS_REST_TOKEN` (Upstash trực tiếp).
 
-Tùy chọn: đặt `SHORTENER_CREATE_KEY` để yêu cầu mã quản trị khi tạo link. Nếu không đặt, trang cho phép tạo link công khai và giới hạn 30 link/giờ/IP.
+Đặt `SHORTENER_ADMIN_EMAILS` bằng danh sách email admin, phân tách bằng dấu phẩy. Ví dụ:
+
+```text
+SHORTENER_ADMIN_EMAILS=admin@example.com,owner@example.com
+```
+
+Trang cho phép đăng ký công khai. Mật khẩu được băm bằng scrypt, session lưu bằng cookie HttpOnly/Secure trong 30 ngày. Người dùng chỉ xem link của mình; email trong `SHORTENER_ADMIN_EMAILS` có thể chuyển sang phạm vi “Tất cả”.
+
+Analytics ghi nhận số đếm tổng hợp theo ngày, quốc gia, thành phố, referrer/social và thiết bị. Vị trí lấy từ header Vercel; hệ thống không lưu IP thô. Các link cũ được tạo trước hệ thống tài khoản vẫn redirect bình thường nhưng không được gán cho tài khoản.
 
 ## Triển khai
 

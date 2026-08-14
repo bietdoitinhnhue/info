@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fb">
+  <title>Đăng nhập | URL Shortener · Drake Nguyễn</title>
+  <meta name="description" content="Đăng nhập hoặc đăng ký để tạo link rút gọn và xem analytics.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://about.drakenguyen.me/tools/rut-gon-link/auth">
+  <link rel="stylesheet" href="/tools/rut-gon-link/account.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/tools/rut-gon-link">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+      </span>
+      <span>Drake URL</span>
+    </a>
+    <a class="top-link" href="/tools/rut-gon-link">← Về công cụ</a>
+  </header>
+
+  <main class="auth-shell">
+    <section class="auth-copy">
+      <small>Dashboard & Analytics</small>
+      <h1>Link của bạn.<br><span>Dữ liệu của bạn.</span></h1>
+      <p>Tạo URL tùy chọn, theo dõi lượt nhấp và hiểu người xem đến từ đâu—trên một dashboard riêng tư.</p>
+      <div class="feature-list">
+        <span><i>✓</i> Analytics vị trí theo quốc gia và thành phố</span>
+        <span><i>✓</i> Phân loại Facebook, TikTok, YouTube, Zalo</span>
+        <span><i>✓</i> Mỗi tài khoản chỉ xem link của chính mình</span>
+      </div>
+    </section>
+
+    <section class="auth-card" aria-labelledby="form-title">
+      <div class="tabs" role="tablist" aria-label="Chọn hình thức truy cập">
+        <button class="tab active" id="login-tab" type="button" role="tab" aria-selected="true">Đăng nhập</button>
+        <button class="tab" id="register-tab" type="button" role="tab" aria-selected="false">Đăng ký</button>
+      </div>
+
+      <h2 class="form-title" id="form-title">Chào mừng trở lại</h2>
+      <p class="form-subtitle" id="form-subtitle">Đăng nhập để xem link và analytics của bạn.</p>
+
+      <form id="auth-form" novalidate>
+        <div class="field" id="name-field" hidden>
+          <label for="name">Tên hiển thị</label>
+          <input id="name" name="name" type="text" autocomplete="name" maxlength="60" placeholder="Nguyễn Văn A">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="ban@example.com" required>
+        </div>
+        <div class="field">
+          <label for="password">Mật khẩu</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="128" placeholder="Tối thiểu 8 ký tự" required>
+        </div>
+        <div class="field" id="confirm-field" hidden>
+          <label for="confirm-password">Nhập lại mật khẩu</label>
+          <input id="confirm-password" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="Nhập lại mật khẩu">
+        </div>
+        <div class="form-message" id="message" role="alert" aria-live="polite" hidden></div>
+        <button class="primary-button" id="submit-button" type="submit">Đăng nhập</button>
+      </form>
+      <p class="privacy-note">Mật khẩu được băm trước khi lưu. Analytics không lưu địa chỉ IP thô.</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var mode = "login";
+      var form = document.getElementById("auth-form");
+      var loginTab = document.getElementById("login-tab");
+      var registerTab = document.getElementById("register-tab");
+      var nameField = document.getElementById("name-field");
+      var confirmField = document.getElementById("confirm-field");
+      var nameInput = document.getElementById("name");
+      var emailInput = document.getElementById("email");
+      var passwordInput = document.getElementById("password");
+      var confirmInput = document.getElementById("confirm-password");
+      var title = document.getElementById("form-title");
+      var subtitle = document.getElementById("form-subtitle");
+      var message = document.getElementById("message");
+      var submitButton = document.getElementById("submit-button");
+      var params = new URLSearchParams(window.location.search);
+      var next = params.get("next") || "/tools/rut-gon-link/dashboard";
+      if (!next.startsWith("/") || next.startsWith("//")) next = "/tools/rut-gon-link/dashboard";
+
+      function setMode(nextMode) {
+        mode = nextMode;
+        var registering = mode === "register";
+        loginTab.classList.toggle("active", !registering);
+        registerTab.classList.toggle("active", registering);
+        loginTab.setAttribute("aria-selected", String(!registering));
+        registerTab.setAttribute("aria-selected", String(registering));
+        nameField.hidden = !registering;
+        confirmField.hidden = !registering;
+        nameInput.required = registering;
+        confirmInput.required = registering;
+        passwordInput.autocomplete = registering ? "new-password" : "current-password";
+        title.textContent = registering ? "Tạo tài khoản" : "Chào mừng trở lại";
+        subtitle.textContent = registering
+          ? "Đăng ký miễn phí để quản lý link của riêng bạn."
+          : "Đăng nhập để xem link và analytics của bạn.";
+        submitButton.textContent = registering ? "Tạo tài khoản" : "Đăng nhập";
+        message.hidden = true;
+      }
+
+      async function checkSession() {
+        try {
+          var response = await fetch("/api/auth", { headers: { accept: "application/json" } });
+          var data = await response.json();
+          if (data.authenticated) window.location.replace(next);
+        } catch (error) {
+          // Keep the form available if the session check fails.
+        }
+      }
+
+      loginTab.addEventListener("click", function () { setMode("login"); });
+      registerTab.addEventListener("click", function () { setMode("register"); });
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        message.hidden = true;
+        var email = emailInput.value.trim();
+        var password = passwordInput.value;
+
+        if (!email || !password) {
+          message.textContent = "Hãy điền email và mật khẩu.";
+          message.hidden = false;
+          return;
+        }
+        if (password.length < 8) {
+          message.textContent = "Mật khẩu cần ít nhất 8 ký tự.";
+          message.hidden = false;
+          return;
+        }
+        if (mode === "register" && password !== confirmInput.value) {
+          message.textContent = "Hai mật khẩu chưa trùng nhau.";
+          message.hidden = false;
+          confirmInput.focus();
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = mode === "register" ? "Đang tạo tài khoản…" : "Đang đăng nhập…";
+
+        try {
+          var response = await fetch("/api/auth", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              action: mode,
+              name: nameInput.value.trim(),
+              email: email,
+              password: password
+            })
+          });
+          var data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Không thể xử lý tài khoản.");
+          window.location.replace(next);
+        } catch (error) {
+          message.textContent = error.message || "Có lỗi xảy ra. Hãy thử lại.";
+          message.hidden = false;
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = mode === "register" ? "Tạo tài khoản" : "Đăng nhập";
+        }
+      });
+
+      checkSession();
+    }());
+  </script>
+</body>
+</html>

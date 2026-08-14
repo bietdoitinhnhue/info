@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fb">
+  <title>Dashboard link & analytics | Drake URL</title>
+  <meta name="description" content="Quản lý link rút gọn và xem analytics vị trí, nguồn social, thiết bị.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://about.drakenguyen.me/tools/rut-gon-link/dashboard">
+  <link rel="stylesheet" href="/tools/rut-gon-link/account.css">
+</head>
+<body>
+  <nav class="mobile-nav" aria-label="Điều hướng di động">
+    <a class="brand" href="/tools/rut-gon-link/dashboard">
+      <span class="brand-mark" aria-hidden="true">URL</span><span>Drake URL</span>
+    </a>
+    <a class="top-link" href="/tools/rut-gon-link">+ Tạo link</a>
+  </nav>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <a class="brand" href="/tools/rut-gon-link/dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+        </span>
+        <span>Drake URL</span>
+      </a>
+      <nav class="side-nav" aria-label="Điều hướng dashboard">
+        <a class="active" href="/tools/rut-gon-link/dashboard">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="/tools/rut-gon-link">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          Tạo link mới
+        </a>
+        <a href="/">
+          <svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+          Trang chủ
+        </a>
+        <button id="logout-button" type="button">
+          <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M14 3h7v18h-7"/></svg>
+          Đăng xuất
+        </button>
+      </nav>
+      <div class="user-mini">
+        <strong id="sidebar-name">Đang tải…</strong>
+        <small id="sidebar-email"></small>
+      </div>
+    </aside>
+
+    <main class="dashboard-main" id="dashboard">
+      <header class="dashboard-head">
+        <div>
+          <small>URL Analytics</small>
+          <h1 id="welcome-title">Dashboard</h1>
+          <p>Chọn một link để xem vị trí, nguồn truy cập và xu hướng click.</p>
+        </div>
+        <div class="head-actions">
+          <a class="secondary-button" href="/tools/rut-gon-link">+ Tạo link</a>
+        </div>
+      </header>
+
+      <div class="dashboard-message" id="message" role="alert" hidden></div>
+
+      <section class="metric-grid" aria-label="Chỉ số tổng quan">
+        <article class="metric-card"><span>Tổng link</span><strong id="metric-links">0</strong><small>Trong phạm vi đang xem</small></article>
+        <article class="metric-card"><span>Tổng lượt click</span><strong id="metric-clicks">0</strong><small>Tất cả link trong danh sách</small></article>
+        <article class="metric-card"><span>Nguồn nổi bật</span><strong id="metric-source">—</strong><small id="metric-source-note">Chọn một link</small></article>
+        <article class="metric-card"><span>Vị trí nổi bật</span><strong id="metric-location">—</strong><small id="metric-location-note">Chọn một link</small></article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Lượt click theo thời gian</h2>
+            <select id="range-select" aria-label="Khoảng thời gian">
+              <option value="7">7 ngày</option>
+              <option value="30" selected>30 ngày</option>
+              <option value="90">90 ngày</option>
+              <option value="all">Tất cả</option>
+            </select>
+          </div>
+          <div class="chart-wrap" id="chart" aria-label="Biểu đồ lượt click"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><h2>Nguồn truy cập</h2></div>
+          <div class="breakdown" id="sources"><div class="empty-state">Chọn một link để xem.</div></div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-head"><h2>Thành phố & quốc gia</h2></div>
+          <div class="breakdown" id="locations"><div class="empty-state">Chưa có dữ liệu vị trí.</div></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><h2>Thiết bị</h2></div>
+          <div class="breakdown" id="devices"><div class="empty-state">Chưa có dữ liệu thiết bị.</div></div>
+        </article>
+      </section>
+
+      <section class="panel links-panel">
+        <div class="panel-head">
+          <h2>Link rút gọn</h2>
+          <div class="scope-switch" id="scope-switch" hidden>
+            <button class="scope-button active" data-scope="mine" type="button">Của tôi</button>
+            <button class="scope-button" data-scope="all" type="button">Tất cả</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Link</th><th>Clicks</th><th>Tạo lúc</th><th>Chủ sở hữu</th></tr></thead>
+            <tbody id="links-body"></tbody>
+          </table>
+          <div class="empty-state" id="links-empty" hidden>Bạn chưa có link nào. Hãy tạo link đầu tiên.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var state = { scope: "mine", links: [], detail: null, selectedSlug: "" };
+      var dashboard = document.getElementById("dashboard");
+      var message = document.getElementById("message");
+      var linksBody = document.getElementById("links-body");
+      var linksEmpty = document.getElementById("links-empty");
+      var scopeSwitch = document.getElementById("scope-switch");
+      var numberFormat = new Intl.NumberFormat("vi-VN");
+
+      function showError(text) {
+        message.textContent = text;
+        message.hidden = false;
+      }
+
+      async function api(url, options) {
+        var response = await fetch(url, options || {});
+        var data = {};
+        try { data = await response.json(); } catch (error) {}
+        if (response.status === 401) {
+          window.location.replace("/tools/rut-gon-link/auth?next=" + encodeURIComponent(window.location.pathname));
+          throw new Error("Bạn cần đăng nhập.");
+        }
+        if (!response.ok) throw new Error(data.error || "Không thể tải dữ liệu.");
+        return data;
+      }
+
+      function formatDate(value) {
+        if (!value) return "—";
+        return new Intl.DateTimeFormat("vi-VN", {
+          day: "2-digit", month: "2-digit", year: "numeric"
+        }).format(new Date(value));
+      }
+
+      function sortedEntries(object) {
+        return Object.entries(object || {}).sort(function (a, b) { return b[1] - a[1]; });
+      }
+
+      function renderBreakdown(targetId, object, emptyText, limit) {
+        var target = document.getElementById(targetId);
+        target.textContent = "";
+        var entries = sortedEntries(object).slice(0, limit || 7);
+        if (!entries.length) {
+          var empty = document.createElement("div");
+          empty.className = "empty-state";
+          empty.textContent = emptyText;
+          target.appendChild(empty);
+          return;
+        }
+        var max = entries[0][1] || 1;
+        entries.forEach(function (entry) {
+          var row = document.createElement("div");
+          row.className = "bar-row";
+          var label = document.createElement("span");
+          label.textContent = entry[0];
+          label.title = entry[0];
+          var bar = document.createElement("span");
+          bar.className = "bar";
+          var fill = document.createElement("i");
+          fill.style.width = Math.max(3, entry[1] / max * 100) + "%";
+          bar.appendChild(fill);
+          var count = document.createElement("strong");
+          count.textContent = numberFormat.format(entry[1]);
+          row.append(label, bar, count);
+          target.appendChild(row);
+        });
+      }
+
+      function rangeDates(days, daily) {
+        if (days === "all") return Object.keys(daily || {}).sort();
+        var result = [];
+        var count = Number(days);
+        for (var i = count - 1; i >= 0; i -= 1) {
+          var date = new Date();
+          date.setHours(12, 0, 0, 0);
+          date.setDate(date.getDate() - i);
+          var y = date.getFullYear();
+          var m = String(date.getMonth() + 1).padStart(2, "0");
+          var d = String(date.getDate()).padStart(2, "0");
+          result.push(y + "-" + m + "-" + d);
+        }
+        return result;
+      }
+
+      function svgElement(name, attributes) {
+        var element = document.createElementNS("http://www.w3.org/2000/svg", name);
+        Object.entries(attributes || {}).forEach(function (entry) {
+          element.setAttribute(entry[0], entry[1]);
+        });
+        return element;
+      }
+
+      function renderChart() {
+        var target = document.getElementById("chart");
+        target.textContent = "";
+        var daily = state.detail ? state.detail.analytics.daily : {};
+        var dates = rangeDates(document.getElementById("range-select").value, daily);
+        var values = dates.map(function (date) { return Number(daily[date] || 0); });
+        if (!values.some(Boolean)) {
+          var empty = document.createElement("div");
+          empty.className = "chart-empty";
+          empty.textContent = state.selectedSlug ? "Chưa có click trong khoảng thời gian này." : "Chọn một link để xem biểu đồ.";
+          target.appendChild(empty);
+          return;
+        }
+
+        var width = 760, height = 220, left = 40, right = 12, top = 14, bottom = 30;
+        var plotWidth = width - left - right, plotHeight = height - top - bottom;
+        var max = Math.max.apply(null, values.concat([1]));
+        var svg = svgElement("svg", { viewBox: "0 0 " + width + " " + height, role: "img" });
+
+        for (var grid = 0; grid <= 4; grid += 1) {
+          var y = top + plotHeight * grid / 4;
+          svg.appendChild(svgElement("line", { x1: left, y1: y, x2: width - right, y2: y, stroke: "#eceef4", "stroke-width": 1 }));
+        }
+
+        var points = values.map(function (value, index) {
+          var x = left + (dates.length === 1 ? plotWidth / 2 : plotWidth * index / (dates.length - 1));
+          var y = top + plotHeight - value / max * plotHeight;
+          return x + "," + y;
+        }).join(" ");
+        svg.appendChild(svgElement("polyline", {
+          points: points, fill: "none", stroke: "#5046e5", "stroke-width": 3,
+          "stroke-linecap": "round", "stroke-linejoin": "round"
+        }));
+
+        values.forEach(function (value, index) {
+          if (!value) return;
+          var x = left + (dates.length === 1 ? plotWidth / 2 : plotWidth * index / (dates.length - 1));
+          var y = top + plotHeight - value / max * plotHeight;
+          var circle = svgElement("circle", { cx: x, cy: y, r: 4, fill: "#fff", stroke: "#5046e5", "stroke-width": 2 });
+          var title = svgElement("title");
+          title.textContent = dates[index] + ": " + value + " clicks";
+          circle.appendChild(title);
+          svg.appendChild(circle);
+        });
+
+        var firstLabel = svgElement("text", { x: left, y: height - 7, fill: "#7a8294", "font-size": 11 });
+        firstLabel.textContent = dates[0] || "";
+        var lastLabel = svgElement("text", { x: width - right, y: height - 7, fill: "#7a8294", "font-size": 11, "text-anchor": "end" });
+        lastLabel.textContent = dates[dates.length - 1] || "";
+        svg.append(firstLabel, lastLabel);
+        target.appendChild(svg);
+      }
+
+      function renderDetail() {
+        var analytics = state.detail ? state.detail.analytics : null;
+        if (!analytics) {
+          document.getElementById("metric-source").textContent = "—";
+          document.getElementById("metric-location").textContent = "—";
+          renderBreakdown("sources", {}, "Chọn một link để xem.", 7);
+          renderBreakdown("locations", {}, "Chưa có dữ liệu vị trí.", 7);
+          renderBreakdown("devices", {}, "Chưa có dữ liệu thiết bị.", 5);
+          renderChart();
+          return;
+        }
+        var source = sortedEntries(analytics.sources)[0];
+        var location = sortedEntries(analytics.cities)[0] || sortedEntries(analytics.countries)[0];
+        document.getElementById("metric-source").textContent = source ? source[0] : "—";
+        document.getElementById("metric-source-note").textContent = source ? numberFormat.format(source[1]) + " clicks · " + state.selectedSlug : state.selectedSlug;
+        document.getElementById("metric-location").textContent = location ? location[0] : "—";
+        document.getElementById("metric-location-note").textContent = location ? numberFormat.format(location[1]) + " clicks · " + state.selectedSlug : state.selectedSlug;
+        renderBreakdown("sources", analytics.sources, "Chưa có dữ liệu nguồn.", 7);
+        renderBreakdown("locations", Object.keys(analytics.cities).length ? analytics.cities : analytics.countries, "Chưa có dữ liệu vị trí.", 7);
+        renderBreakdown("devices", analytics.devices, "Chưa có dữ liệu thiết bị.", 5);
+        renderChart();
+      }
+
+      async function selectLink(slug) {
+        state.selectedSlug = slug;
+        Array.from(linksBody.querySelectorAll("tr")).forEach(function (row) {
+          row.classList.toggle("selected", row.dataset.slug === slug);
+        });
+        try {
+          state.detail = await api("/api/shortener-dashboard?view=detail&slug=" + encodeURIComponent(slug));
+          renderDetail();
+        } catch (error) {
+          showError(error.message);
+        }
+      }
+
+      function renderLinks() {
+        linksBody.textContent = "";
+        linksEmpty.hidden = state.links.length > 0;
+        state.links.forEach(function (link) {
+          var row = document.createElement("tr");
+          row.dataset.slug = link.slug;
+          var linkCell = document.createElement("td");
+          linkCell.className = "link-cell";
+          var shortLink = document.createElement("strong");
+          shortLink.textContent = window.location.host + "/go/" + link.slug;
+          var destination = document.createElement("small");
+          destination.textContent = link.destination;
+          destination.title = link.destination;
+          linkCell.append(shortLink, destination);
+
+          var clicks = document.createElement("td");
+          clicks.textContent = numberFormat.format(link.clicks);
+          var created = document.createElement("td");
+          created.textContent = formatDate(link.createdAt);
+          var owner = document.createElement("td");
+          owner.className = "owner-cell";
+          owner.textContent = link.owner ? link.owner.name : "Bạn";
+          if (link.owner) {
+            var ownerEmail = document.createElement("small");
+            ownerEmail.textContent = link.owner.email;
+            owner.appendChild(ownerEmail);
+          }
+          row.append(linkCell, clicks, created, owner);
+          row.addEventListener("click", function () { selectLink(link.slug); });
+          linksBody.appendChild(row);
+        });
+      }
+
+      async function loadLinks(scope) {
+        dashboard.classList.add("loading");
+        message.hidden = true;
+        try {
+          var data = await api("/api/shortener-dashboard?view=links&scope=" + scope);
+          state.scope = data.scope;
+          state.links = data.links;
+          document.getElementById("sidebar-name").textContent = data.user.name;
+          document.getElementById("sidebar-email").textContent = data.user.email;
+          document.getElementById("welcome-title").textContent = "Xin chào, " + data.user.name.split(" ")[0];
+          scopeSwitch.hidden = data.user.role !== "admin";
+          Array.from(scopeSwitch.querySelectorAll("button")).forEach(function (button) {
+            button.classList.toggle("active", button.dataset.scope === data.scope);
+          });
+          document.getElementById("metric-links").textContent = numberFormat.format(data.total);
+          document.getElementById("metric-clicks").textContent = numberFormat.format(
+            data.links.reduce(function (sum, link) { return sum + link.clicks; }, 0)
+          );
+          renderLinks();
+          if (data.links.length) {
+            await selectLink(data.links[0].slug);
+          } else {
+            state.detail = null;
+            state.selectedSlug = "";
+            renderDetail();
+          }
+        } catch (error) {
+          showError(error.message);
+        } finally {
+          dashboard.classList.remove("loading");
+        }
+      }
+
+      async function logout() {
+        try {
+          await api("/api/auth", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ action: "logout" })
+          });
+        } finally {
+          window.location.replace("/tools/rut-gon-link/auth");
+        }
+      }
+
+      document.getElementById("logout-button").addEventListener("click", logout);
+      document.getElementById("range-select").addEventListener("change", renderChart);
+      scopeSwitch.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-scope]");
+        if (button) loadLinks(button.dataset.scope);
+      });
+      loadLinks("mine");
+    }());
+  </script>
+</body>
+</html>

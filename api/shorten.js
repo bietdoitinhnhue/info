@@ -1,52 +1,23 @@
-const crypto = require("crypto");
+const {
+    getCurrentUser,
+    json,
+    parseLinkRecord,
+    rateLimit,
+    redis,
+    redisPipeline,
+    requireSameOrigin
+} = require("../lib/shortener-store");
 
 const LINK_PREFIX = "short-link:";
-const RATE_PREFIX = "short-rate:";
 const MAX_LINK_LENGTH = 2048;
 const MAX_CREATES_PER_HOUR = 30;
 const SLUG_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,46}[a-z0-9])?$/;
-
-function getRedisConfig() {
-    return {
-        url: process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "",
-        token: process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || ""
-    };
-}
-
-async function redis(command) {
-    const config = getRedisConfig();
-    if (!config.url || !config.token) {
-        const error = new Error("Storage chưa được cấu hình.");
-        error.code = "STORAGE_NOT_CONFIGURED";
-        throw error;
-    }
-
-    const response = await fetch(config.url.replace(/\/$/, ""), {
-        method: "POST",
-        headers: {
-            authorization: "Bearer " + config.token,
-            "content-type": "application/json"
-        },
-        body: JSON.stringify(command)
-    });
-
-    let payload;
-    try {
-        payload = await response.json();
-    } catch {
-        throw new Error("Storage trả về dữ liệu không hợp lệ.");
-    }
-
-    if (!response.ok || payload.error) {
-        throw new Error(payload.error || "Không thể kết nối storage.");
-    }
-
-    return payload.result;
-}
-
-function json(res, status, payload) {
-    res.status(status).json(payload);
-}
+const DATE_FORMATTER = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Ho_Chi_Minh",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+});
 
 function normalizeSlug(value) {
     return String(value || "")
@@ -60,7 +31,6 @@ function normalizeSlug(value) {
 function parseDestination(value) {
     const raw = String(value || "").trim();
     if (!raw || raw.length > MAX_LINK_LENGTH) return null;
-
     try {
         const url = new URL(raw);
         if (!["http:", "https:"].includes(url.protocol)) return null;
@@ -82,33 +52,80 @@ function readBody(req) {
     }
 }
 
-function hasValidCreateKey(req) {
-    const expected = process.env.SHORTENER_CREATE_KEY;
-    if (!expected) return true;
-
-    const provided = String(req.headers["x-shortener-key"] || "");
-    const expectedBuffer = Buffer.from(expected);
-    const providedBuffer = Buffer.from(provided);
-    return expectedBuffer.length === providedBuffer.length
-        && crypto.timingSafeEqual(expectedBuffer, providedBuffer);
+function cleanMetric(value, fallback, maxLength = 60) {
+    const cleaned = String(value || "")
+        .replace(/[\u0000-\u001f\u007f]/g, "")
+        .trim()
+        .slice(0, maxLength);
+    return cleaned || fallback;
 }
 
-function getClientHash(req) {
-    const forwarded = String(req.headers["x-forwarded-for"] || "");
-    const ip = forwarded.split(",")[0].trim() || String(req.socket?.remoteAddress || "unknown");
-    return crypto.createHash("sha256").update(ip).digest("hex").slice(0, 24);
-}
-
-async function enforceRateLimit(req) {
-    const windowId = Math.floor(Date.now() / 3600000);
-    const key = RATE_PREFIX + getClientHash(req) + ":" + windowId;
-    const count = Number(await redis(["INCR", key]));
-
-    if (count === 1) {
-        await redis(["EXPIRE", key, 3700]);
+function decodeCity(value) {
+    try {
+        return decodeURIComponent(String(value || ""));
+    } catch {
+        return String(value || "");
     }
+}
 
-    return count <= MAX_CREATES_PER_HOUR;
+function socialLabel(value) {
+    const source = String(value || "").toLowerCase();
+    if (/facebook|fb\.com|fbclid/.test(source)) return "Facebook";
+    if (/instagram|ig\.me/.test(source)) return "Instagram";
+    if (/tiktok/.test(source)) return "TikTok";
+    if (/youtube|youtu\.be/.test(source)) return "YouTube";
+    if (/zalo/.test(source)) return "Zalo";
+    if (/telegram|t\.me/.test(source)) return "Telegram";
+    if (/twitter|x\.com/.test(source)) return "X / Twitter";
+    if (/linkedin/.test(source)) return "LinkedIn";
+    if (/pinterest/.test(source)) return "Pinterest";
+    return "";
+}
+
+function classifySource(req) {
+    const explicit = req.query.utm_source || req.query.source;
+    const explicitLabel = socialLabel(explicit);
+    if (explicitLabel) return explicitLabel;
+
+    const referrer = String(req.headers.referer || req.headers.referrer || "");
+    if (!referrer) return "Direct";
+    try {
+        const url = new URL(referrer);
+        const label = socialLabel(url.hostname);
+        if (label) return label;
+        if (url.host === String(req.headers.host || "")) return "Internal";
+        return "Other";
+    } catch {
+        return "Other";
+    }
+}
+
+function classifyDevice(req) {
+    const ua = String(req.headers["user-agent"] || "").toLowerCase();
+    if (/bot|crawler|spider|preview|facebookexternalhit/.test(ua)) return "Bot";
+    if (/ipad|tablet|kindle/.test(ua)) return "Tablet";
+    if (/mobile|iphone|android/.test(ua)) return "Mobile";
+    return "Desktop";
+}
+
+async function recordClick(req, slug) {
+    const country = cleanMetric(req.headers["x-vercel-ip-country"], "Unknown", 12).toUpperCase();
+    const cityName = cleanMetric(decodeCity(req.headers["x-vercel-ip-city"]), "Unknown");
+    const city = cityName === "Unknown" ? cityName : cityName + ", " + country;
+    const source = classifySource(req);
+    const device = classifyDevice(req);
+    const date = DATE_FORMATTER.format(new Date());
+    const base = "analytics:" + slug;
+
+    await redisPipeline([
+        ["HINCRBY", base, "total", 1],
+        ["HSET", base, "lastClick", new Date().toISOString()],
+        ["HINCRBY", base + ":daily", date, 1],
+        ["HINCRBY", base + ":countries", country, 1],
+        ["HINCRBY", base + ":cities", city, 1],
+        ["HINCRBY", base + ":sources", source, 1],
+        ["HINCRBY", base + ":devices", device, 1]
+    ]);
 }
 
 async function handleRedirect(req, res) {
@@ -118,24 +135,37 @@ async function handleRedirect(req, res) {
         return;
     }
 
-    const destination = await redis(["GET", LINK_PREFIX + slug]);
-    if (!destination) {
+    const raw = await redis(["GET", LINK_PREFIX + slug]);
+    const record = parseLinkRecord(raw);
+    if (!record || !record.destination) {
         json(res, 404, { error: "Link này không tồn tại hoặc đã bị xóa." });
         return;
     }
 
-    res.setHeader("Cache-Control", "public, max-age=60, s-maxage=300");
+    try {
+        await recordClick(req, slug);
+    } catch (error) {
+        console.error("Analytics error:", error);
+    }
+
+    res.setHeader("Cache-Control", "private, no-store");
     res.setHeader("Referrer-Policy", "no-referrer");
     res.setHeader("X-Robots-Tag", "noindex, nofollow");
-    res.writeHead(302, { Location: destination });
+    res.writeHead(302, { Location: record.destination });
     res.end();
 }
 
 async function handleCreate(req, res) {
-    if (!hasValidCreateKey(req)) {
+    if (!requireSameOrigin(req)) {
+        json(res, 403, { error: "Yêu cầu không hợp lệ." });
+        return;
+    }
+
+    const user = await getCurrentUser(req);
+    if (!user) {
         json(res, 401, {
-            error: "Mã quản trị chưa đúng.",
-            requiresKey: true
+            error: "Hãy đăng nhập để tạo và quản lý link.",
+            requiresAuth: true
         });
         return;
     }
@@ -150,7 +180,6 @@ async function handleCreate(req, res) {
         });
         return;
     }
-
     if (!destination) {
         json(res, 400, {
             error: "Hãy nhập link đích http/https hợp lệ, tối đa 2.048 ký tự."
@@ -158,27 +187,41 @@ async function handleCreate(req, res) {
         return;
     }
 
-    if (!(await enforceRateLimit(req))) {
+    const rate = await rateLimit(
+        "short-create-rate:" + user.id + ":" + Math.floor(Date.now() / 3600000),
+        MAX_CREATES_PER_HOUR,
+        3700
+    );
+    if (!rate.allowed) {
         res.setHeader("Retry-After", "3600");
         json(res, 429, { error: "Bạn đã tạo quá nhiều link. Hãy thử lại sau." });
         return;
     }
 
+    const now = new Date();
+    const record = {
+        slug,
+        destination,
+        userId: user.id,
+        createdAt: now.toISOString()
+    };
     const key = LINK_PREFIX + slug;
-    const created = await redis(["SET", key, destination, "NX"]);
+    const created = await redis(["SET", key, JSON.stringify(record), "NX"]);
 
     if (created !== "OK") {
-        const existing = await redis(["GET", key]);
-        if (existing === destination) {
+        const existing = parseLinkRecord(await redis(["GET", key]));
+        if (existing && existing.userId === user.id && existing.destination === destination) {
             json(res, 200, { created: false, path: "/go/" + slug, slug });
             return;
         }
-
-        json(res, 409, {
-            error: "URL mong muốn đã được sử dụng. Hãy chọn tên khác."
-        });
+        json(res, 409, { error: "URL mong muốn đã được sử dụng. Hãy chọn tên khác." });
         return;
     }
+
+    await redisPipeline([
+        ["ZADD", "user-links:" + user.id, now.getTime(), slug],
+        ["ZADD", "all-links", now.getTime(), slug]
+    ]);
 
     json(res, 201, { created: true, path: "/go/" + slug, slug });
 }
@@ -193,7 +236,6 @@ module.exports = async function handler(req, res) {
             await handleRedirect(req, res);
             return;
         }
-
         if (req.method === "POST") {
             await handleCreate(req, res);
             return;
@@ -203,12 +245,9 @@ module.exports = async function handler(req, res) {
         json(res, 405, { error: "Method not allowed" });
     } catch (error) {
         if (error && error.code === "STORAGE_NOT_CONFIGURED") {
-            json(res, 503, {
-                error: "Công cụ chưa được kết nối storage. Hãy cấu hình Upstash Redis trên Vercel."
-            });
+            json(res, 503, { error: "Công cụ chưa được kết nối storage." });
             return;
         }
-
         console.error("Shortener error:", error);
         json(res, 502, { error: "Không thể xử lý link lúc này. Hãy thử lại." });
     }
