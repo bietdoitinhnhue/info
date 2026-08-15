@@ -147,7 +147,7 @@
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Link</th><th>Clicks</th><th>Tạo lúc</th><th>Chủ sở hữu</th></tr></thead>
+            <thead><tr><th>Link</th><th>Clicks</th><th>Tạo lúc</th><th>Chủ sở hữu</th><th>Thao tác</th></tr></thead>
             <tbody id="links-body"></tbody>
           </table>
           <div class="empty-state" id="links-empty" hidden>Bạn chưa có link nào. Hãy tạo link đầu tiên.</div>
@@ -156,9 +156,32 @@
     </main>
   </div>
 
+  <div class="modal-backdrop" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title" hidden>
+    <section class="modal-card">
+      <div class="modal-head">
+        <div>
+          <small>Sửa link đích</small>
+          <h2 id="edit-modal-title">Cập nhật URL chuyển hướng</h2>
+        </div>
+        <button class="modal-close" id="edit-close-button" type="button" aria-label="Đóng">×</button>
+      </div>
+      <p class="modal-link" id="edit-short-url"></p>
+      <form id="edit-link-form">
+        <label for="edit-destination">Link đích mới</label>
+        <input id="edit-destination" type="url" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="https://example.com/link-moi" required>
+        <small class="domain-help">Slug, custom domain và toàn bộ analytics sẽ được giữ nguyên.</small>
+        <div class="form-message" id="edit-message" role="alert" hidden></div>
+        <div class="modal-actions">
+          <button class="secondary-button" id="edit-cancel-button" type="button">Hủy</button>
+          <button class="primary-inline-button" id="edit-save-button" type="submit">Lưu link mới</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
   <script>
     (function () {
-      var state = { scope: "mine", links: [], detail: null, selectedSlug: "" };
+      var state = { scope: "mine", links: [], detail: null, selectedSlug: "", editingLink: null };
       var dashboard = document.getElementById("dashboard");
       var message = document.getElementById("message");
       var linksBody = document.getElementById("links-body");
@@ -168,10 +191,41 @@
       var domainForm = document.getElementById("domain-form");
       var domainDetail = document.getElementById("domain-detail");
       var currentDomain = null;
+      var editModal = document.getElementById("edit-modal");
+      var editForm = document.getElementById("edit-link-form");
+      var editDestination = document.getElementById("edit-destination");
 
       function showError(text) {
         message.textContent = text;
+        message.classList.remove("success");
         message.hidden = false;
+      }
+
+      function showSuccess(text) {
+        message.textContent = text;
+        message.classList.add("success");
+        message.hidden = false;
+        message.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function openEditModal(link) {
+        state.editingLink = link;
+        document.getElementById("edit-short-url").textContent = link.shortUrl || window.location.origin + link.path;
+        editDestination.value = link.destination;
+        document.getElementById("edit-message").hidden = true;
+        editModal.hidden = false;
+        document.body.classList.add("modal-open");
+        window.setTimeout(function () {
+          editDestination.focus();
+          editDestination.select();
+        }, 0);
+      }
+
+      function closeEditModal() {
+        state.editingLink = null;
+        editModal.hidden = true;
+        document.body.classList.remove("modal-open");
+        editForm.reset();
       }
 
       function setDomainBusy(busy) {
@@ -455,7 +509,19 @@
             ownerEmail.textContent = link.owner.email;
             owner.appendChild(ownerEmail);
           }
-          row.append(linkCell, clicks, created, owner);
+          var actions = document.createElement("td");
+          var editButton = document.createElement("button");
+          editButton.type = "button";
+          editButton.className = "table-action-button";
+          editButton.textContent = "Sửa link";
+          editButton.setAttribute("aria-label", "Sửa link " + link.slug);
+          editButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            openEditModal(link);
+          });
+          actions.appendChild(editButton);
+          row.append(linkCell, clicks, created, owner, actions);
+          row.classList.toggle("selected", state.selectedSlug === link.slug);
           row.addEventListener("click", function () { selectLink(link.slug); });
           linksBody.appendChild(row);
         });
@@ -531,6 +597,47 @@
         } finally {
           setDomainBusy(false);
         }
+      });
+      editForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        if (!state.editingLink) return;
+        var destination = editDestination.value.trim();
+        var saveButton = document.getElementById("edit-save-button");
+        var editMessage = document.getElementById("edit-message");
+        editMessage.hidden = true;
+        saveButton.disabled = true;
+        saveButton.textContent = "Đang lưu…";
+        try {
+          var data = await api("/api/shortener-dashboard", {
+            method: "PATCH",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ slug: state.editingLink.slug, destination: destination })
+          });
+          var slug = state.editingLink.slug;
+          state.links.forEach(function (link) {
+            if (link.slug === slug) link.destination = data.link.destination;
+          });
+          if (state.detail && state.detail.link && state.detail.link.slug === slug) {
+            state.detail.link.destination = data.link.destination;
+          }
+          closeEditModal();
+          renderLinks();
+          showSuccess("Đã cập nhật link đích cho /" + slug + ". Analytics được giữ nguyên.");
+        } catch (error) {
+          editMessage.textContent = error.message;
+          editMessage.hidden = false;
+        } finally {
+          saveButton.disabled = false;
+          saveButton.textContent = "Lưu link mới";
+        }
+      });
+      document.getElementById("edit-close-button").addEventListener("click", closeEditModal);
+      document.getElementById("edit-cancel-button").addEventListener("click", closeEditModal);
+      editModal.addEventListener("click", function (event) {
+        if (event.target === editModal) closeEditModal();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !editModal.hidden) closeEditModal();
       });
       loadDomain();
       loadLinks("mine");

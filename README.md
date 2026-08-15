@@ -77,6 +77,8 @@ SHORTENER_ADMIN_EMAILS=admin@example.com,owner@example.com
 
 Trang cho phép đăng ký công khai. Mật khẩu được băm bằng scrypt, session lưu bằng cookie HttpOnly/Secure trong 30 ngày. Người dùng chỉ xem link của mình; email trong `SHORTENER_ADMIN_EMAILS` có thể chuyển sang phạm vi “Tất cả”.
 
+Trong Dashboard, chủ link có thể thay URL đích của link đã tạo; admin có thể sửa mọi link trong phạm vi “Tất cả”. Slug, custom domain và dữ liệu analytics được giữ nguyên khi thay link đích.
+
 Analytics ghi nhận số đếm tổng hợp theo ngày, quốc gia, thành phố, referrer/social và thiết bị. Vị trí lấy từ header Vercel; hệ thống không lưu IP thô. Các link cũ được tạo trước hệ thống tài khoản vẫn redirect bình thường nhưng không được gán cho tài khoản.
 
 ### Custom domain
