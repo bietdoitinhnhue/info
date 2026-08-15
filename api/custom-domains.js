@@ -10,6 +10,12 @@ const {
 
 const MAX_DOMAIN_CHANGES_PER_HOUR = 8;
 
+function maxProjectDomains() {
+    const configured = Number(process.env.SHORTENER_MAX_CUSTOM_DOMAINS || 40);
+    if (!Number.isFinite(configured)) return 40;
+    return Math.max(1, Math.min(49, Math.floor(configured)));
+}
+
 function readBody(req) {
     if (!req.body) return {};
     if (typeof req.body === "object") return req.body;
@@ -229,6 +235,11 @@ async function addDomain(req, res, user, body) {
             json(res, 409, { error: "Mỗi tài khoản được kết nối tối đa 1 custom domain." });
             return;
         }
+        const totalDomains = Number(await redis(["ZCARD", "all-domains"])) || 0;
+        if (totalDomains >= maxProjectDomains()) {
+            json(res, 409, { error: "Hệ thống đã đạt giới hạn custom domain. Hãy liên hệ admin." });
+            return;
+        }
         claimed = await redis(["SET", "custom-domain-owner:" + domain, user.id, "NX"]) === "OK";
         if (!claimed) {
             json(res, 409, { error: "Domain này đã được một tài khoản khác sử dụng." });
@@ -272,7 +283,18 @@ async function addDomain(req, res, user, body) {
                 // Keep the original error; an orphan domain can be removed in Vercel Settings.
             }
         }
-        if (claimed) await redis(["DEL", "custom-domain-owner:" + domain]);
+        if (claimed) {
+            try {
+                await redisPipeline([
+                    ["DEL", "custom-domain:" + domain],
+                    ["DEL", "custom-domain-owner:" + domain],
+                    ["DEL", "user-domain:" + user.id],
+                    ["ZREM", "all-domains", domain]
+                ]);
+            } catch {
+                // Keep the original error; the lock expires automatically if cleanup fails.
+            }
+        }
         throw error;
     } finally {
         await redis(["DEL", lockKey]);
