@@ -5,12 +5,39 @@ const {
     json,
     parseLinkRecord,
     publicUser,
+    rateLimit,
     redis,
-    redisPipeline
+    redisPipeline,
+    requireSameOrigin
 } = require("../lib/shortener-store");
 
 const SLUG_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,46}[a-z0-9])?$/;
 const PAGE_SIZE = 50;
+const MAX_LINK_UPDATES_PER_HOUR = 30;
+
+function readBody(req) {
+    if (!req.body) return {};
+    if (typeof req.body === "object") return req.body;
+    try {
+        return JSON.parse(req.body);
+    } catch {
+        return {};
+    }
+}
+
+function parseDestination(value) {
+    const raw = String(value || "").trim();
+    if (!raw || raw.length > 2048) return null;
+    try {
+        const url = new URL(raw);
+        if (!["http:", "https:"].includes(url.protocol)) return null;
+        if (url.username || url.password) return null;
+        if (/\/go\/[a-z0-9-]+\/?$/i.test(url.pathname)) return null;
+        return url.toString();
+    } catch {
+        return null;
+    }
+}
 
 function normalizePairs(value) {
     if (!Array.isArray(value)) return [];
@@ -148,13 +175,90 @@ async function loadDetail(user, slug) {
     };
 }
 
+async function updateDestination(req, user) {
+    if (!requireSameOrigin(req)) {
+        const error = new Error("Yêu cầu không hợp lệ.");
+        error.status = 403;
+        throw error;
+    }
+
+    const body = readBody(req);
+    const slug = String(body.slug || "").trim().toLowerCase();
+    const destination = parseDestination(body.destination);
+    if (!SLUG_PATTERN.test(slug)) {
+        const error = new Error("URL rút gọn không hợp lệ.");
+        error.status = 400;
+        throw error;
+    }
+    if (!destination) {
+        const error = new Error("Hãy nhập link đích http/https hợp lệ, tối đa 2.048 ký tự.");
+        error.status = 400;
+        throw error;
+    }
+
+    const key = "short-link:" + slug;
+    const record = parseLinkRecord(await redis(["GET", key]));
+    if (!record) {
+        const error = new Error("Không tìm thấy link.");
+        error.status = 404;
+        throw error;
+    }
+
+    const admin = isAdminEmail(user.email);
+    if (!admin && record.userId !== user.id) {
+        const error = new Error("Bạn không có quyền sửa link này.");
+        error.status = 403;
+        throw error;
+    }
+
+    if (record.domain) {
+        const target = new URL(destination);
+        if (target.hostname.toLowerCase() === record.domain && target.pathname.replace(/\/$/, "") === "/" + slug) {
+            const error = new Error("Link đích không thể trỏ ngược về chính link rút gọn.");
+            error.status = 400;
+            throw error;
+        }
+    }
+
+    const rate = await rateLimit(
+        "short-update-rate:" + user.id + ":" + Math.floor(Date.now() / 3600000),
+        MAX_LINK_UPDATES_PER_HOUR,
+        3700
+    );
+    if (!rate.allowed) {
+        const error = new Error("Bạn đã sửa link quá nhiều lần. Hãy thử lại sau.");
+        error.status = 429;
+        throw error;
+    }
+
+    const updatedAt = new Date().toISOString();
+    await redis(["SET", key, JSON.stringify({
+        ...record,
+        destination,
+        updatedAt
+    })]);
+
+    return {
+        changed: record.destination !== destination,
+        link: {
+            slug,
+            destination,
+            domain: record.domain || null,
+            path: record.domain ? "/" + slug : "/go/" + slug,
+            shortUrl: record.domain ? "https://" + record.domain + "/" + slug : null,
+            createdAt: record.createdAt,
+            updatedAt
+        }
+    };
+}
+
 module.exports = async function handler(req, res) {
     res.setHeader("Cache-Control", "no-store");
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.setHeader("X-Content-Type-Options", "nosniff");
 
-    if (req.method !== "GET") {
-        res.setHeader("Allow", "GET");
+    if (!["GET", "PATCH"].includes(req.method)) {
+        res.setHeader("Allow", "GET, PATCH");
         json(res, 405, { error: "Method not allowed" });
         return;
     }
@@ -163,6 +267,12 @@ module.exports = async function handler(req, res) {
         const user = await getCurrentUser(req);
         if (!user) {
             json(res, 401, { error: "Hãy đăng nhập để xem dashboard.", requiresAuth: true });
+            return;
+        }
+
+        if (req.method === "PATCH") {
+            const data = await updateDestination(req, user);
+            json(res, 200, data);
             return;
         }
 
