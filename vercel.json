@@ -239,6 +239,10 @@
       "destination": "/api/shorten?slug=:slug"
     },
     {
+      "source": "/media-kit",
+      "destination": "/media-kit/index.html"
+    },
+    {
       "source": "/:profile([pP][rR][oO][fF][iI][lL][eE])",
       "destination": "/profile"
     },
