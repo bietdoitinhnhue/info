@@ -14,4 +14,6 @@
   }
   buttons.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.langBtn)));
   let saved='en';try{saved=localStorage.getItem('portfolioLang')||'en'}catch(e){}apply(saved==='vi'?'vi':'en');
+  const runWorkflowImg=document.querySelector('#runbylinh img[alt="Runbylinh automated workshop workflow"]');
+  if(runWorkflowImg)runWorkflowImg.src='/profile/portfolio/assets/Runbylinh_WF.webp';
 })();
