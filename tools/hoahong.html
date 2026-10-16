@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Tính Thưởng & Mô Phỏng Thu Nhập - Brand Global</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        /* Custom scrollbar */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 6px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 6px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Custom Range Slider */
+        input[type=range].custom-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            height: 24px;
+        }
+        input[type=range].custom-slider::-webkit-slider-runnable-track {
+            height: 12px;
+            border-radius: 999px;
+        }
+        input[type=range].custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #1d4ed8;
+            box-shadow: 0 2px 8px rgba(29, 78, 216, 0.45);
+            margin-top: -6px;
+            transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type=range].custom-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            border-color: #1e3a8a;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.6);
+        }
+        input[type=range].custom-slider::-moz-range-thumb {
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #1d4ed8;
+            box-shadow: 0 2px 8px rgba(29, 78, 216, 0.45);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+        .policy-box {
+            background-color: #ebf3fc;
+            border: 1.5px solid #2563eb;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-[#0f172a] via-[#1e3a8a] to-[#1d4ed8] text-white shadow-lg sticky top-0 z-30 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center space-x-3.5">
+                <div class="bg-gradient-to-br from-blue-400 to-indigo-600 p-2.5 rounded-xl shadow-md border border-white/20 flex items-center justify-center">
+                    <i class="fa-solid fa-earth-americas text-xl text-white"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg sm:text-xl font-black tracking-tight uppercase">Brand Global</h1>
+                        <span class="text-[11px] font-bold bg-amber-400 text-slate-950 px-2 py-0.5 rounded-md uppercase tracking-wider">Max $100M</span>
+                    </div>
+                    <p class="text-xs text-blue-200 font-medium">Dashboard Tính Thưởng & Mô Phỏng Thu Nhập Thực Nhận</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Tabs -->
+            <div class="flex bg-slate-900/60 p-1 rounded-xl border border-white/15 self-start md:self-auto backdrop-blur-md">
+                <button onclick="switchTab('calculator')" id="tab-btn-calculator" class="flex items-center space-x-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-white text-blue-950 shadow">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button onclick="switchTab('simulation')" id="tab-btn-simulation" class="flex items-center space-x-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-blue-100 hover:text-white">
+                    <i class="fa-solid fa-table-cells"></i>
+                    <span>Demo</span>
+                </button>
+                <button onclick="switchTab('policy')" id="tab-btn-policy" class="flex items-center space-x-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-blue-100 hover:text-white">
+                    <i class="fa-solid fa-file-shield"></i>
+                    <span>Chính sách</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: CALCULATOR DASHBOARD -->
+        <section id="tab-calculator" class="space-y-6">
+            
+            <!-- Top KPI Summary Banner -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                
+                <!-- Main Hero Card: Final Take-Home & Total Income = Income + Bonus -->
+                <div class="lg:col-span-8 bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#1d4ed8] rounded-3xl p-6 sm:p-7 text-white shadow-xl relative overflow-hidden border border-blue-400/20 flex flex-col justify-between">
+                    <div class="absolute -right-8 -bottom-10 opacity-10 pointer-events-none">
+                        <i class="fa-solid fa-sack-dollar text-[150px]"></i>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-white/15 relative z-10">
+                        <div class="flex items-center gap-2">
+                            <span id="hero-tier-badge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/30 border border-blue-300/40 text-blue-100">
+                                Mục 3b: Doanh thu ≥ $50,000
+                            </span>
+                            <span id="hero-bonus-pill" class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-400/20 border border-emerald-300/40 text-emerald-200 flex items-center gap-1">
+                                <i class="fa-solid fa-bolt"></i> Đạt Bonus 0.25%
+                            </span>
+                        </div>
+                        <div class="text-xs text-blue-200 font-medium">
+                            Tỷ giá áp dụng: <strong class="text-white" id="hero-rate-display">26,000 ₫/USD</strong>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-5 items-center relative z-10">
+                        <!-- Total Income USD -->
+                        <div class="md:col-span-5 space-y-1 md:border-r border-white/15 md:pr-6">
+                            <div class="text-xs font-bold uppercase tracking-wider text-blue-200 flex items-center gap-1.5">
+                                <i class="fa-solid fa-award text-amber-300"></i> Tổng thu nhập (USD)
+                            </div>
+                            <div class="text-4xl sm:text-5xl font-black tracking-tight text-white" id="result-total-usd">$9,250</div>
+                            <div class="text-xs sm:text-sm text-blue-200 font-semibold" id="result-effective-rate">
+                                Tương đương 1.85% Net Revenue
+                            </div>
+                        </div>
+
+                        <!-- Final Take-Home VND -->
+                        <div class="md:col-span-7 space-y-1.5">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-wallet"></i> Thu Nhập Thực Nhận (VNĐ)
+                                </span>
+                                <span id="payout-method-badge" class="text-[11px] font-extrabold bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-md shadow-sm">
+                                    Nhận theo Tổng thu nhập = Income + Bonus
+                                </span>
+                            </div>
+                            <div class="text-3xl sm:text-4xl font-black text-amber-300 tracking-tight" id="result-final-takehome">
+                                240,500,000 ₫
+                            </div>
+                            <p class="text-xs text-blue-100 font-medium" id="result-comparison-note">
+                                Cao hơn Lương cứng (12,000,000 ₫) một khoản là +228,500,000 ₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Mini breakdown bar inside Hero -->
+                    <div class="bg-slate-950/40 rounded-2xl p-3.5 border border-white/10 relative z-10">
+                        <div class="flex flex-wrap items-center justify-between text-xs gap-2 mb-2">
+                            <div class="flex items-center gap-4">
+                                <span class="flex items-center gap-1.5 font-bold text-blue-200">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-blue-400 inline-block"></span>
+                                    <span id="bar-label-income">INCOME [1]: $8,000 (86.5%)</span>
+                                </span>
+                                <span class="flex items-center gap-1.5 font-bold text-emerald-300" id="bar-label-bonus-wrap">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block" id="bar-dot-bonus"></span>
+                                    <span id="bar-label-bonus">BONUS [2]: $1,250 (13.5%)</span>
+                                </span>
+                            </div>
+                            <span class="text-[11px] text-slate-300 font-medium" id="bar-right-hint">Ads < 27% • Kích hoạt tối đa quyền lợi</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                            <div id="visual-bar-income" class="bg-blue-400 h-full transition-all duration-300" style="width: 86.5%"></div>
+                            <div id="visual-bar-bonus" class="bg-emerald-400 h-full transition-all duration-300" style="width: 13.5%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Status Card: Bonus 27% Cut-off Monitor -->
+                <div id="cutoff-monitor-card" class="lg:col-span-4 bg-white rounded-3xl p-6 shadow-sm border-2 border-emerald-500/30 flex flex-col justify-between relative overflow-hidden">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Trạm Kiểm Soát Bonus [2]</span>
+                            <span id="monitor-status-tag" class="px-2.5 py-0.5 text-xs font-extrabold rounded-full bg-emerald-100 text-emerald-800">
+                                AN TOÀN (< 27%)
+                            </span>
+                        </div>
+                        <h3 class="text-base font-extrabold text-slate-800" id="monitor-headline">
+                            Bạn đang giữ được khoản Bonus +$1,250
+                        </h3>
+                        <p class="text-xs text-slate-500 leading-relaxed" id="monitor-desc">
+                            Chi phí MKT (Spent Ads) hiện tại là <strong>20.0%</strong>, thấp hơn ngưỡng cắt <strong>27.0%</strong> là <strong>7.0%</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Visual Thermometer for 27% Threshold -->
+                    <div class="my-4 space-y-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80">
+                        <div class="flex justify-between text-[11px] font-bold">
+                            <span class="text-slate-500">Spent Ads: <strong class="text-slate-800" id="gauge-current-pct">20.0%</strong></span>
+                            <span class="text-rose-600"><i class="fa-solid fa-scissors mr-1"></i>Mốc cắt: 27.0%</span>
+                        </div>
+                        <div class="relative h-3.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                            <div class="absolute inset-y-0 left-0 bg-emerald-500/20" style="width: 67.5%"></div>
+                            <div id="gauge-fill-bar" class="h-full bg-emerald-500 rounded-full transition-all duration-150" style="width: 50%"></div>
+                            <div class="absolute inset-y-0 left-[67.5%] w-0.5 bg-rose-600 z-10"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-semibold text-slate-400">
+                            <span>0.1%</span>
+                            <span class="text-emerald-600">Tối ưu (≤25%)</span>
+                            <span class="text-rose-600 font-bold">27% Cắt</span>
+                            <span>40%+</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <span class="text-slate-500 font-medium">Ngân sách Ads tối đa để giữ Bonus:</span>
+                        <span class="font-extrabold text-slate-800" id="monitor-max-safe-ads">$134,500 (26.9%)</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Main Interactive Workspace: Left Controls & Right Step-by-Step Math -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <!-- Left Column: Input Controls (7 cols) -->
+                <div class="lg:col-span-7 bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-7 space-y-7">
+                    
+                    <!-- Control 1: Net Revenue ($0 to $100,000,000) -->
+                    <div class="space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <label for="net-revenue" class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 inline-flex items-center justify-center text-xs font-black">1</span>
+                                    <span>NET REVENUE (Doanh thu thuần)</span>
+                                </label>
+                                <p class="text-xs text-slate-500 pl-8">Hỗ trợ quy mô tối đa lên tới <strong>$100,000,000 ($100M)</strong></p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-extrabold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-xl" id="rev-short-badge">
+                                    $500K USD
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Revenue Number Input with Formatted Display -->
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-1">
+                            <div class="sm:col-span-7 relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 font-extrabold text-lg">$</span>
+                                <input type="text" inputmode="numeric" id="net-revenue" value="500,000" 
+                                    class="w-full pl-9 pr-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-2xl font-black text-lg text-slate-900 focus:bg-white focus:border-blue-600 outline-none transition"
+                                    oninput="handleRevenueInput(this.value)">
+                            </div>
+                            <div class="sm:col-span-5 bg-blue-50/70 border-2 border-blue-200/80 rounded-2xl px-4 py-2 flex flex-col justify-center">
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-blue-600">Quy đổi VNĐ (Tỷ giá 26,000)</span>
+                                <span class="text-sm sm:text-base font-black text-blue-950 truncate" id="rev-vnd-preview">13,000,000,000 ₫</span>
+                            </div>
+                        </div>
+
+                        <!-- Non-linear Slider with Vivid Colored Bar -->
+                        <div class="pt-3 space-y-2">
+                            <div class="relative flex items-center">
+                                <div class="w-full h-3.5 rounded-full bg-slate-200 overflow-hidden p-0.5 shadow-inner pointer-events-none">
+                                    <div class="w-full h-full rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-emerald-500 opacity-30"></div>
+                                </div>
+                                <div id="rev-slider-fill" class="absolute left-0 h-3.5 rounded-l-full bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 pointer-events-none transition-all duration-75 shadow-sm" style="width: 44%;"></div>
+                                <input type="range" id="net-revenue-slider" min="0" max="1000" step="1" value="440" 
+                                    class="w-full custom-slider absolute inset-x-0 z-10"
+                                    oninput="handleRevenueSlider(this.value)">
+                            </div>
+                            <div class="flex justify-between text-[10px] sm:text-[11px] text-slate-500 font-extrabold px-0.5">
+                                <span>$0</span>
+                                <span class="text-violet-600">$50K (Mốc 3b)</span>
+                                <span class="text-blue-600">$500K</span>
+                                <span class="text-cyan-700">$5M</span>
+                                <span class="text-teal-700">$25M</span>
+                                <span class="text-emerald-700">$100M (Max)</span>
+                            </div>
+                        </div>
+
+                        <!-- Quick Revenue Chips -->
+                        <div class="pt-1">
+                            <div class="text-[11px] font-bold text-slate-400 mb-2">Chọn nhanh quy mô Net Revenue:</div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="setQuickRevenue(15000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$15K</button>
+                                <button onclick="setQuickRevenue(35000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$35K</button>
+                                <button onclick="setQuickRevenue(50000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$50K</button>
+                                <button onclick="setQuickRevenue(100000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$100K</button>
+                                <button onclick="setQuickRevenue(500000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-blue-600 bg-blue-600 text-white shadow-sm transition">$500K</button>
+                                <button onclick="setQuickRevenue(1000000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$1M</button>
+                                <button onclick="setQuickRevenue(5000000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$5M</button>
+                                <button onclick="setQuickRevenue(10000000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$10M</button>
+                                <button onclick="setQuickRevenue(50000000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">$50M</button>
+                                <button onclick="setQuickRevenue(100000000)" class="rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 transition">$100M</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Control 2: Spent Ads / Marketing Cost -->
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <label for="ads-percent" class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 inline-flex items-center justify-center text-xs font-black">2</span>
+                                    <span>SPENT ADS (Chi phí Marketing)</span>
+                                </label>
+                                <p class="text-xs text-slate-500 pl-8">Độ chia chi tiết <strong>0,1%</strong> — Chạm ngưỡng <strong>27,0%</strong> là cắt hoàn toàn Bonus [2]</p>
+                            </div>
+                            <span id="ads-zone-badge" class="px-3 py-1 rounded-xl text-xs font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                20.0% • Có Bonus [2]
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-3.5 rounded-2xl border-2 border-slate-200 focus-within:border-blue-600 focus-within:bg-white transition">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-slate-500">Tỷ lệ % Spent Ads / Net Rev</span>
+                                    <span class="text-[10px] font-bold text-blue-600">Bước nhảy 0.1%</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="stepAdsPercent(-0.1)" class="w-9 h-9 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold flex items-center justify-center shadow-sm active:scale-95 transition">
+                                        <i class="fa-solid fa-minus text-xs"></i>
+                                    </button>
+                                    <div class="relative flex-grow">
+                                        <input type="number" id="ads-percent" value="20.0" min="0.1" max="100" step="0.1" 
+                                            class="w-full pr-7 pl-3 py-1.5 bg-transparent font-black text-xl text-center text-slate-900 outline-none"
+                                            oninput="handleAdsPercentInput(this.value)">
+                                        <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 text-slate-400 font-extrabold">%</span>
+                                    </div>
+                                    <button type="button" onclick="stepAdsPercent(0.1)" class="w-9 h-9 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold flex items-center justify-center shadow-sm active:scale-95 transition">
+                                        <i class="fa-solid fa-plus text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-2xl border-2 border-slate-200 focus-within:border-blue-600 focus-within:bg-white transition flex flex-col justify-between">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-slate-500">Chi phí MKT quy đổi ($)</span>
+                                    <span class="text-[10px] font-extrabold text-blue-600" id="ads-vnd-sub">2,600,000,000 ₫</span>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-slate-400 font-extrabold text-lg">$</span>
+                                    <input type="text" inputmode="numeric" id="ads-dollar" value="100,000" 
+                                        class="w-full pl-7 pr-2 py-1.5 bg-transparent font-black text-xl text-slate-900 outline-none"
+                                        oninput="handleAdsDollarInput(this.value)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 space-y-2">
+                            <div class="relative flex items-center">
+                                <div class="w-full h-3.5 rounded-full overflow-hidden flex pointer-events-none shadow-inner border border-slate-300/60">
+                                    <div class="h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400" style="width: 77.14%"></div>
+                                    <div class="h-full bg-gradient-to-r from-rose-500 to-red-700" style="width: 22.86%"></div>
+                                </div>
+                                <div class="absolute left-[77.14%] -top-1 -bottom-1 w-0.5 bg-slate-900 z-10 pointer-events-none"></div>
+                                <input type="range" id="ads-percent-slider" min="0.1" max="35.0" step="0.1" value="20.0" 
+                                    class="w-full custom-slider absolute inset-x-0 z-20"
+                                    oninput="handleAdsPercentInput(this.value)">
+                            </div>
+
+                            <div class="flex justify-between items-center text-[11px] font-bold text-slate-400 pt-1">
+                                <button onclick="handleAdsPercentInput(0.1)" class="hover:text-emerald-700 transition">0.1% (Min)</button>
+                                <button onclick="handleAdsPercentInput(15.0)" class="hover:text-emerald-700 transition">15.0%</button>
+                                <button onclick="handleAdsPercentInput(20.0)" class="text-emerald-700 hover:underline transition">20.0% (Mẫu)</button>
+                                <button onclick="handleAdsPercentInput(26.9)" class="text-amber-600 hover:underline transition">26.9% (Sát trần)</button>
+                                <button onclick="handleAdsPercentInput(27.0)" class="text-rose-600 font-extrabold hover:underline transition">27.0% (Cắt Bonus)</button>
+                                <button onclick="handleAdsPercentInput(35.0)" class="hover:text-rose-700 transition">35.0%</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Control 3: Exchange Rate & Base Salary -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                                Tỷ giá USD / VNĐ (Mặc định 26,000)
+                            </label>
+                            <div class="relative">
+                                <input type="text" inputmode="numeric" id="exchange-rate" value="26,000" 
+                                    class="w-full pl-3.5 pr-12 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-extrabold text-slate-800 focus:bg-white focus:border-blue-600 outline-none"
+                                    oninput="handleExchangeRateInput(this.value)">
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-xs text-slate-400 font-bold">VNĐ</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                                Lương cứng cố định (Mục 3c)
+                            </label>
+                            <div class="px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-sm font-extrabold text-slate-600 flex items-center justify-between">
+                                <span>12,000,000</span>
+                                <span class="text-xs text-slate-400 font-bold">VNĐ / tháng</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Visual Equation & Breakdown (5 cols) -->
+                <div class="lg:col-span-5 space-y-5">
+                    
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 space-y-5">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+                            <h3 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-diagram-project text-blue-600"></i>
+                                <span>Diễn Giải Công Thức Trực Quan</span>
+                            </h3>
+                            <span id="applied-formula-tag" class="text-xs font-extrabold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                                Mục 3b (≥ $50K)
+                            </span>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                            <div class="flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                <span>Bước 1: Doanh thu sau trừ MKT Cost</span>
+                                <span id="bd-margin-pct" class="text-slate-600">Còn lại 80.0%</span>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-2 pt-1">
+                                <div class="text-xs sm:text-sm font-bold text-slate-600">
+                                    <span id="bd-net-rev" class="text-slate-900">$500,000</span> − <span id="bd-ads-cost" class="text-rose-600">$100,000</span>
+                                </div>
+                                <div class="text-xl font-black text-slate-900" id="bd-net-after-ads">$400,000</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 (Mode 3b) -->
+                        <div id="breakdown-3b" class="space-y-4">
+                            <div class="p-4 rounded-2xl border-2 border-blue-100 bg-blue-50/30 space-y-1.5">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-black uppercase tracking-wider px-2 py-0.5 bg-blue-600 text-white rounded-md">INCOME [1]</span>
+                                    <span class="text-xs font-bold text-blue-700">Hệ số cố định: 2%</span>
+                                </div>
+                                <div class="flex items-baseline justify-between pt-1">
+                                    <span class="text-xs font-semibold text-slate-600" id="bd-income1-formula">= $400,000 × 2%</span>
+                                    <span class="text-2xl font-black text-blue-900" id="bd-income1-val">$8,000</span>
+                                </div>
+                                <div class="text-[11px] font-semibold text-slate-400 text-right" id="bd-income1-vnd">≈ 208.000.000 ₫</div>
+                            </div>
+
+                            <div id="bonus2-card" class="p-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/40 space-y-1.5 transition-all">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-black uppercase tracking-wider px-2 py-0.5 bg-emerald-600 text-white rounded-md" id="bonus2-pill-title">BONUS [2]</span>
+                                    <span id="bonus2-status-badge" class="text-xs font-extrabold text-emerald-700 flex items-center gap-1">
+                                        <i class="fa-solid fa-circle-check"></i> Đạt chuẩn (< 27% Ads)
+                                    </span>
+                                </div>
+                                <div class="flex items-baseline justify-between pt-1">
+                                    <span class="text-xs font-semibold text-slate-600" id="bd-bonus2-formula">= $500,000 × 0,25%</span>
+                                    <span class="text-2xl font-black text-emerald-700" id="bd-bonus2-val">$1,250</span>
+                                </div>
+                                <div class="text-[11px] font-semibold text-slate-500 flex justify-between items-center pt-0.5">
+                                    <span id="bd-bonus2-loss-warning" class="text-emerald-700 font-bold">Đang nhận đủ 100% Bonus</span>
+                                    <span id="bd-bonus2-vnd">≈ 32.500.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 (Mode 3a) -->
+                        <div id="breakdown-3a" class="hidden space-y-4">
+                            <div class="p-4 rounded-2xl border-2 border-purple-200 bg-purple-50/30 space-y-1.5">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-black uppercase tracking-wider px-2 py-0.5 bg-purple-700 text-white rounded-md">THƯỞNG CÔNG THỨC (3a)</span>
+                                    <span id="bd-3a-rate-badge" class="text-xs font-extrabold text-purple-800">Hệ số A% = 7,5%</span>
+                                </div>
+                                <div class="flex items-baseline justify-between pt-1">
+                                    <span class="text-xs font-semibold text-slate-600" id="bd-3a-formula">= ($15,000 - $3,000) × 7,5%</span>
+                                    <span class="text-2xl font-black text-purple-900" id="bd-3a-raw-val">$900</span>
+                                </div>
+                            </div>
+
+                            <div id="bd-3a-min-card" class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold text-slate-500">MỨC TỐI THIỂU CỦA MỐC</span>
+                                    <span id="bd-3a-min-status" class="text-xs font-bold text-slate-500">Đối chiếu Mục 3a</span>
+                                </div>
+                                <div class="flex items-baseline justify-between pt-1">
+                                    <span class="text-xs text-slate-500">Lấy số cao hơn giữa công thức & mức sàn</span>
+                                    <span class="text-xl font-black text-slate-800" id="bd-3a-min-val">$563</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="what-if-cutoff-box" class="p-4 rounded-2xl bg-amber-50/90 border border-amber-200/90 text-xs space-y-1.5">
+                            <div class="font-extrabold text-amber-900 flex items-center gap-1.5">
+                                <i class="fa-solid fa-scale-balanced text-amber-600"></i>
+                                <span>Góc nhìn đối chiếu ngưỡng cắt 27%:</span>
+                            </div>
+                            <p class="text-amber-800 leading-relaxed" id="what-if-cutoff-text">
+                                Nếu Spent Ads chạm <strong>27.0%</strong>, bạn sẽ bị cắt ngay <strong>$1,250</strong> (≈ <strong>32.500.000 ₫</strong>) tiền Bonus [2].
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: DEMO (SIMULATION TABLES) -->
+        <section id="tab-simulation" class="hidden space-y-8">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
+                <div class="border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider px-3 py-1 bg-[#1e4f9c] text-white rounded-lg">4. BẢNG MÔ PHỎNG THU NHẬP</span>
+                        <p class="text-sm text-slate-600 mt-2">
+                            Mô phỏng từ mốc cơ bản đến <strong>$100.000.000 ($100M)</strong>. 
+                            <strong class="text-blue-700">Nhấp vào bất kỳ ô số tiền nào để nạp kịch bản đó vào Dashboard tính toán.</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Table 1: Under $50,000 -->
+                <div class="space-y-3">
+                    <h3 class="text-base font-extrabold text-[#1e4f9c] flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Doanh thu dưới $50.000 — Áp dụng mục 3a</span>
+                    </h3>
+                    <div class="table-container overflow-x-auto rounded-2xl border border-slate-300">
+                        <table class="w-full text-sm text-center border-collapse">
+                            <thead>
+                                <tr class="bg-[#1e4f9c] text-white font-bold">
+                                    <th class="py-3 px-4 text-left border border-blue-800 min-w-[160px]">Net Revenue ($)</th>
+                                    <th class="py-3 px-4 border border-blue-800">5.000</th>
+                                    <th class="py-3 px-4 border border-blue-800">10.000</th>
+                                    <th class="py-3 px-4 border border-blue-800">20.000</th>
+                                    <th class="py-3 px-4 border border-blue-800">30.000</th>
+                                    <th class="py-3 px-4 border border-blue-800">40.000</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sim-table-under50k" class="divide-y divide-slate-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Table 2: $50,000 up to $100M -->
+                <div class="space-y-3 pt-4">
+                    <h3 class="text-base font-extrabold text-[#1e4f9c] flex items-center gap-2">
+                        <i class="fa-solid fa-rocket"></i>
+                        <span>Doanh thu từ $50.000 đến $100.000.000 ($100M) — Áp dụng mục 3b</span>
+                    </h3>
+                    <div class="table-container overflow-x-auto rounded-2xl border border-slate-300">
+                        <table class="w-full text-sm text-center border-collapse">
+                            <thead>
+                                <tr class="bg-[#1e4f9c] text-white font-bold">
+                                    <th class="py-3 px-4 text-left border border-blue-800 min-w-[170px]">Net Revenue ($)</th>
+                                    <th class="py-3 px-3 border border-blue-800">50.000</th>
+                                    <th class="py-3 px-3 border border-blue-800">100.000</th>
+                                    <th class="py-3 px-3 border border-blue-800">300.000</th>
+                                    <th class="py-3 px-3 border border-blue-800 bg-blue-900">500.000</th>
+                                    <th class="py-3 px-3 border border-blue-800">1.000.000</th>
+                                    <th class="py-3 px-3 border border-blue-800 bg-indigo-900">10.000.000</th>
+                                    <th class="py-3 px-3 border border-blue-800 bg-slate-900 text-amber-300">100.000.000</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sim-table-over50k" class="divide-y divide-slate-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-[#fdf8ed] border-2 border-[#d9b675] rounded-2xl p-4 text-sm text-slate-800 space-y-1.5">
+                    <p>
+                        <strong>Quy tắc vùng màu:</strong> Từ mức Spent Ads <strong>27,0%</strong> trở lên, khoản <strong>Bonus [2] (0,25% Net Revenue)</strong> bị cắt hoàn toàn (= $0).
+                    </p>
+                    <p>
+                        <strong>Insight:</strong> Chi phí Ads Expenses / Net Revenue theo hoạt động thông thường của Doanh nghiệp dao động trong khoảng <strong>25 - 30%</strong>. Việc kéo giảm từ 27% xuống dưới 27% giúp giữ trọn khoản Bonus 0,25% tổng doanh thu.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: CHÍNH SÁCH (POLICY) -->
+        <section id="tab-policy" class="hidden space-y-8">
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-md border border-slate-200 p-6 sm:p-12 space-y-8">
+                <div class="text-center border-b-2 border-[#1e4f9c] pb-5">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1e4f9c] tracking-wide">CHÍNH SÁCH THƯỞNG</h2>
+                    <p class="text-sm text-slate-500 mt-1">Áp dụng cho thành viên phụ trách brand global</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-[#1e4f9c] text-white font-bold px-4 py-2 rounded">1. MỤC ĐÍCH</div>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-1.5 pl-2">
+                        <li>Tạo động lực làm việc cho thành viên, gắn lợi ích cá nhân với kết quả kinh doanh chung của Doanh nghiệp.</li>
+                        <li>Đảm bảo minh bạch, rõ ràng và kịp thời trong cách tính thưởng.</li>
+                        <li>Khuyến khích thành viên chủ động trong việc tối ưu hiệu quả quảng cáo và kiểm soát chi phí.</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-[#1e4f9c] text-white font-bold px-4 py-2 rounded">2. ĐỊNH NGHĨA</div>
+                    <div class="overflow-x-auto rounded border border-slate-300">
+                        <table class="w-full text-sm text-left border-collapse">
+                            <thead>
+                                <tr class="bg-[#1e4f9c] text-white">
+                                    <th class="p-3 border border-slate-300 w-1/3">Thuật ngữ</th>
+                                    <th class="p-3 border border-slate-300">Giải thích</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-300">
+                                <tr class="bg-slate-50">
+                                    <td class="p-3 font-bold border border-slate-300">Net Revenue (Doanh thu thuần)</td>
+                                    <td class="p-3 border border-slate-300">Doanh thu sau khi đã trừ đi chiết khấu hàng bán, giảm giá hàng bán, phí chuyển đổi ngân hàng/thanh toán, chi phí quà tặng để bù refund.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold border border-slate-300">Marketing Expenses (Spent Ads)</td>
+                                    <td class="p-3 border border-slate-300">Tổng chi phí quảng cáo trực tiếp trên các nền tảng (Facebook, Google, YouTube, TikTok...) cùng với chi phí Marketing/Branding được hai bên thống nhất.</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="p-3 font-bold border border-slate-300">Income [1]</td>
+                                    <td class="p-3 border border-slate-300">Khoản thưởng dựa trên hiệu quả doanh thu sau khi trừ chi phí quảng cáo.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold border border-slate-300">Bonus [2]</td>
+                                    <td class="p-3 border border-slate-300">Khoản thưởng bổ sung khi đạt các mục tiêu cốt lõi đề ra (Net Revenue ≥ $50k và Spent Ads &lt; 27%).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="space-y-5">
+                    <div class="bg-[#1e4f9c] text-white font-bold px-4 py-2 rounded">3. CÁCH TÍNH THƯỞNG</div>
+                    
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-[#1e4f9c] text-base">3a. DOANH THU DƯỚI $50.000</h4>
+                        <div class="policy-box p-3.5 rounded text-center font-bold text-[#1e3a8a]">
+                            TỔNG THU NHẬP = ( NET REVENUE − MARKETING COST ) × A%
+                        </div>
+                        <div class="overflow-x-auto rounded border border-slate-300">
+                            <table class="w-full text-sm text-center border-collapse">
+                                <thead>
+                                    <tr class="bg-[#1e4f9c] text-white">
+                                        <th class="p-2.5 text-left border border-slate-300">Mốc doanh thu (Net Revenue)</th>
+                                        <th class="p-2.5 border border-slate-300">A%</th>
+                                        <th class="p-2.5 border border-slate-300">Mức Tối Thiểu</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-300">
+                                    <tr><td class="p-2.5 text-left border border-slate-300">Dưới $10.000</td><td class="p-2.5 font-bold border border-slate-300">7,5%</td><td class="p-2.5 border border-slate-300">—</td></tr>
+                                    <tr class="bg-slate-50"><td class="p-2.5 text-left border border-slate-300">Từ $10.000 đến dưới $20.000</td><td class="p-2.5 font-bold border border-slate-300">7,5%</td><td class="p-2.5 border border-slate-300">$563</td></tr>
+                                    <tr><td class="p-2.5 text-left border border-slate-300">Từ $20.000 đến dưới $30.000</td><td class="p-2.5 font-bold border border-slate-300">3,9%</td><td class="p-2.5 border border-slate-300">$585</td></tr>
+                                    <tr class="bg-slate-50"><td class="p-2.5 text-left border border-slate-300">Từ $30.000 đến dưới $40.000</td><td class="p-2.5 font-bold border border-slate-300">2,7%</td><td class="p-2.5 border border-slate-300">$608</td></tr>
+                                    <tr><td class="p-2.5 text-left border border-slate-300">Từ $40.000 đến dưới $50.000</td><td class="p-2.5 font-bold border border-slate-300">2,3%</td><td class="p-2.5 border border-slate-300">$608</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <h4 class="font-bold text-[#1e4f9c] text-base">3b. DOANH THU TỪ $50.000 TRỞ LÊN</h4>
+                        <div class="policy-box p-3.5 rounded text-center font-bold text-[#1e3a8a] space-y-1">
+                            <div>TỔNG THU NHẬP = INCOME [1] + BONUS [2]</div>
+                            <div class="text-xs font-semibold text-blue-800">INCOME [1] = ( NET REVENUE − MARKETING COST ) × 2% &nbsp;|&nbsp; BONUS [2] = NET REVENUE × 0,25% (khi Ads &lt; 27%)</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <h4 class="font-bold text-[#1e4f9c] text-base">3c. ĐỐI CHIẾU VỚI LƯƠNG CỨNG</h4>
+                        <div class="policy-box p-3.5 rounded text-center font-bold text-[#1e3a8a]">
+                            THU NHẬP THỰC NHẬN = MAX ( LƯƠNG CỨNG 12.000.000 VNĐ , TỔNG THU NHẬP = INCOME + BONUS QUY ĐỔI )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-10 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-2">
+            <span>Chính sách thưởng — Brand Global (Tỷ giá chuẩn: 26,000 VNĐ/USD • Max Net Revenue: $100M)</span>
+            <span>Độ nhạy Spent Ads: 0,1% • Ngưỡng cắt Bonus [2]: ≥ 27,0%</span>
+        </div>
+    </footer>
+
+    <script>
+        const BASE_SALARY_VND = 12000000;
+        const MAX_REVENUE = 100000000; // $100M
+
+        function parseFormattedNumber(str) {
+            if (typeof str === 'number') return str;
+            if (!str) return 0;
+            const cleaned = String(str).replace(/[^0-9.]/g, '');
+            return parseFloat(cleaned) || 0;
+        }
+
+        function formatComma(val) {
+            return Math.round(val).toLocaleString('en-US');
+        }
+
+        function formatUSD(val) {
+            return '$' + Math.round(val).toLocaleString('en-US');
+        }
+
+        function formatNumberVN(val) {
+            return Math.round(val).toLocaleString('en-US');
+        }
+
+        function formatShortUSD(val) {
+            if (val >= 1000000) {
+                const m = val / 1000000;
+                return '$' + (Number.isInteger(m) ? m : m.toFixed(2).replace(/\.00$/, '')) + 'M USD';
+            }
+            if (val >= 1000) {
+                const k = val / 1000;
+                return '$' + (Number.isInteger(k) ? k : k.toFixed(1).replace(/\.0$/, '')) + 'K USD';
+            }
+            return '$' + Math.round(val).toLocaleString('en-US') + ' USD';
+        }
+
+        function updateRevSliderFill(sliderPos) {
+            const pct = Math.max(0, Math.min(100, (sliderPos / 1000) * 100));
+            const fillEl = document.getElementById('rev-slider-fill');
+            if (fillEl) fillEl.style.width = `${pct}%`;
+        }
+
+        const SLIDER_BREAKPOINTS = [
+            { pos: 0,    rev: 0 },
+            { pos: 200,  rev: 50000 },      // $50K
+            { pos: 440,  rev: 500000 },     // $500K
+            { pos: 600,  rev: 2000000 },    // $2M
+            { pos: 750,  rev: 10000000 },   // $10M
+            { pos: 900,  rev: 50000000 },   // $50M
+            { pos: 1000, rev: 100000000 }   // $100M
+        ];
+
+        function sliderPosToRevenue(pos) {
+            const p = Math.max(0, Math.min(1000, parseFloat(pos) || 0));
+            for (let i = 0; i < SLIDER_BREAKPOINTS.length - 1; i++) {
+                const start = SLIDER_BREAKPOINTS[i];
+                const end = SLIDER_BREAKPOINTS[i + 1];
+                if (p >= start.pos && p <= end.pos) {
+                    const ratio = (p - start.pos) / (end.pos - start.pos);
+                    const raw = start.rev + ratio * (end.rev - start.rev);
+                    if (raw < 50000) return Math.round(raw / 500) * 500;
+                    if (raw < 1000000) return Math.round(raw / 5000) * 5000;
+                    if (raw < 10000000) return Math.round(raw / 50000) * 50000;
+                    return Math.round(raw / 500000) * 500000;
+                }
+            }
+            return MAX_REVENUE;
+        }
+
+        function revenueToSliderPos(rev) {
+            const r = Math.max(0, Math.min(MAX_REVENUE, parseFloat(rev) || 0));
+            for (let i = 0; i < SLIDER_BREAKPOINTS.length - 1; i++) {
+                const start = SLIDER_BREAKPOINTS[i];
+                const end = SLIDER_BREAKPOINTS[i + 1];
+                if (r >= start.rev && r <= end.rev) {
+                    const ratio = (r - start.rev) / (end.rev - start.rev);
+                    return Math.round(start.pos + ratio * (end.pos - start.pos));
+                }
+            }
+            return 1000;
+        }
+
+        function getTier3aConfig(rev) {
+            if (rev < 10000) {
+                return { rate: 0.075, rateText: '7,5%', min: 0 };
+            } else if (rev < 20000) {
+                return { rate: 0.075, rateText: '7,5%', min: 563 };
+            } else if (rev < 30000) {
+                return { rate: 0.039, rateText: '3,9%', min: 585 };
+            } else if (rev < 40000) {
+                return { rate: 0.027, rateText: '2,7%', min: 608 };
+            } else {
+                return { rate: 0.023, rateText: '2,3%', min: 608 };
+            }
+        }
+
+        function computeReward(netRev, adsCost, explicitAdsPct = null) {
+            const netAfterAds = Math.max(0, netRev - adsCost);
+            const adsRatio = explicitAdsPct !== null
+                ? explicitAdsPct
+                : (netRev > 0 ? (adsCost / netRev) * 100 : 0);
+
+            if (netRev < 50000) {
+                const cfg = getTier3aConfig(netRev);
+                const rawReward = Math.round(netAfterAds * cfg.rate);
+                const finalReward = netRev > 0 ? Math.max(rawReward, cfg.min) : 0;
+                return {
+                    mode: '3a',
+                    netRev,
+                    adsCost,
+                    adsRatio,
+                    netAfterAds,
+                    rateText: cfg.rateText,
+                    minFloor: cfg.min,
+                    rawReward,
+                    income1: finalReward,
+                    bonus2: 0,
+                    potentialBonus2: 0,
+                    qualifiesBonus2: false,
+                    totalUSD: finalReward
+                };
+            } else {
+                const income1 = netAfterAds * 0.02;
+                const potentialBonus2 = netRev * 0.0025;
+                const qualifiesBonus2 = (netRev >= 50000 && adsRatio < 26.9999);
+                const bonus2 = qualifiesBonus2 ? potentialBonus2 : 0;
+                const totalUSD = Math.round(income1 + bonus2);
+                return {
+                    mode: '3b',
+                    netRev,
+                    adsCost,
+                    adsRatio,
+                    netAfterAds,
+                    income1,
+                    bonus2,
+                    potentialBonus2,
+                    qualifiesBonus2,
+                    totalUSD
+                };
+            }
+        }
+
+        function handleRevenueInput(val) {
+            let rev = Math.max(0, Math.min(MAX_REVENUE, parseFormattedNumber(val)));
+            document.getElementById('net-revenue').value = formatComma(rev);
+            const sliderPos = revenueToSliderPos(rev);
+            document.getElementById('net-revenue-slider').value = sliderPos;
+            updateRevSliderFill(sliderPos);
+            const pct = parseFloat(document.getElementById('ads-percent').value) || 0;
+            document.getElementById('ads-dollar').value = formatComma(Math.round(rev * (pct / 100)));
+            highlightActiveRevChip(rev);
+            calculateAll();
+        }
+
+        function handleRevenueSlider(sliderVal) {
+            const rev = sliderPosToRevenue(sliderVal);
+            updateRevSliderFill(sliderVal);
+            document.getElementById('net-revenue').value = formatComma(rev);
+            const pct = parseFloat(document.getElementById('ads-percent').value) || 0;
+            document.getElementById('ads-dollar').value = formatComma(Math.round(rev * (pct / 100)));
+            highlightActiveRevChip(rev);
+            calculateAll();
+        }
+
+        function setQuickRevenue(rev) {
+            document.getElementById('net-revenue').value = formatComma(rev);
+            const sliderPos = revenueToSliderPos(rev);
+            document.getElementById('net-revenue-slider').value = sliderPos;
+            updateRevSliderFill(sliderPos);
+            const pct = parseFloat(document.getElementById('ads-percent').value) || 0;
+            document.getElementById('ads-dollar').value = formatComma(Math.round(rev * (pct / 100)));
+            highlightActiveRevChip(rev);
+            calculateAll();
+        }
+
+        function highlightActiveRevChip(rev) {
+            const buttons = document.querySelectorAll('.rev-chip');
+            buttons.forEach(btn => {
+                const text = btn.textContent.trim();
+                let chipVal = 0;
+                if (text.endsWith('M')) chipVal = parseFloat(text.replace('$', '').replace('M', '')) * 1000000;
+                if (text.endsWith('K')) chipVal = parseFloat(text.replace('$', '').replace('K', '')) * 1000;
+                if (chipVal === rev) {
+                    btn.className = 'rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-blue-600 bg-blue-600 text-white shadow-sm transition';
+                } else {
+                    btn.className = 'rev-chip px-2.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition';
+                }
+            });
+        }
+
+        function handleAdsPercentInput(val) {
+            let pct = parseFloat(val);
+            if (isNaN(pct)) pct = 0.1;
+            pct = Math.max(0.1, Math.min(100, Math.round(pct * 10) / 10));
+            document.getElementById('ads-percent').value = pct.toFixed(1);
+            document.getElementById('ads-percent-slider').value = Math.min(35.0, pct);
+            const rev = parseFormattedNumber(document.getElementById('net-revenue').value);
+            document.getElementById('ads-dollar').value = formatComma(Math.round(rev * (pct / 100)));
+            calculateAll();
+        }
+
+        function stepAdsPercent(delta) {
+            const current = parseFloat(document.getElementById('ads-percent').value) || 20.0;
+            const next = Math.max(0.1, Math.min(100, Math.round((current + delta) * 10) / 10));
+            handleAdsPercentInput(next);
+        }
+
+        function handleAdsDollarInput(val) {
+            const adsDollar = Math.max(0, parseFormattedNumber(val));
+            document.getElementById('ads-dollar').value = formatComma(adsDollar);
+            const rev = parseFormattedNumber(document.getElementById('net-revenue').value);
+            const pct = rev > 0 ? (adsDollar / rev) * 100 : 0.1;
+            const roundedPct = Math.max(0.1, Math.round(pct * 10) / 10);
+            document.getElementById('ads-percent').value = roundedPct.toFixed(1);
+            document.getElementById('ads-percent-slider').value = Math.min(35.0, roundedPct);
+            calculateAll();
+        }
+
+        function handleExchangeRateInput(val) {
+            const rate = Math.max(0, parseFormattedNumber(val));
+            document.getElementById('exchange-rate').value = rate > 0 ? formatComma(rate) : '';
+            calculateAll();
+        }
+
+        function setPreset(rev, adsPct) {
+            switchTab('calculator');
+            document.getElementById('net-revenue').value = formatComma(rev);
+            const sliderPos = revenueToSliderPos(rev);
+            document.getElementById('net-revenue-slider').value = sliderPos;
+            updateRevSliderFill(sliderPos);
+            const cleanPct = Math.max(0.1, Math.round(adsPct * 10) / 10);
+            document.getElementById('ads-percent').value = cleanPct.toFixed(1);
+            document.getElementById('ads-percent-slider').value = Math.min(35.0, cleanPct);
+            document.getElementById('ads-dollar').value = formatComma(Math.round(rev * (cleanPct / 100)));
+            highlightActiveRevChip(rev);
+            calculateAll();
+        }
+
+        function calculateAll() {
+            const netRev = Math.max(0, Math.min(MAX_REVENUE, parseFormattedNumber(document.getElementById('net-revenue').value)));
+            const adsPct = Math.max(0.1, parseFloat(document.getElementById('ads-percent').value) || 0.1);
+            const adsCost = Math.max(0, parseFormattedNumber(document.getElementById('ads-dollar').value));
+            const exchangeRate = Math.max(1, parseFormattedNumber(document.getElementById('exchange-rate').value) || 26000);
+
+            document.getElementById('rev-short-badge').textContent = formatShortUSD(netRev);
+            document.getElementById('rev-vnd-preview').textContent = `${formatNumberVN(netRev * exchangeRate)} ₫`;
+            document.getElementById('ads-vnd-sub').textContent = `${formatNumberVN(adsCost * exchangeRate)} ₫`;
+            document.getElementById('hero-rate-display').textContent = `${formatNumberVN(exchangeRate)} ₫/USD`;
+
+            const res = computeReward(netRev, adsCost, adsPct);
+
+            const monitorCard = document.getElementById('cutoff-monitor-card');
+            const monitorTag = document.getElementById('monitor-status-tag');
+            const monitorHeadline = document.getElementById('monitor-headline');
+            const monitorDesc = document.getElementById('monitor-desc');
+            const gaugeFill = document.getElementById('gauge-fill-bar');
+            const adsZoneBadge = document.getElementById('ads-zone-badge');
+            const heroBonusPill = document.getElementById('hero-bonus-pill');
+
+            document.getElementById('gauge-current-pct').textContent = `${res.adsRatio.toFixed(1)}%`;
+            const maxSafeAds = Math.floor(netRev * 0.269);
+            document.getElementById('monitor-max-safe-ads').textContent = `${formatUSD(maxSafeAds)} (26.9%)`;
+
+            const gaugeWidth = Math.min(100, (res.adsRatio / 40) * 100);
+            gaugeFill.style.width = `${gaugeWidth}%`;
+
+            if (netRev < 50000) {
+                monitorCard.className = 'lg:col-span-4 bg-white rounded-3xl p-6 shadow-sm border-2 border-purple-200 flex flex-col justify-between relative overflow-hidden';
+                monitorTag.className = 'px-2.5 py-0.5 text-xs font-extrabold rounded-full bg-purple-100 text-purple-800';
+                monitorTag.textContent = 'MỤC 3a (< $50K)';
+                monitorHeadline.textContent = 'Chưa tới mốc xét Bonus [2] ($50K)';
+                monitorDesc.innerHTML = `Ở mốc dưới $50.000, bạn nhận thưởng theo hệ số <strong>A% = ${res.rateText}</strong> trên lợi nhuận sau Ads.`;
+                gaugeFill.className = 'h-full bg-purple-500 rounded-full transition-all duration-150';
+                adsZoneBadge.className = 'px-3 py-1 rounded-xl text-xs font-extrabold bg-purple-100 text-purple-800 border border-purple-200';
+                adsZoneBadge.textContent = `${res.adsRatio.toFixed(1)}% • Mục 3a`;
+                heroBonusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-purple-400/20 border border-purple-300/40 text-purple-100';
+                heroBonusPill.innerHTML = `<i class="fa-solid fa-layer-group mr-1"></i> Hệ số A% = ${res.rateText}`;
+            } else if (res.qualifiesBonus2) {
+                const marginToCut = (27.0 - res.adsRatio).toFixed(1);
+                if (res.adsRatio <= 25.0) {
+                    monitorCard.className = 'lg:col-span-4 bg-white rounded-3xl p-6 shadow-sm border-2 border-emerald-500/40 flex flex-col justify-between relative overflow-hidden';
+                    monitorTag.className = 'px-2.5 py-0.5 text-xs font-extrabold rounded-full bg-emerald-100 text-emerald-800';
+                    monitorTag.textContent = 'TỐI ƯU (< 27%)';
+                    gaugeFill.className = 'h-full bg-emerald-500 rounded-full transition-all duration-150';
+                    adsZoneBadge.className = 'px-3 py-1 rounded-xl text-xs font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200';
+                } else {
+                    monitorCard.className = 'lg:col-span-4 bg-white rounded-3xl p-6 shadow-sm border-2 border-amber-500/50 flex flex-col justify-between relative overflow-hidden';
+                    monitorTag.className = 'px-2.5 py-0.5 text-xs font-extrabold rounded-full bg-amber-100 text-amber-800';
+                    monitorTag.textContent = 'SÁT NGƯỠNG CẮT (< 27%)';
+                    gaugeFill.className = 'h-full bg-amber-500 rounded-full transition-all duration-150';
+                    adsZoneBadge.className = 'px-3 py-1 rounded-xl text-xs font-extrabold bg-amber-100 text-amber-800 border border-amber-300';
+                }
+                monitorHeadline.textContent = `Giữ thành công Bonus +${formatUSD(res.bonus2)}`;
+                monitorDesc.innerHTML = `Spent Ads hiện tại là <strong>${res.adsRatio.toFixed(1)}%</strong>, còn cách ngưỡng cắt <strong>27.0%</strong> là <strong>${marginToCut}%</strong>.`;
+                adsZoneBadge.textContent = `${res.adsRatio.toFixed(1)}% • Đạt Bonus [2]`;
+                heroBonusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-400/20 border border-emerald-300/40 text-emerald-200 flex items-center gap-1';
+                heroBonusPill.innerHTML = `<i class="fa-solid fa-circle-check"></i> Đạt Bonus +${formatUSD(res.bonus2)}`;
+            } else {
+                monitorCard.className = 'lg:col-span-4 bg-rose-50/40 rounded-3xl p-6 shadow-sm border-2 border-rose-500 flex flex-col justify-between relative overflow-hidden';
+                monitorTag.className = 'px-2.5 py-0.5 text-xs font-extrabold rounded-full bg-rose-600 text-white';
+                monitorTag.textContent = 'ĐÃ CẮT BONUS (≥ 27%)';
+                monitorHeadline.textContent = `Đã mất ${formatUSD(res.potentialBonus2)} tiền Bonus [2]`;
+                monitorDesc.innerHTML = `Do Spent Ads (<strong>${res.adsRatio.toFixed(1)}%</strong>) chạm/vượt ngưỡng <strong>27.0%</strong>, khoản Bonus 0,25% bị cắt về <strong>$0</strong>. Chỉ cần kéo xuống <strong>26.9%</strong> để khôi phục!`;
+                gaugeFill.className = 'h-full bg-rose-600 rounded-full transition-all duration-150';
+                adsZoneBadge.className = 'px-3 py-1 rounded-xl text-xs font-extrabold bg-rose-100 text-rose-700 border border-rose-300';
+                adsZoneBadge.textContent = `${res.adsRatio.toFixed(1)}% • Đã cắt Bonus`;
+                heroBonusPill.className = 'px-3 py-1 rounded-full text-xs font-extrabold bg-rose-500/30 border border-rose-300/50 text-rose-200 flex items-center gap-1';
+                heroBonusPill.innerHTML = `<i class="fa-solid fa-scissors"></i> Mất Bonus (Ads ≥ 27%)`;
+            }
+
+            document.getElementById('bd-net-rev').textContent = formatUSD(netRev);
+            document.getElementById('bd-ads-cost').textContent = formatUSD(adsCost);
+            document.getElementById('bd-net-after-ads').textContent = formatUSD(res.netAfterAds);
+            const remainPct = Math.max(0, 100 - res.adsRatio).toFixed(1);
+            document.getElementById('bd-margin-pct').textContent = `Còn lại ${remainPct}%`;
+
+            const heroTierBadge = document.getElementById('hero-tier-badge');
+            const formulaTag = document.getElementById('applied-formula-tag');
+
+            if (res.mode === '3b') {
+                heroTierBadge.textContent = 'Mục 3b: Doanh thu ≥ $50.000';
+                formulaTag.textContent = 'Mục 3b (≥ $50K)';
+                document.getElementById('breakdown-3b').classList.remove('hidden');
+                document.getElementById('breakdown-3a').classList.add('hidden');
+
+                document.getElementById('bd-income1-val').textContent = formatUSD(res.income1);
+                document.getElementById('bd-income1-formula').textContent = `= ${formatUSD(res.netAfterAds)} × 2%`;
+                document.getElementById('bd-income1-vnd').textContent = `≈ ${formatNumberVN(res.income1 * exchangeRate)} ₫`;
+
+                const bonusCard = document.getElementById('bonus2-card');
+                const bonusBadge = document.getElementById('bonus2-status-badge');
+                const bonusTitle = document.getElementById('bonus2-pill-title');
+                const bonusWarn = document.getElementById('bd-bonus2-loss-warning');
+
+                if (res.qualifiesBonus2) {
+                    bonusCard.className = 'p-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/40 space-y-1.5 transition-all';
+                    bonusTitle.className = 'text-xs font-black uppercase tracking-wider px-2 py-0.5 bg-emerald-600 text-white rounded-md';
+                    bonusBadge.className = 'text-xs font-extrabold text-emerald-700 flex items-center gap-1';
+                    bonusBadge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Đạt chuẩn (< 27% Ads)';
+                    document.getElementById('bd-bonus2-val').className = 'text-2xl font-black text-emerald-700';
+                    document.getElementById('bd-bonus2-val').textContent = formatUSD(res.bonus2);
+                    document.getElementById('bd-bonus2-formula').textContent = `= ${formatUSD(netRev)} × 0,25%`;
+                    document.getElementById('bd-bonus2-vnd').textContent = `≈ ${formatNumberVN(res.bonus2 * exchangeRate)} ₫`;
+                    bonusWarn.className = 'text-emerald-700 font-bold';
+                    bonusWarn.textContent = 'Đang nhận đủ 100% Bonus';
+
+                    document.getElementById('what-if-cutoff-text').innerHTML = 
+                        `Nếu Spent Ads tăng lên chạm <strong>27.0%</strong>, bạn sẽ bị cắt mất <strong>${formatUSD(res.bonus2)}</strong> (tương đương <strong>${formatNumberVN(res.bonus2 * exchangeRate)} ₫</strong>) tiền Bonus [2].`;
+                } else {
+                    bonusCard.className = 'p-4 rounded-2xl border-2 border-rose-300 bg-rose-50/60 space-y-1.5 transition-all';
+                    bonusTitle.className = 'text-xs font-black uppercase tracking-wider px-2 py-0.5 bg-rose-600 text-white rounded-md';
+                    bonusBadge.className = 'text-xs font-extrabold text-rose-600 flex items-center gap-1';
+                    bonusBadge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Bị cắt (Ads ${res.adsRatio.toFixed(1)}% ≥ 27%)`;
+                    document.getElementById('bd-bonus2-val').className = 'text-2xl font-black text-rose-600';
+                    document.getElementById('bd-bonus2-val').textContent = '$0';
+                    document.getElementById('bd-bonus2-formula').innerHTML = `<span class="line-through text-slate-400">${formatUSD(res.potentialBonus2)}</span> → Bị hủy về $0`;
+                    document.getElementById('bd-bonus2-vnd').textContent = `Mất ${formatNumberVN(res.potentialBonus2 * exchangeRate)} ₫`;
+                    bonusWarn.className = 'text-rose-600 font-bold';
+                    bonusWarn.textContent = `Đã mất ${formatUSD(res.potentialBonus2)} vì chạm trần 27%`;
+
+                    document.getElementById('what-if-cutoff-text').innerHTML = 
+                        `Bạn đang mất <strong>${formatUSD(res.potentialBonus2)}</strong> (≈ <strong>${formatNumberVN(res.potentialBonus2 * exchangeRate)} ₫</strong>). Chỉ cần tối ưu Spent Ads xuống <strong>26.9%</strong>, khoản thưởng này sẽ được cộng lại ngay lập tức!`;
+                }
+
+                const incPct = res.totalUSD > 0 ? (res.income1 / res.totalUSD) * 100 : 100;
+                const bonPct = res.totalUSD > 0 ? (res.bonus2 / res.totalUSD) * 100 : 0;
+                document.getElementById('visual-bar-income').style.width = `${incPct}%`;
+                document.getElementById('visual-bar-bonus').style.width = `${bonPct}%`;
+                document.getElementById('bar-label-income').textContent = `INCOME [1]: ${formatUSD(res.income1)} (${incPct.toFixed(1)}%)`;
+                document.getElementById('bar-label-bonus').textContent = `BONUS [2]: ${formatUSD(res.bonus2)} (${bonPct.toFixed(1)}%)`;
+                document.getElementById('bar-right-hint').textContent = res.qualifiesBonus2
+                    ? 'Ads < 27% • Kích hoạt tối đa quyền lợi'
+                    : 'Ads ≥ 27% • Đã cắt Bonus [2]';
+            } else {
+                heroTierBadge.textContent = 'Mục 3a: Doanh thu < $50.000';
+                formulaTag.textContent = 'Mục 3a (< $50K)';
+                document.getElementById('breakdown-3b').classList.add('hidden');
+                document.getElementById('breakdown-3a').classList.remove('hidden');
+
+                document.getElementById('bd-3a-rate-badge').textContent = `Hệ số A% = ${res.rateText}`;
+                document.getElementById('bd-3a-raw-val').textContent = formatUSD(res.rawReward);
+                document.getElementById('bd-3a-formula').textContent = `= ${formatUSD(res.netAfterAds)} × ${res.rateText}`;
+                document.getElementById('bd-3a-min-val').textContent = res.minFloor > 0 ? formatUSD(res.minFloor) : '—';
+
+                const minStatus = document.getElementById('bd-3a-min-status');
+                if (res.rawReward < res.minFloor && netRev > 0) {
+                    minStatus.className = 'text-xs font-extrabold text-amber-800 bg-amber-200 px-2 py-0.5 rounded';
+                    minStatus.textContent = 'Đang lấy theo Mức Tối Thiểu';
+                } else {
+                    minStatus.className = 'text-xs font-bold text-slate-500';
+                    minStatus.textContent = 'Thưởng công thức ≥ Mức sàn';
+                }
+
+                document.getElementById('visual-bar-income').style.width = '100%';
+                document.getElementById('visual-bar-bonus').style.width = '0%';
+                document.getElementById('bar-label-income').textContent = `THƯỞNG MỤC 3a: ${formatUSD(res.totalUSD)} (100%)`;
+                document.getElementById('bar-label-bonus').textContent = `BONUS [2]: Chưa áp dụng (< $50K)`;
+                document.getElementById('bar-right-hint').textContent = 'Đạt mốc $50,000 để mở khóa cơ chế 3b';
+                document.getElementById('what-if-cutoff-text').innerHTML = 
+                    `Khi nâng Net Revenue lên từ <strong>$50,000</strong> trở lên và giữ Spent Ads <strong>&lt; 27%</strong>, bạn sẽ nhận thêm khoản Bonus 0,25% trên tổng Net Revenue.`;
+            }
+
+            const totalVND = Math.round(res.totalUSD * exchangeRate);
+            const finalTakeHomeVND = Math.max(totalVND, BASE_SALARY_VND);
+            const effectivePct = netRev > 0 ? ((res.totalUSD / netRev) * 100).toFixed(2) : '0.00';
+
+            document.getElementById('result-total-usd').textContent = formatUSD(res.totalUSD);
+            document.getElementById('result-effective-rate').textContent = `Tương đương ${effectivePct}% Net Revenue (${formatNumberVN(totalVND)} ₫)`;
+            document.getElementById('result-final-takehome').textContent = `${formatNumberVN(finalTakeHomeVND)} ₫`;
+
+            const methodBadge = document.getElementById('payout-method-badge');
+            const compNote = document.getElementById('result-comparison-note');
+
+            if (totalVND >= BASE_SALARY_VND) {
+                const diff = totalVND - BASE_SALARY_VND;
+                methodBadge.textContent = 'Nhận theo Tổng thu nhập = Income + Bonus';
+                methodBadge.className = 'text-[11px] font-extrabold bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-md shadow-sm';
+                compNote.textContent = `Cao hơn Lương cứng (12,000,000 ₫) một khoản là +${formatNumberVN(diff)} ₫`;
+            } else {
+                methodBadge.textContent = 'Nhận theo Lương Cứng';
+                methodBadge.className = 'text-[11px] font-extrabold bg-white text-blue-950 px-2.5 py-0.5 rounded-md shadow-sm';
+                compNote.textContent = `Tổng thu nhập quy đổi (${formatNumberVN(totalVND)} ₫) thấp hơn Lương cứng nên nhận 12,000,000 ₫`;
+            }
+        }
+
+        function renderSimulationTables() {
+            const adsPercentages = [10, 15, 20, 25, 26.9, 27, 30, 35];
+            
+            function getRowBgClass(pct) {
+                if (pct <= 20) return 'bg-emerald-50/50 hover:bg-emerald-100/70';
+                if (pct <= 25) return 'bg-[#e6f4ea] hover:bg-emerald-100';
+                if (pct < 27) return 'bg-amber-50 hover:bg-amber-100';
+                return 'bg-rose-50/70 hover:bg-rose-100/80';
+            }
+
+            // 1. Under $50k Table
+            const under50kRevs = [5000, 10000, 20000, 30000, 40000];
+            let htmlUnder = `
+                <tr class="bg-slate-800 text-white font-bold text-xs uppercase">
+                    <td colspan="6" class="py-2 px-4 text-left">TỔNG THU NHẬP = INCOME + BONUS ($) THEO TỶ LỆ SPENT ADS (MỤC 3a)</td>
+                </tr>
+            `;
+            adsPercentages.forEach(pct => {
+                const rowClass = getRowBgClass(pct);
+                htmlUnder += `<tr class="${rowClass} border-b border-slate-200 transition">
+                    <td class="py-2.5 px-4 text-left font-bold text-slate-800 border-r border-slate-300">Spent Ads ${pct}%</td>`;
+                under50kRevs.forEach(rev => {
+                    const ads = rev * (pct / 100);
+                    const res = computeReward(rev, ads, pct);
+                    htmlUnder += `
+                        <td onclick="setPreset(${rev}, ${pct})" title="Nhấn để nạp kịch bản này" 
+                            class="py-2.5 px-4 font-extrabold text-slate-900 border-r border-slate-300 cursor-pointer hover:underline">
+                            $${formatNumberVN(res.totalUSD)}
+                        </td>`;
+                });
+                htmlUnder += `</tr>`;
+            });
+            document.getElementById('sim-table-under50k').innerHTML = htmlUnder;
+
+            // 2. Over $50k up to $100M Table
+            const over50kRevs = [50000, 100000, 300000, 500000, 1000000, 10000000, 100000000];
+            let htmlOver = `
+                <tr class="bg-slate-800 text-white font-bold text-xs uppercase">
+                    <td colspan="8" class="py-2 px-4 text-left">TỔNG THU NHẬP = INCOME + BONUS ($) — SO SÁNH SÁT MỐC CẮT BONUS 26.9% vs 27.0% ĐẾN $100M</td>
+                </tr>
+            `;
+            adsPercentages.forEach(pct => {
+                const rowClass = getRowBgClass(pct);
+                const labelBadge = pct === 26.9 
+                    ? '<span class="ml-1 text-[10px] bg-emerald-600 text-white px-1.5 py-0.5 rounded">Giữ Bonus</span>'
+                    : (pct === 27 ? '<span class="ml-1 text-[10px] bg-rose-600 text-white px-1.5 py-0.5 rounded">Cắt Bonus</span>' : '');
+                htmlOver += `<tr class="${rowClass} border-b border-slate-200 transition">
+                    <td class="py-2.5 px-4 text-left font-bold text-slate-800 border-r border-slate-300 whitespace-nowrap">Spent Ads ${pct}% ${labelBadge}</td>`;
+                over50kRevs.forEach(rev => {
+                    const ads = rev * (pct / 100);
+                    const res = computeReward(rev, ads, pct);
+                    htmlOver += `
+                        <td onclick="setPreset(${rev}, ${pct})" title="Nhấn để nạp vào Dashboard" 
+                            class="py-2.5 px-3 font-extrabold text-slate-900 border-r border-slate-300 cursor-pointer hover:underline">
+                            $${formatNumberVN(res.totalUSD)}
+                        </td>`;
+                });
+                htmlOver += `</tr>`;
+            });
+            document.getElementById('sim-table-over50k').innerHTML = htmlOver;
+        }
+
+        // Fixed Tab Switching Function
+        function switchTab(tabName) {
+            const tabs = ['calculator', 'simulation', 'policy'];
+            tabs.forEach(t => {
+                const sec = document.getElementById(`tab-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (!sec || !btn) return;
+                
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'flex items-center space-x-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-white text-blue-950 shadow';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'flex items-center space-x-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-blue-100 hover:text-white';
+                }
+            });
+        }
+
+        window.onload = function() {
+            renderSimulationTables();
+            calculateAll();
+        };
+    </script>
+</body>
+</html>
