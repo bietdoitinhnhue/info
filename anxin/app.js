@@ -14,6 +14,30 @@
     lobster: {"name": "Tôm hùm đãi đời", "amount": 3000000, "gift": "một bữa tôm hùm", "rank": "Ân nhân tôm hùm đãi đời"},
     omakase: {"name": "Omakase", "amount": 7000000, "gift": "một bữa Omakase", "rank": "Đại ân nhân Omakase"}
   });
+  // Reveal once as sections enter the viewport; keep content visible without JS.
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if ('IntersectionObserver' in window && !reducedMotion.matches) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.food-card, .menu-group-heading, .merit-section, .faq').forEach((el, index) => {
+      el.classList.add('reveal-item');
+      el.style.setProperty('--reveal-delay', `${(index % 4) * 65}ms`);
+      observer.observe(el);
+    });
+    // Accessibility preference changes must not leave queued content hidden.
+    reducedMotion.addEventListener?.('change', () => {
+      if (reducedMotion.matches) {
+        observer.disconnect();
+        document.querySelectorAll('.reveal-item').forEach(el => el.classList.add('is-visible'));
+      }
+    });
+  }
   const $ = id => document.getElementById(id);
   const money = n => new Intl.NumberFormat('vi-VN').format(n) + 'đ';
   const dialog = $('donate-dialog');
@@ -77,27 +101,27 @@
     const c = canvas.getContext('2d');
     if (!c) throw new Error('Canvas unavailable');
     const w = canvas.width;
-    c.fillStyle = '#f5efdf'; c.fillRect(0, 0, w, canvas.height);
-    c.strokeStyle = '#56684e'; c.lineWidth = 3; c.strokeRect(44, 44, 1112, 1412);
+    c.fillStyle = '#0e2221'; c.fillRect(0, 0, w, canvas.height);
+    c.strokeStyle = '#c9ac72'; c.lineWidth = 3; c.strokeRect(44, 44, 1112, 1412);
     c.lineWidth = 1; c.strokeRect(59, 59, 1082, 1382);
-    c.fillStyle = '#63765b'; c.textAlign = 'center';
+    c.fillStyle = '#dcc492'; c.textAlign = 'center';
     c.font = '600 25px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('ĂN XIN ONLINE  /  DRAKE NGUYỄN', w / 2, 140);
-    c.strokeStyle = '#c8c4ad'; c.beginPath(); c.moveTo(130, 184); c.lineTo(1070, 184); c.stroke();
-    c.fillStyle = '#888771'; c.font = '500 19px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('CHỨNG NHẬN MỘT CHÚT TỬ TẾ', w / 2, 255);
-    c.fillStyle = '#343b2d'; c.font = '700 70px "Playfair Display", Georgia, serif'; c.fillText('THẺ CÔNG ĐỨC', w / 2, 362);
-    c.fillStyle = '#df5d36'; c.font = '150px Georgia, serif'; c.fillText('✺', w / 2, 555);
-    c.fillStyle = '#777768'; c.font = '26px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('Trân trọng tấm lòng của', w / 2, 643);
-    c.fillStyle = '#63765b'; fitText(c, data.name, 920, 66, 20, n => `italic 600 ${n}px "Playfair Display", Georgia, serif`); c.fillText(data.name, w / 2, 746);
-    c.fillStyle = '#777768'; c.font = '24px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('Đã mời Drake ' + p.gift, w / 2, 827);
-    c.fillStyle = '#343b2d'; c.font = '700 82px "Be Vietnam Pro", Arial, sans-serif'; c.fillText(money(p.amount), w / 2, 944);
-    c.fillStyle = '#df5d36'; c.font = '500 24px "Be Vietnam Pro", Arial, sans-serif'; c.fillText(p.rank.toUpperCase(), w / 2, 1013);
+    c.strokeStyle = '#73684c'; c.beginPath(); c.moveTo(130, 184); c.lineTo(1070, 184); c.stroke();
+    c.fillStyle = '#b1ac96'; c.font = '500 19px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('CHỨNG NHẬN MỘT CHÚT TỬ TẾ', w / 2, 255);
+    c.fillStyle = '#f2ead7'; c.font = '700 70px "Playfair Display", Georgia, serif'; c.fillText('THẺ CÔNG ĐỨC', w / 2, 362);
+    c.fillStyle = '#d3b16f'; c.font = '150px Georgia, serif'; c.fillText('✺', w / 2, 555);
+    c.fillStyle = '#c0bda9'; c.font = '26px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('Trân trọng tấm lòng của', w / 2, 643);
+    c.fillStyle = '#dcc492'; fitText(c, data.name, 920, 66, 20, n => `italic 600 ${n}px "Playfair Display", Georgia, serif`); c.fillText(data.name, w / 2, 746);
+    c.fillStyle = '#c0bda9'; c.font = '24px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('Đã mời Drake ' + p.gift, w / 2, 827);
+    c.fillStyle = '#f2ead7'; c.font = '700 82px "Be Vietnam Pro", Arial, sans-serif'; c.fillText(money(p.amount), w / 2, 944);
+    c.fillStyle = '#d3b16f'; c.font = '500 24px "Be Vietnam Pro", Arial, sans-serif'; c.fillText(p.rank.toUpperCase(), w / 2, 1013);
     c.setLineDash([8, 8]); c.beginPath(); c.moveTo(120, 1075); c.lineTo(1080, 1075); c.stroke(); c.setLineDash([]);
-    c.fillStyle = '#777768'; c.font = '21px "Be Vietnam Pro", Arial, sans-serif';
+    c.fillStyle = '#c0bda9'; c.font = '21px "Be Vietnam Pro", Arial, sans-serif';
     c.fillText('Một bữa được mời. Một lời cảm ơn được giữ.', w / 2, 1143);
     const date = new Intl.DateTimeFormat('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', dateStyle: 'medium' }).format(new Date(data.date));
     c.font = '18px "Be Vietnam Pro", Arial, sans-serif'; c.fillText(`${date}  ·  ${data.id}`, w / 2, 1202);
-    c.fillStyle = '#df5d36'; c.font = 'italic 44px "Playfair Display", Georgia, serif'; c.fillText('Cảm ơn bạn, Drake', w / 2, 1290);
-    c.fillStyle = '#888771'; c.font = '16px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('NGƯỜI GỬI TỰ XÁC NHẬN · CHƯA ĐỐI SOÁT MOMO', w / 2, 1360);
+    c.fillStyle = '#d3b16f'; c.font = 'italic 44px "Playfair Display", Georgia, serif'; c.fillText('Cảm ơn bạn, Drake', w / 2, 1290);
+    c.fillStyle = '#b1ac96'; c.font = '16px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('NGƯỜI GỬI TỰ XÁC NHẬN · CHƯA ĐỐI SOÁT MOMO', w / 2, 1360);
     c.font = '15px "Be Vietnam Pro", Arial, sans-serif'; c.fillText('Thẻ lưu niệm, không phải biên lai  ·  about.drakenguyen.me/anxin', w / 2, 1394);
     canvas.setAttribute('aria-label', `Thẻ công đức của ${data.name}, gói ${p.name}, ${money(p.amount)}. Người gửi tự xác nhận, chưa đối soát MoMo.`);
   }
