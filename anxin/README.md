@@ -6,7 +6,24 @@ Trang tĩnh HTML/CSS/JavaScript, không cần bước build. Rewrite `/anxin` đ
 
 ## Luồng donate
 
-1. Chọn một trong bốn gói cố định: trà đá 5.000đ, cà phê 20.000đ, cơm sườn 50.000đ, hủ tíu 100.000đ.
+1. Chọn một trong 12 gói cố định, chia ba nhóm bình dân / ăn ngon / đại tiệc.
+
+| Món | Donate |
+| --- | ---: |
+| Ly trà đá | 5.000đ |
+| Ly cà phê | 20.000đ |
+| Ổ bánh mì | 30.000đ |
+| Dĩa cơm sườn | 50.000đ |
+| Tô hủ tíu no bụnh | 100.000đ |
+| Một chiếc pizza | 150.000đ |
+| Con gà nướng | 200.000đ |
+| Nồi lẩu ấm lòng | 350.000đ |
+| Một bữa buffet | 700.000đ |
+| Cua hoàng đế | 1.500.000đ |
+| Tôm hùm đãi đời | 3.000.000đ |
+| Omakase | 7.000.000đ |
+
+Các giá là mốc donate minh họa, không phải báo giá nhà hàng; Omakase bắt đầu tại gói 7 triệu.
 2. QR tĩnh trong `momo-qr.svg` mã hóa chính xác `https://nhantien.momo.vn/0968333342`. QR không chứa số tiền; giao diện nhắc người gửi nhập theo gói và kiểm tra người nhận. Nút mở link MoMo dùng cùng URL.
 3. Người gửi nhập tên tùy chọn và tick tự xác nhận đã chuyển. Trang tạo thẻ lưu niệm PNG 1200 × 1500 có tên, món, số tiền, ngày theo giờ Việt Nam và mã ngẫu nhiên.
 4. Thẻ ghi rõ `NGƯỜI GỬI TỰ XÁC NHẬN · CHƯA ĐỐI SOÁT MOMO`. Không coi thao tác bấm nút là xác minh giao dịch. Không ghi doanh thu, bảng xếp hạng hay người donate giả.
@@ -24,4 +41,4 @@ Minh họa SVG riêng, animation CSS có hỗ trợ `prefers-reduced-motion`, di
 
 `node --check anxin/app.js`
 
-Xem trang qua HTTP(S), thử cả bốn gói và đối chiếu số tiền. Không cần chuyển tiền thật để kiểm thử trên môi trường preview. Checkbox là tự khai; thẻ thử không phải chứng từ. Thử nhập tên dài, đóng bằng Escape, tải PNG, và tải lại trang để xem lại thẻ.
+Xem trang qua HTTP(S), thử cả 12 gói và đối chiếu số tiền. Không cần chuyển tiền thật để kiểm thử trên môi trường preview. Checkbox là tự khai; thẻ thử không phải chứng từ. Thử nhập tên dài, đóng bằng Escape, tải PNG, và tải lại trang để xem lại thẻ.

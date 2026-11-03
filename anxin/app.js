@@ -1,10 +1,18 @@
 (() => {
   'use strict';
   const packages = Object.freeze({
-    tea: { name: 'Ly trà đá', amount: 5000, gift: 'một ly trà đá', rank: 'Ân nhân giải khát' },
-    coffee: { name: 'Ly cà phê', amount: 20000, gift: 'một ly cà phê', rank: 'Ân nhân tiếp năng lượng' },
-    rice: { name: 'Dĩa cơm sườn', amount: 50000, gift: 'một dĩa cơm sườn', rank: 'Ân nhân cứu chiếc bụng' },
-    noodle: { name: 'Tô hủ tíu no bụnh', amount: 100000, gift: 'một tô hủ tíu no bụnh', rank: 'Ân nhân no bụnh' }
+    tea: {"name": "Ly trà đá", "amount": 5000, "gift": "một ly trà đá", "rank": "Ân nhân giải khát"},
+    coffee: {"name": "Ly cà phê", "amount": 20000, "gift": "một ly cà phê", "rank": "Ân nhân tiếp năng lượng"},
+    banhmi: {"name": "Ổ bánh mì", "amount": 30000, "gift": "một ổ bánh mì", "rank": "Ân nhân bánh mì nóng"},
+    rice: {"name": "Dĩa cơm sườn", "amount": 50000, "gift": "một dĩa cơm sườn", "rank": "Ân nhân cứu chiếc bụng"},
+    noodle: {"name": "Tô hủ tíu no bụnh", "amount": 100000, "gift": "một tô hủ tíu no bụnh", "rank": "Ân nhân no bụnh"},
+    pizza: {"name": "Một chiếc pizza", "amount": 150000, "gift": "một chiếc pizza", "rank": "Ân nhân phô mai kéo sợi"},
+    chicken: {"name": "Con gà nướng", "amount": 200000, "gift": "một con gà nướng", "rank": "Ân nhân gà nướng nguyên con"},
+    hotpot: {"name": "Nồi lẩu ấm lòng", "amount": 350000, "gift": "một nồi lẩu ấm lòng", "rank": "Ân nhân nồi lẩu ấm lòng"},
+    buffet: {"name": "Một bữa buffet", "amount": 700000, "gift": "một bữa buffet", "rank": "Ân nhân đại tiệc buffet"},
+    crab: {"name": "Cua hoàng đế", "amount": 1500000, "gift": "một bữa cua hoàng đế", "rank": "Ân nhân cua hoàng đế"},
+    lobster: {"name": "Tôm hùm đãi đời", "amount": 3000000, "gift": "một bữa tôm hùm", "rank": "Ân nhân tôm hùm đãi đời"},
+    omakase: {"name": "Omakase", "amount": 7000000, "gift": "một bữa Omakase", "rank": "Đại ân nhân Omakase"}
   });
   const $ = id => document.getElementById(id);
   const money = n => new Intl.NumberFormat('vi-VN').format(n) + 'đ';
