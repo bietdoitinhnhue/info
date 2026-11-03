@@ -235,6 +235,10 @@
   ],
   "rewrites": [
     {
+      "source": "/anxin",
+      "destination": "/anxin/index.html"
+    },
+    {
       "source": "/go/:slug",
       "destination": "/api/shorten?slug=:slug"
     },

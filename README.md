@@ -6,6 +6,7 @@ Kho mã nguồn cho các website tĩnh của Drake Nguyễn. Các website đư�
 
 | URL | File nguồn | Nội dung |
 | --- | --- | --- |
+| `/anxin` | `anxin/index.html` | Ăn xin Online: donate MoMo và thẻ công đức lưu niệm |
 | `/` | `index.html` | Trang hub tổng hợp các nội dung |
 | `/profile` | `profile/index.html` | CV Drake Nguyễn |
 | `/profile/portfolio` | `profile/portfolio/index.html` | Portfolio và case study |
